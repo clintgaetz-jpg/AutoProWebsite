@@ -17,9 +17,8 @@ const {
   subtitle = await Astro.slots.render('subtitle'),
   tagline = await Astro.slots.render('tagline'),
   actions = await Astro.slots.render('actions'),
-
   id,
-  isDark = false,
+  isDark = true,
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
@@ -27,7 +26,11 @@ const {
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <div
-    class="max-w-3xl mx-auto text-center p-6 rounded-md shadow-xl dark:shadow-none dark:border dark:border-slate-600"
+    class="max-w-3xl mx-auto text-center p-8 md:p-12 rounded-2xl 
+           bg-[#DADAD9]/70 backdrop-blur-md 
+           border border-[#DADAD9]/30
+           shadow-[0_8px_32px_rgba(0,0,0,0.3)]
+           transform hover:scale-[1.02] transition-all duration-300"
   >
     <Headline
       title={title}
@@ -35,17 +38,17 @@ const {
       tagline={tagline}
       classes={{
         container: 'mb-0 md:mb-0',
-        title: 'text-4xl md:text-4xl font-bold tracking-tighter mb-4 font-heading',
-        subtitle: 'text-xl text-muted dark:text-slate-400',
+        title: 'text-4xl md:text-5xl font-bold tracking-tighter mb-4 font-heading drop-shadow-lg',
+        subtitle: 'text-xl drop-shadow-md',
       }}
     />
     {
       actions && (
-        <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 mt-6">
+        <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 mt-8">
           {Array.isArray(actions) ? (
             actions.map((action) => (
               <div class="flex w-full sm:w-auto">
-                <Button {...(action || {})} class="w-full sm:mb-0" />
+                <Button {...(action || {})} class="w-full sm:mb-0 shadow-lg hover:shadow-xl transition-shadow" />
               </div>
             ))
           ) : (

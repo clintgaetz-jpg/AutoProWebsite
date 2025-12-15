@@ -1,9 +1,19 @@
 ---
-import { SITE } from 'astrowind:config';
+import { Image } from 'astro:assets';
+import logoDark from '~/assets/images/autopro-logo.png';
+import logoWhite from '~/assets/images/autopro-logo-white.png';
 ---
-
-<span
-  class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-gray-900 whitespace-nowrap dark:text-white"
->
-  🚀 {SITE?.name}
+<span class="self-center">
+  <Image 
+    src={logoDark} 
+    alt="Sylvan Lake AUTOPRO" 
+    class="h-16 md:h-20 w-auto dark:hidden"
+    loading="eager"
+  />
+  <Image 
+    src={logoWhite} 
+    alt="Sylvan Lake AUTOPRO" 
+    class="h-16 md:h-20 w-auto hidden dark:block"
+    loading="eager"
+  />
 </span>
