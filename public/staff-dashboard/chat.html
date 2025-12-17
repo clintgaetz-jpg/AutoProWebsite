@@ -7,11 +7,36 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231e3a8a' width='100' height='100' rx='20'/><text y='.9em' x='50%' text-anchor='middle' font-size='60' fill='%23facc15'>AP</text></svg>">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>@keyframes spin { to { transform: rotate(360deg); } } .animate-spin { animation: spin 1s linear infinite; }
-  .chat-response h1,.chat-response h2,.chat-response h3{font-weight:600;margin:1em 0 0.5em}.chat-response ul,.chat-response ol{margin:0.5em 0;padding-left:1.5em}.chat-response li{margin:0.25em 0}.chat-response p{margin:0.5em 0}.chat-response code{background:#f1f5f9;padding:0.2em 0.4em;border-radius:4px;font-size:0.9em}.chat-response pre{background:#1e293b;color:#e2e8f0;padding:1em;border-radius:8px;overflow-x:auto;margin:1em 0}.chat-response pre code{background:none;padding:0}</style>
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } } .animate-spin { animation: spin 1s linear infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .typing-indicator { animation: pulse 1.5s ease-in-out infinite; }
+    
+    /* Clean markdown styling for full-width responses */
+    .assistant-msg { line-height: 1.7; }
+    .assistant-msg h1, .assistant-msg h2, .assistant-msg h3 { font-weight: 700; margin: 1.25em 0 0.5em; }
+    .assistant-msg h1 { font-size: 1.25em; }
+    .assistant-msg h2 { font-size: 1.1em; }
+    .assistant-msg h3 { font-size: 1em; }
+    .assistant-msg h1:first-child, .assistant-msg h2:first-child, .assistant-msg h3:first-child { margin-top: 0; }
+    .assistant-msg p { margin: 0.75em 0; }
+    .assistant-msg p:first-child { margin-top: 0; }
+    .assistant-msg p:last-child { margin-bottom: 0; }
+    .assistant-msg ul, .assistant-msg ol { margin: 0.75em 0; padding-left: 1.5em; }
+    .assistant-msg li { margin: 0.4em 0; }
+    .assistant-msg code { background: #e2e8f0; padding: 0.2em 0.5em; border-radius: 4px; font-size: 0.9em; font-family: ui-monospace, monospace; }
+    .assistant-msg pre { background: #1e293b; color: #e2e8f0; padding: 1em 1.25em; border-radius: 8px; overflow-x: auto; margin: 1em 0; font-size: 0.9em; }
+    .assistant-msg pre code { background: none; padding: 0; }
+    .assistant-msg table { border-collapse: collapse; margin: 1em 0; width: 100%; }
+    .assistant-msg th, .assistant-msg td { border: 1px solid #cbd5e1; padding: 0.5em 1em; text-align: left; }
+    .assistant-msg th { background: #f1f5f9; font-weight: 600; }
+    .assistant-msg blockquote { border-left: 4px solid #3b82f6; padding-left: 1em; margin: 1em 0; color: #475569; }
+    .assistant-msg hr { border: none; border-top: 1px solid #e2e8f0; margin: 1.5em 0; }
+    .assistant-msg a { color: #2563eb; text-decoration: underline; }
+  </style>
 </head>
-<body class="bg-slate-100 min-h-screen">
-  <div id="app"></div>
+<body class="bg-slate-100 h-screen flex flex-col overflow-hidden">
+  <div id="app" class="flex flex-col h-full"></div>
   <script src="js/config.js"></script>
   <script>
     const ACTIVE_TAB = 'chat';
@@ -24,6 +49,7 @@
       state.input = '';
       state.loading = true;
       render();
+      scrollToBottom();
       try {
         const r = await fetch(PROTRACTOR_WEBHOOK_URL, {
           method: 'POST',
@@ -31,62 +57,125 @@
           body: JSON.stringify({ message: msg, context: 'dashboard' })
         });
         const data = await r.json();
-        state.messages.push({ role: 'assistant', content: data.response || data.message || 'No response received.' });
+        state.messages.push({ role: 'assistant', content: data.response || data.message || JSON.stringify(data) || 'No response received.' });
       } catch (err) {
         state.messages.push({ role: 'assistant', content: `Error: ${err.message}` });
       }
       state.loading = false;
       render();
-      setTimeout(() => document.getElementById('chat-container')?.scrollTo(0, 999999), 100);
+      scrollToBottom();
     }
 
-    function handleKeydown(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
-    function updateInput(val) { state.input = val; }
+    function scrollToBottom() {
+      setTimeout(() => {
+        const container = document.getElementById('chat-messages');
+        if (container) container.scrollTop = container.scrollHeight;
+      }, 50);
+    }
+
+    function handleKeydown(e) { 
+      if (e.key === 'Enter' && !e.shiftKey) { 
+        e.preventDefault(); 
+        sendMessage(); 
+      }
+    }
+    
+    function updateInput(el) { state.input = el.value; }
     function clearChat() { state.messages = []; render(); }
 
     function renderHeader() {
       const tabs = [
         { id: 'invoices', label: 'Invoices', href: 'invoices.html', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
         { id: 'cores_warranty', label: 'Core & Warranty', href: 'cores-warranty.html', icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' },
+        { id: 'chat', label: 'Ask Protractor', href: 'chat.html', icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z' },
         { id: 'emails', label: 'Emails', href: 'emails.html', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
         { id: 'statements', label: 'Statements', href: 'statements.html', icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
         { id: 'bookkeeper', label: 'Bookkeeper', href: 'bookkeeper.html', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
-        { id: 'chat', label: 'Ask Protractor', href: 'chat.html', icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z' },
         { id: 'search', label: 'Search', href: 'search.html', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' },
         { id: 'settings', label: '', href: 'settings.html', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z', isSettings: true }
       ];
-      return `<header class="bg-blue-900 text-white shadow-lg"><div class="max-w-7xl mx-auto px-4 py-3"><div class="flex items-center gap-4"><div class="bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded text-lg">NAPA</div><div><h1 class="text-xl font-semibold">Sylvan Lake AutoPro</h1><p class="text-blue-200 text-sm">Business Dashboard</p></div><div class="ml-auto"><button onclick="clearChat()" class="px-3 py-1.5 bg-blue-800 hover:bg-blue-700 rounded-lg text-sm">🗑️ Clear</button></div></div></div><div class="bg-blue-800"><div class="max-w-7xl mx-auto px-4"><div class="flex items-end pt-2 overflow-x-auto">${tabs.map((t,i)=>{const a=t.id===ACTIVE_TAB,c=a?'bg-white text-slate-800 border-t border-l border-r border-slate-300':'bg-slate-100 text-slate-600 hover:bg-slate-50 border border-transparent';return t.isSettings?`<a href="${t.href}" class="flex items-center justify-center w-10 h-10 rounded-t-lg ml-1 ${c}"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${t.icon}"></path></svg></a>`:`<a href="${t.href}" class="flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-t-lg ${i>0?'ml-1':''} whitespace-nowrap ${c}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${t.icon}"></path></svg>${t.label}</a>`;}).join('')}</div></div></div></header>`;
+      return `<header class="bg-blue-900 text-white shadow-lg flex-shrink-0"><div class="max-w-7xl mx-auto px-4 py-3"><div class="flex items-center gap-4"><div class="bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded text-lg">NAPA</div><div><h1 class="text-xl font-semibold">Sylvan Lake AutoPro</h1><p class="text-blue-200 text-sm">Business Dashboard</p></div><div class="ml-auto"><button onclick="clearChat()" class="px-3 py-1.5 bg-blue-800 hover:bg-blue-700 rounded-lg text-sm">🗑️ Clear Chat</button></div></div></div><div class="bg-blue-800"><div class="max-w-7xl mx-auto px-4"><div class="flex items-end pt-2 overflow-x-auto">${tabs.map((t,i)=>{const a=t.id===ACTIVE_TAB,c=a?'bg-white text-slate-800 border-t border-l border-r border-slate-300':'bg-slate-100 text-slate-600 hover:bg-slate-50 border border-transparent';return t.isSettings?`<a href="${t.href}" class="flex items-center justify-center w-10 h-10 rounded-t-lg ml-1 ${c}"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${t.icon}"></path></svg></a>`:`<a href="${t.href}" class="flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-t-lg ${i>0?'ml-1':''} whitespace-nowrap ${c}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${t.icon}"></path></svg>${t.label}</a>`;}).join('')}</div></div></div></header>`;
     }
 
     function render() {
       document.getElementById('app').innerHTML = `
         ${renderHeader()}
-        <main class="max-w-4xl mx-auto px-4 py-6 flex flex-col" style="height: calc(100vh - 140px)">
-          <div id="chat-container" class="flex-1 overflow-y-auto bg-white rounded-t-xl shadow-lg p-4 space-y-4">
-            ${state.messages.length === 0 ? `
-              <div class="text-center py-12 text-slate-500">
-                <svg class="w-16 h-16 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                <p class="text-lg font-medium">Ask Protractor anything</p>
-                <p class="text-sm mt-2">Questions about invoices, parts, suppliers, or shop operations</p>
+        <main class="flex-1 flex flex-col overflow-hidden bg-white">
+          <!-- Input at TOP -->
+          <div class="flex-shrink-0 border-b bg-slate-50 p-4">
+            <div class="max-w-4xl mx-auto">
+              <div class="flex gap-3">
+                <input 
+                  id="chat-input"
+                  type="text" 
+                  placeholder="Ask Protractor anything about invoices, parts, suppliers..." 
+                  class="flex-1 px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+                  onkeydown="handleKeydown(event)"
+                  oninput="updateInput(this)"
+                  value="${state.input.replace(/"/g, '&quot;')}"
+                  ${state.loading ? 'disabled' : ''}
+                />
+                <button 
+                  onclick="sendMessage()" 
+                  ${state.loading ? 'disabled' : ''} 
+                  class="px-6 py-3 bg-blue-900 hover:bg-blue-800 disabled:bg-slate-400 text-white font-medium rounded-xl transition-colors flex items-center gap-2"
+                >
+                  ${state.loading ? '<svg class="w-5 h-5 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle><path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" class="opacity-75"></path></svg>' : ''}
+                  ${state.loading ? 'Thinking...' : 'Ask'}
+                </button>
               </div>
-            ` : state.messages.map(m => `
-              <div class="flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}">
-                <div class="${m.role === 'user' ? 'bg-blue-900 text-white' : 'bg-slate-100 text-slate-800'} rounded-2xl px-4 py-3 max-w-[80%] ${m.role === 'assistant' ? 'chat-response' : ''}">
-                  ${m.role === 'assistant' ? marked.parse(m.content) : m.content.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
-                </div>
-              </div>
-            `).join('')}
-            ${state.loading ? `<div class="flex justify-start"><div class="bg-slate-100 rounded-2xl px-4 py-3"><div class="flex gap-1"><span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></span><span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay:0.1s"></span><span class="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style="animation-delay:0.2s"></span></div></div></div>` : ''}
+            </div>
           </div>
-          <div class="bg-white rounded-b-xl shadow-lg border-t p-4">
-            <div class="flex gap-3">
-              <textarea id="chat-input" rows="2" placeholder="Ask a question..." class="flex-1 px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" onkeydown="handleKeydown(event)" oninput="updateInput(this.value)">${state.input}</textarea>
-              <button onclick="sendMessage()" ${state.loading?'disabled':''} class="px-6 py-3 bg-blue-900 hover:bg-blue-800 disabled:bg-slate-400 text-white font-medium rounded-xl transition-colors">${state.loading?'...':'Send'}</button>
+          
+          <!-- Messages below, scrollable -->
+          <div id="chat-messages" class="flex-1 overflow-y-auto">
+            <div class="max-w-4xl mx-auto p-4 space-y-6">
+              ${state.messages.length === 0 ? `
+                <div class="text-center py-16 text-slate-400">
+                  <svg class="w-20 h-20 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                  <p class="text-xl font-medium text-slate-500">Ask Protractor</p>
+                  <p class="mt-2">Questions about invoices, parts, suppliers, cores, warranties...</p>
+                </div>
+              ` : state.messages.map(m => m.role === 'user' ? `
+                <!-- User message - right aligned, compact -->
+                <div class="flex justify-end">
+                  <div class="bg-blue-900 text-white px-5 py-3 rounded-2xl rounded-br-md max-w-[70%] shadow">
+                    ${m.content.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+                  </div>
+                </div>
+              ` : `
+                <!-- Assistant message - full width, rich formatting -->
+                <div class="bg-slate-50 rounded-xl p-6 shadow-sm border border-slate-200">
+                  <div class="flex items-center gap-2 mb-3 text-sm text-slate-500">
+                    <div class="w-6 h-6 bg-blue-900 rounded-full flex items-center justify-center">
+                      <span class="text-yellow-400 text-xs font-bold">P</span>
+                    </div>
+                    <span class="font-medium">Protractor</span>
+                  </div>
+                  <div class="assistant-msg text-slate-700">
+                    ${marked.parse(m.content)}
+                  </div>
+                </div>
+              `).join('')}
+              
+              ${state.loading ? `
+                <div class="bg-slate-50 rounded-xl p-6 shadow-sm border border-slate-200">
+                  <div class="flex items-center gap-2 text-sm text-slate-500">
+                    <div class="w-6 h-6 bg-blue-900 rounded-full flex items-center justify-center">
+                      <span class="text-yellow-400 text-xs font-bold">P</span>
+                    </div>
+                    <span class="font-medium">Protractor</span>
+                    <span class="typing-indicator ml-2">thinking...</span>
+                  </div>
+                </div>
+              ` : ''}
             </div>
           </div>
         </main>`;
+      
+      // Focus input
       const input = document.getElementById('chat-input');
-      if (input) input.value = state.input;
+      if (input && !state.loading) input.focus();
     }
 
     render();
