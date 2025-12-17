@@ -49,7 +49,7 @@
       state.input = '';
       state.loading = true;
       render();
-      scrollToBottom();
+      scrollToLatestMessage();
       try {
         const r = await fetch(PROTRACTOR_WEBHOOK_URL, {
           method: 'POST',
@@ -63,13 +63,17 @@
       }
       state.loading = false;
       render();
-      scrollToBottom();
+      scrollToLatestMessage();
     }
 
-    function scrollToBottom() {
+    function scrollToLatestMessage() {
       setTimeout(() => {
         const container = document.getElementById('chat-messages');
-        if (container) container.scrollTop = container.scrollHeight;
+        const messages = container?.querySelectorAll('.message-item');
+        if (messages && messages.length > 0) {
+          const lastMessage = messages[messages.length - 1];
+          lastMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }, 50);
     }
 
@@ -138,14 +142,14 @@
                 </div>
               ` : state.messages.map(m => m.role === 'user' ? `
                 <!-- User message - right aligned, compact -->
-                <div class="flex justify-end">
+                <div class="message-item flex justify-end">
                   <div class="bg-blue-900 text-white px-5 py-3 rounded-2xl rounded-br-md max-w-[70%] shadow">
                     ${m.content.replace(/</g, '&lt;').replace(/>/g, '&gt;')}
                   </div>
                 </div>
               ` : `
                 <!-- Assistant message - full width, rich formatting -->
-                <div class="bg-slate-50 rounded-xl p-6 shadow-sm border border-slate-200">
+                <div class="message-item bg-slate-50 rounded-xl p-6 shadow-sm border border-slate-200">
                   <div class="flex items-center gap-2 mb-3 text-sm text-slate-500">
                     <div class="w-6 h-6 bg-blue-900 rounded-full flex items-center justify-center">
                       <span class="text-yellow-400 text-xs font-bold">P</span>
