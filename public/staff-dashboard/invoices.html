@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoices - Sylvan Lake AutoPro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231e3a8a' width='100' height='100' rx='20'/><text y='.9em' x='50%' text-anchor='middle' font-size='60' fill='%23facc15'>AP</text></svg>">
+  <style>
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .animate-spin { animation: spin 1s linear infinite; }
+  </style>
+</head>
+<body class="bg-slate-100 min-h-screen">
+  <div id="app"></div>
+
+  <script src="js/config.js"></script>
+
+  <script>
+    const ACTIVE_TAB = 'invoices';
+
+    let state = {
+      view: 'receive',
+      invoices: [],
+      filters: { cores: false, warranty: false, unusual: false },
+      expenseCategories: [],
+      expenseModal: { show: false, invoiceId: null, categoryId: '', note: '' },
+      loading: true,
+      error: null,
+      actionLoading: null,
+      expandedId: null,
+      completedDays: 30
+    };
+
+    // ===================== FETCH =====================
+    async function fetchData() {
+      state.loading = true;
+      state.error = null;
+      render();
+
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - state.completedDays);
+
+      try {
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/invoices?select=*,invoice_items(*)&order=created_at.desc`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+        );
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const allInvoices = await response.json();
+        
+        state.invoices = allInvoices.filter(inv => {
+          if (inv.posted_at) return new Date(inv.posted_at) >= cutoff;
+          return true;
+        });
+      } catch (err) {
+        state.error = err.message;
+      }
+      state.loading = false;
+      render();
+    }
+
+    async function fetchExpenseCategories() {
+      try {
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/expense_categories?is_active=eq.true&order=sort_order,name`,
+          { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }
+        );
+        state.expenseCategories = response.ok ? await response.json() : [];
+      } catch (err) { state.expenseCategories = []; }
+    }
+
+    // ===================== ACTIONS =====================
+    async function markReceived(id) {
+      state.actionLoading = id; render();
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/invoices?id=eq.${id}`, {
+          method: 'PATCH',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ received_at: new Date().toISOString(), received_by: 'dashboard' })
+        });
+        state.invoices = state.invoices.map(inv => inv.id === id ? { ...inv, received_at: new Date().toISOString(), received_by: 'dashboard' } : inv);
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null; render();
+    }
+
+    async function markPosted(id) {
+      state.actionLoading = id; render();
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/invoices?id=eq.${id}`, {
+          method: 'PATCH',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ posted_at: new Date().toISOString(), posted_by: 'dashboard' })
+        });
+        state.invoices = state.invoices.map(inv => inv.id === id ? { ...inv, posted_at: new Date().toISOString(), posted_by: 'dashboard' } : inv);
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null; render();
+    }
+
+    async function undoReceived(id) {
+      state.actionLoading = id; render();
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/invoices?id=eq.${id}`, {
+          method: 'PATCH',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ received_at: null, received_by: null })
+        });
+        state.invoices = state.invoices.map(inv => inv.id === id ? { ...inv, received_at: null, received_by: null } : inv);
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null; render();
+    }
+
+    async function undoPosted(id) {
+      state.actionLoading = id; render();
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/invoices?id=eq.${id}`, {
+          method: 'PATCH',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ posted_at: null, posted_by: null })
+        });
+        state.invoices = state.invoices.map(inv => inv.id === id ? { ...inv, posted_at: null, posted_by: null } : inv);
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null; render();
+    }
+
+    // ===================== EXPENSE FUNCTIONS =====================
+    function openExpenseModal(invoiceId) { state.expenseModal = { show: true, invoiceId, categoryId: '', note: '' }; render(); }
+    function closeExpenseModal() { state.expenseModal = { show: false, invoiceId: null, categoryId: '', note: '' }; render(); }
+
+    async function sendAsExpense() {
+      const { invoiceId, categoryId, note } = state.expenseModal;
+      if (!categoryId) { alert('Please select an expense category'); return; }
+      state.actionLoading = invoiceId; render();
+
+      try {
+        const inv = state.invoices.find(i => i.id === invoiceId);
+        const category = state.expenseCategories.find(c => c.id === categoryId);
+
+        await fetch(`${SUPABASE_URL}/rest/v1/invoices?id=eq.${invoiceId}`, {
+          method: 'PATCH',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ expense_category_id: categoryId, expense_sent_at: new Date().toISOString(), expense_sent_by: 'dashboard', expense_note: note || null, expense_status: 'pending' })
+        });
+
+        await fetch(`${SUPABASE_URL}/rest/v1/bookkeeper_items`, {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ invoice_id: invoiceId, source_type: 'invoice', source_id: invoiceId, item_type: 'expense', title: `Expense: ${inv?.invoice_number || 'Invoice'}`, description: `${category?.name || 'Expense'} - ${inv?.detected_supplier_name || 'Unknown supplier'}${note ? ' - ' + note : ''}`, expense_category_id: categoryId, amount: inv?.total || 0, status: 'pending', sent_at: new Date().toISOString(), sent_by: 'dashboard' })
+        });
+
+        state.invoices = state.invoices.map(i => i.id === invoiceId ? { ...i, expense_category_id: categoryId, expense_sent_at: new Date().toISOString(), expense_sent_by: 'dashboard', expense_note: note, expense_status: 'pending' } : i);
+        closeExpenseModal();
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null; render();
+    }
+
+    async function undoExpense(invoiceId) {
+      state.actionLoading = invoiceId; render();
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/invoices?id=eq.${invoiceId}`, {
+          method: 'PATCH',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ expense_category_id: null, expense_sent_at: null, expense_sent_by: null, expense_note: null, expense_status: null })
+        });
+        await fetch(`${SUPABASE_URL}/rest/v1/bookkeeper_items?invoice_id=eq.${invoiceId}`, { method: 'DELETE', headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } });
+        state.invoices = state.invoices.map(i => i.id === invoiceId ? { ...i, expense_category_id: null, expense_sent_at: null, expense_sent_by: null, expense_note: null, expense_status: null } : i);
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null; render();
+    }
+
+    // ===================== HELPERS =====================
+    function formatDate(d) { return d ? new Date(d).toLocaleDateString('en-CA') : '-'; }
+    function formatCurrency(a) { return a != null ? new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(a) : '-'; }
+    function copyToClipboard(text, btn) { navigator.clipboard.writeText(text).then(() => { const o = btn.innerHTML; btn.innerHTML = '✓'; btn.classList.add('bg-green-100', 'text-green-700'); setTimeout(() => { btn.innerHTML = o; btn.classList.remove('bg-green-100', 'text-green-700'); }, 1000); }); }
+    function copyBtn(v, small = false) { if (v == null || v === '' || v === '-') return ''; const c = String(v).replace(/"/g, '&quot;'); return `<button onclick="event.stopPropagation(); copyToClipboard('${c}', this)" class="${small ? 'w-5 h-5' : 'w-6 h-6'} text-xs inline-flex items-center justify-center rounded hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors ml-1" title="Copy">📋</button>`; }
+    function setView(v) { state.view = v; state.expandedId = null; render(); }
+    function toggleFilter(k) { state.filters[k] = !state.filters[k]; render(); }
+    function clearFilters() { state.filters = { cores: false, warranty: false, unusual: false }; render(); }
+    function toggleExpand(id) { state.expandedId = state.expandedId === id ? null : id; render(); }
+    function loadMoreCompleted() { state.completedDays += 30; fetchData(); }
+
+    function getFilteredInvoices() {
+      let list = state.invoices;
+      if (state.view === 'receive') list = list.filter(inv => !inv.received_at && !inv.expense_sent_at);
+      else if (state.view === 'post') list = list.filter(inv => inv.received_at && !inv.posted_at && !inv.expense_sent_at);
+      else if (state.view === 'complete') list = list.filter(inv => inv.posted_at || inv.expense_sent_at);
+      if (state.filters.cores) list = list.filter(inv => inv.has_core);
+      if (state.filters.warranty) list = list.filter(inv => inv.has_warranty);
+      if (state.filters.unusual) list = list.filter(inv => !inv.valid_po);
+      return list;
+    }
+
+    function getCounts() {
+      return {
+        receive: state.invoices.filter(inv => !inv.received_at && !inv.expense_sent_at).length,
+        post: state.invoices.filter(inv => inv.received_at && !inv.posted_at && !inv.expense_sent_at).length,
+        complete: state.invoices.filter(inv => inv.posted_at || inv.expense_sent_at).length
+      };
+    }
+
+    // ===================== HEADER WITH TABS =====================
+    function renderHeader() {
+      const tabs = [
+        { id: 'invoices', label: 'Invoices', href: 'invoices.html', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+        { id: 'cores_warranty', label: 'Core & Warranty', href: 'cores-warranty.html', icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' },
+        { id: 'emails', label: 'Emails', href: 'emails.html', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+        { id: 'statements', label: 'Statements', href: 'statements.html', icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+        { id: 'bookkeeper', label: 'Bookkeeper', href: 'bookkeeper.html', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
+        { id: 'chat', label: 'Ask Protractor', href: 'chat.html', icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z' },
+        { id: 'search', label: 'Search', href: 'search.html', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' },
+        { id: 'settings', label: '', href: 'settings.html', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z', isSettings: true }
+      ];
+
+      return `
+        <header class="bg-blue-900 text-white shadow-lg">
+          <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center gap-4">
+              <div class="bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded text-lg">NAPA</div>
+              <div>
+                <h1 class="text-xl font-semibold">Sylvan Lake AutoPro</h1>
+                <p class="text-blue-200 text-sm">Business Dashboard</p>
+              </div>
+              <div class="ml-auto">
+                <button onclick="location.reload()" class="px-3 py-1.5 bg-blue-800 hover:bg-blue-700 rounded-lg text-sm transition-colors">🔄 Refresh</button>
+              </div>
+            </div>
+          </div>
+          <div class="bg-blue-800">
+            <div class="max-w-7xl mx-auto px-4">
+              <div class="flex items-end pt-2 overflow-x-auto">
+                ${tabs.map((tab, i) => {
+                  const isActive = tab.id === ACTIVE_TAB;
+                  const baseClass = isActive ? 'bg-white text-slate-800 border-t border-l border-r border-slate-300' : 'bg-slate-100 text-slate-600 hover:bg-slate-50 border border-transparent';
+                  if (tab.isSettings) {
+                    return `<a href="${tab.href}" class="flex items-center justify-center w-10 h-10 rounded-t-lg transition-all ml-1 ${baseClass}" title="Settings"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${tab.icon}"></path></svg></a>`;
+                  }
+                  return `<a href="${tab.href}" class="flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-t-lg transition-all ${i > 0 ? 'ml-1' : ''} whitespace-nowrap ${baseClass}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${tab.icon}"></path></svg>${tab.label}</a>`;
+                }).join('')}
+              </div>
+            </div>
+          </div>
+        </header>
+      `;
+    }
+
+    // ===================== RENDER =====================
+    function render() {
+      const app = document.getElementById('app');
+      const filtered = getFilteredInvoices();
+      const counts = getCounts();
+      const hasActiveFilters = Object.values(state.filters).some(v => v);
+
+      app.innerHTML = `
+        ${renderHeader()}
+        <div class="bg-white border-b border-slate-200 shadow-sm">
+          <div class="max-w-7xl mx-auto px-4 py-3">
+            <div class="flex items-center justify-between flex-wrap gap-3">
+              <div class="flex items-center gap-2">
+                <button onclick="setView('receive')" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${state.view === 'receive' ? 'bg-yellow-400 text-blue-900' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">To Receive <span class="px-2 py-0.5 rounded-full text-xs font-bold ${state.view === 'receive' ? 'bg-blue-900 text-yellow-400' : 'bg-slate-200 text-slate-600'}">${counts.receive}</span></button>
+                <button onclick="setView('post')" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${state.view === 'post' ? 'bg-yellow-400 text-blue-900' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">To Post <span class="px-2 py-0.5 rounded-full text-xs font-bold ${state.view === 'post' ? 'bg-blue-900 text-yellow-400' : 'bg-slate-200 text-slate-600'}">${counts.post}</span></button>
+                <button onclick="setView('complete')" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${state.view === 'complete' ? 'bg-yellow-400 text-blue-900' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">Complete <span class="px-2 py-0.5 rounded-full text-xs font-bold ${state.view === 'complete' ? 'bg-blue-900 text-yellow-400' : 'bg-slate-200 text-slate-600'}">${counts.complete}</span></button>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-sm text-slate-500">Filter:</span>
+                <button onclick="toggleFilter('cores')" class="px-3 py-1.5 rounded-full text-sm font-medium transition-all ${state.filters.cores ? 'bg-orange-100 text-orange-700 ring-2 ring-orange-400' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">Cores</button>
+                <button onclick="toggleFilter('warranty')" class="px-3 py-1.5 rounded-full text-sm font-medium transition-all ${state.filters.warranty ? 'bg-blue-100 text-blue-700 ring-2 ring-blue-400' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">Warranty</button>
+                <button onclick="toggleFilter('unusual')" class="px-3 py-1.5 rounded-full text-sm font-medium transition-all ${state.filters.unusual ? 'bg-amber-100 text-amber-700 ring-2 ring-amber-400' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">Unusual PO</button>
+                ${hasActiveFilters ? `<button onclick="clearFilters()" class="text-sm text-slate-500 hover:text-slate-700 underline ml-1">Clear</button>` : ''}
+              </div>
+            </div>
+          </div>
+        </div>
+        ${state.expenseModal.show ? renderExpenseModal() : ''}
+        <main class="max-w-7xl mx-auto px-4 py-6">
+          ${state.error ? `<div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg">${state.error}</div>` : ''}
+          ${state.loading ? `<div class="bg-white rounded-lg shadow p-12 text-center"><div class="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div><p class="text-slate-600">Loading...</p></div>` : renderContent(filtered, hasActiveFilters)}
+        </main>
+      `;
+    }
+
+    function renderContent(filtered, hasActiveFilters) {
+      if (filtered.length === 0) {
+        return `<div class="bg-white rounded-lg shadow p-12 text-center"><svg class="w-12 h-12 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><p class="text-lg font-medium text-slate-700">No invoices ${state.view === 'receive' ? 'to receive' : state.view === 'post' ? 'to post' : ''}</p>${hasActiveFilters ? `<p class="text-sm text-slate-500 mt-2">Try adjusting your filters</p>` : ''}</div>`;
+      }
+      return `
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <table class="w-full">
+            <thead class="bg-slate-50 border-b"><tr>
+              <th class="w-8"></th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">Invoice #</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">Supplier</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">PO #</th>
+              <th class="text-right px-4 py-3 text-sm font-semibold text-slate-600">Total</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">Date</th>
+              <th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">Flags</th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-slate-600">PDF</th>
+              <th class="text-center px-4 py-3 text-sm font-semibold text-slate-600">Action</th>
+            </tr></thead>
+            <tbody class="divide-y divide-slate-100">${filtered.map(inv => renderInvoiceRow(inv)).join('')}</tbody>
+          </table>
+        </div>
+        ${state.view === 'complete' ? `<div class="mt-4 text-center"><button onclick="loadMoreCompleted()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 rounded-lg text-sm font-medium text-slate-700 transition-colors">Load more (showing last ${state.completedDays} days)</button></div>` : ''}
+      `;
+    }
+
+    function renderInvoiceRow(inv) {
+      const isExpanded = state.expandedId === inv.id;
+      const rowBg = inv.is_credit ? 'bg-emerald-50 hover:bg-emerald-100' : 'hover:bg-slate-50';
+      return `
+        <tr class="cursor-pointer ${rowBg} ${isExpanded ? 'bg-blue-50' : ''}" onclick="toggleExpand('${inv.id}')">
+          <td class="px-2 py-3 text-slate-400">${isExpanded ? '▼' : '▶'}</td>
+          <td class="px-4 py-3"><span class="font-medium ${inv.is_credit ? 'text-emerald-700' : ''}">${inv.is_credit ? '↩ ' : ''}${inv.invoice_number || '-'}</span>${copyBtn(inv.invoice_number)}</td>
+          <td class="px-4 py-3 text-sm">${inv.detected_supplier_name || 'Unknown'}</td>
+          <td class="px-4 py-3"><span class="${inv.valid_po ? 'text-slate-700' : 'text-amber-600 font-medium'}">${inv.po_number || '-'}</span>${copyBtn(inv.po_number)}</td>
+          <td class="px-4 py-3 text-right font-medium ${inv.is_credit ? 'text-emerald-600' : ''}">${inv.is_credit ? '-' : ''}${formatCurrency(Math.abs(inv.total))}</td>
+          <td class="px-4 py-3 text-sm text-slate-600">${formatDate(inv.invoice_date)}</td>
+          <td class="px-4 py-3">${inv.expense_sent_at ? '<span class="px-2 py-0.5 bg-purple-100 text-purple-700 text-xs rounded-full mr-1">💼</span>' : ''}${inv.has_core ? '<span class="px-2 py-0.5 bg-orange-100 text-orange-700 text-xs rounded-full mr-1">Core</span>' : ''}${inv.has_warranty ? '<span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded-full mr-1">Warranty</span>' : ''}${!inv.valid_po && !inv.expense_sent_at ? '<span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-xs rounded-full">Unusual</span>' : ''}</td>
+          <td class="px-4 py-3 text-center">${inv.pdf_url ? `<a href="${inv.pdf_url}" target="_blank" onclick="event.stopPropagation()" class="text-blue-600 hover:text-blue-800">📄</a>` : '-'}</td>
+          <td class="px-4 py-3 text-center" onclick="event.stopPropagation()">
+            ${state.view === 'receive' ? `<button onclick="markReceived('${inv.id}')" ${state.actionLoading === inv.id ? 'disabled' : ''} class="px-3 py-1.5 bg-yellow-400 hover:bg-yellow-500 text-blue-900 text-sm font-semibold rounded-lg transition-colors disabled:opacity-50">${state.actionLoading === inv.id ? '...' : '✓ Received'}</button>` : ''}
+            ${state.view === 'post' ? `<div class="flex gap-1 justify-center"><button onclick="undoReceived('${inv.id}')" ${state.actionLoading === inv.id ? 'disabled' : ''} class="px-2 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-600 text-xs rounded-lg transition-colors disabled:opacity-50" title="Undo">↩</button><button onclick="markPosted('${inv.id}')" ${state.actionLoading === inv.id ? 'disabled' : ''} class="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold rounded-lg transition-colors disabled:opacity-50">${state.actionLoading === inv.id ? '...' : '✓ Posted'}</button></div>` : ''}
+            ${state.view === 'complete' ? (inv.expense_sent_at ? `<button onclick="undoExpense('${inv.id}')" ${state.actionLoading === inv.id ? 'disabled' : ''} class="px-2 py-1.5 bg-purple-200 hover:bg-purple-300 text-purple-700 text-xs rounded-lg transition-colors disabled:opacity-50">↩ Undo</button>` : `<button onclick="undoPosted('${inv.id}')" ${state.actionLoading === inv.id ? 'disabled' : ''} class="px-2 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-600 text-xs rounded-lg transition-colors disabled:opacity-50">↩ Undo</button>`) : ''}
+          </td>
+        </tr>
+        ${isExpanded ? renderExpandedRow(inv) : ''}
+      `;
+    }
+
+    function renderExpandedRow(inv) {
+      const items = inv.invoice_items || [];
+      return `
+        <tr class="bg-slate-50"><td colspan="9" class="px-8 py-4">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
+              <h4 class="font-semibold text-slate-700 mb-2">Line Items</h4>
+              ${items.length > 0 ? `<table class="w-full text-sm bg-white rounded-lg shadow-sm"><thead class="bg-slate-100"><tr><th class="text-left px-3 py-2">Part #</th><th class="text-left px-3 py-2">Description</th><th class="text-center px-3 py-2">Qty</th><th class="text-right px-3 py-2">Price</th><th class="text-right px-3 py-2">Total</th></tr></thead><tbody class="divide-y divide-slate-100">${items.map(item => `<tr class="${item.is_core ? 'bg-orange-50' : item.is_warranty ? 'bg-blue-50' : ''}"><td class="px-3 py-1.5 font-mono text-xs">${item.part_number || '-'}${copyBtn(item.part_number, true)}</td><td class="px-3 py-1.5">${item.description || '-'}${item.is_core ? '<span class="ml-1 px-1.5 py-0.5 bg-orange-100 text-orange-700 text-xs rounded">Core</span>' : ''}${item.is_warranty ? '<span class="ml-1 px-1.5 py-0.5 bg-blue-100 text-blue-700 text-xs rounded">Warranty</span>' : ''}</td><td class="py-1.5 text-center">${item.quantity || 1}</td><td class="py-1.5 text-right">${formatCurrency(item.unit_price)}</td><td class="py-1.5 text-right font-medium">${formatCurrency(item.line_total)}</td></tr>`).join('')}</tbody></table>` : '<p class="text-slate-500 text-sm">No line items</p>'}
+            </div>
+            <div>
+              <h4 class="font-semibold text-slate-700 mb-2">Totals</h4>
+              <div class="bg-white rounded-lg p-4 shadow-sm">
+                <div class="flex justify-between py-1.5 border-b border-slate-100"><span class="text-slate-600">Subtotal</span><span class="font-medium">${formatCurrency(inv.subtotal)}${copyBtn(inv.subtotal)}</span></div>
+                <div class="flex justify-between py-1.5 border-b border-slate-100"><span class="text-slate-600">GST</span><span class="font-medium">${formatCurrency(inv.gst)}${copyBtn(inv.gst)}</span></div>
+                <div class="flex justify-between py-2 text-lg ${inv.is_credit ? 'text-emerald-600' : 'text-slate-800'}"><span class="font-semibold">${inv.is_credit ? 'Credit' : 'Total'}</span><span class="font-bold">${inv.is_credit ? '-' : ''}${formatCurrency(Math.abs(inv.total))}${copyBtn(Math.abs(inv.total))}</span></div>
+              </div>
+              <div class="mt-4 text-xs text-slate-500">
+                <p>Created: ${formatDate(inv.created_at)}</p>
+                ${inv.received_at ? `<p>Received: ${formatDate(inv.received_at)} by ${inv.received_by || '-'}</p>` : ''}
+                ${inv.posted_at ? `<p>Posted: ${formatDate(inv.posted_at)} by ${inv.posted_by || '-'}</p>` : ''}
+                ${inv.expense_sent_at ? `<p class="text-purple-600">Expense: ${formatDate(inv.expense_sent_at)} (${inv.expense_status || 'pending'})</p>` : ''}
+              </div>
+              <div class="mt-4 pt-4 border-t border-slate-200">
+                ${inv.expense_status ? `<div class="flex items-center justify-between"><span class="text-sm text-purple-600 font-medium">✓ Sent as expense</span><button onclick="event.stopPropagation(); undoExpense('${inv.id}')" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-600 text-sm rounded-lg">↩ Undo</button></div>` : `<button onclick="event.stopPropagation(); fetchExpenseCategories().then(() => openExpenseModal('${inv.id}'))" class="w-full px-4 py-2 bg-purple-100 hover:bg-purple-200 text-purple-700 font-medium rounded-lg flex items-center justify-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>Send as Expense</button>`}
+              </div>
+            </div>
+          </div>
+        </td></tr>
+      `;
+    }
+
+    function renderExpenseModal() {
+      return `
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onclick="closeExpenseModal()">
+          <div class="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 p-6" onclick="event.stopPropagation()">
+            <h3 class="text-lg font-semibold text-slate-800 mb-4">Send as Expense</h3>
+            <div class="space-y-4">
+              <div><label class="block text-sm font-medium text-slate-700 mb-1">Category</label><select onchange="state.expenseModal.categoryId = this.value" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"><option value="">Select...</option>${state.expenseCategories.map(c => `<option value="${c.id}">${c.name}</option>`).join('')}</select></div>
+              <div><label class="block text-sm font-medium text-slate-700 mb-1">Note (optional)</label><input type="text" value="${state.expenseModal.note}" onchange="state.expenseModal.note = this.value" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500" placeholder="Add a note..."></div>
+            </div>
+            <div class="flex gap-3 mt-6">
+              <button onclick="closeExpenseModal()" class="flex-1 px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg">Cancel</button>
+              <button onclick="sendAsExpense()" class="flex-1 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg">Send</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    fetchData();
+    fetchExpenseCategories();
+  </script>
+</body>
+</html>

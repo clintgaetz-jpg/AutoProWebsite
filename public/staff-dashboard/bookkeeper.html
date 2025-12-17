@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookkeeper - Sylvan Lake AutoPro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231e3a8a' width='100' height='100' rx='20'/><text y='.9em' x='50%' text-anchor='middle' font-size='60' fill='%23facc15'>AP</text></svg>">
+  <style>@keyframes spin { to { transform: rotate(360deg); } } .animate-spin { animation: spin 1s linear infinite; }</style>
+</head>
+<body class="bg-slate-100 min-h-screen">
+  <div id="app"></div>
+  <script src="js/config.js"></script>
+  <script>
+    const ACTIVE_TAB = 'bookkeeper';
+    let state = { view: 'items', items: [], requests: [], invoices: [], expenseCategories: [], loading: true, error: null, actionLoading: null, expandedId: null };
+
+    async function fetchData() {
+      state.loading = true; state.error = null; render();
+      try {
+        const [items, requests, invoices, cats] = await Promise.all([
+          fetch(`${SUPABASE_URL}/rest/v1/bookkeeper_items?order=created_at.desc`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r=>r.json()),
+          fetch(`${SUPABASE_URL}/rest/v1/bookkeeper_requests?order=created_at.desc`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r=>r.ok?r.json():[]),
+          fetch(`${SUPABASE_URL}/rest/v1/invoices?select=*,invoice_items(*)&order=created_at.desc`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r=>r.json()),
+          fetch(`${SUPABASE_URL}/rest/v1/expense_categories?order=sort_order,name`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r=>r.json())
+        ]);
+        state.items = items; state.requests = requests; state.invoices = invoices; state.expenseCategories = cats;
+      } catch (err) { state.error = err.message; }
+      state.loading = false; render();
+    }
+
+    async function markItemComplete(id) {
+      state.actionLoading = id; render();
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/bookkeeper_items?id=eq.${id}`, {
+          method: 'PATCH', headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ completed_at: new Date().toISOString(), completed_by: 'dashboard', status: 'completed' })
+        });
+        const item = state.items.find(i => i.id === id);
+        if (item && item.invoice_id) {
+          await fetch(`${SUPABASE_URL}/rest/v1/invoices?id=eq.${item.invoice_id}`, {
+            method: 'PATCH', headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+            body: JSON.stringify({ expense_status: 'entered' })
+          });
+        }
+        fetchData();
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null;
+    }
+
+    async function markRequestComplete(id) {
+      state.actionLoading = id; render();
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/bookkeeper_requests?id=eq.${id}`, {
+          method: 'PATCH', headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ status: 'resolved', updated_at: new Date().toISOString() })
+        });
+        fetchData();
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null;
+    }
+
+    function formatDate(d) { return d ? new Date(d).toLocaleDateString('en-CA') : '-'; }
+    function formatCurrency(a) { return a != null ? new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(a) : '-'; }
+    function copyToClipboard(text, btn) { navigator.clipboard.writeText(text).then(() => { const o = btn.innerHTML; btn.innerHTML = '✓'; btn.classList.add('bg-green-100', 'text-green-700'); setTimeout(() => { btn.innerHTML = o; btn.classList.remove('bg-green-100', 'text-green-700'); }, 1000); }); }
+    function copyBtn(v, small = false) { if (v == null || v === '' || v === '-') return ''; const c = String(v).replace(/"/g, '&quot;'); return `<button onclick="event.stopPropagation(); copyToClipboard('${c}', this)" class="${small ? 'w-5 h-5' : 'w-6 h-6'} text-xs inline-flex items-center justify-center rounded hover:bg-slate-200 text-slate-400 hover:text-slate-600 ml-1">📋</button>`; }
+    function setView(v) { state.view = v; render(); }
+    function toggleExpand(id) { state.expandedId = state.expandedId === id ? null : id; render(); }
+    function getCategoryName(id) { const c = state.expenseCategories.find(x => x.id === id); return c ? c.name : ''; }
+
+    function renderHeader() {
+      const tabs = [
+        { id: 'invoices', label: 'Invoices', href: 'invoices.html', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+        { id: 'cores_warranty', label: 'Core & Warranty', href: 'cores-warranty.html', icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' },
+        { id: 'emails', label: 'Emails', href: 'emails.html', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+        { id: 'statements', label: 'Statements', href: 'statements.html', icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+        { id: 'bookkeeper', label: 'Bookkeeper', href: 'bookkeeper.html', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
+        { id: 'chat', label: 'Ask Protractor', href: 'chat.html', icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z' },
+        { id: 'search', label: 'Search', href: 'search.html', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' },
+        { id: 'settings', label: '', href: 'settings.html', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z', isSettings: true }
+      ];
+      return `<header class="bg-blue-900 text-white shadow-lg"><div class="max-w-7xl mx-auto px-4 py-3"><div class="flex items-center gap-4"><div class="bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded text-lg">NAPA</div><div><h1 class="text-xl font-semibold">Sylvan Lake AutoPro</h1><p class="text-blue-200 text-sm">Business Dashboard</p></div><div class="ml-auto"><button onclick="location.reload()" class="px-3 py-1.5 bg-blue-800 hover:bg-blue-700 rounded-lg text-sm">🔄 Refresh</button></div></div></div><div class="bg-blue-800"><div class="max-w-7xl mx-auto px-4"><div class="flex items-end pt-2 overflow-x-auto">${tabs.map((t,i)=>{const a=t.id===ACTIVE_TAB,c=a?'bg-white text-slate-800 border-t border-l border-r border-slate-300':'bg-slate-100 text-slate-600 hover:bg-slate-50 border border-transparent';return t.isSettings?`<a href="${t.href}" class="flex items-center justify-center w-10 h-10 rounded-t-lg ml-1 ${c}"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${t.icon}"></path></svg></a>`:`<a href="${t.href}" class="flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-t-lg ${i>0?'ml-1':''} whitespace-nowrap ${c}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${t.icon}"></path></svg>${t.label}</a>`;}).join('')}</div></div></div></header>`;
+    }
+
+    function render() {
+      const pendingItems = state.items.filter(i => !i.completed_at);
+      const pendingRequests = state.requests.filter(r => r.status === 'pending');
+      document.getElementById('app').innerHTML = `
+        ${renderHeader()}
+        <div class="bg-white border-b border-slate-200 shadow-sm"><div class="max-w-7xl mx-auto px-4 py-3"><div class="flex items-center gap-2">
+          <button onclick="setView('items')" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium ${state.view==='items'?'bg-purple-500 text-white':'bg-slate-100 text-slate-700 hover:bg-slate-200'}">📤 Items <span class="px-2 py-0.5 rounded-full text-xs font-bold ${state.view==='items'?'bg-purple-700 text-white':'bg-purple-100 text-purple-700'}">${pendingItems.length}</span></button>
+          <button onclick="setView('requests')" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium ${state.view==='requests'?'bg-amber-500 text-white':'bg-slate-100 text-slate-700 hover:bg-slate-200'}">📥 Requests ${pendingRequests.length>0?`<span class="px-2 py-0.5 rounded-full text-xs font-bold ${state.view==='requests'?'bg-amber-700 text-white':'bg-amber-100 text-amber-700'}">${pendingRequests.length}</span>`:''}</button>
+          <button onclick="setView('completed')" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium ${state.view==='completed'?'bg-green-500 text-white':'bg-slate-100 text-slate-700 hover:bg-slate-200'}">✓ Completed</button>
+        </div></div></div>
+        <main class="max-w-7xl mx-auto px-4 py-6">
+          ${state.error ? `<div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg">${state.error}</div>` : ''}
+          ${state.loading ? `<div class="bg-white rounded-lg shadow p-12 text-center"><div class="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div><p class="text-slate-600">Loading...</p></div>` : renderContent()}
+        </main>`;
+    }
+
+    function renderContent() {
+      if (state.view === 'items') {
+        const items = state.items.filter(i => !i.completed_at);
+        if (items.length === 0) return `<div class="bg-white rounded-lg shadow p-12 text-center"><p class="text-lg font-medium text-slate-700">No pending items</p></div>`;
+        return `<div class="bg-white rounded-lg shadow overflow-hidden"><table class="w-full"><thead class="bg-purple-50 border-b"><tr><th class="w-8 px-2"></th><th class="text-left px-4 py-3 text-sm font-semibold text-purple-800">Type</th><th class="text-left px-4 py-3 text-sm font-semibold text-purple-800">Title</th><th class="text-left px-4 py-3 text-sm font-semibold text-purple-800">Category</th><th class="text-right px-4 py-3 text-sm font-semibold text-purple-800">Amount</th><th class="text-center px-4 py-3 text-sm font-semibold text-purple-800">PDF</th><th class="text-center px-4 py-3 text-sm font-semibold text-purple-800">Action</th></tr></thead><tbody class="divide-y divide-slate-100">${items.map(item=>{const inv=state.invoices.find(i=>i.id===item.invoice_id);const isExp=state.expandedId===item.id;return`<tr class="hover:bg-slate-50 cursor-pointer ${isExp?'bg-purple-50':''}" onclick="toggleExpand('${item.id}')"><td class="px-2 py-3 text-slate-400">${isExp?'▼':'▶'}</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-xs font-medium bg-purple-100 text-purple-700">💼 Expense</span></td><td class="px-4 py-3 font-medium">${item.title||'-'}${copyBtn(item.title)}</td><td class="px-4 py-3 text-sm">${getCategoryName(item.expense_category_id)||'-'}</td><td class="px-4 py-3 text-right font-semibold">${formatCurrency(item.amount)}${copyBtn(item.amount)}</td><td class="px-4 py-3 text-center" onclick="event.stopPropagation()">${inv&&inv.pdf_url?`<a href="${inv.pdf_url}" target="_blank" class="text-blue-600">📄</a>`:'-'}</td><td class="px-4 py-3 text-center" onclick="event.stopPropagation()"><button onclick="markItemComplete('${item.id}')" class="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-sm rounded-lg">✓ Complete</button></td></tr>${isExp?renderExpanded(item,inv):''}`;}).join('')}</tbody></table></div>`;
+      }
+      if (state.view === 'requests') {
+        const reqs = state.requests.filter(r => r.status === 'pending');
+        if (reqs.length === 0) return `<div class="bg-white rounded-lg shadow p-12 text-center"><p class="text-lg font-medium text-slate-700">No pending requests</p></div>`;
+        return `<div class="bg-white rounded-lg shadow overflow-hidden"><table class="w-full"><thead class="bg-amber-50 border-b"><tr><th class="text-left px-4 py-3 text-sm font-semibold text-amber-800">Type</th><th class="text-left px-4 py-3 text-sm font-semibold text-amber-800">Description</th><th class="text-left px-4 py-3 text-sm font-semibold text-amber-800">Notes</th><th class="text-left px-4 py-3 text-sm font-semibold text-amber-800">Date</th><th class="text-center px-4 py-3 text-sm font-semibold text-amber-800">Action</th></tr></thead><tbody class="divide-y divide-slate-100">${reqs.map(r=>`<tr class="hover:bg-slate-50 bg-amber-50"><td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-xs font-medium ${r.request_type==='missing_invoice'?'bg-red-100 text-red-700':'bg-amber-100 text-amber-700'}">${r.request_type||'request'}</span></td><td class="px-4 py-3 font-medium">${r.description||'-'}</td><td class="px-4 py-3 text-sm text-slate-600">${r.notes||'-'}</td><td class="px-4 py-3 text-sm text-slate-500">${formatDate(r.created_at)}</td><td class="px-4 py-3 text-center"><button onclick="markRequestComplete('${r.id}')" class="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-sm rounded-lg">✓ Resolved</button></td></tr>`).join('')}</tbody></table></div>`;
+      }
+      if (state.view === 'completed') {
+        const completed = state.items.filter(i => i.completed_at).slice(0, 50);
+        if (completed.length === 0) return `<div class="bg-white rounded-lg shadow p-12 text-center"><p class="text-lg font-medium text-slate-700">No completed items</p></div>`;
+        return `<div class="bg-white rounded-lg shadow overflow-hidden"><table class="w-full"><thead class="bg-green-50 border-b"><tr><th class="text-left px-4 py-3 text-sm font-semibold text-green-800">Title</th><th class="text-left px-4 py-3 text-sm font-semibold text-green-800">Category</th><th class="text-right px-4 py-3 text-sm font-semibold text-green-800">Amount</th><th class="text-left px-4 py-3 text-sm font-semibold text-green-800">Completed</th></tr></thead><tbody class="divide-y divide-slate-100">${completed.map(i=>`<tr class="hover:bg-slate-50"><td class="px-4 py-3 font-medium">${i.title||'-'}</td><td class="px-4 py-3 text-sm">${getCategoryName(i.expense_category_id)||'-'}</td><td class="px-4 py-3 text-right font-semibold">${formatCurrency(i.amount)}</td><td class="px-4 py-3 text-sm text-slate-500">${formatDate(i.completed_at)}</td></tr>`).join('')}</tbody></table></div>`;
+      }
+      return '';
+    }
+
+    function renderExpanded(item, inv) {
+      return `<tr class="bg-purple-50"><td colspan="7" class="px-8 py-4"><div class="grid grid-cols-1 lg:grid-cols-2 gap-6"><div class="bg-white rounded-lg p-4 shadow-sm border border-purple-200"><h4 class="font-semibold text-purple-800 mb-3">💼 Expense Details</h4><div class="space-y-2 text-sm"><div class="flex justify-between"><span class="text-slate-600">Category:</span><span class="font-medium text-purple-600">${getCategoryName(item.expense_category_id)||'-'}</span></div><div class="flex justify-between"><span class="text-slate-600">Amount:</span><span class="font-bold">${formatCurrency(item.amount)}${copyBtn(item.amount,true)}</span></div><div class="flex justify-between"><span class="text-slate-600">Sent:</span><span>${formatDate(item.sent_at||item.created_at)}</span></div></div></div><div class="bg-white rounded-lg p-4 shadow-sm border"><h4 class="font-semibold text-slate-700 mb-3">📄 Invoice</h4>${inv?`<div class="space-y-2 text-sm"><div class="flex justify-between"><span class="text-slate-600">Invoice #:</span><span class="font-medium">${inv.invoice_number||'-'}${copyBtn(inv.invoice_number,true)}</span></div><div class="flex justify-between"><span class="text-slate-600">Supplier:</span><span class="font-medium">${inv.detected_supplier_name||'-'}</span></div><div class="flex justify-between font-bold"><span>Total:</span><span>${formatCurrency(inv.total)}${copyBtn(inv.total,true)}</span></div>${inv.pdf_url?`<a href="${inv.pdf_url}" target="_blank" class="mt-3 inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800">📄 View PDF</a>`:''}</div>`:'<div class="text-slate-500 text-sm">Not available</div>'}</div></div></td></tr>`;
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>

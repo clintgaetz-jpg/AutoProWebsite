@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core & Warranty - Sylvan Lake AutoPro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231e3a8a' width='100' height='100' rx='20'/><text y='.9em' x='50%' text-anchor='middle' font-size='60' fill='%23facc15'>AP</text></svg>">
+  <style>@keyframes spin { to { transform: rotate(360deg); } } .animate-spin { animation: spin 1s linear infinite; }</style>
+</head>
+<body class="bg-slate-100 min-h-screen">
+  <div id="app"></div>
+  <script src="js/config.js"></script>
+  <script>
+    const ACTIVE_TAB = 'cores_warranty';
+    let state = {
+      cwView: 'cores',
+      cwFilter: 'pending',
+      coresPending: [],
+      coresCompleted: [],
+      warrantiesPending: [],
+      warrantiesCompleted: [],
+      invoices: [],
+      loading: true,
+      error: null,
+      actionLoading: null,
+      expandedId: null,
+      completedDays: 30
+    };
+
+    async function fetchData() {
+      state.loading = true; state.error = null; render();
+      const cutoff = new Date(); cutoff.setDate(cutoff.getDate() - state.completedDays);
+      try {
+        const [inv, cp, cc, wp, wc] = await Promise.all([
+          fetch(`${SUPABASE_URL}/rest/v1/invoices?select=*,invoice_items(*)&order=created_at.desc`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r => r.json()),
+          fetch(`${SUPABASE_URL}/rest/v1/v_cores_pending?select=*`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r => r.ok ? r.json() : []),
+          fetch(`${SUPABASE_URL}/rest/v1/v_cores_completed?select=*&return_completed_at=gte.${cutoff.toISOString()}`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r => r.ok ? r.json() : []),
+          fetch(`${SUPABASE_URL}/rest/v1/v_warranties_pending?select=*`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r => r.ok ? r.json() : []),
+          fetch(`${SUPABASE_URL}/rest/v1/v_warranties_completed?select=*&return_completed_at=gte.${cutoff.toISOString()}`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r => r.ok ? r.json() : [])
+        ]);
+        state.invoices = inv; state.coresPending = cp; state.coresCompleted = cc; state.warrantiesPending = wp; state.warrantiesCompleted = wc;
+      } catch (err) { state.error = err.message; }
+      state.loading = false; render();
+    }
+
+    async function updateItemStatus(id, newStatus) {
+      state.actionLoading = id; render();
+      const updates = { return_status: newStatus };
+      if (newStatus === 'credited' || newStatus === 'lost' || newStatus === 'dismissed') {
+        updates.return_completed_at = new Date().toISOString();
+        updates.return_completed_by = 'dashboard';
+      }
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/invoice_items?id=eq.${id}`, {
+          method: 'PATCH', headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify(updates)
+        });
+        fetchData();
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null;
+    }
+
+    async function undoToStatus(id, newStatus) {
+      state.actionLoading = id; render();
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/invoice_items?id=eq.${id}`, {
+          method: 'PATCH', headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ return_status: newStatus, return_completed_at: null, return_completed_by: null })
+        });
+        fetchData();
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null;
+    }
+
+    async function dismissCWItem(id) {
+      const initials = prompt('Your initials:'); if (!initials) return;
+      const note = prompt('Add a note (optional):'); if (note === null) return;
+      state.actionLoading = id; render();
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/invoice_items?id=eq.${id}`, {
+          method: 'PATCH', headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify({ return_status: 'dismissed', return_completed_at: new Date().toISOString(), return_completed_by: initials.toUpperCase(), return_notes: note || 'Dismissed' })
+        });
+        fetchData();
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null;
+    }
+
+    async function removeFlag(id, isCores) {
+      const initials = prompt('Your initials:'); if (!initials) return;
+      const note = prompt(`Why is this not a ${isCores ? 'core' : 'warranty'}?`); if (note === null) return;
+      state.actionLoading = id; render();
+      try {
+        const updates = isCores ? { is_core: false, return_status: null, return_completed_by: initials.toUpperCase(), return_notes: note || 'Not a core' } : { is_warranty: false, return_status: null, return_completed_by: initials.toUpperCase(), return_notes: note || 'Not a warranty' };
+        await fetch(`${SUPABASE_URL}/rest/v1/invoice_items?id=eq.${id}`, {
+          method: 'PATCH', headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+          body: JSON.stringify(updates)
+        });
+        fetchData();
+      } catch (err) { alert('Error: ' + err.message); }
+      state.actionLoading = null;
+    }
+
+    function markLabelled(id) { updateItemStatus(id, 'labelled'); }
+    function markSentBack(id) { updateItemStatus(id, 'sent_back'); }
+    function markCredited(id) { updateItemStatus(id, 'credited'); }
+    function markLost(id) { updateItemStatus(id, 'lost'); }
+
+    function formatDate(d) { return d ? new Date(d).toLocaleDateString('en-CA') : '-'; }
+    function formatCurrency(a) { return a != null ? new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(a) : '-'; }
+    function copyToClipboard(text, btn) { navigator.clipboard.writeText(text).then(() => { const o = btn.innerHTML; btn.innerHTML = '✓'; btn.classList.add('bg-green-100', 'text-green-700'); setTimeout(() => { btn.innerHTML = o; btn.classList.remove('bg-green-100', 'text-green-700'); }, 1000); }); }
+    function copyBtn(v, small = false) { if (v == null || v === '' || v === '-') return ''; const c = String(v).replace(/"/g, '&quot;'); return `<button onclick="event.stopPropagation(); copyToClipboard('${c}', this)" class="${small ? 'w-5 h-5' : 'w-6 h-6'} text-xs inline-flex items-center justify-center rounded hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors ml-1" title="Copy">📋</button>`; }
+    function setCWView(v) { state.cwView = v; render(); }
+    function setCWFilter(f) { state.cwFilter = f; render(); }
+    function toggleExpand(id) { state.expandedId = state.expandedId === id ? null : id; render(); }
+    function loadMoreCompleted() { state.completedDays += 30; fetchData(); }
+
+    function renderHeader() {
+      const tabs = [
+        { id: 'invoices', label: 'Invoices', href: 'invoices.html', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+        { id: 'cores_warranty', label: 'Core & Warranty', href: 'cores-warranty.html', icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' },
+        { id: 'emails', label: 'Emails', href: 'emails.html', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+        { id: 'statements', label: 'Statements', href: 'statements.html', icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+        { id: 'bookkeeper', label: 'Bookkeeper', href: 'bookkeeper.html', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
+        { id: 'chat', label: 'Ask Protractor', href: 'chat.html', icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z' },
+        { id: 'search', label: 'Search', href: 'search.html', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' },
+        { id: 'settings', label: '', href: 'settings.html', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z', isSettings: true }
+      ];
+      return `
+        <header class="bg-blue-900 text-white shadow-lg">
+          <div class="max-w-7xl mx-auto px-4 py-3"><div class="flex items-center gap-4">
+            <div class="bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded text-lg">NAPA</div>
+            <div><h1 class="text-xl font-semibold">Sylvan Lake AutoPro</h1><p class="text-blue-200 text-sm">Business Dashboard</p></div>
+            <div class="ml-auto"><button onclick="location.reload()" class="px-3 py-1.5 bg-blue-800 hover:bg-blue-700 rounded-lg text-sm transition-colors">🔄 Refresh</button></div>
+          </div></div>
+          <div class="bg-blue-800"><div class="max-w-7xl mx-auto px-4"><div class="flex items-end pt-2 overflow-x-auto">
+            ${tabs.map((tab, i) => {
+              const isActive = tab.id === ACTIVE_TAB;
+              const baseClass = isActive ? 'bg-white text-slate-800 border-t border-l border-r border-slate-300' : 'bg-slate-100 text-slate-600 hover:bg-slate-50 border border-transparent';
+              if (tab.isSettings) return `<a href="${tab.href}" class="flex items-center justify-center w-10 h-10 rounded-t-lg transition-all ml-1 ${baseClass}" title="Settings"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${tab.icon}"></path></svg></a>`;
+              return `<a href="${tab.href}" class="flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-t-lg transition-all ${i > 0 ? 'ml-1' : ''} whitespace-nowrap ${baseClass}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${tab.icon}"></path></svg>${tab.label}</a>`;
+            }).join('')}
+          </div></div></div>
+        </header>`;
+    }
+
+    function render() {
+      const app = document.getElementById('app');
+      const isCores = state.cwView === 'cores';
+      const isPending = state.cwFilter === 'pending';
+      const items = isCores ? (isPending ? state.coresPending : state.coresCompleted) : (isPending ? state.warrantiesPending : state.warrantiesCompleted);
+      const colorClass = isCores ? 'orange' : 'blue';
+
+      app.innerHTML = `
+        ${renderHeader()}
+        <div class="bg-white border-b border-slate-200 shadow-sm">
+          <div class="max-w-7xl mx-auto px-4 py-3"><div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-2">
+              <button onclick="setCWView('cores')" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${state.cwView === 'cores' ? 'bg-orange-400 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">🔶 Cores <span class="px-2 py-0.5 rounded-full text-xs font-bold ${state.cwView === 'cores' ? 'bg-orange-600 text-white' : 'bg-orange-100 text-orange-700'}">${state.coresPending.length}</span></button>
+              <button onclick="setCWView('warranties')" class="flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all ${state.cwView === 'warranties' ? 'bg-blue-500 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}">🔷 Warranties <span class="px-2 py-0.5 rounded-full text-xs font-bold ${state.cwView === 'warranties' ? 'bg-blue-700 text-white' : 'bg-blue-100 text-blue-700'}">${state.warrantiesPending.length}</span></button>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="setCWFilter('pending')" class="px-3 py-1.5 rounded-full text-sm font-medium transition-all ${state.cwFilter === 'pending' ? 'bg-yellow-400 text-blue-900' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">Pending</button>
+              <button onclick="setCWFilter('completed')" class="px-3 py-1.5 rounded-full text-sm font-medium transition-all ${state.cwFilter === 'completed' ? 'bg-yellow-400 text-blue-900' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">Completed</button>
+            </div>
+          </div></div>
+        </div>
+        <main class="max-w-7xl mx-auto px-4 py-6">
+          ${state.error ? `<div class="mb-4 p-4 bg-red-100 border border-red-300 text-red-700 rounded-lg">${state.error}</div>` : ''}
+          ${state.loading ? `<div class="bg-white rounded-lg shadow p-12 text-center"><div class="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div><p class="text-slate-600">Loading...</p></div>` : renderContent(items, isCores, isPending, colorClass)}
+        </main>`;
+    }
+
+    function renderContent(items, isCores, isPending, colorClass) {
+      if (items.length === 0) return `<div class="bg-white rounded-lg shadow p-12 text-center"><svg class="w-12 h-12 mx-auto text-slate-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg><p class="text-lg font-medium text-slate-700">No ${isCores ? 'cores' : 'warranties'} ${isPending ? 'pending' : 'completed'}</p></div>`;
+      return `
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+          <table class="w-full">
+            <thead class="bg-slate-50 border-b"><tr>
+              <th class="w-8"></th><th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">Part #</th><th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">Description</th><th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">Invoice</th><th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">Supplier</th><th class="text-right px-4 py-3 text-sm font-semibold text-slate-600">Value</th><th class="text-left px-4 py-3 text-sm font-semibold text-slate-600">Status</th><th class="text-center px-4 py-3 text-sm font-semibold text-slate-600">PDF</th><th class="text-center px-4 py-3 text-sm font-semibold text-slate-600">Action</th>
+            </tr></thead>
+            <tbody class="divide-y divide-slate-100">${items.map(item => renderRow(item, isCores, isPending, colorClass)).join('')}</tbody>
+          </table>
+        </div>
+        ${!isPending ? `<div class="mt-4 text-center"><button onclick="loadMoreCompleted()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 rounded-lg text-sm font-medium text-slate-700">Load more (showing last ${state.completedDays} days)</button></div>` : ''}`;
+    }
+
+    function renderRow(item, isCores, isPending, colorClass) {
+      const isExpanded = state.expandedId === item.id;
+      const invoice = state.invoices.find(inv => inv.id === item.invoice_id);
+      const statusClass = { pending: 'bg-yellow-100 text-yellow-700', labelled: 'bg-blue-100 text-blue-700', sent_back: 'bg-purple-100 text-purple-700', credited: 'bg-green-100 text-green-700', lost: 'bg-red-100 text-red-700', dismissed: 'bg-slate-200 text-slate-600' }[item.return_status] || 'bg-slate-100 text-slate-600';
+      return `
+        <tr class="cursor-pointer hover:bg-slate-50 ${isExpanded ? 'bg-blue-50' : ''}" onclick="toggleExpand('${item.id}')">
+          <td class="px-2 py-3 text-slate-400">${isExpanded ? '▼' : '▶'}</td>
+          <td class="px-4 py-3 font-mono text-sm">${item.part_number || '-'}${copyBtn(item.part_number)}</td>
+          <td class="px-4 py-3 text-sm">${item.description || '-'}</td>
+          <td class="px-4 py-3 text-sm">${item.invoice_number || '-'}${copyBtn(item.invoice_number)}</td>
+          <td class="px-4 py-3 text-sm">${item.supplier || '-'}</td>
+          <td class="px-4 py-3 text-right font-medium text-${colorClass}-600">${formatCurrency(item.line_total)}</td>
+          <td class="px-4 py-3"><span class="px-2 py-1 rounded-full text-xs font-medium ${statusClass}">${item.return_status || 'pending'}</span></td>
+          <td class="px-4 py-3 text-center" onclick="event.stopPropagation()">${item.pdf_url ? `<a href="${item.pdf_url}" target="_blank" class="text-blue-600">📄</a>` : '-'}</td>
+          <td class="px-4 py-3 text-center" onclick="event.stopPropagation()">${isPending ? renderActions(item, isCores) : `<button onclick="undoToStatus('${item.id}', 'sent_back')" class="px-2 py-1 bg-slate-200 hover:bg-slate-300 text-slate-600 text-xs rounded">↩ Undo</button>`}</td>
+        </tr>
+        ${isExpanded ? renderExpanded(item, invoice, isCores, colorClass) : ''}`;
+    }
+
+    function renderActions(item, isCores) {
+      const s = item.return_status || 'pending', l = state.actionLoading === item.id;
+      if (s === 'pending') return `<div class="flex gap-1 justify-center flex-wrap"><button onclick="markLabelled('${item.id}')" ${l?'disabled':''} class="px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg disabled:opacity-50">${l?'...':'Label'}</button><button onclick="dismissCWItem('${item.id}')" ${l?'disabled':''} class="px-2 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-600 text-xs rounded-lg disabled:opacity-50">Dismiss</button><button onclick="removeFlag('${item.id}', ${isCores})" ${l?'disabled':''} class="px-2 py-1.5 bg-red-100 hover:bg-red-200 text-red-600 text-xs rounded-lg disabled:opacity-50">Not ${isCores?'Core':'Warranty'}</button></div>`;
+      if (s === 'labelled') return `<div class="flex gap-1 justify-center"><button onclick="undoToStatus('${item.id}', 'pending')" ${l?'disabled':''} class="px-2 py-1 bg-slate-200 text-slate-600 text-xs rounded">↩</button><button onclick="markSentBack('${item.id}')" ${l?'disabled':''} class="px-3 py-1.5 bg-purple-500 hover:bg-purple-600 text-white text-sm rounded-lg disabled:opacity-50">${l?'...':'Sent'}</button></div>`;
+      if (s === 'sent_back') return `<div class="flex gap-1 justify-center"><button onclick="undoToStatus('${item.id}', 'labelled')" ${l?'disabled':''} class="px-2 py-1 bg-slate-200 text-slate-600 text-xs rounded">↩</button><button onclick="markCredited('${item.id}')" ${l?'disabled':''} class="px-3 py-1.5 bg-green-500 hover:bg-green-600 text-white text-sm rounded-lg disabled:opacity-50">${l?'...':'Credited'}</button><button onclick="markLost('${item.id}')" ${l?'disabled':''} class="px-2 py-1.5 bg-red-100 hover:bg-red-200 text-red-600 text-xs rounded-lg disabled:opacity-50">Lost</button></div>`;
+      return '-';
+    }
+
+    function renderExpanded(item, invoice, isCores, colorClass) {
+      return `<tr class="bg-slate-50"><td colspan="9" class="px-8 py-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-${colorClass}-50 rounded-lg p-4 border border-${colorClass}-200">
+            <h4 class="font-semibold text-${colorClass}-800 mb-3">${isCores ? '🔶 Core' : '🔷 Warranty'} Details</h4>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-slate-600">Part #:</span><span class="font-mono font-medium">${item.part_number || '-'}${copyBtn(item.part_number, true)}</span></div>
+              <div class="flex justify-between"><span class="text-slate-600">Description:</span><span class="font-medium">${item.description || '-'}</span></div>
+              <div class="flex justify-between"><span class="text-slate-600">Value:</span><span class="font-bold text-${colorClass}-600">${formatCurrency(item.line_total)}${copyBtn(item.line_total, true)}</span></div>
+              ${item.return_notes ? `<div class="mt-3 pt-3 border-t border-${colorClass}-200"><span class="text-slate-600 text-xs font-medium">Notes:</span><p class="mt-1 text-slate-700 bg-white rounded p-2 text-xs">${item.return_notes}</p></div>` : ''}
+            </div>
+          </div>
+          <div class="bg-white rounded-lg p-4 shadow-sm border">
+            <h4 class="font-semibold text-slate-700 mb-3">Invoice Summary</h4>
+            ${invoice ? `<div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-slate-600">Invoice #:</span><span class="font-medium">${invoice.invoice_number || '-'}${copyBtn(invoice.invoice_number, true)}</span></div>
+              <div class="flex justify-between"><span class="text-slate-600">Supplier:</span><span class="font-medium">${invoice.detected_supplier_name || '-'}</span></div>
+              <div class="flex justify-between"><span class="text-slate-600">PO #:</span><span class="font-medium">${invoice.po_number || '-'}${copyBtn(invoice.po_number, true)}</span></div>
+              <div class="border-t pt-2 mt-2"><div class="flex justify-between font-bold"><span>Total:</span><span>${formatCurrency(invoice.total)}${copyBtn(invoice.total, true)}</span></div></div>
+              ${invoice.pdf_url ? `<a href="${invoice.pdf_url}" target="_blank" class="mt-3 inline-flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800">📄 View PDF</a>` : ''}
+            </div>` : `<div class="text-slate-500 text-sm">Invoice details not available</div>`}
+          </div>
+        </div>
+      </td></tr>`;
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>

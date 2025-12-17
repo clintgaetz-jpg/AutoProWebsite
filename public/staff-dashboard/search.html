@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search - Sylvan Lake AutoPro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%231e3a8a' width='100' height='100' rx='20'/><text y='.9em' x='50%' text-anchor='middle' font-size='60' fill='%23facc15'>AP</text></svg>">
+  <style>@keyframes spin { to { transform: rotate(360deg); } } .animate-spin { animation: spin 1s linear infinite; }</style>
+</head>
+<body class="bg-slate-100 min-h-screen">
+  <div id="app"></div>
+  <script src="js/config.js"></script>
+  <script>
+    const ACTIVE_TAB = 'search';
+    let state = { query: '', dateRange: 90, results: { invoices: [], parts: [] }, loading: false, expandedId: null };
+
+    async function doSearch() {
+      const q = document.getElementById('search-input')?.value?.trim();
+      if (!q) return;
+      state.query = q;
+      state.loading = true;
+      state.results = { invoices: [], parts: [] };
+      render();
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - state.dateRange);
+      try {
+        const [invs, items] = await Promise.all([
+          fetch(`${SUPABASE_URL}/rest/v1/invoices?select=*,invoice_items(*)&or=(invoice_number.ilike.*${q}*,po_number.ilike.*${q}*,detected_supplier_name.ilike.*${q}*)&created_at=gte.${cutoff.toISOString()}&order=created_at.desc&limit=50`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r=>r.json()),
+          fetch(`${SUPABASE_URL}/rest/v1/invoice_items?select=*,invoices(invoice_number,detected_supplier_name,pdf_url,created_at)&or=(part_number.ilike.*${q}*,description.ilike.*${q}*)&created_at=gte.${cutoff.toISOString()}&order=created_at.desc&limit=50`, { headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` } }).then(r=>r.json())
+        ]);
+        state.results.invoices = invs || [];
+        state.results.parts = items || [];
+      } catch (err) { alert('Search error: ' + err.message); }
+      state.loading = false;
+      render();
+    }
+
+    function formatDate(d) { return d ? new Date(d).toLocaleDateString('en-CA') : '-'; }
+    function formatCurrency(a) { return a != null ? new Intl.NumberFormat('en-CA', { style: 'currency', currency: 'CAD' }).format(a) : '-'; }
+    function copyToClipboard(text, btn) { navigator.clipboard.writeText(text).then(() => { const o = btn.innerHTML; btn.innerHTML = '✓'; btn.classList.add('bg-green-100', 'text-green-700'); setTimeout(() => { btn.innerHTML = o; btn.classList.remove('bg-green-100', 'text-green-700'); }, 1000); }); }
+    function copyBtn(v) { if (v == null || v === '' || v === '-') return ''; const c = String(v).replace(/"/g, '&quot;'); return `<button onclick="event.stopPropagation(); copyToClipboard('${c}', this)" class="w-6 h-6 text-xs inline-flex items-center justify-center rounded hover:bg-slate-200 text-slate-400 hover:text-slate-600 ml-1">📋</button>`; }
+    function setDateRange(v) { state.dateRange = parseInt(v); }
+    function toggleExpand(id) { state.expandedId = state.expandedId === id ? null : id; render(); }
+    function handleKey(e) { if (e.key === 'Enter') doSearch(); }
+
+    function renderHeader() {
+      const tabs = [
+        { id: 'invoices', label: 'Invoices', href: 'invoices.html', icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+        { id: 'cores_warranty', label: 'Core & Warranty', href: 'cores-warranty.html', icon: 'M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15' },
+        { id: 'emails', label: 'Emails', href: 'emails.html', icon: 'M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z' },
+        { id: 'statements', label: 'Statements', href: 'statements.html', icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' },
+        { id: 'bookkeeper', label: 'Bookkeeper', href: 'bookkeeper.html', icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z' },
+        { id: 'chat', label: 'Ask Protractor', href: 'chat.html', icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z' },
+        { id: 'search', label: 'Search', href: 'search.html', icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' },
+        { id: 'settings', label: '', href: 'settings.html', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z', isSettings: true }
+      ];
+      return `<header class="bg-blue-900 text-white shadow-lg"><div class="max-w-7xl mx-auto px-4 py-3"><div class="flex items-center gap-4"><div class="bg-yellow-400 text-blue-900 font-bold px-3 py-1 rounded text-lg">NAPA</div><div><h1 class="text-xl font-semibold">Sylvan Lake AutoPro</h1><p class="text-blue-200 text-sm">Business Dashboard</p></div></div></div><div class="bg-blue-800"><div class="max-w-7xl mx-auto px-4"><div class="flex items-end pt-2 overflow-x-auto">${tabs.map((t,i)=>{const a=t.id===ACTIVE_TAB,c=a?'bg-white text-slate-800 border-t border-l border-r border-slate-300':'bg-slate-100 text-slate-600 hover:bg-slate-50 border border-transparent';return t.isSettings?`<a href="${t.href}" class="flex items-center justify-center w-10 h-10 rounded-t-lg ml-1 ${c}"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${t.icon}"></path></svg></a>`:`<a href="${t.href}" class="flex items-center gap-2 px-5 py-2.5 text-sm font-medium rounded-t-lg ${i>0?'ml-1':''} whitespace-nowrap ${c}"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="${t.icon}"></path></svg>${t.label}</a>`;}).join('')}</div></div></div></header>`;
+    }
+
+    function render() {
+      const total = state.results.invoices.length + state.results.parts.length;
+      document.getElementById('app').innerHTML = `
+        ${renderHeader()}
+        <main class="max-w-4xl mx-auto px-4 py-6">
+          <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex gap-3">
+              <div class="flex-1 relative">
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input id="search-input" type="text" placeholder="Invoice #, PO #, part #, description, supplier..." class="w-full pl-12 pr-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg" onkeydown="handleKey(event)" value="${state.query}">
+              </div>
+              <select onchange="setDateRange(this.value)" class="px-4 py-3 border border-slate-300 rounded-xl">
+                <option value="30" ${state.dateRange===30?'selected':''}>30 days</option>
+                <option value="90" ${state.dateRange===90?'selected':''}>90 days</option>
+                <option value="180" ${state.dateRange===180?'selected':''}>6 months</option>
+                <option value="365" ${state.dateRange===365?'selected':''}>1 year</option>
+                <option value="9999" ${state.dateRange===9999?'selected':''}>All</option>
+              </select>
+              <button onclick="doSearch()" class="px-6 py-3 bg-blue-900 hover:bg-blue-800 text-white font-medium rounded-xl">${state.loading?'...':'Search'}</button>
+            </div>
+          </div>
+          ${state.query && !state.loading ? `<div class="mb-4 text-slate-600">Found ${total} results for "<strong>${state.query}</strong>"</div>` : ''}
+          ${state.loading ? `<div class="bg-white rounded-lg shadow p-12 text-center"><div class="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mx-auto mb-4"></div><p class="text-slate-600">Searching...</p></div>` : ''}
+          ${!state.loading && state.results.invoices.length > 0 ? `
+            <div class="bg-white rounded-lg shadow overflow-hidden mb-4">
+              <div class="bg-blue-50 px-4 py-3 border-b font-semibold text-blue-800">Invoices (${state.results.invoices.length})</div>
+              <table class="w-full text-sm"><thead class="bg-slate-50 border-b"><tr><th class="w-8 px-2"></th><th class="text-left px-4 py-2">Invoice #</th><th class="text-left px-4 py-2">Supplier</th><th class="text-left px-4 py-2">PO #</th><th class="text-right px-4 py-2">Total</th><th class="text-left px-4 py-2">Date</th><th class="text-center px-4 py-2">PDF</th></tr></thead><tbody class="divide-y divide-slate-100">
+                ${state.results.invoices.map(inv => {
+                  const isExp = state.expandedId === inv.id;
+                  return `<tr class="hover:bg-slate-50 cursor-pointer ${isExp?'bg-blue-50':''}" onclick="toggleExpand('${inv.id}')"><td class="px-2 py-2 text-slate-400">${isExp?'▼':'▶'}</td><td class="px-4 py-2 font-medium">${inv.invoice_number||'-'}${copyBtn(inv.invoice_number)}</td><td class="px-4 py-2">${inv.detected_supplier_name||'-'}</td><td class="px-4 py-2">${inv.po_number||'-'}${copyBtn(inv.po_number)}</td><td class="px-4 py-2 text-right font-medium">${formatCurrency(inv.total)}</td><td class="px-4 py-2">${formatDate(inv.invoice_date)}</td><td class="px-4 py-2 text-center" onclick="event.stopPropagation()">${inv.pdf_url?`<a href="${inv.pdf_url}" target="_blank" class="text-blue-600">📄</a>`:'-'}</td></tr>
+                  ${isExp && inv.invoice_items?.length ? `<tr class="bg-slate-50"><td colspan="7" class="px-8 py-4"><table class="w-full text-xs bg-white rounded shadow-sm"><thead class="bg-slate-100"><tr><th class="text-left px-3 py-2">Part #</th><th class="text-left px-3 py-2">Description</th><th class="text-center px-3 py-2">Qty</th><th class="text-right px-3 py-2">Total</th></tr></thead><tbody>${inv.invoice_items.map(li=>`<tr class="${li.is_core?'bg-orange-50':li.is_warranty?'bg-blue-50':''}"><td class="px-3 py-1.5 font-mono">${li.part_number||'-'}${copyBtn(li.part_number)}</td><td class="px-3 py-1.5">${li.description||'-'}</td><td class="px-3 py-1.5 text-center">${li.quantity||1}</td><td class="px-3 py-1.5 text-right">${formatCurrency(li.line_total)}</td></tr>`).join('')}</tbody></table></td></tr>` : ''}`;
+                }).join('')}
+              </tbody></table>
+            </div>
+          ` : ''}
+          ${!state.loading && state.results.parts.length > 0 ? `
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+              <div class="bg-green-50 px-4 py-3 border-b font-semibold text-green-800">Parts (${state.results.parts.length})</div>
+              <table class="w-full text-sm"><thead class="bg-slate-50 border-b"><tr><th class="text-left px-4 py-2">Part #</th><th class="text-left px-4 py-2">Description</th><th class="text-left px-4 py-2">Invoice</th><th class="text-left px-4 py-2">Supplier</th><th class="text-right px-4 py-2">Total</th><th class="text-center px-4 py-2">PDF</th></tr></thead><tbody class="divide-y divide-slate-100">
+                ${state.results.parts.map(p => `<tr class="hover:bg-slate-50 ${p.is_core?'bg-orange-50':p.is_warranty?'bg-blue-50':''}"><td class="px-4 py-2 font-mono">${p.part_number||'-'}${copyBtn(p.part_number)}</td><td class="px-4 py-2">${p.description||'-'}</td><td class="px-4 py-2">${p.invoices?.invoice_number||'-'}${copyBtn(p.invoices?.invoice_number)}</td><td class="px-4 py-2">${p.invoices?.detected_supplier_name||'-'}</td><td class="px-4 py-2 text-right font-medium">${formatCurrency(p.line_total)}</td><td class="px-4 py-2 text-center">${p.invoices?.pdf_url?`<a href="${p.invoices.pdf_url}" target="_blank" class="text-blue-600">📄</a>`:'-'}</td></tr>`).join('')}
+              </tbody></table>
+            </div>
+          ` : ''}
+          ${!state.loading && state.query && total === 0 ? `<div class="bg-white rounded-lg shadow p-12 text-center"><p class="text-lg font-medium text-slate-700">No results found</p><p class="text-sm text-slate-500 mt-2">Try different search terms or expand the date range</p></div>` : ''}
+        </main>`;
+    }
+
+    render();
+  </script>
+</body>
+</html>
