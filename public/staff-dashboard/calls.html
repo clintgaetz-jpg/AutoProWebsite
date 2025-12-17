@@ -130,6 +130,21 @@
       fetchData(); 
     }
 
+    async function dismissCall(id) {
+      if (!confirm('Remove this call from the list?')) return;
+      try {
+        await fetch(`${SUPABASE_URL}/rest/v1/Live_Call?conversation_space_id=eq.${id}`, {
+          method: 'DELETE',
+          headers: { 'apikey': SUPABASE_ANON_KEY, 'Authorization': `Bearer ${SUPABASE_ANON_KEY}` }
+        });
+        // Remove from local state immediately
+        state.calls = state.calls.filter(c => c.conversation_space_id !== id);
+        render();
+      } catch (err) {
+        alert('Error dismissing call: ' + err.message);
+      }
+    }
+
     function toggleAutoRefresh() {
       state.autoRefresh = !state.autoRefresh;
       if (state.autoRefresh) {
@@ -224,6 +239,12 @@
                       missed ? 'bg-red-50 border-red-200' : 
                       'bg-white border-slate-200';
 
+      // Format business name nicely
+      const businessName = call.business === 'autopro' ? 'AutoPro' : 
+                          call.business === 'bwhc' ? 'BWHC' : 
+                          call.business === 'gaetzvale' ? 'Gaetzvale' : 
+                          call.business || 'Unknown';
+
       return `
         <div class="rounded-xl shadow-sm border-2 ${bgClass} p-4 mb-3">
           <div class="flex items-start gap-4">
@@ -235,8 +256,19 @@
             
             <!-- Main Info -->
             <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-3 mb-1">
-                <span class="text-lg font-semibold text-slate-800">${formatPhone(call.external_number_norm || call.external_number)}</span>
+              <!-- Caller Info Row -->
+              <div class="flex items-center gap-3 mb-2">
+                <div>
+                  <div class="text-lg font-bold text-slate-800">
+                    ${call.direction === 'INBOUND' ? '📱 From:' : '📞 To:'} 
+                    <span class="text-blue-700">${formatPhone(call.external_number_norm || call.external_number)}</span>
+                  </div>
+                  <div class="text-sm text-slate-500">
+                    ${call.direction === 'INBOUND' ? '➡️ Called:' : '⬅️ From:'} 
+                    <span class="font-medium text-slate-700">${businessName}</span>
+                    ${call.business_number ? `<span class="text-slate-400 ml-1">(${formatPhone(call.business_number)})</span>` : ''}
+                  </div>
+                </div>
                 ${live ? `<span class="px-2 py-0.5 bg-green-500 text-white rounded-full text-xs font-medium animate-pulse">${call.status.toUpperCase()}</span>` : ''}
                 ${missed ? '<span class="px-2 py-0.5 bg-red-500 text-white rounded-full text-xs font-medium">MISSED</span>' : ''}
                 ${sentimentBadge}
@@ -245,7 +277,6 @@
               <div class="flex items-center gap-4 text-sm text-slate-500 mb-2">
                 <span title="Time">🕐 ${formatTime(call.created_at)}</span>
                 <span title="Duration">⏱️ ${formatDuration(duration)}</span>
-                ${call.business ? `<span title="Business" class="px-2 py-0.5 bg-slate-100 rounded text-xs uppercase">${call.business}</span>` : ''}
               </div>
               
               ${call.ai_summary ? `
@@ -262,10 +293,11 @@
               ` : ''}
             </div>
 
-            <!-- Time/Duration Column -->
+            <!-- Time/Duration + Actions Column -->
             <div class="flex-shrink-0 text-right">
               <div class="text-lg font-mono font-semibold ${live ? 'text-green-600' : 'text-slate-600'}">${formatDuration(duration)}</div>
-              <div class="text-xs text-slate-400">${formatTime(call.created_at)}</div>
+              <div class="text-xs text-slate-400 mb-2">${formatTime(call.created_at)}</div>
+              <button onclick="dismissCall('${call.conversation_space_id}')" class="px-2 py-1 bg-slate-200 hover:bg-red-100 hover:text-red-600 text-slate-500 text-xs rounded transition-colors" title="Remove from list">✕ Dismiss</button>
             </div>
           </div>
         </div>
