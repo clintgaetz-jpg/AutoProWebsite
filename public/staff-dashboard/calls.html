@@ -97,12 +97,56 @@
     }
 
     function formatPhone(num) {
-      if (!num) return 'Unknown';
+      if (!num) return null;
       // Try to format nicely
       const clean = num.replace(/\D/g, '');
       if (clean.length === 10) return `(${clean.slice(0,3)}) ${clean.slice(3,6)}-${clean.slice(6)}`;
       if (clean.length === 11 && clean[0] === '1') return `(${clean.slice(1,4)}) ${clean.slice(4,7)}-${clean.slice(7)}`;
       return num;
+    }
+
+    // Map business numbers to names
+    const BUSINESS_LINES = {
+      '+14038870440': { name: 'AutoPro', short: 'autopro' },
+      '14038870440': { name: 'AutoPro', short: 'autopro' },
+      '4038870440': { name: 'AutoPro', short: 'autopro' },
+      '+14039671919': { name: 'BWHC', short: 'bwhc' },
+      '14039671919': { name: 'BWHC', short: 'bwhc' },
+      '4039671919': { name: 'BWHC', short: 'bwhc' },
+      '+15878023643': { name: 'Gaetzvale', short: 'gaetzvale' },
+      '15878023643': { name: 'Gaetzvale', short: 'gaetzvale' },
+      '5878023643': { name: 'Gaetzvale', short: 'gaetzvale' },
+    };
+
+    function getBusinessInfo(call) {
+      // Try to get business info from multiple sources
+      let name = null;
+      let number = null;
+
+      // First check the business field
+      if (call.business) {
+        if (call.business === 'autopro') { name = 'AutoPro'; number = '(403) 887-0440'; }
+        else if (call.business === 'bwhc') { name = 'BWHC'; number = '(403) 967-1919'; }
+        else if (call.business === 'gaetzvale') { name = 'Gaetzvale'; number = '(587) 802-3643'; }
+        else { name = call.business; }
+      }
+
+      // Then check business_number
+      if (call.business_number) {
+        const cleanNum = call.business_number.replace(/\D/g, '');
+        const lookup = BUSINESS_LINES[call.business_number] || BUSINESS_LINES[cleanNum] || BUSINESS_LINES['+' + cleanNum];
+        if (lookup) {
+          name = name || lookup.name;
+        }
+        number = formatPhone(call.business_number) || number;
+      }
+
+      // Try dialed_number for outbound
+      if (!number && call.dialed_number) {
+        number = formatPhone(call.dialed_number);
+      }
+
+      return { name: name || 'Unknown Line', number: number };
     }
 
     function isMissed(call) {
@@ -219,6 +263,7 @@
       const live = isLive(call);
       const duration = getCallDuration(call);
       const sentiment = call.ai_sentiment;
+      const businessInfo = getBusinessInfo(call);
       
       const statusIcon = live ? 
         (call.status === 'ringing' ? '<span class="text-yellow-500 text-2xl pulse">📞</span>' : 
@@ -239,11 +284,9 @@
                       missed ? 'bg-red-50 border-red-200' : 
                       'bg-white border-slate-200';
 
-      // Format business name nicely
-      const businessName = call.business === 'autopro' ? 'AutoPro' : 
-                          call.business === 'bwhc' ? 'BWHC' : 
-                          call.business === 'gaetzvale' ? 'Gaetzvale' : 
-                          call.business || 'Unknown';
+      // Get caller/external number
+      const externalNum = formatPhone(call.external_number_norm || call.external_number);
+      const externalDisplay = externalNum || 'Unknown Caller';
 
       return `
         <div class="rounded-xl shadow-sm border-2 ${bgClass} p-4 mb-3">
@@ -256,27 +299,35 @@
             
             <!-- Main Info -->
             <div class="flex-1 min-w-0">
-              <!-- Caller Info Row -->
-              <div class="flex items-center gap-3 mb-2">
-                <div>
-                  <div class="text-lg font-bold text-slate-800">
-                    ${call.direction === 'INBOUND' ? '📱 From:' : '📞 To:'} 
-                    <span class="text-blue-700">${formatPhone(call.external_number_norm || call.external_number)}</span>
+              <!-- Caller/Called Info -->
+              <div class="mb-2">
+                ${call.direction === 'INBOUND' ? `
+                  <div class="text-lg font-bold text-slate-800 mb-1">
+                    📱 <span class="text-blue-700">${externalDisplay}</span>
+                    <span class="text-slate-400 font-normal text-sm ml-2">called</span>
                   </div>
-                  <div class="text-sm text-slate-500">
-                    ${call.direction === 'INBOUND' ? '➡️ Called:' : '⬅️ From:'} 
-                    <span class="font-medium text-slate-700">${businessName}</span>
-                    ${call.business_number ? `<span class="text-slate-400 ml-1">(${formatPhone(call.business_number)})</span>` : ''}
+                  <div class="text-sm">
+                    🏢 <span class="font-semibold text-slate-700">${businessInfo.name}</span>
+                    ${businessInfo.number ? `<span class="text-slate-500 ml-1">${businessInfo.number}</span>` : ''}
                   </div>
-                </div>
+                ` : `
+                  <div class="text-lg font-bold text-slate-800 mb-1">
+                    📞 <span class="text-slate-700">${businessInfo.name}</span>
+                    <span class="text-slate-400 font-normal text-sm ml-2">called</span>
+                  </div>
+                  <div class="text-sm">
+                    📱 <span class="font-semibold text-blue-700">${externalDisplay}</span>
+                  </div>
+                `}
+              </div>
+
+              <!-- Status badges -->
+              <div class="flex items-center gap-2 mb-2">
                 ${live ? `<span class="px-2 py-0.5 bg-green-500 text-white rounded-full text-xs font-medium animate-pulse">${call.status.toUpperCase()}</span>` : ''}
                 ${missed ? '<span class="px-2 py-0.5 bg-red-500 text-white rounded-full text-xs font-medium">MISSED</span>' : ''}
                 ${sentimentBadge}
-              </div>
-              
-              <div class="flex items-center gap-4 text-sm text-slate-500 mb-2">
-                <span title="Time">🕐 ${formatTime(call.created_at)}</span>
-                <span title="Duration">⏱️ ${formatDuration(duration)}</span>
+                <span class="text-sm text-slate-500">🕐 ${formatTime(call.created_at)}</span>
+                <span class="text-sm text-slate-500">⏱️ ${formatDuration(duration)}</span>
               </div>
               
               ${call.ai_summary ? `
@@ -295,8 +346,8 @@
 
             <!-- Time/Duration + Actions Column -->
             <div class="flex-shrink-0 text-right">
-              <div class="text-lg font-mono font-semibold ${live ? 'text-green-600' : 'text-slate-600'}">${formatDuration(duration)}</div>
-              <div class="text-xs text-slate-400 mb-2">${formatTime(call.created_at)}</div>
+              <div class="text-xl font-mono font-bold ${live ? 'text-green-600' : missed ? 'text-red-500' : 'text-slate-600'}">${formatDuration(duration)}</div>
+              <div class="text-xs text-slate-400 mb-3">${formatTime(call.created_at)}</div>
               <button onclick="dismissCall('${call.conversation_space_id}')" class="px-2 py-1 bg-slate-200 hover:bg-red-100 hover:text-red-600 text-slate-500 text-xs rounded transition-colors" title="Remove from list">✕ Dismiss</button>
             </div>
           </div>
