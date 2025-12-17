@@ -42,28 +42,35 @@ import { UI } from 'astrowind:config';
 
   const onLoad = function () {
     let lastKnownScrollPosition = window.scrollY;
+    let previousScrollPosition = window.scrollY;
     let ticking = true;
 
-    attachEvent('#header nav', 'click', function () {
-      document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
-      document.body.classList.remove('overflow-hidden');
-      document.getElementById('header')?.classList.remove('h-screen');
-      document.getElementById('header')?.classList.remove('expanded');
-      document.getElementById('header')?.classList.remove('bg-page');
-      document.querySelector('#header nav')?.classList.add('hidden');
-      document.querySelector('#header > div > div:last-child')?.classList.add('hidden');
-    });
-
+    // Mobile menu toggle
     attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
       elem.classList.toggle('expanded');
       document.body.classList.toggle('overflow-hidden');
-      document.getElementById('header')?.classList.toggle('h-screen');
       document.getElementById('header')?.classList.toggle('expanded');
-      document.getElementById('header')?.classList.toggle('bg-page');
-      document.querySelector('#header nav')?.classList.toggle('hidden');
-      document.querySelector('#header > div > div:last-child')?.classList.toggle('hidden');
+      
+      // Toggle mobile nav visibility
+      const mobileNav = document.querySelector('#header .mobile-nav');
+      if (mobileNav) {
+        mobileNav.classList.toggle('hidden');
+      }
     });
 
+    // Close mobile menu when clicking nav links
+    attachEvent('#header .mobile-nav a', 'click', function () {
+      document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
+      document.body.classList.remove('overflow-hidden');
+      document.getElementById('header')?.classList.remove('expanded');
+      
+      const mobileNav = document.querySelector('#header .mobile-nav');
+      if (mobileNav) {
+        mobileNav.classList.add('hidden');
+      }
+    });
+
+    // Theme toggle
     attachEvent('[data-aw-toggle-color-scheme]', 'click', function () {
       if (defaultTheme.endsWith(':only')) {
         return;
@@ -75,6 +82,7 @@ import { UI } from 'astrowind:config';
       localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
     });
 
+    // Social share
     attachEvent('[data-aw-social-share]', 'click', function (_, elem) {
       const network = elem.getAttribute('data-aw-social-share');
       const url = encodeURIComponent(elem.getAttribute('data-aw-url'));
@@ -108,27 +116,50 @@ import { UI } from 'astrowind:config';
       newlink.click();
     });
 
+    // Reset mobile menu on screen resize
     const screenSize = window.matchMedia('(max-width: 767px)');
     screenSize.addEventListener('change', function () {
       document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
       document.body.classList.remove('overflow-hidden');
-      document.getElementById('header')?.classList.remove('h-screen');
       document.getElementById('header')?.classList.remove('expanded');
-      document.getElementById('header')?.classList.remove('bg-page');
-      document.querySelector('#header nav')?.classList.add('hidden');
-      document.querySelector('#header > div > div:last-child')?.classList.add('hidden');
+      
+      const mobileNav = document.querySelector('#header .mobile-nav');
+      if (mobileNav) {
+        mobileNav.classList.add('hidden');
+      }
     });
 
+    /**
+     * Header scroll behavior:
+     * - Stays visible for first 300px of scroll
+     * - Hides smoothly when scrolling down past threshold
+     * - Reappears smoothly when scrolling up
+     */
     function applyHeaderStylesOnScroll() {
       const header = document.querySelector('#header[data-aw-sticky-header]');
       if (!header) return;
-      if (lastKnownScrollPosition > 60 && !header.classList.contains('scroll')) {
-        header.classList.add('scroll');
-      } else if (lastKnownScrollPosition <= 60 && header.classList.contains('scroll')) {
-        header.classList.remove('scroll');
+
+      const scrollingDown = lastKnownScrollPosition > previousScrollPosition;
+      const scrollingUp = lastKnownScrollPosition < previousScrollPosition;
+      
+      // Thresholds - header stays visible longer before hiding
+      const hideThreshold = 300;  // Don't hide until scrolled this far
+
+      // Determine if we should hide or show
+      if (scrollingDown && lastKnownScrollPosition > hideThreshold) {
+        // Scrolling down past threshold - hide header
+        header.style.transform = 'translateY(-100%)';
+        header.style.opacity = '0';
+      } else if (scrollingUp || lastKnownScrollPosition <= hideThreshold) {
+        // Scrolling up OR near top - show header
+        header.style.transform = 'translateY(0)';
+        header.style.opacity = '1';
       }
+
+      previousScrollPosition = lastKnownScrollPosition;
       ticking = false;
     }
+    
     applyHeaderStylesOnScroll();
 
     attachEvent([document], 'scroll', function () {
@@ -142,6 +173,7 @@ import { UI } from 'astrowind:config';
       }
     });
   };
+
   const onPageShow = function () {
     document.documentElement.classList.add('motion-safe:scroll-smooth');
     const elem = document.querySelector('[data-aw-toggle-menu]');
@@ -149,9 +181,12 @@ import { UI } from 'astrowind:config';
       elem.classList.remove('expanded');
     }
     document.body.classList.remove('overflow-hidden');
-    document.getElementById('header')?.classList.remove('h-screen');
     document.getElementById('header')?.classList.remove('expanded');
-    document.querySelector('#header nav')?.classList.add('hidden');
+    
+    const mobileNav = document.querySelector('#header .mobile-nav');
+    if (mobileNav) {
+      mobileNav.classList.add('hidden');
+    }
   };
 
   window.onload = onLoad;
@@ -250,12 +285,6 @@ import { UI } from 'astrowind:config';
       });
     },
 
-    /* 
-      REF: #643;
-      We need to remove the delay to fix flickering/delay
-      when toggling the theme. Observer only removes them
-      after data-animated is gone (out of view).
-    */
     removeAnimationDelay() {
       this.elements.forEach((el) => {
         if (el.getAttribute('data-animated') === 'true') {

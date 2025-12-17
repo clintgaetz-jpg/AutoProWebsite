@@ -3,7 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
-import Stats from '~/components/widgets/Stats.astro';
+import StatsMobile from '~/components/widgets/StatsMobile.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -41,15 +41,8 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- Stats -->
-  <Stats
-    stats={[
-      { title: 'Years in Business', amount: '19+' },
-      { title: 'Google Rating', amount: '4.9★' },
-      { title: 'Warranty Coverage', amount: '40,000 km' },
-      { title: 'JD Power Awards', amount: 'Multi-Year' },
-    ]}
-  />
+  <!-- Mobile-only Stats (desktop stats are in Hero) -->
+  <StatsMobile />
 
   <!-- Services -->
   <Features
