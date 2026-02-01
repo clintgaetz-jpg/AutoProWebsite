@@ -2,8 +2,6 @@
 import { Icon } from 'astro-icon/components';
 import Logo from '~/components/Logo.astro';
 import ToggleTheme from '~/components/common/ToggleTheme.astro';
-import ToggleMenu from '~/components/common/ToggleMenu.astro';
-import Button from '~/components/ui/Button.astro';
 
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
@@ -20,9 +18,14 @@ interface MenuLink extends Link {
   links?: Array<MenuLink>;
 }
 
+interface MobileOnlyLink extends Link {
+  icon?: string;
+}
+
 export interface Props {
   id?: string;
   links?: Array<MenuLink>;
+  mobileOnlyLinks?: Array<MobileOnlyLink>;
   actions?: Array<CallToAction>;
   isSticky?: boolean;
   isDark?: boolean;
@@ -35,6 +38,7 @@ export interface Props {
 const {
   id = 'header',
   links = [],
+  mobileOnlyLinks = [],
   actions = [],
   isSticky = false,
   isDark = false,
@@ -58,44 +62,72 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
   <!-- TOP BAR - Thin Yellow -->
   <div class="bg-[#FFC836] h-2"></div>
 
-  <!-- MAIN NAV BAR - Dark Blue Gradient -->
+  <!-- MAIN NAV BAR - Dark Blue -->
   <div class="bg-[#0A0094]">
     <div class="max-w-7xl mx-auto px-3 md:px-6">
-      <div class="flex items-center justify-between py-3">
-        <!-- Logo -->
-        <a class="flex items-center" href={getHomePermalink()}>
+      <div class="relative flex items-center justify-between py-3">
+
+        <!-- Mobile: Hamburger on left -->
+        <button
+          type="button"
+          class="md:hidden flex flex-col h-10 w-10 justify-center items-center cursor-pointer rounded focus:ring-2 focus:ring-[#FFC836] focus:outline-none"
+          aria-label="Toggle Menu"
+          data-aw-toggle-menu
+        >
+          <span class="sr-only">Toggle Menu</span>
+          <span class="h-0.5 w-6 my-1 rounded-full bg-white transition-all duration-200"></span>
+          <span class="h-0.5 w-6 my-1 rounded-full bg-white transition-all duration-200"></span>
+          <span class="h-0.5 w-6 my-1 rounded-full bg-white transition-all duration-200"></span>
+        </button>
+
+        <!-- Logo - Centered on mobile, left on desktop -->
+        <a
+          class="flex items-center md:order-first absolute left-1/2 -translate-x-1/2 md:relative md:left-auto md:translate-x-0 z-10 py-1"
+          href={getHomePermalink()}
+          aria-label="Go to homepage"
+        >
           <Logo />
         </a>
 
-        <!-- Mobile Menu Toggle -->
-        <div class="flex items-center md:hidden">
-          <ToggleMenu />
+        <!-- Mobile: Right side placeholder for balance (or CTA) -->
+        <div class="md:hidden w-10 flex items-center justify-end pointer-events-none">
+          {showToggleTheme && <ToggleTheme iconClass="w-5 h-5 text-white" />}
         </div>
 
         <!-- Desktop Navigation -->
         <nav
-          class="items-center hidden md:flex"
+          class="items-center hidden md:flex ml-auto mr-6"
           aria-label="Main navigation"
+          id="desktop-nav"
         >
           <ul class="flex items-center text-[0.9375rem] tracking-[0.01rem] font-medium">
             {
-              links.map(({ text, href, links: subLinks }) => (
-                <li class={subLinks?.length ? 'dropdown relative' : ''}>
+              links.map(({ text, href, links: subLinks }, index) => (
+                <li class={subLinks?.length ? 'dropdown-container relative' : ''} data-dropdown-index={index}>
                   {subLinks?.length ? (
                     <>
                       <button
                         type="button"
-                        class="text-white hover:text-[#FFC836] px-4 py-3 flex items-center whitespace-nowrap transition-colors duration-200"
+                        class="dropdown-trigger text-white hover:text-[#FFC836] px-4 py-3 flex items-center whitespace-nowrap transition-colors duration-200 focus:ring-2 focus:ring-[#FFC836] focus:outline-none rounded"
+                        aria-expanded="false"
+                        aria-haspopup="true"
+                        data-dropdown-trigger
                       >
                         {text}
-                        <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-1" />
+                        <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-1 transition-transform duration-200" />
                       </button>
-                      <ul class="dropdown-menu absolute top-full left-0 mt-0 hidden min-w-[220px] bg-white rounded-b shadow-lg z-50">
+                      <ul
+                        class:list={[
+                          'dropdown-menu absolute top-full left-0 mt-0 hidden bg-white rounded-b shadow-lg z-50 opacity-0 transition-opacity duration-150',
+                          text === 'Services' ? 'services-dropdown grid grid-cols-2 w-[440px]' : 'min-w-[220px]',
+                        ]}
+                        data-dropdown-menu
+                      >
                         {subLinks.map(({ text: subText, href: subHref }) => (
                           <li>
                             <a
                               class:list={[
-                                'block px-5 py-3 text-gray-700 hover:bg-gray-100 hover:text-[#0A0094] transition-colors',
+                                'block px-5 py-2.5 text-gray-700 hover:bg-gray-100 hover:text-[#0A0094] focus:bg-gray-100 focus:text-[#0A0094] focus:outline-none transition-colors whitespace-nowrap',
                                 { 'font-semibold text-[#0A0094]': subHref === currentPath },
                               ]}
                               href={subHref}
@@ -109,7 +141,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                   ) : (
                     <a
                       class:list={[
-                        'text-white hover:text-[#FFC836] px-4 py-3 flex items-center whitespace-nowrap transition-colors duration-200',
+                        'text-white hover:text-[#FFC836] px-4 py-3 flex items-center whitespace-nowrap transition-colors duration-200 focus:ring-2 focus:ring-[#FFC836] focus:outline-none rounded',
                         { 'text-[#FFC836]': href === currentPath },
                       ]}
                       href={href}
@@ -123,7 +155,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           </ul>
         </nav>
 
-        <!-- Right side: Theme toggle + CTA -->
+        <!-- Desktop: Right side - Theme toggle + CTA -->
         <div class="hidden md:flex items-center gap-4">
           {showToggleTheme && <ToggleTheme iconClass="w-5 h-5 text-white" />}
           {
@@ -131,9 +163,11 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               actions.map((btnProps) => (
                 <a
                   href={btnProps.href}
-                  class="flex items-center gap-2 bg-[#2952e8] hover:bg-[#3d63ea] text-white px-5 py-2.5 rounded font-semibold text-sm transition-colors"
+                  target={btnProps.target}
+                  rel={btnProps.target === '_blank' ? 'noopener noreferrer' : undefined}
+                  class="flex items-center gap-2 bg-[#2952e8] hover:bg-[#3d63ea] text-white px-5 py-2.5 rounded font-semibold text-sm transition-colors focus:ring-2 focus:ring-[#FFC836] focus:outline-none"
                 >
-                  <Icon name="tabler:map-pin" class="w-4 h-4" />
+                  <Icon name="tabler:calendar" class="w-4 h-4" />
                   {btnProps.text}
                 </a>
               ))
@@ -146,27 +180,72 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
   <!-- BOTTOM BAR - Thin Dark Grey (desktop only) -->
   <div class="hidden md:block bg-[#4A4A4A] h-0.5"></div>
+</header>
 
-  <!-- Mobile Navigation Panel -->
+<!-- Mobile Navigation Overlay (outside header for proper fixed positioning) -->
+<div
+  id="mobile-nav-overlay"
+  class="fixed inset-0 z-50 pointer-events-none"
+  aria-hidden="true"
+>
+  <!-- Backdrop -->
+  <div
+    class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300"
+    data-mobile-backdrop
+  ></div>
+
+  <!-- Slide-in Panel -->
   <nav
-    class="mobile-nav hidden md:hidden bg-[#0A0094]"
+    class="mobile-nav-panel absolute top-0 left-0 h-full w-[85%] max-w-[320px] bg-[#0A0094] transform -translate-x-full transition-transform duration-300 ease-out overflow-y-auto"
     aria-label="Mobile navigation"
   >
-    <ul class="px-4 py-4 space-y-1">
+    <!-- Panel Header -->
+    <div class="flex items-center justify-between p-4 border-b border-white/10">
+      <button
+        type="button"
+        class="flex items-center justify-center w-10 h-10 text-white hover:text-[#FFC836] transition-colors rounded focus:ring-2 focus:ring-[#FFC836] focus:outline-none"
+        aria-label="Close menu"
+        data-aw-close-menu
+      >
+        <Icon name="tabler:x" class="w-6 h-6" />
+      </button>
+      <a href={getHomePermalink()} class="flex items-center">
+        <Logo />
+      </a>
+      <div class="w-10"></div> <!-- Spacer for balance -->
+    </div>
+
+    <!-- Mobile-Only: After-Hours Drop Off (Prominent) -->
+    {mobileOnlyLinks?.length > 0 && (
+      <div class="px-4 pt-4">
+        {mobileOnlyLinks.map((link) => (
+          <a
+            href={link.href}
+            class="flex items-center gap-3 bg-[#FFC836] text-[#0A0094] px-4 py-3 rounded-lg font-semibold hover:bg-[#e6b430] transition-colors focus:ring-2 focus:ring-white focus:outline-none"
+          >
+            {link.icon && <Icon name={link.icon} class="w-5 h-5" />}
+            {link.text}
+          </a>
+        ))}
+      </div>
+    )}
+
+    <!-- Navigation Links -->
+    <ul class="px-4 py-4">
       {
         links.map(({ text, href, links: subLinks }) => (
-          <li>
+          <li class="border-b border-white/10">
             {subLinks?.length ? (
               <details class="group">
-                <summary class="flex items-center justify-between text-white py-3 px-2 cursor-pointer hover:text-[#FFC836]">
+                <summary class="flex items-center justify-between text-white py-4 cursor-pointer hover:text-[#FFC836] transition-colors font-medium focus:text-[#FFC836] focus:outline-none">
                   {text}
-                  <Icon name="tabler:chevron-down" class="w-4 h-4 group-open:rotate-180 transition-transform" />
+                  <Icon name="tabler:chevron-down" class="w-5 h-5 group-open:rotate-180 transition-transform" />
                 </summary>
-                <ul class="pl-4 pb-2 space-y-1">
+                <ul class="pb-4 space-y-1">
                   {subLinks.map(({ text: subText, href: subHref }) => (
                     <li>
                       <a
-                        class="block text-white/80 hover:text-[#FFC836] py-2 px-2 transition-colors"
+                        class="block text-white/80 hover:text-[#FFC836] py-2 pl-4 transition-colors focus:text-[#FFC836] focus:outline-none"
                         href={subHref}
                       >
                         {subText}
@@ -177,7 +256,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
               </details>
             ) : (
               <a
-                class="block text-white hover:text-[#FFC836] py-3 px-2 transition-colors"
+                class="block text-white hover:text-[#FFC836] py-4 transition-colors font-medium focus:text-[#FFC836] focus:outline-none"
                 href={href}
               >
                 {text}
@@ -187,15 +266,19 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         ))
       }
     </ul>
+
+    <!-- CTA Button -->
     {
       actions?.length ? (
-        <div class="px-4 pb-4">
+        <div class="px-4 pb-6 pt-2">
           {actions.map((btnProps) => (
             <a
               href={btnProps.href}
-              class="flex items-center justify-center gap-2 bg-[#2952e8] hover:bg-[#3d63ea] text-white px-5 py-3 rounded font-semibold transition-colors w-full"
+              target={btnProps.target}
+              rel={btnProps.target === '_blank' ? 'noopener noreferrer' : undefined}
+              class="flex items-center justify-center gap-2 bg-[#2952e8] hover:bg-[#3d63ea] text-white px-5 py-3.5 rounded font-semibold transition-colors w-full focus:ring-2 focus:ring-[#FFC836] focus:outline-none"
             >
-              <Icon name="tabler:map-pin" class="w-4 h-4" />
+              <Icon name="tabler:calendar" class="w-5 h-5" />
               {btnProps.text}
             </a>
           ))}
@@ -203,4 +286,121 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       ) : null
     }
   </nav>
-</header>
+</div>
+
+<style>
+  /* Mobile nav open state */
+  #mobile-nav-overlay.open {
+    pointer-events: auto;
+  }
+
+  #mobile-nav-overlay.open [data-mobile-backdrop] {
+    opacity: 1;
+  }
+
+  #mobile-nav-overlay.open .mobile-nav-panel {
+    transform: translateX(0);
+  }
+
+  /* Desktop dropdown states */
+  .dropdown-container .dropdown-menu.open {
+    display: block;
+    opacity: 1;
+  }
+
+  /* Services dropdown - 2 column grid */
+  .dropdown-container .dropdown-menu.services-dropdown.open {
+    display: grid;
+  }
+
+  .dropdown-container .dropdown-trigger[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+  // Desktop dropdown management
+  // - Click to open, click same item again to close
+  // - Hover switches dropdowns only when one is already open
+  // - Click outside or Escape closes all
+  function initDesktopDropdowns() {
+    const nav = document.getElementById('desktop-nav');
+    if (!nav) return;
+
+    const dropdownContainers = nav.querySelectorAll('.dropdown-container');
+    let openDropdown: Element | null = null;
+    let clickedDropdown: Element | null = null; // Tracks which dropdown was click-opened
+
+    function closeAllDropdowns() {
+      dropdownContainers.forEach(container => {
+        const trigger = container.querySelector('[data-dropdown-trigger]');
+        const menu = container.querySelector('[data-dropdown-menu]');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+        if (menu) menu.classList.remove('open');
+      });
+      openDropdown = null;
+      clickedDropdown = null;
+    }
+
+    function openDropdownMenu(container: Element) {
+      // Close any open dropdown first
+      if (openDropdown && openDropdown !== container) {
+        const oldTrigger = openDropdown.querySelector('[data-dropdown-trigger]');
+        const oldMenu = openDropdown.querySelector('[data-dropdown-menu]');
+        if (oldTrigger) oldTrigger.setAttribute('aria-expanded', 'false');
+        if (oldMenu) oldMenu.classList.remove('open');
+      }
+
+      const trigger = container.querySelector('[data-dropdown-trigger]');
+      const menu = container.querySelector('[data-dropdown-menu]');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      if (menu) menu.classList.add('open');
+      openDropdown = container;
+    }
+
+    dropdownContainers.forEach(container => {
+      const trigger = container.querySelector('[data-dropdown-trigger]');
+
+      // Click to open/close
+      trigger?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Only close if clicking the same dropdown that was originally clicked open
+        if (clickedDropdown === container) {
+          closeAllDropdowns();
+        } else {
+          // Open (or lock) this dropdown
+          openDropdownMenu(container);
+          clickedDropdown = container;
+        }
+      });
+
+      // Hover only switches if a dropdown is already open
+      container.addEventListener('mouseenter', () => {
+        if (openDropdown && openDropdown !== container) {
+          openDropdownMenu(container);
+        }
+      });
+    });
+
+    // Click outside closes all
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node;
+      if (!nav.contains(target)) {
+        closeAllDropdowns();
+      }
+    });
+
+    // Escape key closes all
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeAllDropdowns();
+      }
+    });
+  }
+
+  // Initialize on page load and after Astro navigation
+  initDesktopDropdowns();
+  document.addEventListener('astro:after-swap', initDesktopDropdowns);
+</script>

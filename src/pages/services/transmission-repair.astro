@@ -1,0 +1,281 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Transmission Repair | Sylvan Lake AUTOPRO',
+  description: "Transmission repair and custom rebuilds in Sylvan Lake. We diagnose and fix YOUR transmission — not just swap in an exchange unit. 49 years builder experience. Allison, Aisin, diesel. Call (403) 887-0440.",
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Transmission Repair & Rebuilds",
+  "description": "Transmission repair and custom rebuilds in Sylvan Lake. We diagnose and fix your transmission with 49 years builder experience. Allison, Aisin, diesel specialists.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Transmission Repair" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Drivetrain Service"
+    title="Transmission Repair & Rebuilds"
+    subtitle="We Fix Yours. We Don't Just Swap It."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="Not Another Exchange Unit"
+    content="Most shops handle transmission problems the same way: diagnose a failure, order an exchange unit, swap it in. You pay for a 'new' transmission that's actually a remanufactured unit of unknown quality, and your original goes back as a core.<br/><br/><strong>We don't work that way.</strong><br/><br/>We diagnose the actual problem. We test. If a rebuild is needed, we send your transmission to our builder — a specialist with <strong>49 years of experience</strong> — who disassembles it, documents what's wrong, and fixes what needs fixing. You get pictures. You get options. You get your transmission back, built right."
+  />
+
+  <!-- Why We Don't Do Exchanges Section -->
+  <Content
+    isReversed={true}
+    title="Exchange Units Are a Gamble"
+    content="Here's what happens with a typical exchange transmission:<br/><br/><strong>1.</strong> Your transmission fails<br/><strong>2.</strong> Shop orders a remanufactured unit from a supplier<br/><strong>3.</strong> Your transmission gets pulled, exchange goes in<br/><strong>4.</strong> Your original becomes someone else's 'remanufactured' unit"
+    items={[
+      { title: "Unknown Quality", description: "You don't know who rebuilt the exchange unit or how well" },
+      { title: "Unknown History", description: "You don't know what was actually wrong with it before rebuild" },
+      { title: "Limited Warranties", description: "Exchange units often come with fine print and limited coverage" },
+      { title: "Overpaying", description: "You're paying for a complete transmission when yours might only need specific repairs" },
+      { title: "Back to Square One", description: "If the exchange unit has problems, you're starting over" },
+    ]}
+  />
+
+  <!-- Our Approach Section -->
+  <Content
+    title="Custom Rebuilds by a 49-Year Specialist"
+    content="When you bring us a transmission problem, here's what actually happens:"
+    items={[
+      { title: "1. Diagnosis First", description: "We don't guess. We test the transmission, check codes, inspect fluid condition, and identify the actual failure point. Sometimes it's not even the transmission — it could be electrical, a sensor, or a linkage issue." },
+      { title: "2. Disassembled and Documented", description: "If internal work is needed, we send your transmission to our builder. He disassembles it completely and documents what he finds — with photos. You see exactly what failed and why." },
+      { title: "3. You Get Options", description: "Maybe it's a minor repair. Maybe it needs a full rebuild. Maybe you want upgrades while it's apart. We give you the information and let you decide." },
+      { title: "4. Built to Your Specs", description: "Your transmission gets rebuilt with quality parts, proper tolerances, and any upgrades you've chosen. Not a mystery unit from a warehouse — yours, done right." },
+    ]}
+  />
+
+  <!-- Upgrades Section -->
+  <Features2
+    title="More Than Stock"
+    subtitle="Since we're rebuilding your transmission anyway, this is the time for upgrades"
+    columns={2}
+    items={[
+      {
+        title: 'Shift Kits',
+        description: 'Firmer, faster shifts that reduce clutch wear and improve durability.',
+        icon: 'tabler:adjustments',
+      },
+      {
+        title: 'Torque Capacity Upgrades',
+        description: 'For towing, hauling, or added power. Built for how you actually use the vehicle.',
+        icon: 'tabler:arrow-up-circle',
+      },
+      {
+        title: 'Valve Body Modifications',
+        description: 'Improved shift quality, faster engagement, and better durability under load.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Heavy-Duty Clutch Packs',
+        description: 'Built for trucks and performance applications. Handles more torque, lasts longer.',
+        icon: 'tabler:stack-2',
+      },
+      {
+        title: 'Diesel-Specific Builds',
+        description: 'Transmissions built to handle diesel torque. Common for Cummins, Duramax, PowerStroke.',
+        icon: 'tabler:gas-station',
+      },
+      {
+        title: 'Towing & Performance',
+        description: 'If you\'ve added a tuner, bigger tires, or tow regularly, a stock rebuild might not cut it.',
+        icon: 'tabler:truck',
+      },
+    ]}
+  />
+
+  <!-- What We Work On Section -->
+  <Features2
+    title="Transmissions We Service"
+    subtitle="Automatic, manual, heavy-duty, and CVT"
+    columns={2}
+    items={[
+      {
+        title: 'Automatic Transmissions',
+        description: 'Domestic (Ford, GM, Chrysler/Ram), Asian (Toyota, Honda, Nissan, Hyundai, Kia, Subaru, Mazda), European (limited — call to confirm).',
+        icon: 'tabler:automatic-gearbox',
+      },
+      {
+        title: 'Heavy-Duty & Diesel',
+        description: 'Allison, Aisin, Ford TorqShift, Ram 68RFE, AS69RC, GM 6L90, 10L90. Built for trucks that work.',
+        icon: 'tabler:truck-loading',
+      },
+      {
+        title: 'Manual Transmissions',
+        description: 'Diagnosis and repair, clutch replacement, flywheel resurfacing. All makes.',
+        icon: 'tabler:manual-gearbox',
+      },
+      {
+        title: 'CVT Transmissions',
+        description: 'Diagnosis and fluid service. We can advise on repair vs. replacement options for your specific unit.',
+        icon: 'tabler:arrows-transfer-down',
+      },
+    ]}
+  />
+
+  <!-- Warning Signs Section -->
+  <Features2
+    title="Signs Your Transmission Needs Attention"
+    subtitle="Don't wait — transmission problems rarely fix themselves"
+    columns={3}
+    items={[
+      {
+        title: 'Slipping',
+        description: 'Engine revs but vehicle doesn\'t accelerate',
+        icon: 'tabler:arrow-up',
+      },
+      {
+        title: 'Hard or Delayed Shifts',
+        description: 'Harsh engagement or hesitation between gears',
+        icon: 'tabler:clock',
+      },
+      {
+        title: 'Grinding or Shaking',
+        description: 'Vibration or grinding during shifts',
+        icon: 'tabler:ripple',
+      },
+      {
+        title: 'Warning Light',
+        description: 'Transmission or check engine light illuminated',
+        icon: 'tabler:alert-triangle',
+      },
+      {
+        title: 'Fluid Leak',
+        description: 'Red or brown fluid under the vehicle',
+        icon: 'tabler:droplet-off',
+      },
+      {
+        title: 'Burning Smell',
+        description: 'Overheated fluid has a distinct burnt odor',
+        icon: 'tabler:flame',
+      },
+      {
+        title: 'Won\'t Engage',
+        description: 'Vehicle won\'t go into Drive or Reverse',
+        icon: 'tabler:ban',
+      },
+      {
+        title: 'Noises in Neutral',
+        description: 'Unusual sounds when parked in neutral',
+        icon: 'tabler:volume',
+      },
+    ]}
+  />
+
+  <!-- Fluid Service Section -->
+  <Content
+    isReversed={true}
+    title="Not Every Problem Needs a Rebuild"
+    content="Regular fluid maintenance prevents most transmission failures. We offer <strong>BG Transmission Service</strong> — a complete fluid exchange that removes old fluid, varnish, and deposits while installing fresh fluid with conditioners that protect seals and clutches.<br/><br/>If your transmission is shifting fine but you're due for service, fluid maintenance is a fraction of the cost of a rebuild.<br/><br/><a href='/services/fluid-maintenance' class='text-primary hover:underline font-semibold'>Learn More About BG Transmission Service →</a>"
+  />
+
+  <!-- Trust Signals Section -->
+  <Features2
+    title="Why Trust Us With Your Transmission"
+    columns={4}
+    items={[
+      {
+        title: '49 Years',
+        description: 'Builder experience',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'NAPA Warranty',
+        description: '24 months / 40,000 km nationwide',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Since 2006',
+        description: 'Serving Sylvan Lake',
+        icon: 'tabler:calendar-check',
+      },
+      {
+        title: '4.9 Rating',
+        description: '290+ Google reviews',
+        icon: 'tabler:star',
+      },
+    ]}
+  />
+
+  <!-- Related Services Section -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Driveline Services',
+        description: 'Differentials, transfer cases, AWD',
+        icon: 'tabler:settings',
+        callToAction: { text: 'Learn More', href: '/services/driveline' },
+      },
+      {
+        title: 'Fluid Maintenance',
+        description: 'BG Transmission Service',
+        icon: 'tabler:droplet',
+        callToAction: { text: 'Learn More', href: '/services/fluid-maintenance' },
+      },
+      {
+        title: 'Diagnostics',
+        description: 'Check engine & warning lights',
+        icon: 'tabler:cpu',
+        callToAction: { text: 'Learn More', href: '/services/diagnostics' },
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Transmission Problems?"
+    subtitle="Get a proper diagnosis — not a guess. We'll tell you exactly what's wrong and give you real options."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+    ]}
+  />
+</Layout>

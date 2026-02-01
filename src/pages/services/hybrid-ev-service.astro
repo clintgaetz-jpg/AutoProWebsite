@@ -1,0 +1,250 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Hybrid & EV Service | Sylvan Lake AUTOPRO',
+  description: 'Hybrid and EV service in Sylvan Lake. We work on all hybrid and electric vehicles—maintenance, diagnostics, repairs. You don\'t have to drive to Red Deer. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Hybrid & Electric Vehicle Service",
+  "description": "Hybrid and electric vehicle service in Sylvan Lake, Alberta",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do hybrids need oil changes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hybrids with gas engines still need oil changes. Full-electric vehicles don't have engine oil, but they have other fluids that need service."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I have my hybrid battery checked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Once a year is a good baseline, or if you notice reduced range or performance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are EV brakes different?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Regenerative braking means brake pads typically last much longer, but they still wear and brake fluid still degrades. Don't skip brake inspections."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you work on Tesla?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We can handle maintenance items—brakes, tires, suspension, 12V battery. Some Tesla-specific systems require their service network."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Hybrid & EV Service" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Specialty Services"
+    title="Hybrid & Electric Vehicle Service"
+    subtitle="Yes, We Work on Hybrids and EVs"
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="Local Hybrid & EV Service"
+    content="Own a hybrid or electric vehicle in Sylvan Lake? <strong>You don't have to drive to Red Deer or Calgary for service.</strong> We work on hybrids and EVs—maintenance, diagnostics, and repairs.<br/><br/>These vehicles have some different systems, but they still need brakes, tires, suspension, cooling system service, and regular maintenance. We have the training and equipment to work on them safely and correctly."
+  />
+
+  <!-- What We Service Section -->
+  <Features2
+    title="What We Service"
+    subtitle="Hybrids and EVs still need regular maintenance"
+    columns={3}
+    items={[
+      {
+        title: 'Brakes',
+        description: 'Regenerative braking means pads last longer, but they still wear. Brake fluid still needs attention.',
+        icon: 'tabler:disc',
+      },
+      {
+        title: 'Tires',
+        description: 'Many hybrids/EVs are heavier and benefit from specific tires. We can advise on the best options.',
+        icon: 'tabler:circle',
+      },
+      {
+        title: 'Suspension & Steering',
+        description: 'Same components as any vehicle, same wear patterns. We service it all.',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Cooling Systems',
+        description: 'Hybrids and EVs have cooling systems for batteries and inverters. They need inspection and maintenance.',
+        icon: 'tabler:temperature',
+      },
+      {
+        title: '12V Battery',
+        description: 'Every hybrid and EV still has a 12V battery for accessories. They fail just like any other.',
+        icon: 'tabler:battery-charging',
+      },
+      {
+        title: 'Fluid Services',
+        description: 'Transmission fluid, brake fluid, coolant. Less frequent on some EVs, but still required.',
+        icon: 'tabler:droplet',
+      },
+    ]}
+  />
+
+  <!-- Diagnostics Section -->
+  <Content
+    isReversed={true}
+    title="Diagnostics & Repairs"
+    content="Beyond regular maintenance, we also handle:<br/><br/>• <strong>Battery health monitoring</strong> — Check your hybrid/EV battery condition<br/>• <strong>Check engine / hybrid system warning lights</strong> — Proper diagnosis, not guessing<br/>• <strong>Charging system issues</strong> — When your EV isn't charging properly<br/>• <strong>High-voltage system diagnostics</strong> — With proper safety equipment<br/>• <strong>Software and module updates</strong> — Keep systems current"
+    items={[
+      { title: 'Proper Training', description: 'Our technicians are trained on hybrid/EV systems' },
+      { title: 'Safety Equipment', description: 'High-voltage work done safely and correctly' },
+      { title: 'Right Diagnosis', description: 'We find the actual problem before recommending repairs' },
+    ]}
+  />
+
+  <!-- High Voltage Safety Section -->
+  <Content
+    title="High-Voltage Safety"
+    content="Hybrid and EV drivetrains operate at voltages that can be dangerous if handled incorrectly. We have the training and equipment to work on these systems safely—both for our technicians and your vehicle.<br/><br/><strong>This isn't something every shop invests in. We have.</strong>"
+  />
+
+  <!-- Vehicles We Service Section -->
+  <Features2
+    title="Vehicles We Service"
+    subtitle="We work on all major hybrid and electric platforms"
+    columns={2}
+    items={[
+      {
+        title: 'Toyota / Lexus',
+        description: 'Prius, RAV4 Hybrid, Camry Hybrid, Highlander Hybrid, Lexus hybrids',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Honda',
+        description: 'Accord Hybrid, CR-V Hybrid, Insight, Clarity',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Ford',
+        description: 'Escape Hybrid, F-150 Lightning, Mustang Mach-E, Maverick Hybrid',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Chevrolet',
+        description: 'Bolt EV, Bolt EUV, Volt, hybrid trucks',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Hyundai / Kia',
+        description: 'Ioniq, Kona Electric, Niro, EV6, Tucson Hybrid',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Other Makes',
+        description: 'Not sure if we can help? Call us—we work on most hybrids and EVs.',
+        icon: 'tabler:phone',
+      },
+    ]}
+  />
+
+  <!-- Why Choose Us Section -->
+  <Content
+    isReversed={true}
+    title="Why Choose Us for Hybrid/EV Service?"
+    content="<strong>We Don't Say No</strong><br/>Some shops won't touch hybrids or EVs. We've invested in the training and equipment because these vehicles are part of the future—and part of our community now.<br/><br/><strong>Local Option</strong><br/>You shouldn't have to drive 45 minutes to Red Deer for a brake inspection on your Prius. We're here in Sylvan Lake.<br/><br/><strong>Same Shop for Everything</strong><br/>If you have a hybrid and a gas vehicle, you don't need two shops. We service both.<br/><br/><strong>NAPA Warranty</strong><br/>Qualifying repairs backed by the NAPA Peace of Mind Warranty—24 months/40,000 km, honored across Canada."
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about hybrid and EV service"
+    columns={1}
+    items={[
+      {
+        title: 'Do hybrids need oil changes?',
+        description: 'Hybrids with gas engines still need oil changes—just like any gas vehicle. Full-electric vehicles don\'t have engine oil, but they have other fluids that need service.',
+      },
+      {
+        title: 'How often should I have my hybrid battery checked?',
+        description: 'Once a year is a good baseline, or if you notice reduced range or performance. We can check battery health as part of regular service.',
+      },
+      {
+        title: 'Are EV brakes different?',
+        description: 'Regenerative braking does most of the work, so brake pads typically last much longer. But they still wear, and brake fluid still degrades. Don\'t skip brake inspections entirely.',
+      },
+      {
+        title: 'Can you work on Tesla?',
+        description: 'We can handle maintenance items—brakes, tires, suspension, 12V battery. Some Tesla-specific systems require their service network, but for general maintenance, we can help.',
+      },
+      {
+        title: 'Do I need special tires for my EV?',
+        description: 'EVs are often heavier and have instant torque. Low rolling-resistance tires designed for EVs can improve range and handle the weight. We can recommend options.',
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Book Your Hybrid/EV Service"
+    subtitle="Local service for your hybrid or electric vehicle. No trip to Red Deer required."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

@@ -1,228 +1,219 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'About us',
+  title: 'About Sylvan Lake AUTOPRO',
+  description: "Locally owned since 2006 by the same owners. 19+ years of trusted auto repair in Sylvan Lake. Red Seal certified technicians, NAPA nationwide warranty, and technology that works for you.",
+};
+
+const aboutSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "mainEntity": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "foundingDate": "2006",
+    "founders": [
+      { "@type": "Person", "name": "Wolfgang Kukowski" },
+      { "@type": "Person", "name": "Clint Gaetz" },
+      { "@type": "Person", "name": "Alaina Gaetz" }
+    ],
+    "url": "https://sylvanlakeautopro.com",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "290"
+    }
+  }
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(aboutSchema)} />
+  </Fragment>
 
-  <Hero
-    tagline="About us"
-    image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Caos Image',
-    }}
-  >
-    <Fragment slot="title">
-      Elevate your online presence with our <br />
-      <span class="text-accent dark:text-white"> Beautiful Website Templates</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Donec efficitur, ipsum quis congue luctus, mauris magna convallis mauris, eu auctor nisi lectus non augue. Donec
-      quis lorem non massa vulputate efficitur ac at turpis. Sed tincidunt ex a nunc convallis, et lobortis nisi tempus.
-      Suspendisse vitae nisi eget tortor luctus maximus sed non lectus.
-    </Fragment>
-  </Hero>
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    title="Statistics about us"
-    stats={[
-      { title: 'Offices', amount: '4' },
-      { title: 'Employees', amount: '248' },
-      { title: 'Templates', amount: '12' },
-      { title: 'Awards', amount: '24' },
+  <!-- Hero Section -->
+  <Hero2
+    tagline="About Us"
+    title="Same Owners. Same Standards. 19 Years and Counting."
+    subtitle="Sylvan Lake AUTOPRO has been locally owned and operated since 2006. Not many businesses can say that."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
     ]}
   />
 
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    title="Our templates"
-    subtitle="Etiam scelerisque, enim eget vestibulum luctus, nibh mauris blandit nulla, nec vestibulum risus justo ut enim. Praesent lacinia diam et ante imperdiet euismod."
-    columns={3}
-    isBeforeContent={true}
-    items={[
-      {
-        title: 'Educational',
-        description:
-          'Morbi faucibus luctus quam, sit amet aliquet felis tempor id. Cras augue massa, ornare quis dignissim a, molestie vel nulla.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Interior Design',
-        description:
-          'Vivamus porttitor, tortor convallis aliquam pretium, turpis enim consectetur elit, vitae egestas purus erat ac nunc nulla.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Photography',
-        description:
-          'Duis sed lectus in nisl vehicula porttitor eget quis odio. Aliquam erat volutpat. Nulla eleifend nulla id sem fermentum.',
-        icon: 'tabler:template',
-      },
-    ]}
+  <!-- Who We Are -->
+  <Content
+    title="Locally Owned Since 2006"
+    content={`Sylvan Lake AUTOPRO was founded in 2006 and remains owned by the same people who started it: <strong>Wolfgang Kukowski</strong> and <strong>Clint and Alaina Gaetz</strong>.<br/><br/>Nineteen years. Same ownership. Same commitment.<br/><br/>In an industry where shops change hands constantly—where you never know who's working on your vehicle or whether they'll be around next year—we're still here. Still showing up. Still standing behind our work.<br/><br/>That kind of stability isn't an accident. It's the result of doing things right, treating people fairly, and building a business we're proud of.`}
   />
 
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    columns={3}
-    isAfterContent={true}
-    items={[
-      {
-        title: 'E-commerce',
-        description:
-          'Rutrum non odio at vehicula. Proin ipsum justo, dignissim in vehicula sit amet, dignissim id quam. Sed ac tincidunt sapien.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Blog',
-        description:
-          'Nullam efficitur volutpat sem sed fringilla. Suspendisse et enim eu orci volutpat laoreet ac vitae libero.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Business',
-        description:
-          'Morbi et elit finibus, facilisis justo ut, pharetra ipsum. Donec efficitur, ipsum quis congue luctus, mauris magna.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Suspendisse vitae nisi eget tortor luctus maximus sed non lectus. Cras malesuada pretium placerat. Nullam venenatis dolor a ante rhoncus.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Medical',
-        description:
-          'Vestibulum malesuada lacus id nibh posuere feugiat. Nam volutpat nulla a felis ultrices, id suscipit mauris congue. In hac habitasse platea dictumst.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus.',
-        icon: 'tabler:template',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Colorful Image',
-    }}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Our values"
-    subtitle="Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus. Nulla facilisi. Vestibulum malesuada lacus."
-    items={[
-      {
-        title: 'Customer-centric approach',
-        description:
-          'Donec id nibh neque. Quisque et fermentum tortor. Fusce vitae dolor a mauris dignissim commodo. Ut eleifend luctus condimentum.',
-      },
-      {
-        title: 'Constant Improvement',
-        description:
-          'Phasellus laoreet fermentum venenatis. Vivamus dapibus pulvinar arcu eget mattis. Fusce eget mauris leo.',
-      },
-      {
-        title: 'Ethical Practices',
-        description:
-          'Vestibulum imperdiet libero et lectus molestie, et maximus augue porta. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-      },
-    ]}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Achievements"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla, sed porttitor est nibh at nulla."
+  <!-- Our Standards -->
+  <Content
     isReversed={true}
-    callToAction={{
-      text: 'See more',
-      href: '/',
-    }}
+    title="High Standards. No Shortcuts."
+    content="We don't cut corners. Every repair, every inspection, every service—done right."
+    items={[
+      { title: 'Red Seal Certified Technicians', description: 'Our mechanics are Red Seal certified—the national standard for skilled trades in Canada. It\'s the highest credential a technician can hold, recognized across every province.' },
+      { title: 'Quality Parts', description: 'We use quality parts—NAPA parts, OEM when required, and products we trust. We don\'t install cheap components to save a few dollars and hope they hold.' },
+      { title: 'We Stand Behind Our Work', description: 'If something\'s not right, we make it right. Simple as that.' },
+    ]}
+  />
+
+  <!-- Our Philosophy -->
+  <Content
+    title="Uncompromising Customer Service"
+    subtitle="That's not a slogan. It's how we operate."
+    content={`The auto repair industry has a trust problem. We know that. Studies show 66% of people distrust repair shops—they're worried about being overcharged, upsold, or told they need work they don't.<br/><br/>We decided early on to be different.`}
+    items={[
+      { title: 'You See What We See', description: 'Our digital inspection system sends photos, measurements, and explanations directly to your phone. No vague descriptions. No "trust us." You see exactly what we\'re recommending and why.' },
+      { title: 'No Surprises', description: 'We explain what\'s needed, what\'s recommended, and what can wait. You decide. We don\'t pressure. We don\'t upsell. We give you the information and let you make the call.' },
+      { title: 'Honest Estimates', description: 'When we quote a job, that\'s the price. If something changes, we call you before we proceed. You\'ll never get a bill that doesn\'t match what we discussed.' },
+    ]}
+  />
+
+  <!-- Technology -->
+  <Features2
+    title="Innovative. Adaptive. Always Improving."
+    subtitle="We're not stuck in the past. We've invested in technology that makes your experience better."
+    columns={3}
     items={[
       {
-        title: 'Global reach',
-        description: 'Nam malesuada urna in enim imperdiet tincidunt. Phasellus non tincidunt nisi, at elementum mi.',
-        icon: 'tabler:globe',
+        title: 'Digital Vehicle Inspections',
+        description: 'Photos and videos sent to your phone. See what we see, approve what you want.',
+        icon: 'tabler:device-mobile',
       },
       {
-        title: 'Positive customer feedback and reviews',
-        description:
-          'Cras semper nulla leo, eget laoreet erat cursus sed. Praesent faucibus massa in purus iaculis dictum.',
-        icon: 'tabler:message-star',
+        title: 'Text Updates',
+        description: 'Get status updates via text. No phone tag, no waiting on hold.',
+        icon: 'tabler:message',
       },
       {
-        title: 'Awards and recognition as industry experts',
-        description:
-          'Phasellus lacinia cursus velit, eu malesuada magna pretium eu. Etiam aliquet tellus purus, blandit lobortis ex rhoncus vitae.',
-        icon: 'tabler:award',
+        title: 'Online Booking',
+        description: 'Schedule appointments 24/7. Pick a time that works for you.',
+        icon: 'tabler:calendar',
+      },
+      {
+        title: 'Text-to-Pay',
+        description: 'Pay securely from your phone. We send a link, you tap to pay.',
+        icon: 'tabler:credit-card',
+      },
+      {
+        title: 'Advanced Diagnostics',
+        description: 'Factory-level scan tools for GM, Ford, Chrysler. Snap-on diagnostics. Autel systems.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Hunter HawkEye Elite Alignment',
+        description: 'A $60,000+ alignment system that measures to the hundredth of a degree.',
+        icon: 'tabler:focus-2',
       },
     ]}
   />
 
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Our locations"
-    tagline="Find us"
-    columns={4}
+  <!-- NAPA AUTOPRO -->
+  <Content
+    isReversed={true}
+    title="Backed by a Network You Can Trust"
+    subtitle="We're a NAPA AUTOPRO facility—part of a network of over 600 shops across Canada"
+    content=""
     items={[
-      {
-        title: 'EE.UU',
-        description: '1234 Lorem Ipsum St, 12345, Miami',
-      },
-      {
-        title: 'Spain',
-        description: '5678 Lorem Ipsum St, 56789, Madrid',
-      },
-      {
-        title: 'Australia',
-        description: '9012 Lorem Ipsum St, 90123, Sydney',
-      },
-      {
-        title: 'Brazil',
-        description: '3456 Lorem Ipsum St, 34567, São Paulo',
-      },
+      { title: 'NAPA Peace of Mind Warranty', description: 'Qualifying repairs are covered for 24 months or 40,000 km—whichever comes first. Honored at any NAPA AUTOPRO location across Canada and the US.' },
+      { title: 'JD Power Award Winners', description: 'NAPA AUTOPRO has received the JD Power Award for Customer Satisfaction multiple years running—and we\'ve been part of that since 2009.' },
+      { title: 'Access to Parts', description: 'As part of the NAPA network, we have access to one of the largest parts inventories in North America. Less waiting. Faster repairs.' },
     ]}
   />
 
-  <!-- Features2 Widget ************** -->
-
+  <!-- Why Choose Us -->
   <Features2
-    title="Technical Support"
-    tagline="Contact us"
+    title="Why Sylvan Lake AUTOPRO?"
+    subtitle="Here's why you'd be making a mistake going somewhere else"
     columns={2}
     items={[
       {
-        title: 'Chat with us',
-        description:
-          'Integer luctus laoreet libero, auctor varius purus rutrum sit amet. Ut nec molestie nisi, quis eleifend mi.',
-        icon: 'tabler:messages',
+        title: '19+ Years, Same Owners',
+        description: 'We\'re not going anywhere. Your vehicle\'s history stays with people who know it.',
+        icon: 'tabler:clock',
       },
       {
-        title: 'Call us',
-        description:
-          'Mauris faucibus finibus orci, in posuere elit viverra non. In hac habitasse platea dictumst. Cras lobortis metus a hendrerit congue.',
-        icon: 'tabler:headset',
+        title: '4.9 Google Rating',
+        description: 'We\'ve earned it, one customer at a time.',
+        icon: 'tabler:star',
+      },
+      {
+        title: 'JD Power Recognized',
+        description: 'Multiple awards since 2009.',
+        icon: 'tabler:award',
+      },
+      {
+        title: 'Nationwide Warranty',
+        description: '24 months / 40,000 km, honored across North America.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Red Seal Certified Technicians',
+        description: 'The highest credential in Canadian trades.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Transparency',
+        description: 'Digital inspections, photos, no surprises.',
+        icon: 'tabler:eye',
+      },
+      {
+        title: 'Technology Investment',
+        description: 'We invest in equipment and systems that benefit you.',
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'We Stand Behind Our Work',
+        description: 'If it\'s not right, we make it right.',
+        icon: 'tabler:check',
       },
     ]}
   />
+
+  <!-- Closing Statement -->
+  <Content
+    title=""
+    content={`<p class="text-lg text-center max-w-3xl mx-auto">You have options. We know that. But not all shops are created equal. We've spent 19 years building something we're proud of. Give us a chance to show you the difference.</p>`}
+  />
+
+  <!-- CTA -->
+  <CallToAction
+    title="Ready to Experience the Difference?"
+    subtitle="Whether it's routine maintenance or a major repair, we're here to help."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Address Footer -->
+  <section class="py-8 text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <p class="text-lg font-semibold text-gray-900 dark:text-white">Sylvan Lake AUTOPRO Inc</p>
+      <p class="text-muted dark:text-slate-400">1A Industrial Dr, Sylvan Lake, AB T4S 1P4</p>
+      <div class="mt-4 flex justify-center gap-4">
+        <a href="/making-it-easy" class="text-primary dark:text-blue-400 hover:underline">Making It Easy</a>
+        <span class="text-gray-300 dark:text-gray-600">|</span>
+        <a href="/contact" class="text-primary dark:text-blue-400 hover:underline">Contact Us</a>
+      </div>
+    </div>
+  </section>
 </Layout>

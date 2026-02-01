@@ -1,0 +1,99 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const appleUrl = 'https://maps.apple.com/?daddr=Sylvan+Lake+AUTOPRO,+Sylvan+Lake,+AB&dirflg=d';
+const googleUrl = 'https://www.google.com/maps/dir/?api=1&destination=Sylvan+Lake+AUTOPRO,+Sylvan+Lake,+AB';
+---
+
+<div class:list={['directions-buttons flex flex-col sm:flex-row gap-3 justify-center', className]} data-directions-buttons>
+  <!-- Apple Maps button - shown only on iOS, hidden by default until JS runs -->
+  <a
+    href={appleUrl}
+    data-apple-maps
+    class="hidden inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold
+           bg-gray-900 text-white hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100
+           transition-colors"
+  >
+    <Icon name="tabler:brand-apple" class="w-5 h-5" />
+    Apple Maps
+  </a>
+
+  <!-- Google Maps button - always shown -->
+  <a
+    href={googleUrl}
+    data-google-maps
+    class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold
+           bg-primary text-white hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500
+           transition-colors"
+  >
+    <Icon name="tabler:map-pin" class="w-5 h-5" />
+    Google Maps
+  </a>
+</div>
+
+<script>
+  function initDirectionsButtons() {
+    try {
+      const containers = document.querySelectorAll('[data-directions-buttons]');
+
+      containers.forEach((container) => {
+        const appleButton = container.querySelector('[data-apple-maps]') as HTMLAnchorElement | null;
+        const googleButton = container.querySelector('[data-google-maps]') as HTMLAnchorElement | null;
+
+        if (!appleButton || !googleButton) return;
+
+        // Detect iOS devices
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+        // Detect mobile (for target behavior)
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+          (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+        if (isIOS) {
+          // Show Apple Maps button on iOS
+          appleButton.classList.remove('hidden');
+          appleButton.classList.add('inline-flex');
+        }
+
+        // Set target based on device type
+        // Mobile: same tab (will hand off to map app)
+        // Desktop: new tab
+        if (!isMobile) {
+          appleButton.setAttribute('target', '_blank');
+          appleButton.setAttribute('rel', 'noopener noreferrer');
+          googleButton.setAttribute('target', '_blank');
+          googleButton.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
+    } catch (e) {
+      // If detection fails, show both buttons (Apple Maps is already hidden by default,
+      // but we'll show it as a fallback for safety)
+      const containers = document.querySelectorAll('[data-directions-buttons]');
+      containers.forEach((container) => {
+        const appleButton = container.querySelector('[data-apple-maps]');
+        if (appleButton) {
+          appleButton.classList.remove('hidden');
+          appleButton.classList.add('inline-flex');
+        }
+      });
+      console.warn('DirectionsButtons: Device detection failed, showing both buttons');
+    }
+  }
+
+  // Run on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDirectionsButtons);
+  } else {
+    initDirectionsButtons();
+  }
+
+  // Also run on Astro page transitions
+  document.addEventListener('astro:page-load', initDirectionsButtons);
+</script>

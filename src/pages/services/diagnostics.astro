@@ -1,0 +1,297 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Check Engine Light | Sylvan Lake AUTOPRO',
+  description: 'Check engine light on? We diagnose the actual problem, not just read codes. Free code scan available. Professional diagnostics in Sylvan Lake. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Check Engine Light & Diagnostics",
+  "description": "Professional automotive diagnostics in Sylvan Lake. We diagnose the actual problem, not just read codes. Free code scan available.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I just get the code and fix it myself?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can try. For simple things like a loose gas cap, sure. For anything more complex, codes alone usually aren't enough to identify the actual problem. If you want to DIY, we're happy to do a free scan so you at least have the code to research."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do you charge for diagnosis when parts stores scan for free?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Parts stores read codes. We diagnose problems. Reading a code takes 30 seconds. Figuring out why that code set — testing wiring, checking sensor operation, researching your specific vehicle — takes time and expertise."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if the diagnosis costs more than the repair?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sometimes the diagnosis is the hard part, and the fix is simple and cheap. We'll always tell you what we found and what the repair costs before doing any work. If it doesn't make sense to fix, at least you know what you're dealing with."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "The light came on, then went off. Should I still have it checked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The code is probably still stored. We can scan it and see what triggered the light. Intermittent problems are often early warnings of something that will become consistent — better to catch it early."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Check Engine Light & Diagnostics" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Diagnostics"
+    title="Check Engine Light & Diagnostics"
+    subtitle="Codes Tell Us Where to Look. Testing Tells Us What's Wrong."
+    actions={[
+      { variant: 'primary', text: 'Book Diagnostic Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="More Than Just Reading Codes"
+    content="Your check engine light came on. Now what?<br/><br/>You could go to a parts store and have them scan the code. They'll hand you a printout that says something like 'P0420 — Catalyst System Efficiency Below Threshold' and suggest you need a catalytic converter. Maybe you do. Maybe you don't.<br/><br/><strong>Trouble codes don't tell you what's broken. They tell us where to start looking.</strong><br/><br/>Real diagnosis means understanding what the code is actually reporting, researching what causes it, and testing to find the actual problem. That's what we do."
+  />
+
+  <!-- Why Codes Aren't Enough Section -->
+  <Content
+    isReversed={true}
+    title="The Problem With 'Just Reading Codes'"
+    content="Here's something most people don't realize: a trouble code doesn't mean 'replace this part.'<br/><br/>A code is the computer's way of saying 'this reading doesn't look right' or 'this system isn't performing as expected.' The code points to a symptom. Finding the cause takes work.<br/><br/><strong>Example: Oxygen Sensor Code</strong><br/>Your scan shows P0130 — O2 Sensor Circuit Malfunction (Bank 1, Sensor 1).<br/><br/><strong>What people assume:</strong> The oxygen sensor is bad. Replace it.<br/><br/><strong>What it could actually be:</strong><br/>• The oxygen sensor is bad<br/>• The wiring to the sensor is damaged, corroded, or chafed<br/>• A connector has backed out or has corrosion<br/>• There's an exhaust leak before the sensor<br/>• The sensor is reading correctly, but something else is causing an abnormal reading<br/>• The PCM (computer) has an issue<br/><br/>If you just replace the sensor and the problem was wiring, you've wasted money and the light comes right back on."
+  />
+
+  <!-- Free Code Scan Section -->
+  <Content
+    title="Want Us to Just Check the Code? No Problem."
+    content="Here's something we offer that most shops don't: <strong>stop by and we'll scan your codes and clear them for free.</strong><br/><br/>Why do we do this?<br/><br/><strong>1. Peace of mind</strong> — If your light just came on, you want to know if it's serious. We can tell you if it's something urgent or something that can wait.<br/><br/><strong>2. It proves our point</strong> — Codes alone don't tell you much. We can read the code, tell you what system it relates to, and clear it. If it comes back, you'll know it's time to book a proper diagnostic appointment.<br/><br/><strong>3. We want to help</strong> — Not everything needs to be a billable service. If we can give you useful information in five minutes, we're happy to do it.<br/><br/><em>Note: This is a quick scan and clear, not a diagnosis. If you need us to actually find out what's wrong, that's a diagnostic appointment.</em>"
+  />
+
+  <!-- How Diagnosis Works Section -->
+  <Steps2
+    title="What Happens During a Diagnostic Appointment"
+    subtitle="Our process for finding the actual problem"
+    items={[
+      { title: 'We Listen', description: 'You tell us what\'s happening — when the light came on, any symptoms you\'ve noticed, anything that changed recently. This context matters.' },
+      { title: 'We Scan', description: 'We pull all stored codes and freeze frame data. Freeze frame tells us what the engine was doing when the code set — speed, temperature, load, fuel trims.' },
+      { title: 'We Research', description: 'We look up your specific vehicle, year, and code combination. What are the common causes? Are there technical service bulletins? What\'s the diagnostic procedure?' },
+      { title: 'We Test', description: 'Checking wiring and connectors, testing sensor outputs, comparing live data to specifications, smoke testing for leaks, checking fuel pressure — whatever the code requires.' },
+      { title: 'We Report', description: 'We tell you what we found, what\'s causing the problem, and what it takes to fix it. You get a clear explanation and a repair estimate.' },
+    ]}
+  />
+
+  <!-- Diagnostic Time Section -->
+  <Content
+    isReversed={true}
+    title="How Long Does Diagnosis Take?"
+    content="We authorize just over an hour for most diagnostic appointments. That's enough time to scan, research, and test for the majority of issues.<br/><br/><strong>Sometimes it's faster.</strong> Common problems on common vehicles often have known causes. We might have your answer in 30 minutes.<br/><br/><strong>Sometimes it takes longer.</strong> Intermittent problems, multiple codes, or unusual failures can require extended testing. If we need more time, we'll contact you before proceeding.<br/><br/>We charge for diagnostic time because it's skilled work that takes real expertise. The alternative — guessing and replacing parts until something works — costs you more in the long run."
+  />
+
+  <!-- Diagnostic Equipment Section -->
+  <Features2
+    title="The Right Tools for the Job"
+    subtitle="Proper diagnosis requires proper equipment"
+    columns={2}
+    items={[
+      {
+        title: 'Snap-on Diagnostic Scanners',
+        description: 'Professional-grade tools with bidirectional control and advanced capabilities for thorough testing.',
+        icon: 'tabler:device-desktop',
+      },
+      {
+        title: 'OEM Factory Scan Tools',
+        description: 'GM, Ford, and Chrysler factory diagnostic equipment for manufacturer-specific tests and programming.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Autel Diagnostic Systems',
+        description: 'Comprehensive coverage for Asian and European vehicles with full system access.',
+        icon: 'tabler:world',
+      },
+      {
+        title: 'Specialty Equipment',
+        description: 'Oscilloscopes, multimeters, smoke machines for leak detection, fuel pressure testers, and more.',
+        icon: 'tabler:tool',
+      },
+    ]}
+  />
+
+  <!-- Common Causes Section -->
+  <Features2
+    title="What Usually Triggers the Light"
+    subtitle="Common categories of check engine light causes"
+    columns={3}
+    items={[
+      {
+        title: 'Emissions System',
+        description: 'Catalytic converter, oxygen sensors, EVAP leaks, EGR issues',
+        icon: 'tabler:leaf',
+      },
+      {
+        title: 'Engine Performance',
+        description: 'Misfires, mass airflow sensor, throttle body, timing issues',
+        icon: 'tabler:engine',
+      },
+      {
+        title: 'Fuel System',
+        description: 'Fuel trim problems, fuel pump/pressure, injector issues',
+        icon: 'tabler:gas-station',
+      },
+      {
+        title: 'Sensors & Wiring',
+        description: 'Cam/crank sensors, temp sensors, wiring damage, connector corrosion',
+        icon: 'tabler:plug',
+      },
+      {
+        title: 'Transmission',
+        description: 'Shift solenoid codes, torque converter, performance codes',
+        icon: 'tabler:manual-gearbox',
+      },
+      {
+        title: 'Many More',
+        description: 'The light can mean many things — that\'s why diagnosis matters',
+        icon: 'tabler:help',
+      },
+    ]}
+  />
+
+  <!-- When to Worry Section -->
+  <Features2
+    title="Is It Urgent?"
+    subtitle="How to know when you need to act quickly"
+    columns={3}
+    items={[
+      {
+        title: 'Flashing Light = STOP',
+        description: 'A flashing check engine light means active misfire that can damage your catalytic converter. Don\'t keep driving — you can turn a $500 repair into $2,500.',
+        icon: 'tabler:alert-octagon',
+      },
+      {
+        title: 'Steady + Symptoms',
+        description: 'Light on with performance problems — rough idle, hesitation, poor fuel economy? Book a diagnostic appointment soon.',
+        icon: 'tabler:alert-triangle',
+      },
+      {
+        title: 'Steady + No Symptoms',
+        description: 'Less urgent, but don\'t ignore it. You won\'t know when something serious comes up if the light is already on.',
+        icon: 'tabler:alert-circle',
+      },
+    ]}
+  />
+
+  <!-- FAQs Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'Can I just get the code and fix it myself?',
+        description: 'You can try. For simple things like a loose gas cap, sure. For anything more complex, codes alone usually aren\'t enough to identify the actual problem. If you want to DIY, we\'re happy to do a free scan so you at least have the code to research.',
+      },
+      {
+        title: 'Why do you charge for diagnosis when parts stores scan for free?',
+        description: 'Parts stores read codes. We diagnose problems. Reading a code takes 30 seconds. Figuring out why that code set — testing wiring, checking sensor operation, researching your specific vehicle — takes time and expertise.',
+      },
+      {
+        title: 'What if the diagnosis costs more than the repair?',
+        description: 'Sometimes the diagnosis is the hard part, and the fix is simple and cheap. We\'ll always tell you what we found and what the repair costs before doing any work. If it doesn\'t make sense to fix, at least you know what you\'re dealing with.',
+      },
+      {
+        title: 'The light came on, then went off. Should I still have it checked?',
+        description: 'The code is probably still stored. We can scan it and see what triggered the light. Intermittent problems are often early warnings of something that will become consistent — better to catch it early.',
+      },
+      {
+        title: 'How much does diagnosis cost?',
+        description: 'Our standard diagnostic time covers just over an hour of testing. Complex problems may require additional time, which we\'ll discuss with you before proceeding.',
+      },
+    ]}
+  />
+
+  <!-- Related Services Section -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Electrical System Service',
+        description: 'Batteries, starters, alternators, wiring',
+        icon: 'tabler:bolt',
+        callToAction: { text: 'Learn More', href: '/services/electrical' },
+      },
+      {
+        title: 'Hybrid & EV Service',
+        description: 'Specialized diagnostics for hybrid systems',
+        icon: 'tabler:leaf',
+        callToAction: { text: 'Learn More', href: '/services/hybrid-ev-service' },
+      },
+      {
+        title: 'Fluid Maintenance',
+        description: 'Preventive maintenance to avoid problems',
+        icon: 'tabler:droplet',
+        callToAction: { text: 'Learn More', href: '/services/fluid-maintenance' },
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Check Engine Light On?"
+    subtitle="Stop by for a free code scan, or book a diagnostic appointment if you're ready to find out what's actually wrong."
+    actions={[
+      { variant: 'primary', text: 'Book Diagnostic Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

@@ -3,6 +3,21 @@ import { getAsset } from '~/utils/permalinks';
 ---
 
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- viewport-fit=cover enables safe area insets for notched phones -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+<!-- Inform browser this site supports both light and dark color schemes -->
+<meta name="color-scheme" content="light dark" />
+
+<!-- App-like behavior on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="SL AUTOPRO" />
+
+<!-- App-like behavior on Android -->
+<meta name="mobile-web-app-capable" content="yes" />
+
+<!-- Prevent phone number auto-detection (we control our own tel: links) -->
+<meta name="format-detection" content="telephone=no" />
 
 <link rel="sitemap" href={getAsset('/sitemap-index.xml')} />

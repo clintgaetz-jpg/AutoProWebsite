@@ -1,0 +1,245 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'CVIP Inspection | Sylvan Lake AUTOPRO',
+  description: 'Licensed CVIP facility in Sylvan Lake. Annual inspections for trucks, trailers, buses, ambulances. Fleet maintenance programs available. No air brake units. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Commercial Vehicle Inspection (CVIP)",
+  "description": "Licensed CVIP commercial vehicle inspection facility in Sylvan Lake, Alberta",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Ponoka", "Eckville"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a CVIP inspection take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Typically 1-2 hours, depending on the vehicle. Inspections require brake disassembly and wheel removal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my CVIP has expired?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can drive directly to an inspection facility with no stops. If pulled over, you must show proof of a scheduled appointment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you inspect vehicles with air brakes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Air brake systems require a heavy-duty facility. We inspect light trucks, trailers, buses, and other commercial vehicles without air brakes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you do repairs if my vehicle fails?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We're a full-service shop. We can complete repairs and re-inspect once work is done."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "CVIP Inspection" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Commercial Inspections"
+    title="Commercial Vehicle Inspections — CVIP"
+    subtitle="Licensed Facility. Annual Inspections. Fleet Programs."
+    actions={[
+      { variant: 'primary', text: 'Book CVIP Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="Licensed CVIP Facility in Sylvan Lake"
+    content="We're a licensed CVIP facility inspecting commercial vehicles for businesses across Central Alberta. Light trucks, trailers, buses, ambulances—<strong>if it doesn't have air brakes, we can inspect it.</strong><br/><br/>Running a fleet? We offer maintenance programs to keep your vehicles compliant and on the road. One shop for inspections, repairs, and ongoing maintenance."
+  />
+
+  <!-- What We Inspect Section -->
+  <Features2
+    title="Vehicles We Inspect"
+    subtitle="Commercial vehicles without air brake systems"
+    columns={3}
+    items={[
+      {
+        title: 'Light Trucks',
+        description: 'Commercial trucks without air brakes',
+        icon: 'tabler:truck',
+      },
+      {
+        title: 'Trailers',
+        description: 'Utility trailers and commercial trailers',
+        icon: 'tabler:truck-loading',
+      },
+      {
+        title: 'Buses',
+        description: 'School buses and charter buses',
+        icon: 'tabler:bus',
+      },
+      {
+        title: 'Ambulances',
+        description: 'Medical transport vehicles',
+        icon: 'tabler:ambulance',
+      },
+      {
+        title: 'Commercial Vans',
+        description: 'Delivery and service vans',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Note',
+        description: 'Air brake systems require a heavy-duty facility',
+        icon: 'tabler:info-circle',
+      },
+    ]}
+  />
+
+  <!-- Requirements Section -->
+  <Content
+    isReversed={true}
+    title="When Is a CVIP Required?"
+    content="Alberta Transportation requires annual inspections for commercial vehicles based on weight and operation:<br/><br/><strong>Intra-provincial (within Alberta):</strong> 11,794 kg+ GVW — Annual<br/><br/><strong>Extra-provincial (crossing borders):</strong> 4,500 kg+ GVW — Annual<br/><br/><strong>Buses (10+ passengers including driver):</strong> Any weight — Semi-annual<br/><br/>If your vehicle operates commercially and meets these thresholds, it needs a current CVIP certificate and decal."
+  />
+
+  <!-- Inspection Process Section -->
+  <Content
+    title="The Inspection Process"
+    content="A CVIP inspection typically takes <strong>1-2 hours</strong> and includes:<br/><br/>• Brake disassembly and measurement<br/>• Wheel removal and inspection<br/>• Steering and suspension evaluation<br/>• Lighting and electrical systems<br/>• Tires, wheels, and coupling devices<br/>• Body and frame inspection<br/>• Full safety system check<br/><br/>We follow the criteria in Alberta's Commercial Vehicle Inspection Manual. Pass/fail is based on government standards—no opinion involved."
+    items={[
+      { title: 'If You Pass', description: 'CVIP certificate, decal showing expiration, documentation for records' },
+      { title: 'If You Fail', description: 'Documentation of deficiencies, repair here or elsewhere, return for re-inspection' },
+    ]}
+  />
+
+  <!-- Fleet Programs Section -->
+  <Features2
+    title="Fleet Maintenance Programs"
+    subtitle="We want your fleet. Let us handle the tracking and scheduling."
+    columns={2}
+    items={[
+      {
+        title: 'Inspection Tracking',
+        description: 'Never miss a CVIP due date. We track your fleet and contact you when inspections are coming due.',
+        icon: 'tabler:calendar-event',
+      },
+      {
+        title: 'Scheduled Maintenance',
+        description: 'Preventive maintenance keeps vehicles on the road. We build a schedule that fits your operation.',
+        icon: 'tabler:tool',
+      },
+      {
+        title: 'Service History Access',
+        description: 'Need records for a compliance audit? We maintain complete service history for your fleet vehicles.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Priority Scheduling',
+        description: 'Fleet clients get priority booking. When you need a vehicle back on the road, we make it happen.',
+        icon: 'tabler:clock',
+      },
+    ]}
+  />
+
+  <!-- Who We Work With Section -->
+  <Content
+    isReversed={true}
+    title="Who We Work With"
+    content="<strong>Businesses we serve:</strong><br/><br/>• Landscaping and construction companies<br/>• Property management fleets<br/>• Medical transport and ambulance services<br/>• School and charter bus operators<br/>• Delivery and courier services<br/>• Any business with commercial vehicles<br/><br/><strong>Call us to discuss your fleet: (403) 887-0440</strong>"
+  />
+
+  <!-- About CVIP Program Section -->
+  <Content
+    title="About the CVIP Program"
+    content="The Commercial Vehicle Inspection Program is administered by Carrier and Vehicle Safety Services under Alberta Transportation. As a licensed facility, we:<br/><br/>• Maintain facility standards set by the province<br/>• Pass regular compliance audits<br/>• License technicians through the program<br/>• Follow inspection criteria from the Commercial Vehicle Inspection Manual<br/><br/>Inspections are standardized. Our technicians make observations and compare them to government guidelines—pass/fail is determined by the manual, not opinion."
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about CVIP inspections"
+    columns={1}
+    items={[
+      {
+        title: 'How long does a CVIP inspection take?',
+        description: 'Typically 1-2 hours, depending on the vehicle. Inspections require brake disassembly and wheel removal, so it\'s not a quick walk-around.',
+      },
+      {
+        title: 'What if my CVIP has expired?',
+        description: 'You can still drive directly to an inspection facility—but only there. No stops. If pulled over, you must show proof of a scheduled appointment. Get it handled before it expires.',
+      },
+      {
+        title: 'Do you inspect vehicles with air brakes?',
+        description: 'No. Air brake systems require a heavy-duty facility. We inspect light trucks, trailers, buses, and other commercial vehicles without air brakes.',
+      },
+      {
+        title: 'Can you do repairs if my vehicle fails?',
+        description: 'Yes. We\'re a full-service shop. If your vehicle fails inspection, we can quote and complete repairs, then re-inspect once work is done. One stop.',
+      },
+      {
+        title: 'How do your fleet programs work?',
+        description: 'We track your vehicles, schedule inspections and maintenance, and maintain service records. Contact us to discuss your fleet—every operation is different.',
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Book Your CVIP Inspection"
+    subtitle="Licensed facility since 2006. Fleet inquiries welcome."
+    actions={[
+      { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

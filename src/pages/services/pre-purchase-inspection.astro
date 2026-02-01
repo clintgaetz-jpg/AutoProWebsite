@@ -1,0 +1,272 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Pre-Purchase Inspection | $160 | Sylvan Lake AUTOPRO',
+  description: 'Pre-purchase vehicle inspection before you buy. Starting at $160 for cars and SUVs. Avoid hidden repair costs. Detailed report with photos. Sylvan Lake AUTOPRO. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Pre-Purchase Vehicle Inspection",
+  "description": "Pre-purchase vehicle inspections in Sylvan Lake, Alberta",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "160",
+    "priceCurrency": "CAD",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": true
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Will the seller let me get a pre-purchase inspection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most reasonable sellers have no problem with it. A seller who refuses an inspection is telling you something—walk away."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I negotiate based on what you find?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. If we find needed repairs, that's legitimate reason to ask for a price reduction or walk away. Our report gives you documentation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a pre-purchase inspection take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Plan for 1-1.5 hours. We have a comfortable waiting room with Wi-Fi, coffee, and snacks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you inspect vehicles from dealerships?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. A used vehicle is a used vehicle, regardless of source. Our job is to provide unbiased information."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Pre-Purchase Inspection" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Inspections"
+    title="Pre-Purchase Vehicle Inspections"
+    subtitle="Know What You're Buying Before You Sign — Starting at $160"
+    actions={[
+      { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="Don't Buy Problems You Can't See"
+    content="Thinking about buying a used vehicle? <strong>Get it inspected first.</strong><br/><br/>We see it all the time: someone buys a truck, brings it in for service, and we find $2,000 in brake and suspension work that needs to happen now. That 'great deal' suddenly isn't.<br/><br/>A pre-purchase inspection costs <strong>$160 for cars and SUVs</strong>. Finding hidden problems after you've signed? That costs a lot more."
+  />
+
+  <!-- Why Get Inspection Section -->
+  <Features2
+    title="Why Get a Pre-Purchase Inspection?"
+    subtitle="The reality of used vehicle shopping"
+    columns={2}
+    items={[
+      {
+        title: "Sellers Aren't Mechanics",
+        description: 'Many genuinely don\'t know about problems with their vehicle.',
+        icon: 'tabler:user-question',
+      },
+      {
+        title: "Some Problems Aren't Obvious",
+        description: 'Worn suspension, brake issues, and pending failures don\'t always make noise—until they do.',
+        icon: 'tabler:eye-off',
+      },
+      {
+        title: 'Cosmetics Hide a Lot',
+        description: 'A detailed interior and fresh wash make any vehicle look great. What\'s underneath is another story.',
+        icon: 'tabler:sparkles',
+      },
+      {
+        title: 'Dealership Inspections Vary',
+        description: 'Some are thorough. Some are a quick walk-around. You don\'t know what you got.',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  />
+
+  <!-- What We Check Section -->
+  <Features2
+    title="What We Check"
+    subtitle="Comprehensive inspection with detailed report"
+    columns={2}
+    items={[
+      {
+        title: 'Safety Systems',
+        description: 'Brakes, steering, suspension, tires, lights and signals',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Mechanical Condition',
+        description: 'Engine, transmission, exhaust, cooling system, belts and hoses',
+        icon: 'tabler:engine',
+      },
+      {
+        title: 'Electrical Systems',
+        description: 'Battery, charging system, warning lights, computer scan for codes',
+        icon: 'tabler:plug',
+      },
+      {
+        title: 'Visual Inspection',
+        description: 'Previous collision repair, rust, fluid leaks, overall condition',
+        icon: 'tabler:search',
+      },
+    ]}
+  />
+
+  <!-- What We Find Section -->
+  <Content
+    isReversed={true}
+    title="What We Actually Find"
+    content="These aren't rare catastrophic failures. This is regular stuff that adds up fast:<br/><br/><strong>'It drives fine'</strong><br/>Until you find out the front brakes are metal-on-metal. Rotors, pads, possibly calipers. $600-$800 you didn't budget for.<br/><br/><strong>'Just had the oil changed'</strong><br/>Great, but the lower control arm bushings are shot and it needs an alignment. Another $800-$1,000.<br/><br/><strong>'Runs great'</strong><br/>Sure, but there's a transmission code stored that the seller cleared before you test drove it. That's a $3,000+ problem waiting.<br/><br/><strong>This is a regular Tuesday for us.</strong> A $160 inspection saves you thousands—or gives you leverage to negotiate."
+  />
+
+  <!-- When to Get Inspection Section -->
+  <Content
+    title="When to Get an Inspection"
+    content="<strong>Private Sales</strong><br/>Most critical. No warranty, no recourse. Once you hand over the money, you own whatever problems come with it.<br/><br/><strong>Dealership Purchases</strong><br/>Yes, even from a dealer. Dealership inspections vary in quality. An independent inspection from a shop with no stake in the sale gives you unbiased information.<br/><br/><strong>Out-of-Town Purchases</strong><br/>Buying from Calgary, Edmonton, or elsewhere? Give us a call. Through the NAPA AUTOPRO network, we may be able to recommend a trusted shop near the vehicle who can inspect it for you."
+  />
+
+  <!-- Pricing Section -->
+  <Content
+    isReversed={true}
+    title="Pricing"
+    content="<strong>Cars and SUVs:</strong> $160 (tax included)<br/><br/><strong>2500/3500 trucks and larger:</strong> Call for quote<br/><br/>For the cost of a tank of gas, you get professional insight into what you're actually buying.<br/><br/><strong>Think of it this way:</strong> If the inspection finds nothing wrong, you bought peace of mind for $160. If it finds problems, you just saved yourself from a bad purchase—or got leverage to negotiate the price down.<br/><br/>Either way, you win."
+  />
+
+  <!-- How It Works Section -->
+  <Steps2
+    title="How It Works"
+    subtitle="Five simple steps"
+    items={[
+      {
+        title: 'Book the Inspection',
+        description: 'Call (403) 887-0440 or book online. Let us know what vehicle you\'re looking at.',
+        icon: 'tabler:calendar',
+      },
+      {
+        title: 'Bring the Vehicle',
+        description: 'Bring it yourself, have the seller bring it, or meet the seller here. We see all scenarios.',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'We Inspect',
+        description: 'Takes approximately 1-1.5 hours. Wait in our comfortable waiting room or we\'ll call when done.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Get Your Report',
+        description: 'We walk you through everything—good, needs attention now, might need attention later. Digital report with photos.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Make Your Decision',
+        description: 'Armed with real information, decide whether to buy, negotiate, or walk away. No pressure from us.',
+        icon: 'tabler:check',
+      },
+    ]}
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about pre-purchase inspections"
+    columns={1}
+    items={[
+      {
+        title: 'Will the seller let me get an inspection?',
+        description: 'Most reasonable sellers have no problem with it. A seller who refuses is telling you something—walk away. If they\'re confident in what they\'re selling, they\'ll welcome a professional look.',
+      },
+      {
+        title: 'Can I negotiate based on what you find?',
+        description: 'Absolutely. If we find $1,500 in needed repairs, that\'s legitimate reason to ask for a price reduction—or walk away. Our report gives you documentation.',
+      },
+      {
+        title: 'What if the vehicle is perfect?',
+        description: 'That happens! Plenty of people maintain their vehicles well. If it comes back clean, you just confirmed you\'re making a smart purchase. Worth $160.',
+      },
+      {
+        title: 'Do you inspect vehicles from dealerships?',
+        description: 'Yes. A used vehicle is a used vehicle, regardless of source. Our job is unbiased information.',
+      },
+      {
+        title: 'How long does it take?',
+        description: 'Plan for 1-1.5 hours. Comfortable waiting room with Wi-Fi, coffee, and snacks if you\'re staying.',
+      },
+      {
+        title: 'What about trucks and larger vehicles?',
+        description: 'Our $160 rate covers cars and SUVs. For 2500/3500 trucks and larger vehicles, call for a quote—they take more time.',
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Book Your Pre-Purchase Inspection"
+    subtitle="$160 for cars and SUVs (tax included) • Detailed report with photos"
+    actions={[
+      { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

@@ -1,17 +1,111 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600&display=swap');
+/* ===========================================
+   SELF-HOSTED FONTS
+   Eliminates external request to Google Fonts
+   for better Core Web Vitals performance
+   =========================================== */
+
+/* Barlow */
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/barlow-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/barlow-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/barlow-600.woff2') format('woff2');
+}
+
+/* Barlow Condensed */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-700.woff2') format('woff2');
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  /*
+   * Font size respects user's system settings.
+   * Tailwind uses rem units which scale with user preferences.
+   * Do NOT override with fixed percentages - let users control their own text size.
+   */
+
+  /* ===========================================
+     APP-LIKE MOBILE EXPERIENCE
+     Makes the website feel like a native app
+     =========================================== */
+
   html {
-    font-size: 100%;
+    /* Smooth momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent pull-to-refresh on mobile (optional - keeps it native) */
+    overscroll-behavior-y: contain;
   }
 
-  @media (max-width: 640px) {
+  body {
+    /* Safe area padding for notched phones (iPhone X+, Android) */
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    /* Prevent text selection on double-tap (more app-like) */
+    -webkit-user-select: none;
+    user-select: none;
+    /* Remove tap highlight on mobile (we add our own) */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Allow text selection on content areas */
+  main, article, .selectable {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  /* Smooth scrolling for anchor links */
+  @media (prefers-reduced-motion: no-preference) {
     html {
-      font-size: 110%;
+      scroll-behavior: smooth;
     }
   }
 
@@ -120,7 +214,8 @@
     @apply btn border-none shadow-none text-muted hover:text-gray-900 dark:text-gray-400 dark:hover:text-white;
   }
   .btn-accent {
-    @apply btn font-semibold bg-[#FFC836] text-[#0A0094] border-[#FFC836] hover:bg-[#e6b430] hover:border-[#e6b430];
+    @apply btn font-semibold bg-[#FFC836] border-[#FFC836] hover:bg-[#e6b430] hover:border-[#e6b430];
+    color: #0A0094 !important;
   }
 }
 
@@ -230,4 +325,59 @@
 
 .dd *:first-child {
   margin-top: 0;
+}
+
+/* ===========================================
+   APP-LIKE TOUCH FEEDBACK
+   Provides immediate visual response to taps
+   =========================================== */
+
+/* Touch feedback for buttons and links */
+.btn,
+a[href],
+button,
+[role="button"] {
+  /* Subtle scale on press for tactile feel */
+  transition: transform 0.1s ease-out, opacity 0.1s ease-out, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:active,
+a[href]:active,
+button:active,
+[role="button"]:active {
+  transform: scale(0.97);
+  opacity: 0.9;
+}
+
+/* Prevent accidental double-tap zoom on buttons */
+.btn,
+button,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* Cards get subtle press feedback */
+.card,
+[class*="rounded-xl"][class*="shadow"] {
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.card:active,
+[class*="rounded-xl"][class*="shadow"]:active {
+  transform: scale(0.98);
+}
+
+/* ===========================================
+   SAFE AREA SUPPORT FOR FIXED ELEMENTS
+   =========================================== */
+
+/* Fixed header respects notch */
+#header {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Any fixed bottom elements should account for home indicator */
+.fixed-bottom,
+[class*="fixed"][class*="bottom-0"] {
+  padding-bottom: env(safe-area-inset-bottom);
 }

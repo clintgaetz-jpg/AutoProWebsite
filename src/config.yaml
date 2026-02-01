@@ -8,14 +8,14 @@ metadata:
   title:
     default: Sylvan Lake AUTOPRO
     template: '%s | Sylvan Lake AUTOPRO'
-  description: "Trusted auto repair in Sylvan Lake since 2006. ASE-certified mechanics, NAPA Peace of Mind warranty. Inspections, brakes, diagnostics & more. Call (403) 887-0440."
+  description: "Trusted auto repair in Sylvan Lake since 2006. Licensed mechanics, NAPA Peace of Mind warranty. Inspections, brakes, diagnostics & more. Call (403) 887-0440."
   robots:
     index: true
     follow: true
   openGraph:
     site_name: Sylvan Lake AUTOPRO
     images:
-      - url: '~/assets/images/og-image.png'
+      - url: '~/assets/images/og-image.jpg'
         width: 1200
         height: 630
     type: website
@@ -58,7 +58,7 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: null
+      id: "G-KZM81H73XL"
 
 ui:
   theme: 'system'

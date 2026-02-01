@@ -1,0 +1,287 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Tires | Sales & Service | Sylvan Lake AUTOPRO',
+  description: 'Tire sales and service in Sylvan Lake. Shop tires online, professional installation, balancing, rotation, TPMS, flat repair, seasonal storage. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Tire Sales & Service",
+  "description": "Tire sales and service in Sylvan Lake — shop online, professional installation, balancing, rotation, TPMS service, flat repair, and seasonal storage.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does tire installation take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Typically 45 minutes to an hour for a set of four, including balancing. If we're doing an alignment at the same time, add another 45 minutes to an hour."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you install tires purchased elsewhere?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Bring your tires, we'll mount and balance them. Just know that tires purchased through us include our warranty support and any applicable manufacturer road hazard coverage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What tire brands do you carry?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We have access to most major brands through our tire suppliers. Use the search tool on our website to see what's available for your vehicle, or call us if you're looking for something specific."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need winter tires in Alberta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In central Alberta, yes. All-seasons are a compromise — they're okay in mild conditions but don't perform well when it's actually cold and snowy. Dedicated winter tires make a significant difference in traction, braking, and safety from November through March."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you match tire prices?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In most cases, yes. If you find a better price on the same tire, let us know. We'll do our best to match it or get close."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Tire Sales & Service" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Tires & Service"
+    title="Tire Sales & Service"
+    subtitle="Shop Online. We Install. Done Right."
+    actions={[
+      { variant: 'primary', text: 'Shop Tires Below ↓', href: '#tire-shop' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="The Only Part That Touches the Road"
+    content="Tires affect everything — handling, braking, fuel economy, ride comfort, and safety. They're the only part of your vehicle that actually makes contact with the pavement.<br/><br/>We sell tires from multiple brands, all available through our online tire shop below. Find what fits your vehicle, compare options, and we'll handle the installation, balancing, and everything else.<br/><br/><strong>Not sure what you need?</strong> Give us a call. We'll help you find the right tire for how you drive."
+  />
+
+  <!-- TireConnect Widget Section -->
+  <section id="tire-shop" class="py-12 md:py-16 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 dark:text-white">Find Tires for Your Vehicle</h2>
+        <p class="text-lg text-gray-600 dark:text-slate-400">Search by vehicle or tire size. Compare brands, see pricing, and schedule your installation.</p>
+      </div>
+      <div id="tireconnect" class="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-4 min-h-[400px]"></div>
+    </div>
+  </section>
+
+  <script is:inline src="https://app.tireconnect.ca/js/widget.js"></script>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof TCWidget !== 'undefined') {
+        TCWidget.init({
+          apikey: '11cf9c56224e594319d104dbdeb76dab',
+          container: 'tireconnect',
+          locale: 'en_CA'
+        });
+      }
+    });
+  </script>
+
+  <!-- Tire Services Section -->
+  <Features2
+    title="More Than Just Sales"
+    subtitle="We don't just sell tires — we install them properly and keep them maintained so they last"
+    columns={2}
+    items={[
+      {
+        title: 'Tire Installation',
+        description: 'Professional mounting on modern equipment. We torque lug nuts to spec (not with an impact gun on full blast), install valve stems, and make sure everything is seated correctly.',
+        icon: 'tabler:tool',
+      },
+      {
+        title: 'Tire Balancing',
+        description: 'Every tire we install gets balanced. Proper balancing eliminates vibration, reduces uneven wear, and makes your ride smoother. Rebalancing available if you develop a vibration later.',
+        icon: 'tabler:circles',
+      },
+      {
+        title: 'Tire Rotation',
+        description: 'Regular rotation evens out wear patterns and extends tire life. Most vehicles should have tires rotated every 8,000–12,000 km. We\'ll remind you when it\'s due.',
+        icon: 'tabler:rotate',
+      },
+      {
+        title: 'Flat Repair',
+        description: 'Puncture in the tread? We repair with a proper plug-patch from the inside — the right way, not a rope plug jammed in from outside. If the damage is unrepairable, we\'ll let you know.',
+        icon: 'tabler:bandage',
+      },
+    ]}
+  />
+
+  <!-- TPMS Service Section -->
+  <Content
+    isReversed={true}
+    title="TPMS Service"
+    content="That little tire pressure light on your dash? It matters.<br/><br/>Your TPMS sensors monitor tire pressure and warn you when something's low. But sensors have batteries that eventually die, and they can be damaged during tire service if not handled carefully.<br/><br/>If your TPMS light is on, don't ignore it. Underinflated tires wear faster, handle worse, and cost you fuel economy."
+    items={[
+      { title: 'Sensor Replacement', description: 'When sensors fail or batteries die' },
+      { title: 'Relearn/Reset', description: 'After tire rotation or new sensor installation' },
+      { title: 'Diagnosis', description: 'When the light is on but pressures look fine' },
+      { title: 'Careful Handling', description: 'We know how to service tires without damaging sensors' },
+    ]}
+  />
+
+  <!-- Seasonal Storage Section -->
+  <Content
+    title="Seasonal Tire Storage"
+    content="Don't want winter tires taking up space in your garage all summer? We offer seasonal tire storage.<br/><br/>Drop off your off-season tires, we store them properly, and they're ready when you need them swapped. No hauling tires around in your trunk, no finding space at home.<br/><br/><strong>Ask us about seasonal storage when you book your tire swap.</strong>"
+  />
+
+  <!-- Alignment Cross-Link Section -->
+  <Content
+    isReversed={true}
+    title="New Tires? Get an Alignment."
+    content="You just spent $800–$2,000 on a set of tires. The last thing you want is premature wear because your alignment is off.<br/><br/>Misalignment causes uneven wear patterns that can ruin tires in a fraction of their expected life. We recommend an alignment check with every new set of tires — it protects your investment and ensures your vehicle handles the way it should.<br/><br/><a href='/services/alignment' class='text-primary hover:underline font-semibold'>Learn More About Wheel Alignments →</a>"
+  />
+
+  <!-- When to Replace Section -->
+  <Features2
+    title="How Do You Know When It's Time?"
+    subtitle="Signs your tires need attention"
+    columns={2}
+    items={[
+      {
+        title: 'Tread Depth',
+        description: 'Legal minimum in Alberta is 1.6mm (2/32"), but tires lose significant wet/snow traction before then. Replace at 4/32" for all-seasons, 5/32" for winter tires.',
+        icon: 'tabler:ruler-measure',
+      },
+      {
+        title: 'Age',
+        description: 'Even tires with good tread wear out from age. Rubber hardens and cracks over time. Replace after 6–10 years regardless of tread depth. Check the DOT date code.',
+        icon: 'tabler:calendar',
+      },
+      {
+        title: 'Visible Damage',
+        description: 'Bulges, cracks, cuts, or punctures in the sidewall mean the tire needs replacement. These aren\'t repairable.',
+        icon: 'tabler:alert-triangle',
+      },
+      {
+        title: 'Uneven Wear',
+        description: 'Wearing on inside edge, outside edge, or center? There\'s an underlying problem — alignment, suspension, or inflation. We can diagnose it.',
+        icon: 'tabler:chart-bar',
+      },
+    ]}
+  />
+
+  <!-- FAQs Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'How long does tire installation take?',
+        description: 'Typically 45 minutes to an hour for a set of four, including balancing. If we\'re doing an alignment at the same time, add another 45 minutes to an hour.',
+      },
+      {
+        title: 'Do you install tires purchased elsewhere?',
+        description: 'Yes. Bring your tires, we\'ll mount and balance them. Just know that tires purchased through us include our warranty support and any applicable manufacturer road hazard coverage.',
+      },
+      {
+        title: 'What brands do you carry?',
+        description: 'We have access to most major brands through our tire suppliers. Use the search tool above to see what\'s available for your vehicle, or call us if you\'re looking for something specific.',
+      },
+      {
+        title: 'Do I need winter tires?',
+        description: 'In central Alberta? Yes. All-seasons are a compromise — they\'re okay in mild conditions but don\'t perform well when it\'s actually cold and snowy. Dedicated winter tires make a significant difference in traction, braking, and safety from November through March.',
+      },
+      {
+        title: 'Can you match tire prices?',
+        description: 'In most cases, yes. If you find a better price on the same tire, let us know. We\'ll do our best to match it or get close.',
+      },
+    ]}
+  />
+
+  <!-- Related Services Section -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Wheel Alignment',
+        description: 'Protect your tire investment',
+        icon: 'tabler:steering-wheel',
+        callToAction: { text: 'Learn More', href: '/services/alignment' },
+      },
+      {
+        title: 'Brake Service',
+        description: 'Stopping power matters',
+        icon: 'tabler:disc',
+        callToAction: { text: 'Learn More', href: '/services/brake-inspection' },
+      },
+      {
+        title: 'Steering & Suspension',
+        description: 'Affects tire wear and handling',
+        icon: 'tabler:car',
+        callToAction: { text: 'Learn More', href: '/services/steering-suspension' },
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Ready for New Tires?"
+    subtitle="Shop online using the tool above, or give us a call to discuss what's right for your vehicle."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Book Installation', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+    ]}
+  />
+</Layout>

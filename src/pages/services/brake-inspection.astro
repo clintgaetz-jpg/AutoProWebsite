@@ -1,0 +1,229 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Brake Inspection | $92.40 | Sylvan Lake AUTOPRO',
+  description: 'Thorough brake inspection in Sylvan Lake. We disassemble, measure, and document everything. Digital report with photos. $92.40 tax included. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Complete Brake Inspection",
+  "description": "Full brake system disassembly, measurement, and digital documentation",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "92.40",
+    "priceCurrency": "CAD",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": true
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a brake inspection cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our complete brake inspection is $92.40, tax included. This covers removing wheels, disassembling brake components, measuring everything, and providing a digital report with photos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a brake inspection take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A thorough brake inspection takes approximately 30-45 minutes. We recommend booking an appointment so we can get you in and out efficiently."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why don't you offer free brake inspections like other shops?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Free inspections are usually quick visual checks through the wheel spokes. Our inspection requires removing wheels and disassembling components to measure everything accurately. This takes time and expertise, but it means your repair quote will be accurate with no surprises."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I wait while you inspect my brakes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We have a comfortable waiting room with Wi-Fi, TV, and complimentary beverages. Most inspections are complete within 45 minutes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if my brakes are fine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We'll tell you. Your report will show green across the board, and we'll let you know when to check again. We're not here to sell you parts you don't need."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Brake Inspection" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Brake Services"
+    title="Complete Brake Inspection"
+    subtitle="We Measure. We Document. You Decide."
+    actions={[
+      { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    isReversed={false}
+    title="What Is a Complete Brake Inspection?"
+    content="A complete brake inspection at Sylvan Lake AUTOPRO costs <strong>$92.40, tax included</strong>. We remove the wheels, disassemble the brake components, and measure everything—pad thickness, rotor thickness, caliper condition, brake lines, and hardware. You'll receive a digital report with photos of your actual brakes and color-coded status for each component.<br/><br/>This isn't a quick glance through your wheel spokes. It's a thorough inspection that tells you exactly what condition your brakes are in and what (if anything) they need. No guessing. No surprises."
+  />
+
+  <!-- What We Inspect Section -->
+  <Features2
+    title="What We Inspect"
+    subtitle="Every component in your braking system, measured and documented"
+    columns={3}
+    items={[
+      {
+        title: 'Brake Pads & Shoes',
+        description: 'Actual thickness measured in millimeters—not "looks low" or "about half."',
+        icon: 'tabler:circle-check',
+      },
+      {
+        title: 'Rotors & Drums',
+        description: 'Thickness compared to manufacturer specs. We check for scoring, heat damage, and warping.',
+        icon: 'tabler:circle-check',
+      },
+      {
+        title: 'Calipers & Cylinders',
+        description: 'Slides checked for free movement, piston seals inspected for leaks.',
+        icon: 'tabler:circle-check',
+      },
+      {
+        title: 'Brake Lines & Hoses',
+        description: 'Steel lines checked for rust and damage. Rubber hoses inspected for cracks.',
+        icon: 'tabler:circle-check',
+      },
+      {
+        title: 'Brake Fluid',
+        description: 'Level and condition checked. Old fluid reduces braking effectiveness.',
+        icon: 'tabler:circle-check',
+      },
+      {
+        title: 'Hardware & Parking Brake',
+        description: 'Springs, clips, slides, and parking brake operation verified.',
+        icon: 'tabler:circle-check',
+      },
+    ]}
+  />
+
+  <!-- Why We Charge Section -->
+  <Content
+    isReversed={true}
+    title="Why Do We Charge for Brake Inspections?"
+    content={`You've seen shops advertising "free brake inspections." Here's why we don't—and why that's actually better for you.<br/><br/><strong>What a "free" inspection really means:</strong> A quick visual look without removing the wheels. Someone peers through your wheel spokes and says "looks okay" or "pads are getting low."<br/><br/><strong>What you can't see without taking things apart:</strong><br/>• Whether your caliper is seized<br/>• If your rotors are thick enough to machine<br/>• Whether caliper pistons are leaking<br/>• If your slides are moving freely<br/>• The actual pad thickness in millimeters<br/><br/><strong>Our approach:</strong> We pull the wheels, disassemble everything, measure with actual tools, photograph what we find, and send you a digital report. When we quote your repair, we know exactly what's needed. No surprises.`}
+    items={[
+      { title: 'No Surprise Costs', description: 'Your quote is accurate because we inspected first' },
+      { title: 'Digital Documentation', description: 'Photos and measurements sent to your phone' },
+      { title: 'Accurate Repair Quotes', description: 'We know exactly what parts are needed' },
+    ]}
+  />
+
+  <!-- Digital Report Section -->
+  <Content
+    title="Your Digital Inspection Report"
+    subtitle="See exactly what we see"
+    content="After your brake inspection, you'll receive a detailed report sent directly to your phone or email."
+    items={[
+      { title: 'Photos of Your Actual Brakes', description: 'Not stock images—your vehicle, your components' },
+      { title: 'Actual Measurements', description: 'Pad thickness, rotor thickness, numbers in millimeters' },
+      { title: 'Color-Coded Status', description: 'Green (good), Yellow (monitor), Red (needs attention)' },
+      { title: 'Plain Language Explanations', description: 'What we found and what it means for you' },
+    ]}
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about brake inspections"
+    columns={1}
+    items={[
+      {
+        title: 'How much does a brake inspection cost?',
+        description: 'Our complete brake inspection is $92.40, tax included. This covers removing wheels, disassembling brake components, measuring everything, and providing a digital report with photos.',
+      },
+      {
+        title: 'How long does a brake inspection take?',
+        description: 'A thorough brake inspection takes approximately 30-45 minutes. We recommend booking an appointment so we can get you in and out efficiently.',
+      },
+      {
+        title: "Why don't you offer free brake inspections?",
+        description: "Free inspections are usually quick visual checks through the wheel spokes. Our inspection requires removing wheels and disassembling components to measure everything accurately. This takes time and expertise, but it means your repair quote is accurate with no surprises.",
+      },
+      {
+        title: 'Can I wait while you inspect my brakes?',
+        description: 'Yes. We have a comfortable waiting room with Wi-Fi, TV, and complimentary beverages. Most inspections are complete within 45 minutes.',
+      },
+      {
+        title: 'What if my brakes are fine?',
+        description: "We'll tell you. Your report will show green across the board, and we'll let you know when to check again. We're not here to sell you parts you don't need.",
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Book Your Brake Inspection"
+    subtitle="$92.40 (tax included) • Digital report with photos"
+    actions={[
+      { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

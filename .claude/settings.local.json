@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev:*)",
+      "Bash(del C:autoprowebsitesrcpagesservices.astro)",
+      "Bash(find:*)",
+      "WebSearch",
+      "WebFetch(domain:www.cyberoptik.net)",
+      "WebFetch(domain:www.subframe.com)",
+      "WebFetch(domain:webflow.com)",
+      "Bash(copy:*)",
+      "Bash(cmd /c copy \"C:\\\\Users\\\\Clint\\\\Sylvan Lake Autopro\\\\Personal - Documents\\\\Automation Project\\\\Website Autopro\\\\Images\\\\castrol graph.jpg\" \"C:\\\\autoprowebsite\\\\src\\\\assets\\\\images\\\\castrol-graph.jpg\")",
+      "Bash(cmd /c copy \"C:\\\\Users\\\\Clint\\\\Sylvan Lake Autopro\\\\Personal - Documents\\\\Automation Project\\\\Website Autopro\\\\Images\\\\castrol severe.jpg\" \"C:\\\\autoprowebsite\\\\src\\\\assets\\\\images\\\\castrol-severe.jpg\")",
+      "Bash(ffprobe:*)",
+      "Bash(where:*)",
+      "Bash(done)",
+      "Bash(grep:*)",
+      "Bash(magick identify:*)",
+      "Bash(node --version:*)",
+      "Bash(node scripts/remove-checker.mjs:*)",
+      "Bash(npm run build:*)",
+      "Bash(cmd /c if not exist \"C:\\\\autoprowebsite\\\\public\\\\fonts\" mkdir \"C:\\\\autoprowebsite\\\\public\\\\fonts\")",
+      "WebFetch(domain:fonts.googleapis.com)",
+      "WebFetch(domain:gwfh.mranftl.com)",
+      "Bash(powershell -Command:*)",
+      "Bash(cmd /c dir \"C:\\\\autoprowebsite\\\\public\\\\fonts\")",
+      "Bash(cmd /c del \"C:\\\\autoprowebsite\\\\src\\\\pages\\\\privacy.md\")",
+      "Bash(cmd /c del \"C:\\\\autoprowebsite\\\\src\\\\pages\\\\terms.md\")",
+      "Bash(command -v:*)",
+      "Bash(command -v convert:*)",
+      "Bash(where.exe:*)",
+      "Bash(node:*)",
+      "Bash(dir \"C:\\\\autoprowebsite\\\\src\\\\pages\\\\services\")",
+      "Bash(findstr:*)",
+      "Bash(test:*)",
+      "Bash(identify:*)",
+      "Bash(dir /b \"C:\\\\autoprowebsite\\\\src\\\\pages\\\\[...blog]\")",
+      "Bash(dir /b \"C:\\\\autoprowebsite\\\\src\\\\data\\\\post\\\\*.md\")",
+      "Bash(del:*)"
+    ]
+  }
+}

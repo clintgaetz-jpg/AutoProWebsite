@@ -1,0 +1,239 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'A/C Repair & Service | Sylvan Lake AUTOPRO',
+  description: 'Car A/C not blowing cold? Expert diagnosis and repair in Sylvan Lake. R-134a and R-1234yf service. Leak detection, compressor repair, full system service. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Automotive A/C Service & Repair",
+  "description": "Automotive air conditioning diagnosis and repair in Sylvan Lake, Alberta",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How often should I have my A/C serviced?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We don't recommend annual service. Get a full system check every few years, or whenever you notice decreased performance. Regular maintenance visits include visual inspections."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use a DIY recharge kit?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We strongly advise against it. DIY kits often overcharge the system, contaminate the refrigerant, or include stop-leak chemicals that clog components. This creates additional expense or leaves us unable to service your vehicle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is A/C repair so expensive now?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Modern R-1234yf refrigerant costs significantly more than older R-134a. A system might cost $150+ just in refrigerant before parts or labor. Proper leak repair is more important than ever."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My A/C smells musty. What causes that?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually mold or mildew growth on the evaporator. When you shut off the A/C, moisture on the cold evaporator becomes a breeding ground. An evaporator cleaning service or replacement can help."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "A/C Service & Repair" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Climate Control"
+    title="Automotive A/C Service & Repair"
+    subtitle="Proper Diagnosis. Quality Repairs. All Refrigerant Types."
+    actions={[
+      { variant: 'primary', text: 'Book A/C Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="Car A/C Not Blowing Cold?"
+    content="We diagnose and repair automotive air conditioning systems at our Sylvan Lake shop. We service all refrigerant types—<strong>R-134a and the newer R-1234yf</strong> systems that require specialized equipment many shops don't have.<br/><br/>A/C problems range from simple (low refrigerant from a slow leak) to complex (compressor failure, blend door actuators, electronic control issues). We figure out what's actually wrong before recommending repairs. Get your A/C checked now—waiting until July means competing with everyone else who waited."
+  />
+
+  <!-- Problem Categories Section -->
+  <Features2
+    title="Why Is My A/C Not Cooling?"
+    subtitle="Common causes of air conditioning problems"
+    columns={3}
+    items={[
+      {
+        title: 'Refrigerant Issues',
+        description: 'Low refrigerant from leaks, contaminated refrigerant from DIY kits, or wrong refrigerant type.',
+        icon: 'tabler:gas-station',
+      },
+      {
+        title: 'Mechanical Failures',
+        description: 'Compressor failure, condenser damage from road debris, evaporator leak, expansion valve problems.',
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'Electrical & Controls',
+        description: 'Compressor clutch failure, pressure switch malfunction, blend door actuator, sensor failures.',
+        icon: 'tabler:plug',
+      },
+    ]}
+  />
+
+  <!-- Alberta Challenges Section -->
+  <Content
+    isReversed={true}
+    title="Why Alberta Is Hard on A/C Systems"
+    content="You'd think A/C problems would be a hot-climate issue. Alberta actually creates unique challenges:<br/><br/><strong>Extended Dormancy:</strong> We barely use A/C for eight months of the year. Seals dry out when the system sits idle. When you finally turn it on in June, that's when problems appear.<br/><br/><strong>Temperature Extremes:</strong> Going from -30°C to +30°C stresses every seal, hose, and fitting. Expansion and contraction eventually cause leaks.<br/><br/><strong>Road Debris:</strong> Alberta roads throw rocks. The condenser sits right behind the grille, taking direct hits.<br/><br/><strong>Expensive Refrigerant:</strong> Modern R-1234yf costs significantly more than older R-134a. Finding and fixing leaks properly is more important than ever."
+    items={[
+      { title: 'Pro Tip', description: 'Run your A/C for 10 minutes monthly, even in winter. It keeps seals lubricated and catches problems before summer.' },
+    ]}
+  />
+
+  <!-- Our Services Section -->
+  <Features2
+    title="Our A/C Services"
+    subtitle="Complete air conditioning diagnosis and repair"
+    columns={2}
+    items={[
+      {
+        title: 'Diagnosis & Leak Detection',
+        description: 'Pressure testing, electronic leak detection, UV dye injection. We find the actual problem before repairs begin.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'System Recharge',
+        description: 'After verifying no leaks exist, we recharge with the correct refrigerant type and exact amount specified.',
+        icon: 'tabler:reload',
+      },
+      {
+        title: 'Compressor Replacement',
+        description: 'Full service including system flush, receiver/drier replacement, and proper oil charge. Done right to prevent repeat failures.',
+        icon: 'tabler:engine',
+      },
+      {
+        title: 'Condenser Replacement',
+        description: 'Road debris damage repair. We check for internal restrictions and external blockage.',
+        icon: 'tabler:layout-grid',
+      },
+      {
+        title: 'Evaporator Service',
+        description: 'Inside the dash—same labor as heater core. We recommend doing both if accessing the HVAC housing.',
+        icon: 'tabler:air-conditioning',
+      },
+      {
+        title: 'Electrical Diagnostics',
+        description: 'Scan tool communication with HVAC module to diagnose sensor, actuator, and control problems.',
+        icon: 'tabler:cpu',
+      },
+    ]}
+  />
+
+  <!-- Refrigerant Types Section -->
+  <Content
+    title="Refrigerant Types We Service"
+    content="<strong>R-12 (Pre-1994):</strong> No longer available. We offer retrofit to R-134a.<br/><br/><strong>R-134a (1994-2015):</strong> Most common type, reasonable cost.<br/><br/><strong>R-1234yf (2015+):</strong> Required on newer vehicles, significantly more expensive.<br/><br/>We've invested in equipment to service all refrigerant types, including R-1234yf systems that many shops can't handle."
+  />
+
+  <!-- DIY Warning Section -->
+  <Content
+    isReversed={true}
+    title="Why DIY Recharge Kits Are a Bad Idea"
+    content="We strongly advise against DIY A/C recharge kits. Here's why:<br/><br/>• <strong>Overcharge the system</strong> — Damages components<br/>• <strong>Contaminate the refrigerant</strong> — We can't service it with our equipment<br/>• <strong>Include 'stop leak' chemicals</strong> — Clogs components<br/>• <strong>Don't fix the actual leak</strong> — Just delays the real repair<br/><br/>What seems like a $40 money-saver often creates hundreds in additional expense, or leaves us unable to service your vehicle until the contaminated refrigerant is evacuated with special equipment."
+  />
+
+  <!-- Spring Check Section -->
+  <Content
+    title="Spring A/C Check: Beat the Summer Rush"
+    content="Every year we see the same pattern: first hot week in June, phones ring off the hook with A/C problems.<br/><br/><strong>Get your A/C checked in spring:</strong><br/>• No waiting—we can get you in quickly<br/>• Find problems before you're sweating in traffic<br/>• Time to order parts if needed<br/>• Avoid being stuck in a queue when everyone else discovers their A/C is dead<br/><br/>A 15-minute check in May beats a week without A/C in July."
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about automotive A/C service"
+    columns={1}
+    items={[
+      {
+        title: 'How often should I have my A/C serviced?',
+        description: "We don't recommend annual service like some shops push. Your regular maintenance visits include visual inspections of A/C components. Get a full system check every few years, or whenever you notice decreased performance.",
+      },
+      {
+        title: 'How long does an A/C repair take?',
+        description: 'It varies widely. A simple leak repair and recharge might be same-day. Compressor replacement is typically a full day. Evaporator replacement requires dash removal—multiple days.',
+      },
+      {
+        title: 'Can I use a DIY recharge kit?',
+        description: "We strongly advise against it. DIY kits often overcharge the system, contaminate the refrigerant, or include 'stop leak' chemicals that clog components. This creates hundreds in additional expense or leaves us unable to service your vehicle.",
+      },
+      {
+        title: 'Why is A/C repair so expensive now?',
+        description: 'Modern R-1234yf refrigerant costs significantly more than older R-134a. A system that takes 2 lbs of refrigerant might cost $150+ just in refrigerant, before any parts or labor. Proper leak repair is more important than ever.',
+      },
+      {
+        title: 'My A/C smells musty. What causes that?',
+        description: "Usually mold or mildew growth on the evaporator. When you shut off the A/C, moisture on the cold evaporator becomes a breeding ground. An evaporator cleaning service can help, or in severe cases, evaporator replacement.",
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Book Your A/C Service"
+    subtitle="Don't wait until you're sweating in traffic. Get your A/C checked before the summer rush."
+    actions={[
+      { variant: 'primary', text: 'Book A/C Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

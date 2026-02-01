@@ -1,0 +1,269 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Fleet & Commercial Service | Sylvan Lake AUTOPRO',
+  description: 'Fleet and commercial vehicle service in Sylvan Lake. We understand your truck is your income. Quality repairs, timely service, fleet cards accepted. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Fleet & Commercial Vehicle Service",
+  "description": "Fleet and commercial vehicle service in Sylvan Lake, Alberta",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Ponoka", "Eckville"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you prioritize commercial vehicles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We do our best to minimize downtime for work vehicles. Let us know your situation when you book and we'll work with your schedule."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What fleet cards do you accept?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most major fleet cards. Call us and we'll confirm if yours works here."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you handle diesel trucks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Light and medium duty diesel trucks without air brakes. Heavy duty with air brakes needs a heavy-duty facility."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you do after-hours drop-off?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Key drop available for early morning or after-hours drop-off."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Fleet & Diesel Services" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Commercial Services"
+    title="Fleet & Commercial Vehicle Service"
+    subtitle="Your Truck Is Your Income. We Get It."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="We Understand Work Trucks"
+    content="You use your truck to make a living. No vehicle means no income. We understand that.<br/><br/>When your work truck needs service, we prioritize getting you back on the job. Not with a quick patch that fails next week—with quality repairs that keep you reliable. We accept most major fleet cards and we'll work with your schedule as much as possible."
+  />
+
+  <!-- What We Understand Section -->
+  <Features2
+    title="What We Understand"
+    subtitle="Your truck isn't just transportation"
+    columns={2}
+    items={[
+      {
+        title: 'Downtime Costs Money',
+        description: 'Every day in the shop is a day you\'re not working. We minimize that.',
+        icon: 'tabler:clock-dollar',
+      },
+      {
+        title: 'Reliability Over Cheap',
+        description: 'A breakdown on a job site costs way more than doing it right the first time.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Your Schedule Isn\'t 9-5',
+        description: 'Sometimes you need early drop-off or after-hours pickup. We accommodate.',
+        icon: 'tabler:calendar-time',
+      },
+      {
+        title: 'Done Right Matters',
+        description: 'Warranty work, comebacks, and repeat failures aren\'t something you can afford.',
+        icon: 'tabler:check',
+      },
+    ]}
+  />
+
+  <!-- Services Section -->
+  <Features2
+    title="Services for Work Vehicles"
+    subtitle="Everything your fleet needs under one roof"
+    columns={3}
+    items={[
+      {
+        title: 'Maintenance',
+        description: 'Oil changes, brake service, tires, filters, belts, hoses, cooling system service',
+        icon: 'tabler:tool',
+      },
+      {
+        title: 'Repairs',
+        description: 'Engine diagnostics, transmission, electrical, suspension, steering, exhaust',
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'Inspections',
+        description: 'CVIP commercial, out of province, pre-purchase, general safety inspections',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  />
+
+  <!-- Fleet Cards Section -->
+  <Content
+    isReversed={true}
+    title="Fleet Cards Accepted"
+    content="We accept most major fleet cards. Not sure if yours works here? Give us a call and we'll confirm.<br/><br/>Some fleet programs have their own networks. We'll let you know if we can work with your program or point you in the right direction if we can't."
+    items={[
+      { title: 'Most Major Cards', description: 'Call to confirm your specific card' },
+      { title: 'Direct Billing', description: 'For qualifying fleet accounts' },
+    ]}
+  />
+
+  <!-- Loaner Vehicles Section -->
+  <Content
+    title="Loaner Vehicles"
+    content="Yes, we have loaner vehicles available for longer repairs.<br/><br/><strong>The honest truth:</strong> A Ford Escape doesn't replace your F350. We know that. But if you need to get to a site to supervise, grab parts, or handle something that doesn't need your work truck, a loaner can help keep your day moving.<br/><br/>For major repairs where you'll be without your truck for multiple days, let's talk about options. We'll do what we can to minimize your downtime."
+  />
+
+  <!-- Who We Work With Section -->
+  <Features2
+    title="Who We Work With"
+    subtitle="One truck or a dozen — same priority, same quality"
+    columns={3}
+    items={[
+      {
+        title: 'Contractors & Trades',
+        description: 'Plumbers, electricians, HVAC, general contractors',
+        icon: 'tabler:hammer',
+      },
+      {
+        title: 'Landscaping & Snow',
+        description: 'Lawn care, landscaping, snow removal',
+        icon: 'tabler:tree',
+      },
+      {
+        title: 'Construction',
+        description: 'Construction companies and crews',
+        icon: 'tabler:building',
+      },
+      {
+        title: 'Property Management',
+        description: 'Property managers and maintenance teams',
+        icon: 'tabler:home',
+      },
+      {
+        title: 'Delivery & Courier',
+        description: 'Delivery services and courier companies',
+        icon: 'tabler:truck-delivery',
+      },
+      {
+        title: 'Oilfield & Industrial',
+        description: 'Oilfield service and industrial vehicles',
+        icon: 'tabler:gas-station',
+      },
+    ]}
+  />
+
+  <!-- Quality Section -->
+  <Content
+    isReversed={true}
+    title="Why Quality Matters for Work Trucks"
+    content="A cheap repair on a commuter car is annoying. <strong>A cheap repair on a work truck can cost you a contract.</strong><br/><br/><strong>Our approach:</strong><br/>• Diagnose it right the first time<br/>• Use quality parts that hold up to hard use<br/>• Stand behind our work with the NAPA warranty<br/>• Keep records so you know what's been done<br/><br/>Your truck works hard. The repairs should match."
+  />
+
+  <!-- NAPA Warranty Section -->
+  <Content
+    title="NAPA Peace of Mind Warranty"
+    content="Most repairs backed by the NAPA Peace of Mind Warranty—<strong>24 months/40,000 km</strong>, honored at NAPA AUTOPRO locations across Canada.<br/><br/>If something goes wrong while you're on a job in Edmonton, Calgary, or anywhere else, you're covered."
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about fleet and commercial service"
+    columns={1}
+    items={[
+      {
+        title: 'Do you prioritize commercial vehicles?',
+        description: 'We do our best to minimize downtime for work vehicles. Let us know your situation when you book and we\'ll work with your schedule.',
+      },
+      {
+        title: 'What fleet cards do you accept?',
+        description: 'Most major fleet cards. Call us and we\'ll confirm if yours works here.',
+      },
+      {
+        title: 'Can you handle diesel trucks?',
+        description: 'Yes. Light and medium duty diesel trucks (no air brakes). Heavy duty with air brakes needs a heavy-duty facility.',
+      },
+      {
+        title: 'Do you do after-hours drop-off?',
+        description: 'Yes. Key drop available for early morning or after-hours drop-off. Let us know when you book.',
+      },
+      {
+        title: 'What if my truck needs to be down for multiple days?',
+        description: 'We\'ll give you an honest timeline upfront. Loaner vehicles available for some situations. For major repairs, we\'ll discuss options to minimize the impact on your work.',
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Get Your Fleet Serviced"
+    subtitle="Fleet card questions? Call us and we'll confirm your card works here."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+    ]}
+  />
+</Layout>

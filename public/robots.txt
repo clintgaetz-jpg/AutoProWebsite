@@ -1,2 +1,18 @@
 User-agent: *
+Allow: /
 Disallow:
+
+Sitemap: https://sylvanlakeautopro.com/sitemap-index.xml
+
+# AI Crawlers - Explicitly allowed for AI search discovery
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /

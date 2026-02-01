@@ -1,0 +1,275 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Warranty | Sylvan Lake AUTOPRO',
+  description: "NAPA Peace of Mind warranty: 24 months / 40,000 km, honored at 600+ locations across North America. Plus our own 2-year/40K labor warranty. We stand behind our work.",
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Peace of Mind"
+    title="Warranty That Travels With You"
+    subtitle="National network backing. Local shop accountability. We stand behind our work."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'View NAPA Warranty', href: 'https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/', target: '_blank' },
+    ]}
+  />
+
+  <!-- NAPA Peace of Mind Warranty -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <p class="text-sm font-bold tracking-wide uppercase text-primary dark:text-blue-200 mb-2">NAPA Peace of Mind Warranty</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">24 Months / 40,000 KM — Honored Across North America</h2>
+      </div>
+
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 max-w-3xl mx-auto mb-10">
+        <p>As a NAPA AUTOPRO facility, qualifying repairs are backed by the NAPA Peace of Mind Warranty — 24 months or 40,000 kilometres, whichever comes first.</p>
+        <p>Here's what that means for you:</p>
+      </div>
+
+      <!-- Covered Anywhere -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8 mb-8">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 bg-primary/10 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+            <Icon name="tabler:map-pin" class="w-6 h-6 text-primary dark:text-blue-400" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-2 dark:text-white">Covered Anywhere</h3>
+            <p class="text-muted dark:text-slate-400">Break down in Vancouver? Toronto? Texas? Your warranty travels with you. It's honored at over 600 NAPA AUTOPRO and AutoCare locations across Canada and the United States. Call <strong class="dark:text-white">1-866-GET-NAPA</strong> (1-866-438-6272) and they'll direct you to the nearest participating shop.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- What's Covered / Not Covered Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <!-- What's Covered -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+              <Icon name="tabler:check" class="w-5 h-5 text-green-600 dark:text-green-400" />
+            </div>
+            <h3 class="text-xl font-bold dark:text-white">What's Covered</h3>
+          </div>
+          <ul class="space-y-2 text-muted dark:text-slate-400">
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Brakes</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Steering & suspension</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>A/C and climate control</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Electrical systems</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Exhaust</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Fuel systems</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Engine performance & drivability</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Starting & charging systems</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Cooling systems</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Clutches</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>CV joints, U-joints, wheel bearings</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+              <span>Drive axles & transaxles</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- What's Not Covered -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center">
+              <Icon name="tabler:info-circle" class="w-5 h-5 text-gray-500 dark:text-slate-400" />
+            </div>
+            <h3 class="text-xl font-bold dark:text-white">What's Not Covered</h3>
+          </div>
+          <ul class="space-y-2 text-muted dark:text-slate-400">
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+              <span>Internal engine repairs (external seals and gaskets are covered)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+              <span>Internal transmission repairs (external seals and gaskets are covered)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+              <span>Tires and batteries</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+              <span>Oil changes and fluid flushes</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+              <span>Customer-supplied parts</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+              <span>Used or salvaged parts (separate warranty)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+              <span>Commercial vehicles over 17,000 lbs GVW</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
+              <span>Off-road, racing, and recreational vehicles</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-center text-muted dark:text-slate-400 mt-8">
+        For full details, visit the <a href="https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">official NAPA warranty page</a> or ask us — we'll explain exactly what applies to your repair.
+      </p>
+    </div>
+  </section>
+
+  <!-- Our Labor Warranty -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <p class="text-sm font-bold tracking-wide uppercase text-primary dark:text-blue-200 mb-2">Our Commitment</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">We Stand Behind Our Work</h2>
+      </div>
+
+      <div class="bg-primary/5 dark:bg-blue-900/20 border border-primary/20 dark:border-blue-800 rounded-xl p-6 md:p-8">
+        <p class="text-lg md:text-xl font-bold text-center text-gray-900 dark:text-white mb-4">2-Year / 40,000 KM Labor Warranty</p>
+        <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+          <p>Beyond the parts, we warranty our labor: 2 years or 40,000 kilometres on the work we perform.</p>
+          <p>If a repair fails or doesn't perform as expected, bring it back. We'll look at it, we'll fix it, and we won't make you feel like a problem for asking.</p>
+          <p class="font-medium text-gray-900 dark:text-white">That's not a slogan. It's how we operate.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parts Warranties Vary -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Not All Parts Are Created Equal</h2>
+        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3">Different parts carry different warranties. That's the reality.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-8">
+        <div class="bg-white dark:bg-slate-900 rounded-xl p-5 text-center">
+          <p class="font-bold text-gray-900 dark:text-white mb-1">OEM Parts</p>
+          <p class="text-muted dark:text-slate-400 text-sm">Typically 12 months</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl p-5 text-center">
+          <p class="font-bold text-gray-900 dark:text-white mb-1">Aftermarket Parts</p>
+          <p class="text-muted dark:text-slate-400 text-sm">12 months to lifetime</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl p-5 text-center">
+          <p class="font-bold text-gray-900 dark:text-white mb-1">Used/Salvage Parts</p>
+          <p class="text-muted dark:text-slate-400 text-sm">30-90 days typically</p>
+        </div>
+      </div>
+
+      <p class="text-muted dark:text-slate-400">
+        We dig into this for every job. We'll recommend parts that balance quality, warranty coverage, and value for your situation. If you want to know exactly what warranty applies to a specific repair, just ask — we'll tell you before we order anything.
+      </p>
+    </div>
+  </section>
+
+  <!-- Used & Salvage Parts -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Smart Sourcing, Not Cutting Corners</h2>
+        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3">When used parts make sense</p>
+      </div>
+
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+        <p>Some shops won't touch salvage parts. We think that's short-sighted.</p>
+        <p>Sometimes a quality used part is the right call — discontinued parts, older vehicles, or when new doesn't make financial sense. We don't use them to cut corners. We use them when they're the smart choice.</p>
+        <p>Here's the difference: we've built a network of trusted salvage partners over 19 years. Some even provide warranty on their parts. We know what to look for, we know who to trust, and we've sent parts back when they didn't meet our standards. <strong class="text-gray-900 dark:text-white">If we wouldn't put it in our own vehicle, it's not going in yours.</strong></p>
+        <p>Warranty on used parts varies — could be 30 days, 90 days, or more depending on the part and supplier. We'll always discuss it with you before we order.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tire Protection Plan -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <div class="flex flex-col md:flex-row items-start gap-6">
+        <div class="w-16 h-16 bg-primary/10 dark:bg-blue-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+          <Icon name="tabler:circle-dotted" class="w-8 h-8 text-primary dark:text-blue-400" />
+        </div>
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold font-heading dark:text-white mb-4">Protect Your Investment</h2>
+          <p class="text-base md:text-lg text-muted dark:text-slate-400">
+            Tires take a beating. Our tire protection plan covers road hazard damage — nails, potholes, debris — so an unexpected puncture doesn't become an unexpected expense.
+          </p>
+          <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3">
+            Ask us about coverage options when you buy tires.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Factory Warranty -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">New Car? You're Still Covered.</h2>
+        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3">Your factory warranty stays intact</p>
+      </div>
+
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+        <p>Worried about voiding your factory warranty by coming to us instead of the dealership? Don't be.</p>
+        <p>Getting routine maintenance here won't void your manufacturer warranty. Dealerships can't require you to service exclusively with them — your warranty is protected as long as the work meets manufacturer specifications.</p>
+        <p>We use quality parts, we document everything, and we follow manufacturer service guidelines. <strong class="text-gray-900 dark:text-white">Your warranty stays intact.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CallToAction
+    title="Questions About Warranty?"
+    subtitle="Every repair is different. If you want to know exactly what's covered before we start, just ask. We'll walk you through it."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Contact Us', href: '/contact' },
+    ]}
+  />
+</Layout>

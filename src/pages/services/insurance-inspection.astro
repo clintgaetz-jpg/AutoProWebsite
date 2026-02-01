@@ -1,0 +1,254 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Insurance Inspection | $95.99 | Sylvan Lake AUTOPRO',
+  description: 'Insurance vehicle inspection in Sylvan Lake. Required for vehicles 12+ years when switching insurers. $95.99 tax included. Same-day appointments available. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Insurance Vehicle Inspection",
+  "description": "Insurance vehicle inspections in Sylvan Lake, Alberta",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "95.99",
+    "priceCurrency": "CAD",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "valueAddedTaxIncluded": true
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does an insurance inspection take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most inspections take 30-45 minutes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I just had an out-of-province inspection. Do I need an insurance inspection too?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Maybe not. If you recently completed an OOP inspection, that documentation may satisfy your insurer. Check with them first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you do repairs the same day if my vehicle doesn't pass?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Often, yes. Minor issues can usually be addressed immediately. For larger repairs, we'll provide an estimate and schedule the work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do I need this inspection now when I never did before?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Switching insurance providers triggers the new insurer's underwriting requirements, which typically include inspections for vehicles 12 years or older."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Insurance Inspection" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Inspections"
+    title="Insurance Vehicle Inspections"
+    subtitle="Quick. Affordable. Done Right. — $95.99"
+    actions={[
+      { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="Switching Insurance Providers?"
+    content="Your new insurer may require a safety inspection before they'll issue a policy—especially for vehicles <strong>12 years or older</strong>.<br/><br/>We verify your vehicle is safe and roadworthy, document everything, and provide the paperwork your insurance company needs.<br/><br/><strong>$95.99 tax included. Most inspections completed same day.</strong>"
+  />
+
+  <!-- When Required Section -->
+  <Features2
+    title="When Is an Insurance Inspection Required?"
+    subtitle="Insurance companies (not the government) set these requirements"
+    columns={2}
+    items={[
+      {
+        title: 'Vehicle Age (12+ Years)',
+        description: 'Most insurers require inspection for vehicles 12 years or older. Some require it at 10 years.',
+        icon: 'tabler:calendar',
+      },
+      {
+        title: 'Switching Providers',
+        description: 'Moving to a new insurance company with an older vehicle? They\'ll likely require an inspection.',
+        icon: 'tabler:switch-horizontal',
+      },
+      {
+        title: 'Buying Older Used Vehicle',
+        description: 'Purchasing a vehicle 12+ years old? Your new insurer will probably want an inspection.',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Lapse in Coverage',
+        description: 'If your vehicle has been uninsured for an extended period, inspection may be required.',
+        icon: 'tabler:clock-off',
+      },
+    ]}
+  />
+
+  <!-- Simple Rule Section -->
+  <Content
+    isReversed={true}
+    title="The Simple Rule"
+    content="<strong>Same insurer, continuous coverage</strong> → Usually no inspection needed.<br/><br/><strong>Switch insurers, older vehicle, or coverage lapse</strong> → Inspection likely required.<br/><br/>When in doubt, ask your insurance company what they need."
+  />
+
+  <!-- What We Inspect Section -->
+  <Features2
+    title="What We Inspect"
+    subtitle="We verify your vehicle meets safety standards"
+    columns={3}
+    items={[
+      {
+        title: 'Brakes',
+        description: 'Pad/shoe condition, rotors/drums, brake lines, fluid',
+        icon: 'tabler:disc',
+      },
+      {
+        title: 'Steering & Suspension',
+        description: 'Ball joints, tie rods, shocks/struts, wheel bearings',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Tires',
+        description: 'Tread depth, condition, matching sizes',
+        icon: 'tabler:circle',
+      },
+      {
+        title: 'Lights & Signals',
+        description: 'Headlights, brake lights, turn signals, hazards',
+        icon: 'tabler:bulb',
+      },
+      {
+        title: 'Windshield & Wipers',
+        description: 'Visibility, cracks, wiper condition',
+        icon: 'tabler:droplet',
+      },
+      {
+        title: 'Body & Frame',
+        description: 'Rust, structural integrity, exhaust, mirrors',
+        icon: 'tabler:layout',
+      },
+    ]}
+  />
+
+  <!-- Pricing Section -->
+  <Content
+    title="Pricing"
+    content="<strong>Insurance Vehicle Inspection:</strong> $95.99 (tax included)<br/><br/>No hidden fees. No surprises.<br/><br/>You receive a digital report with photos and measurements—same transparency we provide on all our inspections."
+  />
+
+  <!-- If Doesn't Pass Section -->
+  <Content
+    isReversed={true}
+    title="What If My Vehicle Doesn't Pass?"
+    content="If we find issues that prevent your vehicle from passing:<br/><br/>• Clear explanation of what failed and why<br/>• Photos documenting the issues<br/>• Estimate for repairs if you want them done here<br/><br/>You're not obligated to have repairs done with us—but if you do, we re-inspect at no additional charge once work is complete.<br/><br/>Many issues are minor: burnt-out bulb, worn wiper blades, low tire tread. We'll tell you what's critical and what's quick to fix."
+  />
+
+  <!-- Don't Wait Section -->
+  <Content
+    title="Don't Wait Until the Deadline"
+    content="Most insurers give you a window to submit inspection results after coverage begins—but timelines vary. Don't push it.<br/><br/>If your vehicle needs minor repairs to pass, you'll want time to address them. Book early, get it done, one less thing to worry about."
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about insurance inspections"
+    columns={1}
+    items={[
+      {
+        title: 'How long does an insurance inspection take?',
+        description: 'Most inspections take 30-45 minutes. Comfortable waiting room with Wi-Fi, coffee, and snacks if you\'re staying.',
+      },
+      {
+        title: 'Do I need an appointment?',
+        description: 'Appointments recommended so we can get you in and out quickly. Call (403) 887-0440 or book online.',
+      },
+      {
+        title: 'What documents do I need?',
+        description: 'Just bring your vehicle. We handle the inspection and provide documentation for your insurer.',
+      },
+      {
+        title: 'I just had an out-of-province inspection. Do I need this too?',
+        description: 'Maybe not. If you recently completed an OOP inspection, that documentation may satisfy your insurer. Check with them first—you might not need a separate insurance inspection.',
+      },
+      {
+        title: 'Can you do repairs the same day if needed?',
+        description: 'Often, yes. Minor issues can usually be addressed immediately so you leave with a passing inspection. For larger repairs, we\'ll provide an estimate and schedule the work.',
+      },
+      {
+        title: 'Why do I need this now when I never did before?',
+        description: 'If you kept continuous insurance with the same provider, they likely never required it. Switching triggers the new insurer\'s underwriting requirements, which typically include inspections for older vehicles.',
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Book Your Insurance Inspection"
+    subtitle="$95.99 (tax included) • Same-day appointments available"
+    actions={[
+      { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

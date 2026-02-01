@@ -1,0 +1,222 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Auto Repair Services | Sylvan Lake AUTOPRO',
+  description: 'Full-service auto repair in Sylvan Lake. Oil changes, brakes, inspections, diagnostics, tires, and more. NAPA warranty. Call (403) 887-0440.',
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Sylvan Lake AUTOPRO",
+  "@id": "https://sylvanlakeautopro.com/#organization",
+  "url": "https://sylvanlakeautopro.com/services",
+  "telephone": "+1-403-887-0440",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1A Industrial Dr",
+    "addressLocality": "Sylvan Lake",
+    "addressRegion": "AB",
+    "postalCode": "T4S 1P4",
+    "addressCountry": "CA"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    }
+  ]
+};
+
+const serviceCategories = [
+  {
+    title: 'Maintenance',
+    icon: 'wrench',
+    services: [
+      { name: 'Oil Change Services', href: '/services/oil-change' },
+      { name: 'Steering & Suspension', href: '/services/steering-suspension' },
+      { name: 'Electrical System Service', href: '/services/electrical' },
+    ],
+  },
+  {
+    title: 'Brakes & Safety',
+    icon: 'disc',
+    services: [
+      { name: 'Brake Repair', href: '/services/brake-repair' },
+      { name: 'Brake Inspection', href: '/services/brake-inspection' },
+    ],
+  },
+  {
+    title: 'Diagnostics',
+    icon: 'engine',
+    services: [
+      { name: 'Check Engine Light Diagnostics', href: '/services/diagnostics' },
+      { name: 'Starting & Charging', href: '/services/electrical' },
+    ],
+  },
+  {
+    title: 'Climate & Comfort',
+    icon: 'temperature',
+    services: [
+      { name: 'A/C Service & Repair', href: '/services/ac-service-repair' },
+      { name: 'Cooling System Service', href: '/services/fluid-maintenance' },
+    ],
+  },
+  {
+    title: 'Wheels & Tires',
+    icon: 'wheel',
+    services: [
+      { name: 'Wheel Alignment', href: '/services/alignment' },
+      { name: 'Tire Sales & Service', href: '/services/tires' },
+      { name: 'Wheel Balancing & Rotation', href: '/services/tires' },
+      { name: 'TPMS Service', href: '/services/tires' },
+    ],
+  },
+  {
+    title: 'Inspections',
+    icon: 'clipboard',
+    services: [
+      { name: 'Out of Province Inspection', href: '/services/out-of-province-inspection' },
+      { name: 'Commercial Vehicle Inspection (CVIP)', href: '/services/cvip-inspection' },
+      { name: 'Pre-Purchase Inspection', href: '/services/pre-purchase-inspection' },
+    ],
+  },
+  {
+    title: 'Specialty Services',
+    icon: 'star',
+    services: [
+      { name: 'Automotive Keys', href: '/services/automotive-keys' },
+      { name: 'Fleet Services', href: '/services/fleet-services' },
+      { name: 'Hybrid & Electric Vehicle Service', href: '/services/hybrid-ev-service' },
+    ],
+  },
+];
+
+const icons: Record<string, string> = {
+  wrench: 'M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z',
+  disc: 'M12 2a10 10 0 100 20 10 10 0 000-20zm0 6a4 4 0 110 8 4 4 0 010-8z',
+  engine: 'M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 010-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+  temperature: 'M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z',
+  wheel: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z',
+  clipboard: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4',
+  star: 'M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z',
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Full-Service Auto Repair"
+    title="Our Services"
+    subtitle="From routine oil changes to complex diagnostics, we keep Sylvan Lake moving. All repairs backed by our NAPA Peace of Mind warranty."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Service Categories -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {serviceCategories.map((category) => (
+          <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-gray-100 dark:border-slate-800 border-l-4 border-l-primary overflow-hidden">
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-[#FFC836]/20 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-[#FFC836]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={icons[category.icon]} />
+                  </svg>
+                </div>
+                <h2 class="text-xl font-bold text-gray-900 dark:text-white">{category.title}</h2>
+              </div>
+              <ul class="space-y-2">
+                {category.services.map((service) => (
+                  <li>
+                    <a
+                      href={service.href}
+                      class="flex items-center text-muted dark:text-slate-400 hover:text-primary dark:hover:text-blue-400 transition-colors group"
+                    >
+                      <svg class="w-4 h-4 mr-2 text-gray-400 group-hover:text-primary dark:group-hover:text-blue-400 transition-colors" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                      </svg>
+                      {service.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Additional Info -->
+  <section class="py-12 md:py-16 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold mb-4 dark:text-white">Don't See What You Need?</h2>
+      <p class="text-lg text-muted dark:text-slate-400 mb-6">
+        We work on most makes and models. If you have a question about a specific repair or service, give us a call. We'll let you know if we can help or point you in the right direction.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="tel:+14038870440"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold bg-primary text-white hover:bg-primary/90 transition-colors"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          Call (403) 887-0440
+        </a>
+        <a
+          href="sms:+14038870440"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold border-2 border-primary text-primary dark:text-blue-400 hover:bg-primary hover:text-white transition-colors"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+          Text Us
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAPA Warranty Banner -->
+  <section class="py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="bg-gradient-to-r from-primary to-secondary rounded-2xl p-8 md:p-12 text-center text-white">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">NAPA Peace of Mind Warranty</h2>
+        <p class="text-lg text-white/90 mb-2">24 months / 40,000 km nationwide coverage on qualifying repairs.</p>
+        <p class="text-white/80">Honored at NAPA AUTOPRO locations across Canada and the US.</p>
+        <a href="/warranty" class="inline-flex items-center mt-6 text-white font-semibold hover:underline">
+          Learn more about our warranty
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CallToAction
+    title="Ready to Book?"
+    subtitle="Schedule your appointment online or give us a call."
+    actions={[
+      { variant: 'primary', text: 'Book Online', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

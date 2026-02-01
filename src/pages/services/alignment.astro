@@ -1,0 +1,309 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Wheel Alignment | Sylvan Lake AUTOPRO',
+  description: 'Precision wheel alignment in Sylvan Lake using Hunter HawkEye Elite equipment. We don\'t just get the numbers in the green — we make it drive straight. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Wheel Alignment",
+  "description": "Precision wheel alignment in Sylvan Lake using Hunter HawkEye Elite equipment. Four-wheel alignment with test drive verification.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does an alignment take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Typically 45 minutes to an hour. If we encounter seized hardware, need to make rear adjustments, or find other complications, it can take longer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need a four-wheel alignment or just front?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Four-wheel. Even if the front is what's adjustable, we need to measure the rear to set the front correctly. The rear determines the thrust angle that the front aligns to. Front-only alignments are a shortcut that can leave you with a crooked steering wheel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you align lifted trucks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Lifted vehicles often need alignment after the lift is installed, and may need it more frequently as components settle. Our equipment handles lifted trucks."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My vehicle pulls but the alignment is in spec — what's wrong?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Alignment specs have tolerances. A vehicle can be in spec but still have a cross-camber or cross-caster difference that causes a pull. Sometimes the spec itself isn't ideal for how the vehicle has aged. We look at the whole picture, not just whether numbers fall within a range."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you do ADAS calibration?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Our system is ready for dynamic ADAS calibrations and steering system resets. Static ADAS calibrations (forward-facing cameras) are coming as we expand our capabilities."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Wheel Alignment" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Precision Service"
+    title="Wheel Alignment"
+    subtitle="Green Numbers Are Easy. Straight Driving Takes Skill."
+    actions={[
+      { variant: 'primary', text: 'Book Alignment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="More Than Numbers in the Green"
+    content="Getting alignment numbers 'in the green' is straightforward. Any shop with an alignment rack can do that.<br/><br/><strong>Making your vehicle actually drive straight? That takes more.</strong><br/><br/>It takes understanding how the angles interact. It takes patience to get the steering wheel centered while the thrust angle is correct while the toe is set properly. It takes knowing when factory specs aren't quite right for how a vehicle has aged or been used.<br/><br/>We invest in the best equipment and take the time to do alignments properly — not just technically correct, but actually right."
+  />
+
+  <!-- Hunter HawkEye Elite Section -->
+  <Content
+    isReversed={true}
+    title="The Equipment Matters"
+    content="We recently invested over <strong>$60,000</strong> in a Hunter HawkEye Elite alignment system — the same equipment used by dealerships and high-end shops."
+    items={[
+      { title: 'Pinpoint Accuracy', description: 'Four high-resolution cameras measure alignment angles with precision that budget equipment can\'t match. We\'re adjusting in 0.1-degree increments — small differences that affect how your vehicle tracks and wears tires.' },
+      { title: 'QuickGrip Wheel Adaptors', description: 'Hunter\'s patented adaptors grip the tire, not the rim. No metal-to-metal contact, no risk of scratching your wheels. This matters when you have $3,000 wheels on your truck.' },
+      { title: 'Integrated Diagnostics', description: 'Modern vehicles often require steering angle sensor resets after alignment. Our system includes Hunter\'s ADASLink diagnostic tool, which performs these resets as part of the alignment process.' },
+      { title: 'ADAS Calibration Ready', description: 'Many newer vehicles have cameras and sensors that need recalibration after alignment work. Our system is expandable to handle static ADAS calibrations as this technology becomes more common.' },
+    ]}
+  />
+
+  <!-- What Makes a Good Alignment Section -->
+  <Content
+    title="It's Not Just About the Numbers"
+    content="Here's the thing about alignments: the computer can show all green, 'in spec' numbers, and your vehicle can still pull to one side or the steering wheel can be off-center.<br/><br/><strong>Why?</strong><br/><br/>Because alignment is about how multiple angles work together — camber, caster, toe, thrust angle, and steering axis inclination all interact. Changing one affects the others. Getting them all correct AND getting the vehicle to track straight with a centered steering wheel takes experience and patience."
+  />
+
+  <!-- Our Approach Section -->
+  <Steps2
+    title="Our Approach"
+    subtitle="How we do alignments right"
+    items={[
+      { title: 'Test Drive First', description: 'We need to know what the vehicle is doing before we measure it' },
+      { title: 'Full Four-Wheel Measurement', description: 'Even if you think it\'s just the front, we measure everything' },
+      { title: 'Diagnose Before Adjusting', description: 'Sometimes the numbers are off because something is worn or bent, not just out of adjustment' },
+      { title: 'Adjust With the End Result in Mind', description: 'Centered steering wheel, straight tracking, even tire wear' },
+      { title: 'Test Drive After', description: 'We verify it drives correctly, not just that the numbers are green' },
+    ]}
+  />
+
+  <!-- When Standard Alignment Isn't Enough Section -->
+  <Features2
+    title="Sometimes It's More Complicated"
+    subtitle="A standard alignment assumes everything is adjustable and nothing is damaged. That's not always the case."
+    columns={2}
+    items={[
+      {
+        title: 'Rear Adjustments',
+        description: 'Some vehicles have limited or no rear adjustment from the factory. If your rear alignment is off, we may need extra time to access adjustment points or work around factory limitations.',
+        icon: 'tabler:adjustments',
+      },
+      {
+        title: 'Seized or Factory-Retained Hardware',
+        description: 'Adjustment bolts can seize from corrosion. Factory retainers sometimes need removal. Alberta roads and winters are hard on this hardware — what should be simple sometimes requires extra work.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Eccentric Kits',
+        description: 'Some vehicles didn\'t come with adjustable alignment points. When alignment is off on these vehicles, we can often install eccentric bolt kits that create adjustability where there wasn\'t any.',
+        icon: 'tabler:tools',
+      },
+      {
+        title: 'Damage from Impact',
+        description: 'Hit a pothole? Curbed a wheel? It doesn\'t take much force to bend a control arm, tie rod, or steering knuckle slightly. Sometimes we can adjust around minor bends. Sometimes components need replacement.',
+        icon: 'tabler:alert-triangle',
+      },
+    ]}
+  />
+
+  <!-- Signs You Need an Alignment Section -->
+  <Features2
+    title="When to Come In"
+    subtitle="Signs your vehicle needs alignment"
+    columns={2}
+    items={[
+      {
+        title: 'Vehicle Pulls to One Side',
+        description: 'The most obvious sign — your vehicle wants to go left or right when you let go of the steering wheel.',
+        icon: 'tabler:arrow-right',
+      },
+      {
+        title: 'Off-Center Steering Wheel',
+        description: 'You\'re driving straight but the steering wheel isn\'t centered, or it doesn\'t return to center after turns.',
+        icon: 'tabler:steering-wheel',
+      },
+      {
+        title: 'Uneven Tire Wear',
+        description: 'Inside edge, outside edge, or feathered wear patterns indicate alignment problems destroying your tires.',
+        icon: 'tabler:circle-half-2',
+      },
+      {
+        title: 'Feels Loose or Wandery',
+        description: 'Vehicle feels unstable at highway speeds or you\'re constantly making small steering corrections.',
+        icon: 'tabler:arrows-move',
+      },
+    ]}
+  />
+
+  <!-- Recommended Timing Section -->
+  <Content
+    isReversed={true}
+    title="When You Should Get an Alignment"
+    items={[
+      { title: 'With New Tires', description: 'Protect your investment — misalignment destroys tires prematurely' },
+      { title: 'After Suspension Work', description: 'Any time components are removed and reinstalled' },
+      { title: 'After Impact', description: 'Pothole, curb, collision — get it checked' },
+      { title: 'Annually', description: 'Especially if you drive rough roads or notice any handling changes' },
+      { title: 'When Tire Wear Looks Uneven', description: 'Before it destroys another set' },
+    ]}
+  />
+
+  <!-- What's Included Section -->
+  <Content
+    title="Standard Four-Wheel Alignment"
+    content="Every alignment includes:"
+    items={[
+      { title: 'Pre-Alignment Test Drive', description: 'We know what it\'s doing before we measure' },
+      { title: 'Four-Wheel Measurement', description: 'Hunter HawkEye Elite precision measurement' },
+      { title: 'Steering & Suspension Inspection', description: 'Check for worn or damaged components' },
+      { title: 'Adjustment of All Available Angles', description: 'To specification or better' },
+      { title: 'Steering Angle Sensor Reset', description: 'If your vehicle is equipped' },
+      { title: 'Post-Alignment Test Drive', description: 'Verify it drives correctly' },
+      { title: 'Printed Alignment Report', description: 'Before and after measurements' },
+    ]}
+  />
+
+  <!-- Additional Work Note -->
+  <Content
+    isReversed={true}
+    title="When Additional Work Is Needed"
+    content="If we find seized hardware, need to install adjustment kits, or encounter other complications, we'll let you know before proceeding. Standard alignment pricing assumes adjustments can be made with existing hardware in normal condition.<br/><br/><strong>No surprises. Just honest communication about what your vehicle needs.</strong>"
+  />
+
+  <!-- FAQs Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'How long does an alignment take?',
+        description: 'Typically 45 minutes to an hour. If we encounter seized hardware, need to make rear adjustments, or find other complications, it can take longer.',
+      },
+      {
+        title: 'How much does an alignment cost?',
+        description: 'Standard four-wheel alignment pricing is competitive with other shops. If additional work is needed (seized hardware, eccentric kits, etc.), we\'ll quote that separately before proceeding.',
+      },
+      {
+        title: 'Do I need a four-wheel alignment or just front?',
+        description: 'Four-wheel. Even if the front is what\'s adjustable, we need to measure the rear to set the front correctly. The rear determines the "thrust angle" that the front aligns to. Front-only alignments are a shortcut that can leave you with a crooked steering wheel.',
+      },
+      {
+        title: 'Can you align lifted trucks?',
+        description: 'Yes. Lifted vehicles often need alignment after the lift is installed, and may need it more frequently as components settle. Our equipment handles lifted trucks.',
+      },
+      {
+        title: 'My vehicle pulls but the alignment is "in spec" — what\'s wrong?',
+        description: 'Alignment specs have tolerances. A vehicle can be "in spec" but still have a cross-camber or cross-caster difference that causes a pull. Sometimes the spec itself isn\'t ideal for how the vehicle has aged. We look at the whole picture, not just whether numbers fall within a range.',
+      },
+      {
+        title: 'Do you do ADAS calibration?',
+        description: 'Our system is ready for dynamic ADAS calibrations and steering system resets. Static ADAS calibrations (forward-facing cameras) are coming as we expand our capabilities. If your vehicle needs static calibration, we can discuss options.',
+      },
+    ]}
+  />
+
+  <!-- Related Services Section -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Tire Sales & Service',
+        description: 'New tires? Get them aligned.',
+        icon: 'tabler:circle',
+        callToAction: { text: 'Learn More', href: '/services/tires' },
+      },
+      {
+        title: 'Steering & Suspension',
+        description: 'When alignment isn\'t enough',
+        icon: 'tabler:car',
+        callToAction: { text: 'Learn More', href: '/services/steering-suspension' },
+      },
+      {
+        title: 'Pre-Purchase Inspection',
+        description: 'Alignment check included',
+        icon: 'tabler:clipboard-check',
+        callToAction: { text: 'Learn More', href: '/services/pre-purchase-inspection' },
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Ready to Get It Straight?"
+    subtitle="Whether your vehicle is pulling, your steering wheel is off-center, or you just want to protect your new tires — we'll make it drive right."
+    actions={[
+      { variant: 'primary', text: 'Book Alignment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

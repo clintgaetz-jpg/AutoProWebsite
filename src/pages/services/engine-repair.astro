@@ -1,0 +1,277 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Engine Repair | Sylvan Lake AUTOPRO',
+  description: 'Engine repair and replacement in Sylvan Lake. Head gasket repair, rebuilt engines, used engines, or send yours out for rebuild. NAPA warranty. (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Engine Repair & Replacement",
+  "description": "Complete engine repair and replacement services including diagnostics, head gasket repair, timing components, and engine replacement with rebuilt or quality used engines.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": [
+    "Sylvan Lake",
+    "Red Deer",
+    "Rocky Mountain House",
+    "Rimbey",
+    "Ponoka",
+    "Blackfalds",
+    "Penhold",
+    "Eckville",
+    "Bentley",
+    "Benalto",
+    "Condor",
+    "Leslieville",
+    "Alhambra",
+    "Withrow",
+    "Evarts",
+    "Dickson",
+    "Markerville",
+    "Caroline",
+    "Bluffton",
+    "Hoadley",
+    "Jarvis Bay",
+    "Norglenwold",
+    "Gull Lake",
+    "Birchcliff"
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I know if my engine needs to be replaced?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Signs include persistent knocking, severe overheating damage, excessive oil consumption, or coolant/oil mixing. We'll diagnose the issue and give you honest options."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between rebuilt and used engines?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A rebuilt engine has been disassembled, inspected, and restored with new parts to meet original specs. A used engine comes from another vehicle and is tested/inspected but not rebuilt. Rebuilt typically costs more but offers longer warranties."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you repair my engine instead of replacing it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Often yes. Head gasket replacement, timing components, and other repairs can restore an engine. We'll tell you when repair makes sense vs. replacement."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Engine Repair & Replacement" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Engine Services"
+    title="Engine Repair & Replacement"
+    subtitle="From minor repairs to complete engine replacement—we'll get you back on the road."
+    actions={[
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- What We Offer Section -->
+  <Features2
+    title="What We Offer"
+    subtitle="Complete engine repair and replacement services"
+    columns={2}
+    items={[
+      {
+        title: 'Diagnostics & Troubleshooting',
+        description: 'Compression tests, leak-down tests, oil pressure testing—we find the root cause before recommending repairs.',
+        icon: 'tabler:stethoscope',
+      },
+      {
+        title: 'Head Gasket Repair',
+        description: 'Head gasket failure doesn\'t always mean engine replacement. We can repair or replace head gaskets when the engine is otherwise sound.',
+        icon: 'tabler:layers-intersect',
+      },
+      {
+        title: 'Timing Belt/Chain Replacement',
+        description: 'Preventive timing component replacement protects your engine. We also repair timing-related failures when they occur.',
+        icon: 'tabler:clock',
+      },
+      {
+        title: 'Engine Rebuild Coordination',
+        description: 'For engines worth saving, we can send yours out for professional rebuild by machine shop specialists.',
+        icon: 'tabler:refresh',
+      },
+      {
+        title: 'Rebuilt Engine Installation',
+        description: 'Quality rebuilt engines restored to original specifications with warranty coverage for peace of mind.',
+        icon: 'tabler:engine',
+      },
+      {
+        title: 'Used Engine Installation',
+        description: 'Inspected used engines can be a cost-effective option. We source quality units and verify condition before installation.',
+        icon: 'tabler:recycle',
+      },
+      {
+        title: 'Oil Leaks & Gasket Repairs',
+        description: 'Valve cover gaskets, oil pan gaskets, rear main seals—we fix leaks before they become bigger problems.',
+        icon: 'tabler:droplet-off',
+      },
+      {
+        title: 'Overheating Diagnosis & Repair',
+        description: 'Overheating causes serious engine damage. We diagnose cooling system issues and repair before catastrophic failure.',
+        icon: 'tabler:temperature',
+      },
+    ]}
+  />
+
+  <!-- Warning Signs Section -->
+  <Features2
+    title="When to Suspect Engine Problems"
+    subtitle="Don't ignore these warning signs"
+    columns={3}
+    items={[
+      {
+        title: 'Check Engine Light + Performance Issues',
+        description: 'A check engine light combined with rough running, misfires, or reduced power often indicates internal engine problems.',
+        icon: 'tabler:engine',
+      },
+      {
+        title: 'Knocking or Ticking Noises',
+        description: 'Unusual sounds from the engine—especially knocking—can indicate bearing wear, low oil pressure, or other serious issues.',
+        icon: 'tabler:volume',
+      },
+      {
+        title: 'Excessive Oil Consumption',
+        description: 'Adding oil frequently between changes suggests worn piston rings, valve seals, or other internal wear.',
+        icon: 'tabler:droplet',
+      },
+      {
+        title: 'White Smoke from Exhaust',
+        description: 'White smoke (not steam) typically indicates coolant entering the combustion chamber—often a head gasket issue.',
+        icon: 'tabler:cloud',
+      },
+      {
+        title: 'Overheating',
+        description: 'Repeated overheating can warp heads and damage gaskets. Don\'t ignore temperature warnings.',
+        icon: 'tabler:flame',
+      },
+      {
+        title: 'Coolant Mixing with Oil',
+        description: 'Milky residue under the oil cap or in the oil indicates coolant contamination—a serious issue requiring immediate attention.',
+        icon: 'tabler:alert-triangle',
+      },
+    ]}
+  />
+
+  <!-- Our Approach Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading dark:text-white">Our Approach</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-left md:text-center">
+        <p>We diagnose the actual problem before recommending repairs. Sometimes what seems like a major engine issue is something simpler. When engine replacement is needed, we discuss all options—repairing your current engine, installing a quality rebuilt unit, or sourcing an inspected used engine—so you can make the best decision for your budget and situation.</p>
+        <p>Engine work is significant, both in cost and time. We take the time to explain what we find, what your options are, and what we recommend. No pressure, no upselling—just honest information so you can decide what's right for your vehicle.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAPA Warranty Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading dark:text-white">NAPA Peace of Mind Warranty</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+        <p>Engine repairs at Sylvan Lake AUTOPRO are backed by the <strong class="text-gray-900 dark:text-white">NAPA Peace of Mind Warranty</strong>:</p>
+        <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-8 my-6">
+          <div class="text-center">
+            <p class="text-2xl md:text-3xl font-bold text-primary dark:text-blue-400">24 months</p>
+            <p class="text-sm">or 40,000 km</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl md:text-3xl font-bold text-primary dark:text-blue-400">Nationwide</p>
+            <p class="text-sm">Valid across Canada</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl md:text-3xl font-bold text-primary dark:text-blue-400">Parts & Labor</p>
+            <p class="text-sm">Fully covered</p>
+          </div>
+        </div>
+        <p>Rebuilt engines often come with their own warranty coverage as well. We'll explain all warranty terms before you approve any work.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about engine repair"
+    columns={1}
+    items={[
+      {
+        title: 'How do I know if my engine needs to be replaced?',
+        description: 'Signs include persistent knocking, severe overheating damage, excessive oil consumption, or coolant/oil mixing. We\'ll diagnose the issue and give you honest options—sometimes what seems catastrophic is actually repairable.',
+      },
+      {
+        title: 'What\'s the difference between rebuilt and used engines?',
+        description: 'A rebuilt engine has been disassembled, inspected, and restored with new parts to meet original specifications. A used engine comes from another vehicle and is tested/inspected but not rebuilt. Rebuilt typically costs more but offers longer warranties and more predictable longevity.',
+      },
+      {
+        title: 'Can you repair my engine instead of replacing it?',
+        description: 'Often yes. Head gasket replacement, timing components, and other repairs can restore an engine to reliable service. We\'ll tell you honestly when repair makes sense vs. when replacement is the better investment.',
+      },
+      {
+        title: 'How long does an engine replacement take?',
+        description: 'Most engine replacements take 2-4 days depending on the vehicle and parts availability. We\'ll give you a timeline estimate before you approve the work.',
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Concerned About Your Engine?"
+    subtitle="Strange noises? Warning lights? Let's diagnose the problem and give you honest options."
+    actions={[
+      { variant: 'primary', text: 'Book Diagnostic', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

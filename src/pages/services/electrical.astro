@@ -1,0 +1,301 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Auto Electrical Repair | Sylvan Lake AUTOPRO',
+  description: 'Automotive electrical repair in Sylvan Lake. Batteries, starters, alternators, wiring repair, electrical diagnosis. Our techs are good at the hard stuff. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Electrical System Service",
+  "description": "Automotive electrical repair in Sylvan Lake — batteries, starters, alternators, wiring repair, and electrical diagnosis.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a car battery last?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Typically 4–6 years, depending on climate, driving habits, and quality. Alberta winters are hard on batteries. If yours is over 4 years old, it's worth testing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is electrical diagnosis expensive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It's not expensive — it's time-intensive. Electrical problems often require methodical testing, accessing wiring, checking multiple circuits, and interpreting diagnostic data. We charge fairly for the time involved."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you install aftermarket accessories?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — things like trailer wiring, auxiliary lighting, or other electrical accessories. We'll wire it properly so it works reliably and doesn't cause problems."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My battery keeps dying. Is it the battery or the alternator?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Could be either — or something else. A failed alternator won't keep the battery charged. A parasitic draw will drain even a good battery with a good alternator. We test the whole system to find the actual cause."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work on hybrid/EV electrical systems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We have technicians trained for hybrid and electric vehicle service, including high-voltage safety."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Electrical System Service" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Electrical Service"
+    title="Electrical System Service"
+    subtitle="Batteries, Starters, Alternators — and the Complicated Stuff Too"
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="Your Vehicle Runs on Electricity"
+    content="Modern vehicles run on electricity as much as they run on fuel. Dozens of computers, hundreds of sensors, miles of wiring — all of it needs to work correctly for your vehicle to start, run, and keep you comfortable.<br/><br/>When something electrical fails, it can be straightforward (dead battery) or frustrating (intermittent issue that comes and goes). We handle both. <strong>Our technicians are experienced with electrical diagnosis and repair — including the complicated stuff other shops don't want to touch.</strong>"
+  />
+
+  <!-- Batteries Section -->
+  <Content
+    isReversed={true}
+    title="Battery Testing & Replacement"
+    content="<strong>When to Check Your Battery:</strong><br/>• Vehicle is slow to crank or won't start<br/>• Battery warning light on the dash<br/>• Electrical accessories acting strangely<br/>• Battery is more than 4–5 years old<br/>• You've needed a jump start recently"
+    items={[
+      { title: 'Battery Testing', description: 'We test your battery\'s state of charge and cold cranking amps to see if it\'s still healthy. We also test the charging system to make sure your alternator is keeping it charged.' },
+      { title: 'Battery Replacement', description: 'When it\'s time for a new battery, we install one that matches your vehicle\'s requirements — correct size, terminal configuration, and capacity.' },
+      { title: 'Battery Registration', description: 'Many newer vehicles (especially European) require the new battery to be "registered" with the vehicle\'s computer so the charging system adjusts properly. We have the equipment to do this.' },
+    ]}
+  />
+
+  <!-- Starters Section -->
+  <Content
+    title="Starter Diagnosis & Replacement"
+    content="<strong>Signs of Starter Problems:</strong><br/>• Clicking sound when you turn the key (no crank)<br/>• Grinding noise when starting<br/>• Intermittent no-start (sometimes works, sometimes doesn't)<br/>• Starter engages slowly or sounds labored<br/><br/>We diagnose starter problems properly — testing the battery, connections, and starter circuit before condemning the starter itself. Sometimes a 'bad starter' is actually a bad connection, weak battery, or wiring issue. If the starter is the problem, we replace it with a quality unit."
+  />
+
+  <!-- Alternators Section -->
+  <Content
+    isReversed={true}
+    title="Alternator Diagnosis & Replacement"
+    content="<strong>Signs of Alternator Problems:</strong><br/>• Battery warning light on the dash<br/>• Dimming headlights or interior lights<br/>• Battery keeps dying (even a new battery)<br/>• Electrical accessories not working properly<br/>• Whining noise from the engine area<br/><br/>We test alternator output and determine whether it's charging properly. Alternator problems can also be caused by bad wiring, loose connections, or a slipping belt — we check the whole system before recommending replacement."
+  />
+
+  <!-- Electrical Diagnosis Section -->
+  <Features2
+    title="When It's More Complicated"
+    subtitle="Not all electrical problems are as simple as a dead battery"
+    columns={2}
+    items={[
+      {
+        title: 'Parasitic Draw',
+        description: 'Something is draining your battery while the vehicle sits. Finding it requires methodical testing — disconnecting circuits until we find the culprit.',
+        icon: 'tabler:battery-off',
+      },
+      {
+        title: 'Intermittent Faults',
+        description: 'Problems that come and go are the hardest to find. They require patience, experience, and sometimes extended monitoring.',
+        icon: 'tabler:activity',
+      },
+      {
+        title: 'Wiring Damage',
+        description: 'Rodent damage, corrosion, chafed wires, poor previous repairs. We trace wiring and fix it properly.',
+        icon: 'tabler:plug-x',
+      },
+      {
+        title: 'Module/Computer Issues',
+        description: 'Failed control modules, communication problems between systems, software issues requiring reprogramming.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Ground Faults',
+        description: 'Poor grounds cause all kinds of strange symptoms. We check and repair ground connections.',
+        icon: 'tabler:bolt-off',
+      },
+      {
+        title: 'Lighting Issues',
+        description: 'Headlights, taillights, interior lights, trailer wiring — we diagnose and repair lighting problems.',
+        icon: 'tabler:bulb',
+      },
+    ]}
+  />
+
+  <!-- Our Approach Section -->
+  <Content
+    title="Our Approach to Electrical Diagnosis"
+    content="Electrical diagnosis takes time, the right tools, and experience. We have:"
+    items={[
+      { title: 'Professional Diagnostic Equipment', description: 'Snap-on, OEM factory tools, and Autel scanners for comprehensive vehicle coverage' },
+      { title: 'Electrical Testing Tools', description: 'Multimeters, test lights, oscilloscopes, circuit trackers for detailed testing' },
+      { title: 'Wiring Diagrams', description: 'Access to factory wiring information for your specific vehicle' },
+      { title: 'Experience', description: 'Our techs have seen a lot of weird electrical problems and know how to track them down' },
+    ]}
+  />
+
+  <!-- Wiring Repair Section -->
+  <Content
+    isReversed={true}
+    title="Wiring Repair & Modifications"
+    content="Whether it's fixing damaged wiring or installing something new, we can help:"
+    items={[
+      { title: 'Damaged Wiring Repair', description: 'Rodent damage, accident damage, corrosion — properly repaired' },
+      { title: 'Connector Repair', description: 'Corroded or damaged connectors replaced or rebuilt' },
+      { title: 'Accessory Wiring', description: 'Trailer hitches, auxiliary lighting, aftermarket accessories installed correctly' },
+      { title: 'Previous Hack Job Repairs', description: 'Fixing what the last guy did wrong' },
+    ]}
+  />
+
+  <Content
+    content="<strong>We solder and heat-shrink connections properly — no twist-and-tape repairs.</strong>"
+  />
+
+  <!-- Common Issues Section -->
+  <Features2
+    title="What We See Often"
+    subtitle="Common electrical problems we diagnose and repair"
+    columns={2}
+    items={[
+      {
+        title: 'Battery Drains Overnight',
+        description: 'Parasitic draw from aftermarket accessories, trunk/glove box lights staying on, or failing modules. We find the culprit.',
+        icon: 'tabler:battery-1',
+      },
+      {
+        title: 'Lights Acting Strange',
+        description: 'Flickering, dimming, or lights that don\'t work. Could be bulbs, wiring, ground issues, or failing switches.',
+        icon: 'tabler:bulb-off',
+      },
+      {
+        title: 'Accessories Not Working',
+        description: 'Power windows, locks, mirrors, seats — problems with switches, motors, wiring, or fuse/relay issues.',
+        icon: 'tabler:adjustments-off',
+      },
+      {
+        title: 'Intermittent Starting',
+        description: 'Sometimes it starts, sometimes it doesn\'t. Battery, starter, ignition switch, safety switches, wiring, or computer issues.',
+        icon: 'tabler:key-off',
+      },
+    ]}
+  />
+
+  <!-- FAQs Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'How long does a battery last?',
+        description: 'Typically 4–6 years, depending on climate, driving habits, and quality. Alberta winters are hard on batteries. If yours is over 4 years old, it\'s worth testing.',
+      },
+      {
+        title: 'Why is electrical diagnosis so expensive?',
+        description: 'It\'s not expensive — it\'s time-intensive. Electrical problems often require methodical testing, accessing wiring, checking multiple circuits, and interpreting diagnostic data. A straightforward problem might take 30 minutes. A complicated intermittent issue might take several hours. We charge fairly for the time involved.',
+      },
+      {
+        title: 'Can you install aftermarket accessories?',
+        description: 'Yes — things like trailer wiring, auxiliary lighting, or other electrical accessories. We\'ll wire it properly so it works reliably and doesn\'t cause problems.',
+      },
+      {
+        title: 'My battery keeps dying. Is it the battery or the alternator?',
+        description: 'Could be either — or something else. A failed alternator won\'t keep the battery charged. A parasitic draw will drain even a good battery with a good alternator. We test the whole system to find the actual cause.',
+      },
+      {
+        title: 'Do you work on hybrid/EV electrical systems?',
+        description: 'Yes. We have technicians trained for hybrid and electric vehicle service, including high-voltage safety. See our Hybrid & EV Service page for more information.',
+      },
+    ]}
+  />
+
+  <!-- Related Services Section -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Check Engine Light & Diagnostics',
+        description: 'Often related to electrical faults',
+        icon: 'tabler:engine',
+        callToAction: { text: 'Learn More', href: '/services/diagnostics' },
+      },
+      {
+        title: 'Hybrid & EV Service',
+        description: 'High-voltage electrical systems',
+        icon: 'tabler:leaf',
+        callToAction: { text: 'Learn More', href: '/services/hybrid-ev-service' },
+      },
+      {
+        title: 'Pre-Purchase Inspection',
+        description: 'Electrical system check included',
+        icon: 'tabler:clipboard-check',
+        callToAction: { text: 'Learn More', href: '/services/pre-purchase-inspection' },
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Electrical Problems?"
+    subtitle="From dead batteries to complicated wiring issues, we can diagnose and fix it."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

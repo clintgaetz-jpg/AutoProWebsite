@@ -1,0 +1,247 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Heater Repair | Sylvan Lake AUTOPRO',
+  description: 'Car heater not working? We diagnose all three systems that control cabin heat—engine cooling, HVAC mechanical, and electronics. Serving Sylvan Lake since 2006. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Car Heater Repair & Diagnosis",
+  "description": "Car heater diagnosis and repair for Sylvan Lake and Central Alberta",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Why is my car blowing cold air when the heat is on?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Three systems control cabin heat: engine cooling (thermostat, coolant, water pump), HVAC mechanical (heater core, blend doors), and electronic controls (actuators, sensors, modules). A proper diagnosis checks all three to find the actual cause."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does heater repair cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the cause. A thermostat is a few hundred dollars. A blend door actuator might be $300-600. A heater core replacement can run $800-1,500+ because of the labor involved in removing the dashboard."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is heater core replacement so expensive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The heater core itself is relatively cheap ($100-300). The expense is labor—on most vehicles, the entire dashboard must be removed to access it. This takes 6-12 hours depending on the vehicle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "My heater works on the highway but not in town. Why?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "This usually indicates low coolant, a failing water pump, or a partially clogged heater core. At highway speeds, more coolant flows through. At idle, there's less flow, so marginal problems become obvious."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I hear clicking behind my dashboard. What is it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually a blend door actuator. These small electric motors move the doors that direct airflow. When the plastic gears wear out, they click repeatedly as they try to find position."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Heater Repair" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Climate Control"
+    title="Car Heater Repair & Diagnosis"
+    subtitle="Three Systems. One Symptom. Proper Diagnosis Matters."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="Why Is My Car Heater Blowing Cold Air?"
+    content="Car heater not working? In modern vehicles, <strong>three separate systems</strong> control your cabin heat—engine cooling, HVAC mechanical components, and electronic controls. Any one of them failing produces the same symptom: cold air when you want warm.<br/><br/>That's why proper diagnosis matters. A thermostat problem looks the same as a blend door actuator failure from the driver's seat, but the repair is completely different. We check all three systems to find the actual cause before recommending repairs. No guessing. No parts-swapping at your expense."
+  />
+
+  <!-- Three Systems Section -->
+  <Features2
+    title="What Controls Your Cabin Heat?"
+    subtitle="Three systems that must work together"
+    columns={3}
+    items={[
+      {
+        title: 'Engine Cooling System',
+        description: 'Thermostat stuck open, low coolant, water pump failing, coolant leak, or air pocket in system.',
+        icon: 'tabler:engine',
+      },
+      {
+        title: 'HVAC Mechanical',
+        description: 'Heater core plugged or leaking, blend door stuck, blend door actuator failed, mode door problems.',
+        icon: 'tabler:tool',
+      },
+      {
+        title: 'Electronic Controls',
+        description: 'Blend door actuator failure, temperature sensor malfunction, control module issues, wiring problems.',
+        icon: 'tabler:cpu',
+      },
+    ]}
+  />
+
+  <!-- Diagnosis Section -->
+  <Content
+    isReversed={true}
+    title="Why Heater Diagnosis Takes Time"
+    content="This isn't a quick scan and done.<br/><br/>A proper heater diagnosis means checking:<br/>• Engine operating temperature<br/>• Coolant level and condition<br/>• Both heater hoses (are they both hot?)<br/>• Blend door actuator operation<br/>• Climate control module communication<br/>• Scan tool data from HVAC system<br/>• Airflow from different vents and settings<br/><br/>The symptom 'no heat' could be a <strong>$30 thermostat</strong> or a <strong>$1,500 heater core replacement</strong>. We figure out which one before you spend money."
+    items={[
+      { title: 'No Guessing', description: 'We test all three systems before recommending repairs' },
+      { title: 'Accurate Quotes', description: 'Know the real cost before work begins' },
+      { title: 'Right Repair First Time', description: 'No parts-swapping at your expense' },
+    ]}
+  />
+
+  <!-- Alberta Winters Section -->
+  <Content
+    title="Alberta Winters and Your Heater"
+    content="Extreme cold exposes problems that mild weather hides.<br/><br/><strong>What happens at -30°C that doesn't happen at -5°C:</strong><br/>• Weak thermostats can't maintain temperature against extreme cold<br/>• Marginal coolant flow becomes inadequate<br/>• Blend door actuators that 'mostly work' fail completely when plastic gets cold and brittle<br/>• Heater cores with partial blockage can't keep up with the demand<br/>• Block heater circuits get stressed from constant use<br/><br/>A heater that 'kind of works' in November may completely fail in January. If you notice reduced performance early in the season, get it checked before you're stuck in a deep freeze."
+  />
+
+  <!-- Heater Core Reality Section -->
+  <Content
+    isReversed={true}
+    title="The Heater Core Reality"
+    content="If diagnosis points to the heater core, here's what you need to know:<br/><br/><strong>The heater core itself is inexpensive</strong> — Usually $100-$300 for the part.<br/><br/><strong>The labor is not</strong> — On most vehicles, the entire dashboard must be removed to access it. This is a 6-12 hour job depending on the vehicle.<br/><br/><strong>What's involved:</strong> Drain coolant, evacuate A/C system, remove steering column covers, remove instrument panel, remove center console, disconnect wiring harnesses, remove HVAC housing, split housing to access heater core, replace core, reassemble everything, recharge A/C, refill and bleed coolant, test entire system.<br/><br/><strong>Our recommendation:</strong> If we're going that deep into the dash, we'll advise you on whether it makes sense to replace the evaporator core (A/C) at the same time. Same labor to access—doing both now avoids paying that labor twice later."
+  />
+
+  <!-- Warning Signs Section -->
+  <Features2
+    title="Signs Your Heater Needs Attention"
+    subtitle="Get it checked if you notice any of these"
+    columns={3}
+    items={[
+      {
+        title: 'Cold Air on Full Heat',
+        description: 'No heat at all when the heater is turned up',
+        icon: 'tabler:snowflake',
+      },
+      {
+        title: 'Intermittent Heat',
+        description: 'Heat works sometimes but not others',
+        icon: 'tabler:temperature',
+      },
+      {
+        title: 'One-Sided Heat',
+        description: 'Only one side blows warm (dual-zone systems)',
+        icon: 'tabler:arrows-left-right',
+      },
+      {
+        title: 'Clicking From Dash',
+        description: 'Clicking or ticking from behind the dashboard',
+        icon: 'tabler:volume',
+      },
+      {
+        title: 'Sweet Smell Inside',
+        description: 'Sweet coolant smell indicates a leak',
+        icon: 'tabler:droplet',
+      },
+      {
+        title: 'Foggy Windows',
+        description: 'Windows fog up and won\'t clear properly',
+        icon: 'tabler:mist',
+      },
+    ]}
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about car heater problems"
+    columns={1}
+    items={[
+      {
+        title: 'Why is my car blowing cold air when the heat is on?',
+        description: 'Three systems control cabin heat: engine cooling (thermostat, coolant, water pump), HVAC mechanical (heater core, blend doors), and electronic controls (actuators, sensors, modules). We diagnose all three to find the actual cause before recommending repairs.',
+      },
+      {
+        title: 'How much does heater repair cost?',
+        description: 'It depends entirely on the cause. A thermostat replacement is a few hundred dollars. A blend door actuator might be $300-600 depending on location. A heater core replacement can run $800-1,500+ because of the labor involved in removing the dashboard.',
+      },
+      {
+        title: 'Why is heater core replacement so expensive?',
+        description: 'The heater core itself is relatively cheap ($100-300). The expense is labor—on most vehicles, the entire dashboard must be removed to access it. This takes 6-12 hours depending on the vehicle, and often requires evacuating the A/C system as well.',
+      },
+      {
+        title: 'My heater works on the highway but not in town. Why?',
+        description: 'This usually indicates low coolant, a failing water pump, or a partially clogged heater core. At highway speeds, the engine runs harder and pushes more coolant through. At idle, there\'s less flow, so marginal problems become obvious.',
+      },
+      {
+        title: 'I hear clicking behind my dashboard. What is it?',
+        description: 'Usually a blend door actuator. These small electric motors move the doors that direct airflow and mix temperatures. When the plastic gears wear out, they click repeatedly as they try (and fail) to find position. Eventually they\'ll fail completely.',
+      },
+      {
+        title: 'Can I just bypass the heater core?',
+        description: 'Technically yes—the heater hoses can be connected together to bypass a leaking core. But then you have no cabin heat at all, and in Alberta, that\'s not practical. It\'s an emergency measure, not a fix.',
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Book Your Heater Diagnosis"
+    subtitle="Don't wait until it's -30° to find out your heater doesn't work."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

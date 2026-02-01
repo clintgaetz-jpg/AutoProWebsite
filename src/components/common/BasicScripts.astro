@@ -45,28 +45,43 @@ import { UI } from 'astrowind:config';
     let previousScrollPosition = window.scrollY;
     let ticking = true;
 
-    // Mobile menu toggle
+    // Mobile menu toggle - open overlay
     attachEvent('[data-aw-toggle-menu]', 'click', function (_, elem) {
-      elem.classList.toggle('expanded');
-      document.body.classList.toggle('overflow-hidden');
-      document.getElementById('header')?.classList.toggle('expanded');
-      
-      // Toggle mobile nav visibility
-      const mobileNav = document.querySelector('#header .mobile-nav');
-      if (mobileNav) {
-        mobileNav.classList.toggle('hidden');
+      const overlay = document.getElementById('mobile-nav-overlay');
+      if (overlay) {
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('overflow-hidden');
+      }
+    });
+
+    // Close menu button
+    attachEvent('[data-aw-close-menu]', 'click', function () {
+      const overlay = document.getElementById('mobile-nav-overlay');
+      if (overlay) {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('overflow-hidden');
+      }
+    });
+
+    // Close menu when clicking backdrop
+    attachEvent('[data-mobile-backdrop]', 'click', function () {
+      const overlay = document.getElementById('mobile-nav-overlay');
+      if (overlay) {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('overflow-hidden');
       }
     });
 
     // Close mobile menu when clicking nav links
-    attachEvent('#header .mobile-nav a', 'click', function () {
-      document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
-      document.body.classList.remove('overflow-hidden');
-      document.getElementById('header')?.classList.remove('expanded');
-      
-      const mobileNav = document.querySelector('#header .mobile-nav');
-      if (mobileNav) {
-        mobileNav.classList.add('hidden');
+    attachEvent('#mobile-nav-overlay a', 'click', function () {
+      const overlay = document.getElementById('mobile-nav-overlay');
+      if (overlay) {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('overflow-hidden');
       }
     });
 
@@ -119,15 +134,57 @@ import { UI } from 'astrowind:config';
     // Reset mobile menu on screen resize
     const screenSize = window.matchMedia('(max-width: 767px)');
     screenSize.addEventListener('change', function () {
-      document.querySelector('[data-aw-toggle-menu]')?.classList.remove('expanded');
-      document.body.classList.remove('overflow-hidden');
-      document.getElementById('header')?.classList.remove('expanded');
-      
-      const mobileNav = document.querySelector('#header .mobile-nav');
-      if (mobileNav) {
-        mobileNav.classList.add('hidden');
+      const overlay = document.getElementById('mobile-nav-overlay');
+      if (overlay) {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
       }
+      document.body.classList.remove('overflow-hidden');
     });
+
+    // ===========================================
+    // GA4 CONVERSION TRACKING
+    // Track key user actions for analytics
+    // ===========================================
+
+    // Only run if gtag is available (GA4 loaded)
+    if (typeof gtag === 'function') {
+      // Track phone call clicks
+      attachEvent('a[href^="tel:"]', 'click', function (_, elem) {
+        gtag('event', 'call_click', {
+          'event_category': 'contact',
+          'event_label': elem.href
+        });
+      });
+
+      // Track SMS/text clicks
+      attachEvent('a[href^="sms:"]', 'click', function (_, elem) {
+        gtag('event', 'sms_click', {
+          'event_category': 'contact',
+          'event_label': elem.href
+        });
+      });
+
+      // Track Book Online clicks (autotext.me booking system)
+      document.querySelectorAll('a[href*="autotext.me"]').forEach(function (elem) {
+        elem.addEventListener('click', function () {
+          gtag('event', 'book_online_click', {
+            'event_category': 'conversion',
+            'event_label': elem.href
+          });
+        });
+      });
+
+      // Track Directions clicks (Google Maps and Apple Maps)
+      document.querySelectorAll('a[href*="google.com/maps"], a[href*="maps.apple.com"]').forEach(function (elem) {
+        elem.addEventListener('click', function () {
+          gtag('event', 'directions_click', {
+            'event_category': 'engagement',
+            'event_label': elem.href.includes('apple.com') ? 'Apple Maps' : 'Google Maps'
+          });
+        });
+      });
+    }
 
     /**
      * Header scroll behavior:
@@ -176,17 +233,12 @@ import { UI } from 'astrowind:config';
 
   const onPageShow = function () {
     document.documentElement.classList.add('motion-safe:scroll-smooth');
-    const elem = document.querySelector('[data-aw-toggle-menu]');
-    if (elem) {
-      elem.classList.remove('expanded');
+    const overlay = document.getElementById('mobile-nav-overlay');
+    if (overlay) {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
     }
     document.body.classList.remove('overflow-hidden');
-    document.getElementById('header')?.classList.remove('expanded');
-    
-    const mobileNav = document.querySelector('#header .mobile-nav');
-    if (mobileNav) {
-      mobileNav.classList.add('hidden');
-    }
   };
 
   window.onload = onLoad;

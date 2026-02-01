@@ -1,0 +1,333 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Image from '~/components/common/Image.astro';
+import { Icon } from 'astro-icon/components';
+
+import heroImage from '~/assets/images/oil-change-hero.jpg';
+import castrolImage from '~/assets/images/castrol-oil.jpg';
+import napaGoldImage from '~/assets/images/napa-gold.jpg';
+import inspectionImage from '~/assets/images/phone-inspection-mockup.png';
+import inspectionBgImage from '~/assets/images/inspection-tech-bg.jpg';
+
+const metadata = {
+  title: 'Oil Change Service | Sylvan Lake AUTOPRO',
+  description: 'Premium oil changes in Sylvan Lake using Castrol GTX Magnatec full synthetic and NAPA Gold filters. Courtesy inspection included. We\'re in the business of making vehicles last. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Oil Change Service",
+  "description": "Premium oil change service in Sylvan Lake using Castrol GTX Magnatec and NAPA Gold filters",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How often should I change my oil?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most vehicles using full synthetic oil can go 8,000-12,000 km between changes, depending on driving habits. Check your owner's manual or ask us for a recommendation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you use synthetic oil?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We use Castrol GTX Magnatec full synthetic unless your vehicle requires something specific like diesel or European spec oil."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I'm past my oil change interval?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Don't panic. Quality synthetic oil provides protection even when you run a bit over. Come see us and we'll get you back on track."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does an oil change take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Plan for about an hour. We don't just dump and fill — we let the oil drain properly, swap the filter, do a courtesy inspection, and check your vehicle over. Care takes time, and we'd rather do it right than rush you out the door."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you service my vehicle while it's still under warranty?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. We can perform all scheduled maintenance while maintaining your factory warranty. No need to go to the dealer."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Oil Change Service" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section with Image -->
+  <Hero2
+    tagline="Maintenance Services"
+    title="Oil Change Service"
+    subtitle="Premium Products. Courtesy Inspection. Built to Last."
+    image={{
+      src: heroImage,
+      alt: 'Oil change service at Sylvan Lake AUTOPRO',
+    }}
+    actions={[
+      { variant: 'primary', text: 'Book Oil Change', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading dark:text-white">We're in the Business of Making Vehicles Last</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-left md:text-center">
+        <p>Let's be honest — when's the last time you got your oil changed <em>before</em> the sticker said you should?</p>
+        <p>We're all busy. Life gets in the way. That next oil change creeps up, and suddenly you're 1,000 km past due.</p>
+        <p>That's exactly why we use <strong class="text-gray-900 dark:text-white">Castrol GTX Magnatec full synthetic oil</strong> and <strong class="text-gray-900 dark:text-white">NAPA Gold filters</strong>. They're not the cheapest option — but they're designed to protect your engine even when life doesn't go according to schedule.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Showcase - Two Column Cards -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <p class="text-sm font-bold tracking-wide uppercase text-primary dark:text-blue-200 mb-2">Premium Products</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Why We Use Quality Oil & Filters</h2>
+        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3 md:mt-4 max-w-2xl mx-auto">The difference in cost is a few dollars per oil change. The difference in engine life is measured in years.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+        <!-- Castrol GTX Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden">
+          <div class="relative aspect-[4/3] bg-gray-100 dark:bg-slate-800">
+            <Image
+              src={castrolImage}
+              alt="Castrol GTX Magnatec Full Synthetic oil being poured during service"
+              class="absolute inset-0 w-full h-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-4 md:p-6 lg:p-8">
+            <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 font-heading dark:text-white">Castrol GTX Magnatec</h3>
+            <p class="text-sm md:text-base text-muted dark:text-slate-400 mb-4 md:mb-6">Intelligent molecules that physically cling to engine parts — even when the engine is off. Protection starts before the oil pressure gauge moves.</p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">6X better wear protection</strong> than API test requirements</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">50% reduction</strong> in warm-up wear</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">API SP certified</strong> with LSPI protection</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- NAPA Gold Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden">
+          <div class="relative aspect-[4/3] bg-gray-100 dark:bg-slate-800">
+            <Image
+              src={napaGoldImage}
+              alt="NAPA Gold oil filter being installed - professional grade filtration"
+              class="absolute inset-0 w-full h-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-4 md:p-6 lg:p-8">
+            <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 font-heading dark:text-white">NAPA Gold Filters</h3>
+            <p class="text-sm md:text-base text-muted dark:text-slate-400 mb-4 md:mb-6">Made by WIX — the company that invented the spin-on oil filter in 1954. Professional-grade construction that cheap filters can't match.</p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">99% filtration efficiency</strong> at 23 microns</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">Steel end caps</strong> — not cardboard</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">Silicone anti-drainback</strong> for Canadian winters</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courtesy Inspection Section -->
+  <section class="relative py-12 md:py-16 lg:py-20 overflow-hidden">
+    <!-- Background Image -->
+    <div
+      class="absolute inset-0 bg-cover bg-center"
+      style={`background-image: url(${inspectionBgImage.src});`}
+    ></div>
+    <!-- Dark Overlay - 80% opacity for better text contrast -->
+    <div class="absolute inset-0 bg-gray-800/[0.80] dark:bg-slate-900/[0.85]"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <!-- Image -->
+        <div class="order-2 lg:order-1 flex justify-center items-center py-8">
+          <div class="w-full max-w-3xl">
+            <Image
+              src={inspectionImage}
+              alt="Digital vehicle inspection report on smartphone showing color-coded results"
+              class="w-full h-auto drop-shadow-2xl rotate-[-15deg] scale-125"
+              widths={[400, 684]}
+              sizes="(max-width: 768px) 400px, 684px"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="order-1 lg:order-2">
+          <p class="text-sm font-bold tracking-wide uppercase text-[#FFC836] mb-2">Every Oil Change</p>
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading text-white">We Give Your Vehicle a Good Look</h2>
+          <div class="text-base md:text-lg text-gray-200 space-y-4">
+            <p>While your oil drains, we do a courtesy inspection — a quick visual check of the basics. We look at fluid levels, tire condition, belts, hoses, lights, and wipers. It's not a comprehensive bumper-to-bumper inspection, but it helps us catch obvious issues before they leave you stranded.</p>
+            <p>If we spot something that needs a closer look, we'll let you know. No pressure, no upsell — just a heads-up so you can make an informed decision.</p>
+            <p>You'll receive a <strong class="text-white">digital report with photos</strong> sent directly to your phone.</p>
+          </div>
+
+          <div class="mt-6 md:mt-8 space-y-3">
+            <div class="flex items-center gap-3">
+              <div class="w-4 h-4 rounded-full bg-green-500 flex-shrink-0"></div>
+              <span class="text-base text-gray-200"><strong class="text-white">Green</strong> — Good condition, no action needed</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-4 h-4 rounded-full bg-yellow-500 flex-shrink-0"></div>
+              <span class="text-base text-gray-200"><strong class="text-white">Yellow</strong> — Worth watching, may need attention soon</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <div class="w-4 h-4 rounded-full bg-red-500 flex-shrink-0"></div>
+              <span class="text-base text-gray-200"><strong class="text-white">Red</strong> — Needs attention now for safety or to prevent damage</span>
+            </div>
+          </div>
+
+          <p class="mt-6 text-base md:text-lg text-gray-300">It's your vehicle. You should know what's happening with it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Quality Oil Matters Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Why Quality Oil Matters</h2>
+        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3 md:mt-4">For those who want to understand why we choose the products we do</p>
+      </div>
+
+      <div class="space-y-6 md:space-y-8 text-base md:text-lg text-muted dark:text-slate-400">
+        <div>
+          <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 dark:text-white">Cold Starts Cause Most Engine Wear</h3>
+          <p>Up to 75% of engine wear happens in the first 20 minutes after you start your car. When your engine sits overnight, conventional oil drains back to the pan. Castrol GTX Magnatec's molecules cling to engine surfaces, so protection is already in place when you turn the key.</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 dark:text-white">Modern Engines Are More Demanding</h3>
+          <p>Turbochargers spin at 200,000 RPM at 400°C. Direct injection creates conditions for destructive pre-ignition. Tighter tolerances demand better filtration. Stop-start systems mean more start cycles. Quality oil and filters aren't optional anymore — they're required.</p>
+        </div>
+
+        <div>
+          <h3 class="text-lg md:text-xl font-bold mb-2 md:mb-3 dark:text-white">The Real Math</h3>
+          <p>A premium oil change costs maybe $20-30 more than the budget option. Over 100,000 km, that's roughly $150-200 total difference. One turbocharger replacement costs $1,500-$4,000. One timing chain repair costs $1,500-$3,500. <strong class="text-gray-900 dark:text-white">One repair wipes out the "savings" from 50+ budget oil changes.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about oil changes"
+    columns={1}
+    items={[
+      {
+        title: 'How often should I change my oil?',
+        description: 'Most vehicles using full synthetic oil can go 8,000-12,000 km between changes, but it depends on your driving habits. Check your owner\'s manual, or ask us — we\'ll give you an honest recommendation based on how you drive.',
+      },
+      {
+        title: 'Do you use synthetic oil?',
+        description: 'Yes. We use Castrol GTX Magnatec full synthetic on all oil changes unless your vehicle specifically requires something different (diesel, European spec, etc.). We stock multiple viscosities and specifications.',
+      },
+      {
+        title: 'What if I\'m past my oil change interval?',
+        description: 'Don\'t panic. Quality synthetic oil is designed to provide protection even when you run a bit over. That said, don\'t make a habit of it — regular maintenance is still the best protection. Come see us and we\'ll get you back on track.',
+      },
+      {
+        title: 'How long does an oil change take?',
+        description: 'Plan for about an hour. We don\'t just dump and fill — we let the oil drain properly, swap the filter, do a courtesy inspection, and check your vehicle over. Care takes time, and we\'d rather do it right than rush you out the door.',
+      },
+      {
+        title: 'Can you service my vehicle while it\'s still under warranty?',
+        description: 'Absolutely. We can perform all scheduled maintenance on new vehicles while maintaining your factory warranty. No need to go to the dealer.',
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="This Is What an Oil Change Should Be"
+    subtitle="We're not just changing your oil. We're looking out for your vehicle."
+    actions={[
+      { variant: 'primary', text: 'Book Oil Change', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

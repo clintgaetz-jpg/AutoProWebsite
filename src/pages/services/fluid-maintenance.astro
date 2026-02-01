@@ -1,0 +1,204 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Fluid Maintenance | Sylvan Lake AUTOPRO',
+  description: 'Professional fluid maintenance services in Sylvan Lake using BG Products. Transmission, coolant, brake fluid, fuel system service. We help your vehicle last. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Fluid Maintenance Services",
+  "description": "Professional fluid maintenance services using BG Products in Sylvan Lake, Alberta",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Fluid Maintenance Services" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Maintenance Services"
+    title="Fluid Maintenance Services"
+    subtitle="Your Vehicle Has a Lot of Fluids. They All Wear Out. We Can Help."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="We're in the Business of Making Vehicles Last"
+    content="Your vehicle doesn't just run on gasoline. It runs on transmission fluid, coolant, brake fluid, power steering fluid, and differential fluid. Every one of these breaks down over time — from heat, moisture, contamination, and just plain use.<br/><br/>Most people know about oil changes. Fewer think about the rest.<br/><br/>We use <strong>BG Products</strong> for our fluid services — professional-grade chemistry designed to clean, flush, and protect. Not the cheapest option, but the one that actually works. BG backs their services with a <strong>Lifetime Protection Plan</strong> that covers component failure up to $4,000–$6,000 if you keep up with maintenance."
+  />
+
+  <!-- You Decide Section -->
+  <Content
+    isReversed={true}
+    title="Your Vehicle, Your Call"
+    content="We get it — people approach maintenance differently.<br/><br/>Some customers bring in their owner's manual and follow the schedule to the letter. Some prefer to stick with the basics and skip the extras. Most are somewhere in between.<br/><br/><strong>All of that is fine with us.</strong><br/><br/>Here's how we see our job: we recommend what we think is best to make your vehicle last. You decide what actually gets done. No pressure, no judgment.<br/><br/>Here's the thing — we're all keeping vehicles longer than we used to. The average vehicle on the road is over 12 years old now. When you're planning to drive something for 200,000+ km, preventive maintenance stops being optional. It's what keeps a $4,000 transmission from failing at 180,000 km instead of lasting to 300,000."
+  />
+
+  <!-- Services Overview -->
+  <Features2
+    title="Our Fluid Services"
+    subtitle="Professional BG Products services for every system"
+    columns={2}
+    items={[
+      {
+        title: 'Transmission Service',
+        description: 'Dissolves deposits, removes old fluid and contaminants, installs fresh fluid with shift improvers. Every 50,000 km.',
+        icon: 'tabler:manual-gearbox',
+      },
+      {
+        title: 'Cooling System Service',
+        description: 'Removes rust, scale, and sludge. Installs fresh coolant with corrosion protection. Every 50,000 km.',
+        icon: 'tabler:temperature',
+      },
+      {
+        title: 'Brake Fluid Service',
+        description: 'Removes moisture-contaminated fluid from entire brake system. Prevents corrosion and maintains pedal feel. Every 50,000 km.',
+        icon: 'tabler:disc',
+      },
+      {
+        title: 'Fuel System Service',
+        description: 'Cleans injectors, throttle body, intake valves, and combustion chambers. Restores performance and efficiency. Every 25,000 km.',
+        icon: 'tabler:gas-station',
+      },
+    ]}
+  />
+
+  <!-- Transmission Service Section -->
+  <Content
+    title="BG Transmission Service"
+    content="Your transmission is one of the most expensive components in your vehicle. It's also one of the most neglected.<br/><br/>Transmission fluid breaks down from heat and use. As it degrades, it loses its ability to lubricate, cool, and maintain hydraulic pressure. Deposits form on valve bodies and clutch packs. Shifting gets harder. Eventually, things start slipping.<br/><br/><strong>A transmission rebuild can cost $3,000–$6,000. A fluid service costs a fraction of that.</strong><br/><br/><em>Already having transmission problems?</em> <a href='/services/transmission-repair' class='text-primary hover:underline font-semibold'>Learn about our transmission repair & rebuild services →</a>"
+    items={[
+      { title: 'Interval', description: 'Every 50,000 km' },
+      { title: 'Signs You\'re Overdue', description: 'Hard shifting, slipping, shudder, dark/burnt fluid' },
+    ]}
+  />
+
+  <!-- Coolant Service Section -->
+  <Content
+    isReversed={true}
+    title="BG Cooling System Service"
+    content="Coolant doesn't just keep your engine from overheating — it protects against corrosion, lubricates the water pump, and keeps your heater working in January.<br/><br/>Over time, coolant becomes acidic as its additives deplete. This leads to internal corrosion, scale buildup, and deposits that restrict flow. Left unchecked, you're looking at heater core failures, water pump failures, and overheating — all expensive repairs that start with neglected coolant."
+    items={[
+      { title: 'Interval', description: 'Every 50,000 km' },
+      { title: 'Signs You\'re Overdue', description: 'Running hot, weak heater, rust in coolant, 5+ years since service' },
+    ]}
+  />
+
+  <!-- Brake Fluid Service Section -->
+  <Content
+    title="BG Brake Fluid Service"
+    content="Brake fluid is hygroscopic — it absorbs moisture from the air. Over time, that moisture lowers the boiling point of your brake fluid and causes internal corrosion in your brake lines, calipers, and master cylinder.<br/><br/>Contaminated brake fluid leads to spongy pedal feel, reduced braking performance, and eventually component failure. In Alberta's climate, with our temperature swings and road salt, this happens faster than you'd think."
+    items={[
+      { title: 'Interval', description: 'Every 50,000 km or when contaminated' },
+      { title: 'Signs You\'re Overdue', description: 'Spongy pedal, longer pedal travel, dark fluid, 3+ years since service' },
+    ]}
+  />
+
+  <!-- Fuel System Service Section -->
+  <Content
+    isReversed={true}
+    title="BG Fuel System Service"
+    content="Carbon deposits are a fact of life in modern engines. They form on fuel injectors, throttle bodies, intake valves, and combustion chambers. As they build up, you lose fuel efficiency, power, and throttle response.<br/><br/>This is especially true for <strong>GDI (Gasoline Direct Injection)</strong> engines, where fuel doesn't wash over the intake valves. Carbon builds up fast, and there's no easy way to remove it without professional service.<br/><br/><strong>BG Platinum Fuel System Service:</strong> Cleans injectors, throttle body, valves, and combustion chambers. Every 25,000 km.<br/><br/><strong>BG GDI Fuel/Air Induction Service:</strong> Specifically targets intake valve carbon on direct injection engines. Every 24,000 km."
+    items={[
+      { title: 'Standard Interval', description: 'Every 25,000 km' },
+      { title: 'GDI Interval', description: 'Every 24,000 km' },
+      { title: 'Signs You\'re Overdue', description: 'Poor fuel economy, rough idle, hesitation, loss of power' },
+    ]}
+  />
+
+  <!-- BG MOA Section -->
+  <Content
+    title="BG MOA — Engine Oil Supplement"
+    content="BG MOA (Motor Oil Additive) is a pour-in supplement we can add to your oil change. It's designed to protect against sludge formation, oil breakdown, and deposit buildup between oil changes.<br/><br/>Think of it as insurance for your engine oil — especially useful if you:<br/>• Do a lot of short trips (oil doesn't get fully up to temperature)<br/>• Occasionally run past your oil change interval<br/>• Want extra protection for a high-mileage engine<br/>• Want to qualify for BG's Lifetime Protection Plan<br/><br/>MOA doesn't replace good oil — it enhances it."
+  />
+
+  <!-- BG Protection Plan Section -->
+  <Features2
+    title="BG Lifetime Protection Plan"
+    subtitle="Real coverage, not marketing"
+    columns={2}
+    items={[
+      {
+        title: 'Up to $6,000 Coverage',
+        description: 'Component failure coverage for engine, transmission, cooling, brake, power steering, and driveline systems.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Lifetime Coverage',
+        description: 'Renews every time you get the service done at recommended intervals. Keep your records.',
+        icon: 'tabler:infinity',
+      },
+      {
+        title: 'Real Claims Paid',
+        description: 'BG has been backing their products since 1971. This isn\'t a gimmick — it\'s a real program.',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Simple Process',
+        description: 'Get BG services at recommended intervals, keep your records, file a claim if needed.',
+        icon: 'tabler:file-text',
+      },
+    ]}
+  />
+
+  <!-- BG On The Road Section -->
+  <Content
+    isReversed={true}
+    title="BG On The Road — 6 Months Roadside Assistance"
+    content="Every BG service comes with <strong>BG On The Road</strong> — complimentary roadside assistance for 6 months. And it's renewable every time you get another BG service.<br/><br/><strong>Coverage includes:</strong><br/>• Towing service (accidents and disablements)<br/>• Jump start service<br/>• Flat tire assistance<br/>• Lock-out service<br/>• Emergency fluid delivery<br/>• Trip routing service<br/>• Emergency rental car coverage<br/>• Emergency travel expense<br/>• Theft/hit and run protection<br/><br/>Available anywhere in the US, Canada, and Puerto Rico. It's a nice bonus for services you should probably be doing anyway."
+  />
+
+  <!-- Where Do I Start Section -->
+  <Content
+    title="Not Sure What Your Vehicle Needs?"
+    content="That's fine. Most people aren't.<br/><br/>Here's how we approach it:<br/><br/><strong>1.</strong> Tell us about your vehicle — year, make, model, mileage<br/><strong>2.</strong> Tell us what you know — what's been done, what hasn't, any concerns<br/><strong>3.</strong> We'll look at your maintenance schedule and tell you what's due<br/><strong>4.</strong> You decide what to tackle and when<br/><br/>No pressure. No scare tactics. Just information so you can make a good decision."
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Ready to Talk?"
+    subtitle="Questions about fluid services? Want to know what your vehicle needs? Give us a call."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+    ]}
+  />
+</Layout>

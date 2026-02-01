@@ -3,165 +3,96 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 export const headerData = {
   links: [
     {
-      text: 'Homes',
+      text: 'Services',
       links: [
-        {
-          text: 'SaaS',
-          href: getPermalink('/homes/saas'),
-        },
-        {
-          text: 'Startup',
-          href: getPermalink('/homes/startup'),
-        },
-        {
-          text: 'Mobile App',
-          href: getPermalink('/homes/mobile-app'),
-        },
-        {
-          text: 'Personal',
-          href: getPermalink('/homes/personal'),
-        },
+        // Column 1
+        { text: 'Oil Change', href: getPermalink('/services/oil-change') },
+        { text: 'Brakes', href: getPermalink('/services/brake-repair') },
+        { text: 'Tires & Alignment', href: getPermalink('/services/tires') },
+        { text: 'A/C Service', href: getPermalink('/services/ac-service-repair') },
+        { text: 'Fluid Services', href: getPermalink('/services/fluid-maintenance') },
+        { text: 'Check Engine Light', href: getPermalink('/services/diagnostics') },
+        { text: 'Electrical', href: getPermalink('/services/electrical') },
+        // Column 2
+        { text: 'Steering & Suspension', href: getPermalink('/services/steering-suspension') },
+        { text: 'Transmission', href: getPermalink('/services/transmission-repair') },
+        { text: 'Engine', href: getPermalink('/services/engine-repair') },
+        { text: 'Diesel', href: getPermalink('/services/fleet-services') },
+        { text: 'Hybrid & EV', href: getPermalink('/services/hybrid-ev-service') },
+        { text: 'Automotive Keys', href: getPermalink('/services/automotive-keys') },
       ],
     },
     {
-      text: 'Pages',
+      text: 'Inspections',
       links: [
-        {
-          text: 'Features (Anchor Link)',
-          href: getPermalink('/#features'),
-        },
-        {
-          text: 'Services',
-          href: getPermalink('/services'),
-        },
-        {
-          text: 'Pricing',
-          href: getPermalink('/pricing'),
-        },
-        {
-          text: 'About us',
-          href: getPermalink('/about'),
-        },
-        {
-          text: 'Contact',
-          href: getPermalink('/contact'),
-        },
-        {
-          text: 'Terms',
-          href: getPermalink('/terms'),
-        },
-        {
-          text: 'Privacy policy',
-          href: getPermalink('/privacy'),
-        },
+        { text: 'Out of Province', href: getPermalink('/services/out-of-province-inspection') },
+        { text: 'Commercial (CVIP)', href: getPermalink('/services/cvip-inspection') },
+        { text: 'Insurance', href: getPermalink('/services/insurance-inspection') },
+        { text: 'Pre-Purchase', href: getPermalink('/services/pre-purchase-inspection') },
+        { text: 'Brake Inspection', href: getPermalink('/services/brake-inspection') },
       ],
     },
     {
-      text: 'Landing',
+      text: 'About',
       links: [
-        {
-          text: 'Lead Generation',
-          href: getPermalink('/landing/lead-generation'),
-        },
-        {
-          text: 'Long-form Sales',
-          href: getPermalink('/landing/sales'),
-        },
-        {
-          text: 'Click-Through',
-          href: getPermalink('/landing/click-through'),
-        },
-        {
-          text: 'Product Details (or Services)',
-          href: getPermalink('/landing/product'),
-        },
-        {
-          text: 'Coming Soon or Pre-Launch',
-          href: getPermalink('/landing/pre-launch'),
-        },
-        {
-          text: 'Subscription',
-          href: getPermalink('/landing/subscription'),
-        },
+        { text: 'About Us', href: getPermalink('/about') },
+        { text: 'Making It Easy', href: getPermalink('/making-it-easy') },
+        { text: 'Warranty', href: getPermalink('/warranty') },
+        // { text: 'Team', href: getPermalink('/team') }, // Add later
       ],
     },
     {
-      text: 'Blog',
-      links: [
-        {
-          text: 'Blog List',
-          href: getBlogPermalink(),
-        },
-        {
-          text: 'Article',
-          href: getPermalink('get-started-website-with-astro-tailwind-css', 'post'),
-        },
-        {
-          text: 'Article (with MDX)',
-          href: getPermalink('markdown-elements-demo-post', 'post'),
-        },
-        {
-          text: 'Category Page',
-          href: getPermalink('tutorials', 'category'),
-        },
-        {
-          text: 'Tag Page',
-          href: getPermalink('astro', 'tag'),
-        },
-      ],
-    },
-    {
-      text: 'Widgets',
-      href: '#',
+      text: 'Contact',
+      href: getPermalink('/contact'),
     },
   ],
-  actions: [{ text: 'Download', href: 'https://github.com/arthelokyo/astrowind', target: '_blank' }],
+  // Mobile-only link
+  mobileOnlyLinks: [
+    { text: 'After-Hours Drop Off', href: getPermalink('/making-it-easy#after-hours'), icon: 'tabler:clock' },
+  ],
+  actions: [{ text: 'Book Now', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' }],
 };
 
 export const footerData = {
   links: [
     {
-      title: 'Product',
+      title: 'Services',
       links: [
-        { text: 'Features', href: '#' },
-        { text: 'Security', href: '#' },
-        { text: 'Team', href: '#' },
-        { text: 'Enterprise', href: '#' },
-        { text: 'Customer stories', href: '#' },
-        { text: 'Pricing', href: '#' },
-        { text: 'Resources', href: '#' },
+        { text: 'Oil Change', href: getPermalink('/services/oil-change') },
+        { text: 'Brakes', href: getPermalink('/services/brake-repair') },
+        { text: 'Tires & Alignment', href: getPermalink('/services/tires') },
+        { text: 'A/C Service', href: getPermalink('/services/ac-service-repair') },
+        { text: 'Steering & Suspension', href: getPermalink('/services/steering-suspension') },
+        { text: 'Transmission', href: getPermalink('/services/transmission-repair') },
       ],
     },
     {
-      title: 'Platform',
+      title: 'Inspections',
       links: [
-        { text: 'Developer API', href: '#' },
-        { text: 'Partners', href: '#' },
-        { text: 'Atom', href: '#' },
-        { text: 'Electron', href: '#' },
-        { text: 'AstroWind Desktop', href: '#' },
+        { text: 'Out of Province', href: getPermalink('/services/out-of-province-inspection') },
+        { text: 'Commercial (CVIP)', href: getPermalink('/services/cvip-inspection') },
+        { text: 'Pre-Purchase', href: getPermalink('/services/pre-purchase-inspection') },
+        { text: 'Insurance', href: getPermalink('/services/insurance-inspection') },
+        { text: 'Brake Inspection', href: getPermalink('/services/brake-inspection') },
       ],
     },
     {
-      title: 'Support',
+      title: 'More Services',
       links: [
-        { text: 'Docs', href: '#' },
-        { text: 'Community Forum', href: '#' },
-        { text: 'Professional Services', href: '#' },
-        { text: 'Skills', href: '#' },
-        { text: 'Status', href: '#' },
+        { text: 'Fluid Services', href: getPermalink('/services/fluid-maintenance') },
+        { text: 'Check Engine Light', href: getPermalink('/services/diagnostics') },
+        { text: 'Electrical', href: getPermalink('/services/electrical') },
+        { text: 'Hybrid & EV', href: getPermalink('/services/hybrid-ev-service') },
+        { text: 'Automotive Keys', href: getPermalink('/services/automotive-keys') },
       ],
     },
     {
       title: 'Company',
       links: [
-        { text: 'About', href: '#' },
-        { text: 'Blog', href: '#' },
-        { text: 'Careers', href: '#' },
-        { text: 'Press', href: '#' },
-        { text: 'Inclusion', href: '#' },
-        { text: 'Social Impact', href: '#' },
-        { text: 'Shop', href: '#' },
+        { text: 'About Us', href: getPermalink('/about') },
+        { text: 'Making It Easy', href: getPermalink('/making-it-easy') },
+        { text: 'Warranty', href: getPermalink('/warranty') },
+        { text: 'Contact', href: getPermalink('/contact') },
       ],
     },
   ],
@@ -170,13 +101,11 @@ export const footerData = {
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
   ],
   socialLinks: [
-    { ariaLabel: 'X', icon: 'tabler:brand-x', href: '#' },
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: '#' },
-    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
-    { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
-    { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/arthelokyo/astrowind' },
+    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/SylvanLakeAutopro/' },
+    { ariaLabel: 'Google', icon: 'tabler:brand-google', href: 'https://g.page/sylvan-lake-autopro' },
   ],
   footNote: `
-    Made by <a class="text-blue-600 underline dark:text-muted" href="https://github.com/arthelokyo"> Arthelokyo</a> · All rights reserved.
+    <span class="text-sm">© ${new Date().getFullYear()} Sylvan Lake AUTOPRO. All rights reserved.</span><br/>
+    <span class="text-xs text-gray-500">1A Industrial Dr, Sylvan Lake, AB T4S 1P4 · (403) 887-0440</span>
   `,
 };

@@ -10,23 +10,106 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'Sylvan Lake AUTOPRO | Trusted Auto Repair Since 2006',
+  description: 'Trusted auto repair in Sylvan Lake since 2006. Oil changes, brakes, inspections, diagnostics. 4.9★ rating, NAPA warranty. Call (403) 887-0440.',
   ignoreTitleTemplate: true,
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Sylvan Lake AUTOPRO",
+  "image": "https://sylvanlakeautopro.com/images/og-image.jpg",
+  "logo": "https://sylvanlakeautopro.com/images/autopro-logo.png",
+  "@id": "https://sylvanlakeautopro.com/#organization",
+  "url": "https://sylvanlakeautopro.com",
+  "telephone": "+1-403-887-0440",
+  "email": "service@sylvanlakeautopro.com",
+  "priceRange": "$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1A Industrial Dr",
+    "addressLocality": "Sylvan Lake",
+    "addressRegion": "AB",
+    "postalCode": "T4S 1P4",
+    "addressCountry": "CA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 52.311676,
+    "longitude": -114.073863
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "290",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "areaServed": [
+    "Sylvan Lake",
+    "Red Deer",
+    "Rocky Mountain House",
+    "Rimbey",
+    "Ponoka",
+    "Blackfalds",
+    "Penhold",
+    "Eckville",
+    "Bentley",
+    "Benalto",
+    "Condor",
+    "Leslieville",
+    "Alhambra",
+    "Withrow",
+    "Evarts",
+    "Dickson",
+    "Markerville",
+    "Caroline",
+    "Bluffton",
+    "Hoadley",
+    "Jarvis Bay",
+    "Norglenwold",
+    "Gull Lake",
+    "Birchcliff"
+  ],
+  "sameAs": [
+    "https://www.facebook.com/SylvanLakeAutopro/",
+    "https://g.page/sylvan-lake-autopro"
+  ]
 };
 ---
 
 <Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  </Fragment>
+
   <!-- Hero -->
   <Hero
     actions={[
       {
-        variant: 'primary',
+        variant: 'accent',
         text: 'Call (403) 887-0440',
         href: 'tel:4038870440',
         icon: 'tabler:phone',
       },
-      { 
-        text: 'Book Appointment', 
-        href: 'https://sylvanlakeautopro.autotext.me/',
+      {
+        variant: 'accent',
+        text: 'Text Us',
+        href: 'sms:+14038870440',
+        icon: 'tabler:message',
+      },
+      {
+        variant: 'accent',
+        text: 'Book Appointment',
+        href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1',
         target: '_blank',
       },
     ]}
@@ -36,7 +119,7 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="font-semibold">Locally owned since 2006.</span> ASE-certified mechanics, 
+      <span class="font-semibold">Locally owned since 2006.</span> Licensed technicians,
       NAPA Peace of Mind warranty, and service that treats you like a neighbour—because you are one.
     </Fragment>
   </Hero>
@@ -55,31 +138,37 @@ const metadata = {
         title: 'Out of Province Inspections',
         description: 'Bringing a vehicle into Alberta? We handle the mandatory OOP inspection so you can get registered fast.',
         icon: 'tabler:clipboard-check',
+        href: '/services/out-of-province-inspection',
       },
       {
         title: 'Commercial Vehicle Inspections (CVIP)',
         description: 'Certified CVIP facility for trucks, trailers, and commercial fleets. Stay compliant, stay on the road.',
         icon: 'tabler:truck',
+        href: '/services/cvip-inspection',
       },
       {
         title: 'Brakes & Suspension',
         description: 'Squealing, grinding, or pulling? We diagnose and fix brake and suspension issues with quality NAPA parts.',
         icon: 'tabler:disc',
+        href: '/services/brake-repair',
       },
       {
         title: 'Engine Diagnostics',
         description: 'Check engine light on? Our scan tools and experience pinpoint the problem—no guesswork.',
         icon: 'tabler:engine',
+        href: '/services/diagnostics',
       },
       {
         title: 'Oil Changes & Maintenance',
         description: 'Quick, thorough oil changes and factory-scheduled maintenance to keep your warranty intact.',
         icon: 'tabler:droplet',
+        href: '/services/oil-change',
       },
       {
         title: 'A/C & Heating',
         description: 'Alberta summers and winters demand working climate control. We service and repair all systems.',
         icon: 'tabler:temperature',
+        href: '/services/ac-service-repair',
       },
     ]}
   />
@@ -99,8 +188,8 @@ const metadata = {
         icon: 'tabler:shield-check',
       },
       {
-        title: '<span class="font-medium">ASE-Certified Technicians</span>',
-        description: 'Our mechanics hold ASE certifications—the gold standard in automotive repair training.',
+        title: '<span class="font-medium">Licensed Technicians</span>',
+        description: 'Our mechanics are provincially licensed and trained to work on all makes and models.',
         icon: 'tabler:certificate',
       },
       {
@@ -145,28 +234,45 @@ const metadata = {
   />
 
   <!-- Call to Action -->
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Call (403) 887-0440',
-        href: 'tel:4038870440',
-        icon: 'tabler:phone',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      <span class="text-white">Ready to Book Your Service?</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-       <span class="text-[#FFC836] font-semibold text-lg md:text-xl">Call us or book online. We take care of your vehicle like it is our own.</span>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('/src/assets/images/napa-blue-wall.jpg');">
-        <div class="absolute inset-0 bg-primary/80"></div>
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <div class="max-w-3xl mx-auto text-center p-6 md:p-12 rounded-2xl bg-[#0A0094] shadow-xl">
+        <h2 class="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tighter mb-4 font-heading text-white">
+          Ready to Book Your Service?
+        </h2>
+        <p class="text-base md:text-xl text-gray-200 mb-6 md:mb-8">
+          Call us or book online. We take care of your vehicle like it's our own.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
+          <a
+            href="tel:+14038870440"
+            class="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-full font-semibold
+                   bg-[#FFC836] border-2 border-[#FFC836] text-[#0A0094]
+                   hover:bg-[#e6b430] hover:border-[#e6b430] transition-colors"
+          >
+            Call (403) 887-0440
+          </a>
+          <!-- Text button - mobile only -->
+          <a
+            href="sms:+14038870440"
+            class="sm:hidden inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-full font-semibold
+                   bg-[#FFC836] border-2 border-[#FFC836] text-[#0A0094]
+                   hover:bg-[#e6b430] hover:border-[#e6b430] transition-colors"
+          >
+            Text Us
+          </a>
+          <a
+            href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-full font-semibold
+                   bg-transparent border-2 border-white text-white
+                   hover:bg-white hover:text-[#0A0094] transition-colors"
+          >
+            Book Online
+          </a>
+        </div>
       </div>
-    </Fragment>
-  </CallToAction>
+    </div>
+  </section>
 </Layout>

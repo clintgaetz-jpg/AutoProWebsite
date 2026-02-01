@@ -1,0 +1,309 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Out of Province Inspection | $179.95 | Sylvan Lake AUTOPRO',
+  description: 'Licensed out of province vehicle inspection in Sylvan Lake. $179.95 most vehicles. Certified facility since 2006. Digital report included. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Out of Province Vehicle Inspection",
+  "description": "Alberta government-mandated inspection for vehicles from outside the province",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "179.95",
+    "priceCurrency": "CAD"
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does an out of province inspection cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "$179.95 ($188.95 with GST) for most cars, SUVs, and light trucks. Heavier trucks may cost more due to additional disassembly time."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does the inspection take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Typically 1-2 hours. We recommend booking an appointment so we can get you in and out efficiently."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if my vehicle fails the inspection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You'll receive documentation listing exactly what needs repair, plus an estimate. You have 10 days to complete repairs and return for re-inspection."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I have to get repairs done at your shop?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. You can go anywhere, or do them yourself. You'll just need to return for re-inspection to verify the work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I'm from BC, Saskatchewan, or Manitoba. Do I need an inspection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Maybe not. If your vehicle is 4 model years old or newer and has no salvage or rebuilt status, you may qualify for the New West Partnership exemption."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Out of Province Inspection" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Vehicle Inspections"
+    title="Out of Province Vehicle Inspection"
+    subtitle="Licensed Facility. No Surprises. Welcome to Alberta."
+    actions={[
+      { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="What Does an Out of Province Inspection Cost?"
+    content="An out of province vehicle inspection in Sylvan Lake costs <strong>$179.95</strong> for most cars, SUVs, and light trucks. We're a licensed Alberta inspection facility—certified since 2006, regularly audited, with trained technicians who know the program inside and out.<br/><br/>Just moved to Central Alberta? Welcome! You'll need this inspection to register your vehicle here. We'll walk you through the process, tell you exactly what to expect, and give you a digital report documenting everything we check. No surprises. If repairs are needed, you'll know the cost before we start."
+  />
+
+  <!-- Do You Need an Inspection? Section -->
+  <Features2
+    title="Do You Need an Out of Province Inspection?"
+    subtitle="Quick reference to determine if your vehicle requires inspection"
+    columns={2}
+    items={[
+      {
+        title: 'Vehicle was last registered outside Alberta',
+        description: 'Yes, inspection required',
+        icon: 'tabler:circle-check',
+      },
+      {
+        title: 'Purchased used vehicle from another province',
+        description: 'Yes, inspection required',
+        icon: 'tabler:circle-check',
+      },
+      {
+        title: 'Importing a vehicle from the USA',
+        description: 'Yes, inspection required',
+        icon: 'tabler:circle-check',
+      },
+      {
+        title: 'Vehicle has salvage or rebuilt status',
+        description: 'Yes, inspection required',
+        icon: 'tabler:circle-check',
+      },
+      {
+        title: 'Brand new vehicle (less than 90 days)',
+        description: 'May be exempt—check with registry',
+        icon: 'tabler:info-circle',
+      },
+      {
+        title: 'From BC/SK/MB with vehicle under 4 years old',
+        description: 'May qualify for New West Partnership exemption',
+        icon: 'tabler:info-circle',
+      },
+    ]}
+  />
+
+  <!-- Process Steps Section -->
+  <Steps2
+    title="How Does the Out of Province Inspection Work?"
+    subtitle="Four simple steps to get your vehicle registered in Alberta"
+    items={[
+      {
+        title: 'Step 1: Get Your Request Form',
+        description: "Visit any Alberta registry office and purchase a 'Request for Out of Province Inspection Form.' You'll need ID, your vehicle's VIN, and about $9. The registry gives you a paper form to bring to us.",
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Step 2: Book Your Appointment',
+        description: 'Call us at (403) 887-0440 or book online. Bring your request form when you arrive. The inspection must be done in the name of whoever will register the vehicle.',
+        icon: 'tabler:calendar',
+      },
+      {
+        title: 'Step 3: The Inspection',
+        description: "The inspection typically takes 1-2 hours. We check everything the Alberta government requires—brakes, steering, suspension, lights, tires, glass, structure, and more. You'll receive a digital report showing exactly what we inspected.",
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Step 4: Your Results',
+        description: "Pass: You'll receive a certificate valid for 14 days to take to the registry. Fail: You'll receive documentation listing exactly what needs repair. You have 10 days to complete repairs and return for re-inspection.",
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  />
+
+  <!-- What We Inspect Section -->
+  <Features2
+    title="What Do We Inspect?"
+    subtitle="Every safety-related system on your vehicle"
+    columns={3}
+    items={[
+      {
+        title: 'Brakes',
+        description: 'Pad/shoe thickness, rotor condition, lines, fluid, parking brake',
+        icon: 'tabler:disc',
+      },
+      {
+        title: 'Steering',
+        description: 'Linkage, power steering, wheel play, alignment-related wear',
+        icon: 'tabler:rotate',
+      },
+      {
+        title: 'Suspension',
+        description: 'Shocks, struts, ball joints, bushings, springs',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Tires & Wheels',
+        description: 'Tread depth, condition, matching sizes, wheel damage',
+        icon: 'tabler:circle',
+      },
+      {
+        title: 'Lights',
+        description: 'Headlights, signals, brake lights, markers, dash warning lights',
+        icon: 'tabler:bulb',
+      },
+      {
+        title: 'Glass & Structure',
+        description: 'Windshield cracks, visibility, wipers, frame, body, rust-through',
+        icon: 'tabler:layout',
+      },
+    ]}
+  />
+
+  <!-- Pricing Section -->
+  <Content
+    title="Pricing"
+    content="<strong>Out of Province Inspection (most vehicles):</strong> $179.95 ($188.95 with GST)<br/><br/><strong>Re-inspection (repairs done elsewhere):</strong> Half hour labor<br/><br/><strong>Simple re-inspection (windshield, bulb replacement):</strong> No charge<br/><br/><strong>Larger vehicles:</strong> Heavier trucks may have additional charges due to extra time needed to disassemble brakes for measurement. We'll tell you before we start.<br/><br/><em>Our guarantee: You will never receive a bill higher than you have authorized.</em>"
+  />
+
+  <!-- What If My Vehicle Fails Section -->
+  <Content
+    isReversed={true}
+    title="What If My Vehicle Fails?"
+    content="First—don't panic. Many vehicles need minor repairs to pass. Common issues include worn brake pads, cracked windshield, burned out bulbs, worn suspension components, or insufficient tire tread.<br/><br/><strong>You have options:</strong><br/><br/>• <strong>Have us do the repairs</strong> — We'll give you an estimate upfront. No surprises.<br/>• <strong>Go elsewhere</strong> — You can have repairs done at any shop. Return here for re-inspection (half hour labor charge).<br/>• <strong>Do it yourself</strong> — Same deal. Return for re-inspection when complete.<br/><br/><strong>The 10-day rule:</strong> You have 10 days to complete repairs and get re-inspected. After that, the inspection expires and you'll need to start over with a new full inspection. This is a government program rule, not ours."
+    items={[
+      { title: 'Repairs Here', description: 'Upfront estimate, no surprises' },
+      { title: 'Repairs Elsewhere', description: 'Return for re-inspection only' },
+      { title: '10-Day Window', description: 'Government deadline for repairs' },
+    ]}
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about out of province inspections"
+    columns={1}
+    items={[
+      {
+        title: 'How much does an out of province inspection cost?',
+        description: "$179.95 ($188.95 with GST) for most cars, SUVs, and light trucks. Heavier trucks may cost more due to additional disassembly time—we'll always tell you before we start.",
+      },
+      {
+        title: 'How long does the inspection take?',
+        description: 'Typically 1-2 hours. We recommend booking an appointment so we can get you in and out efficiently.',
+      },
+      {
+        title: 'What happens if my vehicle fails?',
+        description: "You'll receive documentation listing exactly what needs repair, plus an estimate if you want us to do the work. You have 10 days to complete repairs and return for re-inspection.",
+      },
+      {
+        title: 'Do I have to get repairs done at your shop?',
+        description: "No. You can go anywhere, or do them yourself. You'll just need to return here for re-inspection to verify the work.",
+      },
+      {
+        title: "I'm from BC/Saskatchewan/Manitoba. Do I need an inspection?",
+        description: 'Maybe not. If your vehicle is 4 model years old or newer and has no salvage/rebuilt status, you may qualify for the New West Partnership exemption. Check with a registry office to confirm.',
+      },
+      {
+        title: 'What about insurance?',
+        description: "In Alberta, insurance is sold separately from registration. You'll need valid insurance before you can get plates. If you don't have coverage from your previous province, you'll need an in-transit permit from the registry.",
+      },
+    ]}
+  />
+
+  <!-- Local Resources Section -->
+  <Content
+    title="Local Resources"
+    subtitle="New to Central Alberta? Here are trusted local businesses to help"
+    items={[
+      {
+        title: 'Acera Insurance (formerly Sylvan Agencies)',
+        description: '(403) 887-2002 • acera.ca',
+      },
+      {
+        title: 'Lakestone Insurance (Locally Owned)',
+        description: '(403) 887-1080 • lakestoneinsurance.com',
+      },
+      {
+        title: 'Sylvan Lake Registries',
+        description: '(403) 887-2102 • sylvanlakeregistries.com',
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Book Your Out of Province Inspection"
+    subtitle="$179.95 (most vehicles) • 1-2 hours • Digital report included"
+    actions={[
+      { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

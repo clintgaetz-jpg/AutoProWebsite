@@ -1,0 +1,343 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Steering & Suspension | Sylvan Lake AUTOPRO',
+  description: 'Steering and suspension repair in Sylvan Lake. Ball joints, tie rods, control arms, shocks, struts, wheel bearings. Quality NAPA parts. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Steering & Suspension Service",
+  "description": "Steering and suspension repair in Sylvan Lake — ball joints, tie rods, control arms, shocks, struts, wheel bearings. Quality NAPA parts.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I know if my shocks or struts are worn?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The bounce test only catches severely worn shocks. If your vehicle has over 80,000–100,000 km and you've never replaced shocks/struts, they're probably due. If you notice bouncing, poor handling, or cupped tire wear, they're definitely due."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does suspension work take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depends on what's being done. A pair of front struts might take 2–3 hours. Ball joints and control arms can take longer, especially if hardware is seized. We'll give you a time estimate when we quote the work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to drive with worn suspension?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Worn shocks, bushings, and minor play in components? The vehicle will still drive, but handling, braking, and tire wear are compromised. Severely worn ball joints or tie rod ends? No. These can fail suddenly and cause loss of control."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need to replace shocks/struts in pairs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We recommend it. Even if only one side is obviously failed, the other side has the same mileage and wear. Replacing one side puts mismatched damping on the vehicle, which affects handling."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can worn suspension cause tire wear?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. Worn ball joints, tie rod ends, and control arm bushings allow alignment angles to shift as you drive. This causes uneven wear patterns that can destroy tires quickly."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Steering & Suspension" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Safety & Handling"
+    title="Steering & Suspension Service"
+    subtitle="Keep It Tight. Keep It Safe. Keep It Driving Right."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <Content
+    title="More Than Just Comfort"
+    content="Your steering and suspension do two jobs: keep your tires on the road and keep you in control of where they're going.<br/><br/>When these components wear out, you feel it — wandering at highway speeds, clunking over bumps, uneven tire wear, a steering wheel that doesn't feel right. <strong>These aren't just comfort issues. Worn steering and suspension components are safety issues.</strong><br/><br/>Alberta roads are hard on this stuff. Potholes, frost heaves, gravel shoulders — it all adds up. We see a lot of worn suspension, and we fix it properly."
+  />
+
+  <!-- Steering Components Section -->
+  <Features2
+    title="Steering Components"
+    subtitle="Everything that controls where your vehicle goes"
+    columns={2}
+    items={[
+      {
+        title: 'Tie Rod Ends',
+        description: 'Inner and outer tie rods connect your steering rack to your wheels. When they wear, you get loose steering, wandering, and uneven tire wear. Failed tie rod ends can cause loss of steering control.',
+        icon: 'tabler:link',
+      },
+      {
+        title: 'Steering Rack & Pinion',
+        description: 'The rack converts your steering wheel input into wheel movement. Leaking seals, worn bushings, or internal damage cause loose steering, fluid leaks, and hard steering.',
+        icon: 'tabler:steering-wheel',
+      },
+      {
+        title: 'Power Steering System',
+        description: 'Pumps, hoses, and fluid. Whining noises, hard steering, and leaks are signs of power steering problems. We also offer power steering fluid service.',
+        icon: 'tabler:droplet',
+      },
+      {
+        title: 'Steering Linkage',
+        description: 'Idler arms, pitman arms, center links — vehicles with steering gear boxes have additional linkage components that wear over time.',
+        icon: 'tabler:arrows-horizontal',
+      },
+    ]}
+  />
+
+  <!-- Suspension Components Section -->
+  <Features2
+    title="Suspension Components"
+    subtitle="Everything that keeps your tires on the road"
+    columns={3}
+    items={[
+      {
+        title: 'Ball Joints',
+        description: 'Upper and lower ball joints connect control arms to steering knuckles. They\'re load-bearing and critical. Worn ball joints can separate — causing loss of control.',
+        icon: 'tabler:3d-cube-sphere',
+      },
+      {
+        title: 'Control Arms & Bushings',
+        description: 'Control arms locate your wheels and absorb road impacts. The rubber bushings wear out, causing clunks, vibration, and alignment problems.',
+        icon: 'tabler:arrows-move',
+      },
+      {
+        title: 'Shocks & Struts',
+        description: 'Dampen suspension movement and keep tires in contact with the road. Worn units cause bouncing, poor handling, longer stopping distances, and tire wear.',
+        icon: 'tabler:arrow-autofit-height',
+      },
+      {
+        title: 'Coil & Leaf Springs',
+        description: 'Springs support vehicle weight and absorb impacts. Broken or sagging springs cause ride height problems, poor handling, and can damage other components.',
+        icon: 'tabler:spiral',
+      },
+      {
+        title: 'Wheel Bearings',
+        description: 'Allow your wheels to spin freely. Worn bearings cause humming or growling noise that changes with speed, and can eventually seize if ignored.',
+        icon: 'tabler:circle-dotted',
+      },
+      {
+        title: 'Sway Bar Links & Bushings',
+        description: 'Sway bars reduce body roll in corners. Worn links and bushings cause clunking over bumps and reduced handling.',
+        icon: 'tabler:line',
+      },
+    ]}
+  />
+
+  <!-- Quality Parts Section -->
+  <Content
+    isReversed={true}
+    title="We Use Parts That Last"
+    content="Suspension components take a beating. Cheap parts wear out fast — sometimes faster than the originals they replaced. Then you're paying for the same repair twice.<br/><br/>We primarily use <strong>NAPA Premium Steering & Suspension</strong> parts. They're built to meet or exceed OE specifications, and they're backed by NAPA's warranty program.<br/><br/>When the job calls for something different — OEM parts for specific applications, heavy-duty upgrades for trucks that tow — we source what's right for the vehicle and how it's used.<br/><br/><strong>The goal is to fix it once, fix it right, and have it last.</strong>"
+  />
+
+  <!-- Signs: What You Feel -->
+  <Features2
+    title="What You Feel"
+    subtitle="Sensations that indicate steering or suspension problems"
+    columns={2}
+    items={[
+      {
+        title: 'Steering Wheel Vibration',
+        description: 'Vibration through the steering wheel, especially at certain speeds',
+        icon: 'tabler:ripple',
+      },
+      {
+        title: 'Loose or Wandering Steering',
+        description: 'Vehicle wanders at highway speeds or requires constant correction',
+        icon: 'tabler:arrows-shuffle',
+      },
+      {
+        title: 'Vehicle Pulls to One Side',
+        description: 'Car or truck drifts left or right when you let go of the wheel',
+        icon: 'tabler:arrow-right',
+      },
+      {
+        title: 'Bouncy or Floaty Ride',
+        description: 'Vehicle bounces excessively over bumps or feels unstable',
+        icon: 'tabler:arrows-up-down',
+      },
+    ]}
+  />
+
+  <!-- Signs: What You Hear -->
+  <Features2
+    title="What You Hear"
+    subtitle="Sounds that indicate steering or suspension problems"
+    columns={2}
+    items={[
+      {
+        title: 'Clunking Over Bumps',
+        description: 'Knocking or clunking sounds when hitting bumps or potholes',
+        icon: 'tabler:volume',
+      },
+      {
+        title: 'Squeaking or Groaning',
+        description: 'Squeaking when turning or groaning at low speeds',
+        icon: 'tabler:music',
+      },
+      {
+        title: 'Humming or Growling',
+        description: 'Noise that changes with vehicle speed — often wheel bearings',
+        icon: 'tabler:wave-sine',
+      },
+      {
+        title: 'Popping When Turning',
+        description: 'Clicking or popping sounds during turns',
+        icon: 'tabler:point',
+      },
+    ]}
+  />
+
+  <!-- Signs: What You See -->
+  <Content
+    title="What You See"
+    items={[
+      { title: 'Uneven Tire Wear', description: 'Especially inside or outside edges wearing faster than the rest' },
+      { title: 'Leaking Fluid', description: 'Wet spots at steering components or shock absorbers' },
+      { title: 'Damaged Boots', description: 'Torn or cracked rubber boots on tie rods or CV joints' },
+      { title: 'Vehicle Sitting Low', description: 'One side lower than the other, or overall sagging' },
+      { title: 'Cupped Tire Wear', description: 'Scalloped or wavy pattern on tire tread — worn shocks' },
+    ]}
+  />
+
+  <!-- Alignment Connection Section -->
+  <Content
+    isReversed={true}
+    title="Suspension Work Usually Means Alignment"
+    content="Here's something to keep in mind: most steering and suspension repairs affect your alignment.<br/><br/>Replace a tie rod? Alignment. Ball joints? Alignment. Control arms? Alignment. Struts on vehicles where they're part of the steering geometry? Alignment.<br/><br/>We have a <strong>Hunter HawkEye Elite alignment system</strong> — the same equipment used by dealerships. When your suspension work is done, we can align it properly before you leave.<br/><br/><a href='/services/alignment' class='text-primary hover:underline font-semibold'>Learn More About Our Alignment Service →</a>"
+  />
+
+  <!-- Inspection & Diagnosis Section -->
+  <Content
+    title="We Don't Guess"
+    content="Suspension noises and handling problems can come from multiple sources. A clunk could be ball joints, control arm bushings, sway bar links, or strut mounts. A pull could be alignment, tire condition, or worn components.<br/><br/>We inspect and diagnose before we recommend repairs. You'll know what's actually wrong before we start replacing parts.<br/><br/><strong>Our digital inspection reports include photos of what we find</strong> — worn boots, play in joints, leaking seals. You see what we see."
+  />
+
+  <!-- FAQs Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    items={[
+      {
+        title: 'How do I know if my shocks or struts are worn?',
+        description: 'The "bounce test" (pushing down on a corner and watching it settle) only catches severely worn shocks. By that point, they\'ve been affecting your handling and tire wear for a while. If your vehicle has over 80,000–100,000 km and you\'ve never replaced shocks/struts, they\'re probably due. If you notice bouncing, poor handling, or cupped tire wear, they\'re definitely due.',
+      },
+      {
+        title: 'How long does suspension work take?',
+        description: 'Depends on what\'s being done. A pair of front struts might take 2–3 hours. Ball joints and control arms can take longer, especially if hardware is seized. We\'ll give you a time estimate when we quote the work.',
+      },
+      {
+        title: 'Is it safe to drive with worn suspension?',
+        description: 'Worn shocks, bushings, and minor play in components? The vehicle will still drive, but handling, braking, and tire wear are compromised. Severely worn ball joints or tie rod ends? No. These can fail suddenly and cause loss of control. If we find something unsafe, we\'ll tell you directly.',
+      },
+      {
+        title: 'Do I need to replace shocks/struts in pairs?',
+        description: 'We recommend it. Even if only one side is obviously failed, the other side has the same mileage and wear. Replacing one side puts mismatched damping on the vehicle, which affects handling. Replacing pairs also means one alignment instead of two.',
+      },
+      {
+        title: 'Can worn suspension cause tire wear?',
+        description: 'Absolutely. Worn ball joints, tie rod ends, and control arm bushings allow alignment angles to shift as you drive. Your alignment might be set correctly with the vehicle on the rack, but worn components let it move around on the road. This causes uneven wear patterns that can destroy tires quickly.',
+      },
+    ]}
+  />
+
+  <!-- Related Services Section -->
+  <Features2
+    title="Related Services"
+    columns={4}
+    items={[
+      {
+        title: 'Wheel Alignment',
+        description: 'Essential after suspension work',
+        icon: 'tabler:focus-2',
+        callToAction: { text: 'Learn More', href: '/services/alignment' },
+      },
+      {
+        title: 'Tire Sales & Service',
+        description: 'Suspension wear affects your tires',
+        icon: 'tabler:circle',
+        callToAction: { text: 'Learn More', href: '/services/tires' },
+      },
+      {
+        title: 'Brake Service',
+        description: 'Often inspected together',
+        icon: 'tabler:disc',
+        callToAction: { text: 'Learn More', href: '/services/brake-repair' },
+      },
+      {
+        title: 'Pre-Purchase Inspection',
+        description: 'Suspension check included',
+        icon: 'tabler:clipboard-check',
+        callToAction: { text: 'Learn More', href: '/services/pre-purchase-inspection' },
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Something Not Feeling Right?"
+    subtitle="Clunks, noises, pulling, wandering — we'll figure out what's going on and fix it properly."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>

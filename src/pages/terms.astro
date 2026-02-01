@@ -1,0 +1,153 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Terms of Service | Sylvan Lake AUTOPRO',
+  description: 'Terms of service for Sylvan Lake AUTOPRO. Information about estimates, authorizations, and warranty coverage.',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2 font-heading dark:text-white">Terms of Service</h1>
+      <p class="text-sm text-muted dark:text-slate-400 mb-8">Last updated: January 2025</p>
+
+      <div class="prose prose-lg dark:prose-invert max-w-none space-y-8">
+
+        <!-- Website Use -->
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold mb-3 dark:text-white">Website Use</h2>
+          <p class="text-muted dark:text-slate-400">
+            This website is provided by Sylvan Lake AUTOPRO Inc. for informational purposes. The information here gives you a general idea of our services and capabilities.
+          </p>
+          <p class="text-muted dark:text-slate-400 mt-3">
+            Prices shown on this website are estimates and may vary based on your specific vehicle and situation. For current pricing and availability, please contact us directly.
+          </p>
+        </div>
+
+        <!-- Repair Estimates & Authorizations -->
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold mb-3 dark:text-white">Repair Estimates & Authorizations</h2>
+          <p class="text-muted dark:text-slate-400">
+            We follow the repair authorization requirements set by AMVIC (Alberta Motor Vehicle Industry Council). These rules exist to protect you as a customer, and we're happy to follow them.
+          </p>
+
+          <h3 class="text-lg font-bold mt-5 mb-2 dark:text-white">Estimates</h3>
+          <ul class="list-disc pl-6 text-muted dark:text-slate-400 space-y-2">
+            <li>Written estimates are provided upon request before work begins</li>
+            <li>Estimates include a description of the work and the estimated total cost (labour, parts, and any equipment charges)</li>
+            <li>If diagnostic work is needed first to identify the problem, we'll tell you the maximum cost for that diagnostic work upfront</li>
+          </ul>
+
+          <h3 class="text-lg font-bold mt-5 mb-2 dark:text-white">Authorization</h3>
+          <ul class="list-disc pl-6 text-muted dark:text-slate-400 space-y-2">
+            <li>We require your authorization before performing any repair work</li>
+            <li>Authorization includes: your name, the date, description of work to be done, estimated cost, and your confirmation</li>
+            <li>If you authorize work by phone, we record the time, method of contact, and all the details above</li>
+          </ul>
+
+          <h3 class="text-lg font-bold mt-5 mb-2 dark:text-white">Additional Work</h3>
+          <p class="text-muted dark:text-slate-400">
+            Sometimes we discover additional issues once we get into a repair. If the final cost will exceed the original estimate, we'll contact you for re-authorization before proceeding. No surprises.
+          </p>
+        </div>
+
+        <!-- Warranty Information -->
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold mb-3 dark:text-white">Warranty Information</h2>
+          <p class="text-muted dark:text-slate-400">
+            Most repairs performed at our shop are covered by the <strong class="dark:text-white">NAPA "Peace of Mind" Warranty</strong>:
+          </p>
+          <ul class="list-disc pl-6 mt-3 text-muted dark:text-slate-400 space-y-2">
+            <li><strong class="dark:text-white">24 months / 40,000 km</strong> coverage (whichever comes first)</li>
+            <li><strong class="dark:text-white">Nationwide coverage</strong> at participating NAPA AUTOPRO locations across Canada</li>
+          </ul>
+
+          <div class="bg-blue-50 dark:bg-slate-700 border-l-4 border-primary p-4 mt-4">
+            <p class="text-muted dark:text-slate-300">
+              <strong class="dark:text-white">Need warranty service?</strong> Contact us first at <a href="tel:+14038870440" class="text-primary hover:underline">(403) 887-0440</a>. If you're more than 40 km away, call <strong class="dark:text-white">1-866-GET-NAPA</strong> (1-866-438-6272) to find a participating location. Warranty repairs must be pre-authorized to receive coverage.
+            </p>
+          </div>
+
+          <p class="text-muted dark:text-slate-400 mt-4">
+            The warranty is provided by the NAPA AUTOPRO network. Some exclusions apply, including:
+          </p>
+          <ul class="list-disc pl-6 mt-2 text-muted dark:text-slate-400 space-y-1">
+            <li>Internal engine and transmission repairs</li>
+            <li>Tires and batteries</li>
+            <li>Preventive maintenance services (oil changes, fluid flushes, etc.)</li>
+            <li>Body work and collision repair</li>
+            <li>Commercial vehicles over 17,000 lbs GVW</li>
+          </ul>
+          <p class="text-muted dark:text-slate-400 mt-3">
+            For full warranty terms and conditions, visit: <a href="https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">NAPA AUTOPRO Peace of Mind Warranty</a>
+          </p>
+        </div>
+
+        <!-- Third-Party Services -->
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold mb-3 dark:text-white">Third-Party Services</h2>
+          <p class="text-muted dark:text-slate-400">
+            Our website links to third-party services for your convenience:
+          </p>
+          <ul class="list-disc pl-6 mt-3 text-muted dark:text-slate-400 space-y-2">
+            <li><strong class="dark:text-white">AutoText.me</strong> — online appointment booking</li>
+            <li><strong class="dark:text-white">Flexiti</strong> — financing options</li>
+            <li><strong class="dark:text-white">AutologiQ</strong> — financing options</li>
+          </ul>
+          <p class="text-muted dark:text-slate-400 mt-3">
+            These services are operated by third parties. When you use them, their terms of service and privacy policies apply. We provide these links as a convenience but do not control these services.
+          </p>
+        </div>
+
+        <!-- Limitation of Liability -->
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold mb-3 dark:text-white">Limitation of Liability</h2>
+          <p class="text-muted dark:text-slate-400">
+            The information on this website is provided "as is." We make reasonable efforts to keep it current and accurate, but we can't guarantee it's always perfect.
+          </p>
+          <p class="text-muted dark:text-slate-400 mt-3">
+            We are not liable for errors or omissions on this website. For accurate pricing, availability, and service information, please contact us directly. The real conversation happens when you call or visit — this website is just the introduction.
+          </p>
+        </div>
+
+        <!-- Governing Law -->
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold mb-3 dark:text-white">Governing Law</h2>
+          <p class="text-muted dark:text-slate-400">
+            These terms are governed by the laws of the Province of Alberta and the federal laws of Canada applicable therein. Any disputes arising from these terms or your use of this website are subject to the exclusive jurisdiction of the courts of Alberta.
+          </p>
+        </div>
+
+        <!-- Changes to Terms -->
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold mb-3 dark:text-white">Changes to Terms</h2>
+          <p class="text-muted dark:text-slate-400">
+            We may update these terms from time to time. Changes will be posted on this page with an updated "Last updated" date. Your continued use of this website after changes are posted constitutes acceptance of the updated terms.
+          </p>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold mb-3 dark:text-white">Contact Us</h2>
+          <p class="text-muted dark:text-slate-400">
+            If you have questions about these terms, please contact us:
+          </p>
+          <div class="mt-4 text-muted dark:text-slate-400">
+            <p><strong class="dark:text-white">Sylvan Lake AUTOPRO Inc.</strong></p>
+            <p>1A Industrial Dr</p>
+            <p>Sylvan Lake, AB T4S 1P4</p>
+            <p class="mt-3">
+              <strong class="dark:text-white">Email:</strong> <a href="mailto:service@sylvanlakeautopro.com" class="text-primary hover:underline">service@sylvanlakeautopro.com</a>
+            </p>
+            <p>
+              <strong class="dark:text-white">Phone:</strong> <a href="tel:+14038870440" class="text-primary hover:underline">(403) 887-0440</a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

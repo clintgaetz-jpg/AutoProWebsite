@@ -1,0 +1,368 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
+import { Icon } from 'astro-icon/components';
+
+import keyProgrammingImage from '~/assets/images/key-programming.jpg';
+
+const metadata = {
+  title: 'Automotive Key Cutting & Programming | Sylvan Lake AUTOPRO',
+  description: 'Professional automotive key services in Sylvan Lake. Key cutting, transponder programming, remote fobs & push-to-start systems. Domestic & Asian vehicles. Same-day service available. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Automotive Key Services",
+  "description": "Professional automotive key cutting and programming in Sylvan Lake. Transponder keys, key fobs, push-to-start systems for domestic and Asian vehicles.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does it take to cut and program a key?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "If we have the blank in stock, most keys can be completed in 30-60 minutes. Complex programming or special-order blanks may take longer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you make a key if I've lost all my keys?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For many domestic and Asian vehicles, yes. The Lonsdor K518 PRO can handle all-key-lost situations for supported vehicles. Some models may require additional steps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why don't you service European vehicles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "European manufacturers use proprietary systems that require expensive, brand-specific equipment and ongoing software subscriptions. The volume of European key work in our area doesn't justify that investment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a dealership key better quality?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. We use the same quality key blanks and the same programming protocols. For Ford, Dodge, and GM, we literally use the same factory tools. The end result is identical."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you program a key I bought online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sometimes. Aftermarket keys vary in quality and compatibility. We can attempt programming, but we can't guarantee success with keys we didn't supply."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Automotive Key Services" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section with Video -->
+  <section class="relative md:-mt-[76px] not-prose bg-gradient-to-b from-[#2952e8] via-[#1a3cb8] to-[#0A0094]">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pt-0 md:pt-[76px]"></div>
+      <div class="py-12 md:py-20 lg:py-0 lg:flex lg:items-center lg:min-h-[85vh] lg:gap-8">
+        <!-- Text Content -->
+        <div class="basis-1/2 text-center lg:text-left pb-10 md:pb-16 mx-auto">
+          <p class="text-base text-blue-200 font-bold tracking-wide uppercase mb-2">Key Services</p>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading text-white">
+            Automotive Key Services
+          </h1>
+          <p class="text-lg md:text-xl text-gray-200 mb-6 max-w-2xl">
+            Professional key cutting and programming—without the dealership price tag. Most keys ready same-day.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+            <Button variant="primary" text="Call (403) 887-0440" href="tel:+14038870440" class="w-full sm:w-auto min-h-[48px]" />
+            <Button variant="secondary" text="Book Appointment" href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1" target="_blank" class="w-full sm:w-auto min-h-[48px] border-white text-white hover:bg-white hover:text-[#0A0094]" />
+          </div>
+        </div>
+        <!-- Video -->
+        <div class="basis-1/2">
+          <div class="relative rounded-xl overflow-hidden shadow-2xl aspect-[4/3]">
+            <!-- Video with CSS crop to hide watermark at top -->
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-[115%] object-cover object-bottom"
+              poster="/images/key-cutting-poster.jpg"
+            >
+              <source src="/videos/key-cutting.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading dark:text-white">Skip the Dealership</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-left md:text-center">
+        <p>Lost your only key? Need a spare before it becomes an emergency? Dealerships charge premium prices and often require towing your vehicle to them. Wait times can stretch into days.</p>
+        <p>We provide the same key cutting and programming services—using <strong class="text-gray-900 dark:text-white">professional-grade equipment</strong> and <strong class="text-gray-900 dark:text-white">factory diagnostic tools</strong>—at a fraction of the cost.</p>
+        <p>Most keys can be cut and programmed while you wait.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipment Showcase - Two Column Cards -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-7xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <p class="text-sm font-bold tracking-wide uppercase text-primary dark:text-blue-200 mb-2">Professional Equipment</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Same Tools as the Dealership</h2>
+        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3 md:mt-4 max-w-2xl mx-auto">For Ford, Dodge, and GM we use the exact same factory diagnostic tools. Same programming process, same results.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 lg:gap-8">
+        <!-- Key Programming Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden">
+          <div class="aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-slate-800">
+            <Image
+              src={keyProgrammingImage}
+              alt="Programming a Ford key fob with Lonsdor diagnostic tool"
+              class="w-full h-full object-cover"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              loading="lazy"
+            />
+          </div>
+          <div class="p-4 md:p-6 lg:p-8">
+            <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 font-heading dark:text-white">Lonsdor K518 PRO</h3>
+            <p class="text-sm md:text-base text-muted dark:text-slate-400 mb-4 md:mb-6">Professional-grade key programmer that handles everything from basic transponder programming to complex all-key-lost situations.</p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">All-key-lost</strong> programming for supported vehicles</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">Push-to-start</strong> proximity fob programming</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">Immobilizer reset</strong> and chip cloning</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Key Cutting Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden">
+          <div class="aspect-[4/3] overflow-hidden bg-gray-100 dark:bg-slate-800">
+            <!-- Video with CSS crop -->
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full h-[115%] object-cover object-bottom"
+            >
+              <source src="/videos/key-cutting.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="p-4 md:p-6 lg:p-8">
+            <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 font-heading dark:text-white">Triton Key Cutting Machine</h3>
+            <p class="text-sm md:text-base text-muted dark:text-slate-400 mb-4 md:mb-6">High-precision computerized key cutting. From basic blade keys to complex laser-cut high-security keys with exact accuracy.</p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">Laser-cut</strong> high-security keys</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">Transponder</strong> keys with security chips</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                <span class="text-sm md:text-base dark:text-slate-300"><strong class="dark:text-white">VATS keys</strong> for GM vehicles</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Can Do Section -->
+  <Features2
+    title="What We Can Do"
+    subtitle="Complete key cutting and programming services"
+    columns={2}
+    items={[
+      {
+        title: 'Key Cutting',
+        description: 'Standard blade keys, transponder keys with security chips, laser-cut high-security keys, and VATS keys for GM vehicles.',
+        icon: 'tabler:key',
+      },
+      {
+        title: 'Key Programming',
+        description: 'Transponder chip programming, immobilizer system programming, push-to-start proximity fobs, and remote keyless entry.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Factory Tool Programming',
+        description: 'For Ford, Dodge, and Chevrolet/GM, we use the same factory diagnostic tools as dealerships. Same accuracy, same results.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'All-Key-Lost Service',
+        description: 'Lost your only key? For many domestic and Asian vehicles, we can create a new key from scratch—no existing key needed.',
+        icon: 'tabler:key-off',
+      },
+    ]}
+  />
+
+  <!-- Mid-page CTA -->
+  <CallToAction
+    title="Need a Key?"
+    subtitle="Call us with your year, make, and model for pricing. Most keys can be cut and programmed same-day."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+    ]}
+  />
+
+  <!-- Vehicles We Service Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Vehicles We Service</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
+        <div>
+          <h3 class="text-lg md:text-xl font-bold mb-3 dark:text-white">Domestic Brands</h3>
+          <p class="text-base md:text-lg text-muted dark:text-slate-400">Ford, Chevrolet, GMC, Dodge, Chrysler, Jeep, Ram, Buick, Cadillac, Lincoln, Mercury, Pontiac, Oldsmobile, Saturn</p>
+        </div>
+        <div>
+          <h3 class="text-lg md:text-xl font-bold mb-3 dark:text-white">Asian Brands</h3>
+          <p class="text-base md:text-lg text-muted dark:text-slate-400">Toyota, Honda, Nissan, Hyundai, Kia, Mazda, Mitsubishi, Lexus, Acura, Infiniti</p>
+        </div>
+      </div>
+
+      <!-- European Exclusion Notice -->
+      <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 md:p-6">
+        <h3 class="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-2">European Vehicles Not Supported</h3>
+        <p class="text-sm md:text-base text-amber-700 dark:text-amber-300">We do not provide key services for European vehicles (BMW, Mercedes, Audi, Volkswagen, Volvo, etc.). These require specialized equipment and software subscriptions that aren't cost-effective for us to maintain.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Common Situations Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Common Situations We Handle</h2>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white dark:bg-slate-900 rounded-lg p-4 md:p-6 shadow-sm">
+          <h3 class="text-lg font-bold mb-2 dark:text-white">"I lost my only key"</h3>
+          <p class="text-sm md:text-base text-muted dark:text-slate-400">For many domestic and Asian vehicles, we can create a new key from scratch—no existing key needed. We'll cut the key and program it to your vehicle's immobilizer.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-lg p-4 md:p-6 shadow-sm">
+          <h3 class="text-lg font-bold mb-2 dark:text-white">"I need a spare key"</h3>
+          <p class="text-sm md:text-base text-muted dark:text-slate-400">Smart move. Having a spare prevents the emergency (and expense) of being stranded with no key. We can cut and program a spare while you wait.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-lg p-4 md:p-6 shadow-sm">
+          <h3 class="text-lg font-bold mb-2 dark:text-white">"The dealership wants $400+ for a key"</h3>
+          <p class="text-sm md:text-base text-muted dark:text-slate-400">We hear this constantly. Our pricing is significantly lower, and we can usually complete the work faster. Same quality, less hassle.</p>
+        </div>
+        <div class="bg-white dark:bg-slate-900 rounded-lg p-4 md:p-6 shadow-sm">
+          <h3 class="text-lg font-bold mb-2 dark:text-white">"I bought a used car with only one key"</h3>
+          <p class="text-sm md:text-base text-muted dark:text-slate-400">Common situation. We can add keys to your vehicle so you have backups. Much cheaper than finding out you need one after losing the original.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about key services"
+    columns={1}
+    items={[
+      {
+        title: 'How long does it take to cut and program a key?',
+        description: 'If we have the blank in stock, most keys can be completed in 30-60 minutes. Complex programming or special-order blanks may take longer.',
+      },
+      {
+        title: 'Can you make a key if I\'ve lost all my keys?',
+        description: 'For many domestic and Asian vehicles, yes. The Lonsdor K518 PRO can handle all-key-lost situations for supported vehicles. Call with your year/make/model and we\'ll let you know.',
+      },
+      {
+        title: 'Why don\'t you service European vehicles?',
+        description: 'European manufacturers use proprietary systems that require expensive, brand-specific equipment and ongoing software subscriptions. The volume of European key work in our area doesn\'t justify that investment.',
+      },
+      {
+        title: 'Is a dealership key better quality?',
+        description: 'No. We use the same quality key blanks and the same programming protocols. For Ford, Dodge, and GM, we literally use the same factory tools. The end result is identical.',
+      },
+      {
+        title: 'Do you keep key blanks in stock?',
+        description: 'We stock common blanks for popular domestic and Asian vehicles. Less common keys may need to be ordered (usually 1-2 business days).',
+      },
+      {
+        title: 'Can you program a key I bought online?',
+        description: 'Sometimes. Aftermarket keys vary in quality and compatibility. We can attempt programming, but we can\'t guarantee success with keys we didn\'t supply.',
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Professional Keys, Fair Prices"
+    subtitle="Same tools. Same quality. Less hassle. Walk-ins welcome."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+    ]}
+  />
+</Layout>

@@ -1,0 +1,267 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Making It Easy | Sylvan Lake AUTOPRO',
+  description: "Auto repair doesn't have to be a hassle. Shuttle service, loaner vehicles, digital inspections, flexible payment, online booking, and more. Sylvan Lake AUTOPRO makes it easy.",
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Customer Convenience"
+    title="Making It Easy"
+    subtitle="Auto repair shouldn't be a hassle. Here's how we make it work for you."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Main Content Grid -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+
+      <!-- Getting Around -->
+      <div class="mb-12">
+        <h3 class="text-sm font-semibold text-primary dark:text-blue-400 uppercase tracking-wide mb-4">Getting Around</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-slate-800 border-l-4 border-l-primary">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-[#FFC836]/20 dark:bg-[#FFC836]/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#FFC836]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 17h8M8 17v-4m8 4v-4m-8 0h8m-8 0V9a2 2 0 012-2h4a2 2 0 012 2v4M6 17H4a1 1 0 01-1-1v-2a1 1 0 011-1h2m14 4h2a1 1 0 001-1v-2a1 1 0 00-1-1h-2" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Local Shuttle Service</h4>
+                <p class="text-muted dark:text-slate-400">Need a ride? We offer free shuttle service within Sylvan Lake. Drop your vehicle off and we'll get you where you need to be — home, work, or the coffee shop down the street.</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-slate-800 border-l-4 border-l-primary">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-[#FFC836]/20 dark:bg-[#FFC836]/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#FFC836]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Loaner Vehicles</h4>
+                <p class="text-muted dark:text-slate-400">For longer repairs, ask about our loaner vehicles. Drive one of ours while we work on yours. Must be 25+ with valid license and insurance. Call ahead for availability.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Drop Off & Pick Up -->
+      <div class="mb-12">
+        <h3 class="text-sm font-semibold text-primary dark:text-blue-400 uppercase tracking-wide mb-4">Drop Off & Pick Up</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-slate-800 border-l-4 border-l-primary">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-[#FFC836]/20 dark:bg-[#FFC836]/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#FFC836]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Drop Off Anytime</h4>
+                <p class="text-muted dark:text-slate-400">Can't make it during business hours? Drop your vehicle off early morning or after we close. Use the after-hours key drop — large grey box at the front of the shop. Text or email us your info and we'll get started when we arrive.</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-slate-800 border-l-4 border-l-primary">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-[#FFC836]/20 dark:bg-[#FFC836]/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#FFC836]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Pick Up Anytime</h4>
+                <p class="text-muted dark:text-slate-400">Need your vehicle after hours? Pay before close (e-transfer or text-to-pay), we'll text you the lock box combination, and you grab your keys and go. Your schedule, not ours.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stay Connected -->
+      <div class="mb-12">
+        <h3 class="text-sm font-semibold text-primary dark:text-blue-400 uppercase tracking-wide mb-4">Stay Connected</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-slate-800 border-l-4 border-l-primary">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-[#FFC836]/20 dark:bg-[#FFC836]/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#FFC836]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Text Updates</h4>
+                <p class="text-muted dark:text-slate-400">Prefer texting? So do we. Get updates on your vehicle's status via text. No phone tag, no voicemails. We'll let you know when it's ready or if we find anything that needs your attention.</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-slate-800 border-l-4 border-l-primary">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-[#FFC836]/20 dark:bg-[#FFC836]/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#FFC836]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Digital Vehicle Inspections</h4>
+                <p class="text-muted dark:text-slate-400">We don't just tell you what's wrong — we show you. Our digital inspection system sends photos, measurements, and explanations directly to your phone. See exactly what we see, make informed decisions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment & Booking -->
+      <div class="mb-12">
+        <h3 class="text-sm font-semibold text-primary dark:text-blue-400 uppercase tracking-wide mb-4">Payment & Booking</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-slate-800 border-l-4 border-l-primary">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-[#FFC836]/20 dark:bg-[#FFC836]/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#FFC836]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Flexible Payment Options</h4>
+                <p class="text-muted dark:text-slate-400">Pay your way: text-to-pay, e-transfer, credit/debit, or cash. Need financing? We partner with Flexiti and AutologiQ for flexible payment plans. Apply online, get approved, pay over time.</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-lg border border-gray-100 dark:border-slate-800 border-l-4 border-l-primary">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-[#FFC836]/20 dark:bg-[#FFC836]/20 rounded-xl flex items-center justify-center">
+                <svg class="w-6 h-6 text-[#FFC836]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Online Booking</h4>
+                <p class="text-muted dark:text-slate-400">Book your appointment 24/7 through our online system. Pick a time that works for you — no phone call required. Or call/text us at (403) 887-0440.</p>
+                <a href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1" target="_blank" rel="noopener" class="inline-flex items-center mt-3 text-primary dark:text-blue-400 hover:underline font-semibold text-sm">
+                  Book Online
+                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Detailed Sections Below -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+
+      <!-- Waiting Room -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden mb-8">
+        <div class="md:flex">
+          <div class="md:w-1/3 bg-gradient-to-br from-primary to-secondary p-8 flex items-center justify-center">
+            <div class="text-center">
+              <svg class="w-16 h-16 text-white mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+              </svg>
+              <h3 class="text-2xl font-bold text-white">While You Wait</h3>
+            </div>
+          </div>
+          <div class="md:w-2/3 p-8">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Comfortable Waiting Room</h4>
+            <p class="text-muted dark:text-slate-400 mb-6">If you're staying while we work, make yourself at home. Most routine services take 30-60 minutes. We'll keep you posted on timing.</p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                  </svg>
+                </div>
+                <span class="text-gray-900 dark:text-white font-medium">Free Wi-Fi</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <span class="text-gray-900 dark:text-white font-medium">TV</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <span class="text-gray-900 dark:text-white font-medium">Coffee & Water</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <span class="text-gray-900 dark:text-white font-medium">Light Snacks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Financing Details -->
+      <div class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl overflow-hidden">
+        <div class="md:flex md:flex-row-reverse">
+          <div class="md:w-1/3 bg-gradient-to-br from-[#FFC836] to-[#e6b430] p-8 flex items-center justify-center">
+            <div class="text-center">
+              <svg class="w-16 h-16 text-[#0A0094] mx-auto mb-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+              </svg>
+              <h3 class="text-2xl font-bold text-[#0A0094]">Financing</h3>
+            </div>
+          </div>
+          <div class="md:w-2/3 p-8">
+            <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Repairs Not in the Budget?</h4>
+            <p class="text-muted dark:text-slate-400 mb-6">We know unexpected repairs can be stressful. That's why we partner with financing providers to give you options.</p>
+            <div class="space-y-4">
+              <div class="flex items-start gap-4 p-4 bg-gray-50 dark:bg-slate-800 rounded-lg">
+                <div class="font-bold text-primary dark:text-blue-400">Flexiti</div>
+                <p class="text-sm text-muted dark:text-slate-400">Apply online, get approved in minutes. Flexible payment plans with competitive rates.</p>
+              </div>
+              <div class="flex items-start gap-4 p-4 bg-gray-50 dark:bg-slate-800 rounded-lg">
+                <div class="font-bold text-primary dark:text-blue-400">AutologiQ</div>
+                <p class="text-sm text-muted dark:text-slate-400">Automotive-specific financing. Easy application, quick decisions.</p>
+              </div>
+            </div>
+            <p class="text-sm text-muted dark:text-slate-400 mt-4">Need help? Ask us about financing options when you drop off or call ahead.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CallToAction
+    title="Questions?"
+    subtitle="We're here to help. If you have questions about any of our services or amenities, give us a call."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Contact Us', href: '/contact' },
+    ]}
+  />
+</Layout>

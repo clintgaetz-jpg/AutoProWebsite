@@ -1,0 +1,324 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Brake Repair | Sylvan Lake AUTOPRO',
+  description: 'Expert brake repair in Sylvan Lake. Pads, rotors, calipers, fluid service. No surprise costs—we inspect first and show you what we find. NAPA warranty. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Brake Repair & Service",
+  "description": "Complete brake repair and service including pads, rotors, calipers, and brake fluid service",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a brake job cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Brake repair costs vary based on what's needed. Pad replacement on one axle might be $250-400, while a complete brake job with rotors and calipers on all four wheels could exceed $1,000. Our $92.40 inspection gives you an accurate quote based on exactly what your vehicle needs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I just replace brake pads without replacing rotors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sometimes, yes. If rotors have enough thickness remaining and no significant scoring or warping, pad replacement alone is fine. We measure rotor thickness during inspection and show you the numbers compared to specifications."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does a brake job take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A straightforward pad and rotor replacement takes about 1-2 hours per axle. More complex repairs involving calipers, brake lines, or ABS components take longer."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it safe to drive with squeaking brakes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Light squeaking when brakes are cold or wet is usually not urgent. Persistent squeaking means pads are worn—get them checked soon. Grinding noise means metal-on-metal contact and should be addressed immediately to prevent rotor damage."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Brake Repair & Service" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Brake Services"
+    title="Brake Repair & Service"
+    subtitle="No Surprises. No Guesswork. Just Honest Brake Work."
+    actions={[
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading dark:text-white">Expert Brake Repair in Sylvan Lake</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-left md:text-center">
+        <p>Brake repair at Sylvan Lake AUTOPRO starts with knowing exactly what your vehicle needs. We inspect first, document everything with photos and measurements, and give you an accurate quote before any work begins. No surprise parts. No uncomfortable phone calls halfway through the job.</p>
+        <p>We've been repairing brakes in Sylvan Lake since 2006. Whether you need brake pads, rotors, calipers, or a complete brake system overhaul, our licensed technicians use quality NAPA parts backed by a <strong class="text-gray-900 dark:text-white">24-month, 40,000 km nationwide warranty</strong>.</p>
+        <p>Your brakes are your vehicle's most important safety system. We treat them that way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Warning Signs Section -->
+  <Features2
+    title="Signs Your Brakes Need Attention"
+    subtitle="Don't ignore these warning signs"
+    columns={3}
+    items={[
+      {
+        title: 'Squealing or Squeaking',
+        description: 'That high-pitched noise is usually the wear indicator telling you pads are getting low.',
+        icon: 'tabler:volume',
+      },
+      {
+        title: 'Grinding Noise',
+        description: 'Metal grinding on metal means pads are worn through. This damages rotors quickly—don\'t wait.',
+        icon: 'tabler:alert-triangle',
+      },
+      {
+        title: 'Soft Brake Pedal',
+        description: 'A spongy pedal or one that goes to the floor indicates air in lines or a fluid issue.',
+        icon: 'tabler:arrow-down',
+      },
+      {
+        title: 'Steering Wheel Shakes',
+        description: 'Vibration during braking typically indicates warped rotors from heat buildup.',
+        icon: 'tabler:steering-wheel',
+      },
+      {
+        title: 'Pulls to One Side',
+        description: 'Vehicle pulling when braking often means a stuck caliper or uneven pad wear.',
+        icon: 'tabler:arrows-left-right',
+      },
+      {
+        title: 'Longer Stopping Distance',
+        description: 'If you\'re pressing harder or stopping takes more distance, your brakes need attention.',
+        icon: 'tabler:ruler-2',
+      },
+    ]}
+  />
+
+  <!-- Our Services Section -->
+  <Features2
+    title="Our Brake Repair Services"
+    subtitle="Complete brake system service and repair"
+    columns={2}
+    items={[
+      {
+        title: 'Brake Pad & Shoe Replacement',
+        description: 'Quality NAPA pads installed with proper lubrication of slides and hardware. We inspect rotors and only replace what\'s needed.',
+        icon: 'tabler:disc',
+      },
+      {
+        title: 'Rotor & Drum Service',
+        description: 'We measure thickness and check for damage. Rotors can often be machined if they have enough material—we\'ll show you the numbers.',
+        icon: 'tabler:circle',
+      },
+      {
+        title: 'Caliper Repair & Replacement',
+        description: 'Stuck calipers cause uneven wear and poor braking. We diagnose, rebuild, or replace as needed.',
+        icon: 'tabler:tool',
+      },
+      {
+        title: 'Brake Fluid Flush',
+        description: 'Brake fluid absorbs moisture over time, reducing effectiveness. We flush the entire system with fresh DOT-spec fluid.',
+        icon: 'tabler:droplet',
+      },
+      {
+        title: 'Brake Line & Hose Replacement',
+        description: 'Rusted steel lines and cracked rubber hoses are safety hazards. We inspect and replace as needed.',
+        icon: 'tabler:line',
+      },
+      {
+        title: 'ABS Diagnostics & Repair',
+        description: 'When your ABS light comes on, we have the diagnostic equipment to find out why and fix it properly.',
+        icon: 'tabler:cpu',
+      },
+    ]}
+  />
+
+  <!-- Our Process Section -->
+  <Steps2
+    title="Our Process: No Surprises"
+    subtitle="How we handle every brake repair"
+    items={[
+      {
+        title: 'Thorough Inspection',
+        description: 'Every brake repair starts with our complete brake inspection. We remove wheels, disassemble components, and measure everything. You\'ll receive a digital report with photos.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Accurate Quote',
+        description: 'Based on exactly what we found—not what we think might be wrong—you get a written estimate. Parts, labor, everything itemized.',
+        icon: 'tabler:file-invoice',
+      },
+      {
+        title: 'Your Decision',
+        description: 'You decide whether to proceed. No pressure. We\'ll answer questions and explain options, but it\'s your vehicle and your choice.',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Quality Repair',
+        description: 'We use NAPA parts, follow proper procedures, and take the time to do it right. Everything torqued to spec, slides lubricated, hardware replaced if needed.',
+        icon: 'tabler:tools',
+      },
+      {
+        title: 'Road Test & Verification',
+        description: 'Before you pick up your vehicle, we road test the brakes to verify proper operation. No squeaks, no pulls, stops straight and smooth.',
+        icon: 'tabler:car',
+      },
+    ]}
+  />
+
+  <!-- Pricing Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">What Does Brake Repair Cost?</h2>
+        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3 md:mt-4">Costs depend on what's actually needed. Here are typical ranges:</p>
+      </div>
+      <div class="space-y-6 md:space-y-8 text-base md:text-lg text-muted dark:text-slate-400">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-xl">
+            <p class="font-bold dark:text-white">Brake pads only (one axle)</p>
+            <p class="text-xl md:text-2xl font-bold text-primary dark:text-blue-400">$250 - $400</p>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-xl">
+            <p class="font-bold dark:text-white">Pads + rotors (one axle)</p>
+            <p class="text-xl md:text-2xl font-bold text-primary dark:text-blue-400">$400 - $700</p>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-xl">
+            <p class="font-bold dark:text-white">Pads + rotors + calipers</p>
+            <p class="text-xl md:text-2xl font-bold text-primary dark:text-blue-400">$700 - $1,200</p>
+          </div>
+          <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-xl">
+            <p class="font-bold dark:text-white">Complete brake job (all four wheels)</p>
+            <p class="text-xl md:text-2xl font-bold text-primary dark:text-blue-400">$800 - $1,500+</p>
+          </div>
+        </div>
+        <p class="text-center">These are estimates. Your actual cost depends on your vehicle and what the inspection reveals. That's why we inspect first—so your quote is accurate.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAPA Warranty Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading dark:text-white">NAPA Peace of Mind Warranty</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+        <p>Brake repairs at Sylvan Lake AUTOPRO are backed by the <strong class="text-gray-900 dark:text-white">NAPA Peace of Mind Warranty</strong>:</p>
+        <div class="flex flex-col md:flex-row justify-center gap-4 md:gap-8 my-6">
+          <div class="text-center">
+            <p class="text-2xl md:text-3xl font-bold text-primary dark:text-blue-400">24 months</p>
+            <p class="text-sm">or 40,000 km</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl md:text-3xl font-bold text-primary dark:text-blue-400">Nationwide</p>
+            <p class="text-sm">Valid across Canada</p>
+          </div>
+          <div class="text-center">
+            <p class="text-2xl md:text-3xl font-bold text-primary dark:text-blue-400">Parts & Labor</p>
+            <p class="text-sm">Fully covered</p>
+          </div>
+        </div>
+        <p>If you're traveling and something goes wrong with a repair we performed, any NAPA AUTOPRO shop can help. You're covered wherever you drive.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about brake repair"
+    columns={1}
+    items={[
+      {
+        title: 'How much does a brake job cost?',
+        description: 'Brake repair costs vary based on what\'s needed. Pad replacement on one axle might be $250-400, while a complete brake job with rotors and calipers on all four wheels could exceed $1,000. Our $92.40 inspection gives you an accurate quote based on exactly what your vehicle needs.',
+      },
+      {
+        title: 'Can I just replace brake pads without replacing rotors?',
+        description: 'Sometimes, yes. If rotors have enough thickness remaining and no significant scoring or warping, pad replacement alone is fine. We measure rotor thickness during inspection and show you the numbers compared to specifications.',
+      },
+      {
+        title: 'How long does a brake job take?',
+        description: 'A straightforward pad and rotor replacement takes about 1-2 hours per axle. More complex repairs involving calipers, brake lines, or ABS components take longer. We\'ll give you a time estimate when you approve the work.',
+      },
+      {
+        title: 'Is it safe to drive with squeaking brakes?',
+        description: 'Light squeaking when brakes are cold or wet is usually not urgent. Persistent squeaking means pads are worn—get them checked soon. Grinding noise means metal-on-metal contact and should be addressed immediately to prevent rotor damage.',
+      },
+      {
+        title: 'Why does my car shake when I brake?',
+        description: 'Vibration during braking usually indicates warped rotors. This happens from heat buildup during heavy braking, towing, or descending long hills. Rotors may be able to be machined, or they may need replacement.',
+      },
+      {
+        title: 'How often should I have my brakes checked?',
+        description: 'We recommend a brake inspection every 20,000-30,000 km, or immediately if you notice any warning signs like noise, vibration, or longer stopping distances.',
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Schedule Brake Service"
+    subtitle="Hearing noise? Feeling vibration? Let's find out what's going on."
+    actions={[
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+</Layout>
