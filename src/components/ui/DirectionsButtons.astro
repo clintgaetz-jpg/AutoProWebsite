@@ -7,8 +7,9 @@ export interface Props {
 
 const { class: className = '' } = Astro.props;
 
-const appleUrl = 'https://maps.apple.com/?daddr=Sylvan+Lake+AUTOPRO,+Sylvan+Lake,+AB&dirflg=d';
-const googleUrl = 'https://www.google.com/maps/dir/?api=1&destination=Sylvan+Lake+AUTOPRO,+Sylvan+Lake,+AB';
+// Using coordinates for reliability (1A Industrial Dr, Sylvan Lake, AB T4S 1P4)
+const appleUrl = 'https://maps.apple.com/?daddr=52.311676,-114.073863&dirflg=d';
+const googleUrl = 'https://www.google.com/maps/dir/?api=1&destination=52.311676,-114.073863';
 ---
 
 <div class:list={['directions-buttons flex flex-col sm:flex-row gap-3 justify-center', className]} data-directions-buttons>
