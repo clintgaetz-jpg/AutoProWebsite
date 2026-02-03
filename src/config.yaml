@@ -59,6 +59,7 @@ analytics:
   vendors:
     googleAnalytics:
       id: "G-KZM81H73XL"
+      partytown: false
 
 ui:
   theme: 'system'
