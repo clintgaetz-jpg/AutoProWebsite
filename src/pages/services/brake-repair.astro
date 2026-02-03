@@ -1,10 +1,13 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import brakePadRotorImage from '~/assets/images/brake-pad-rotor.jpg';
 
 const metadata = {
   title: 'Brake Repair | Sylvan Lake AUTOPRO',
@@ -96,21 +99,20 @@ const breadcrumbSchema = {
     subtitle="No Surprises. No Guesswork. Just Honest Brake Work."
     actions={[
       { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
   <!-- Introduction Section -->
-  <section class="py-12 md:py-16 lg:py-20">
-    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
-      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading dark:text-white">Expert Brake Repair in Sylvan Lake</h2>
-      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-left md:text-center">
-        <p>Brake repair at Sylvan Lake AUTOPRO starts with knowing exactly what your vehicle needs. We inspect first, document everything with photos and measurements, and give you an accurate quote before any work begins. No surprise parts. No uncomfortable phone calls halfway through the job.</p>
-        <p>We've been repairing brakes in Sylvan Lake since 2006. Whether you need brake pads, rotors, calipers, or a complete brake system overhaul, our licensed technicians use quality NAPA parts backed by a <strong class="text-gray-900 dark:text-white">24-month, 40,000 km nationwide warranty</strong>.</p>
-        <p>Your brakes are your vehicle's most important safety system. We treat them that way.</p>
-      </div>
-    </div>
-  </section>
+  <Content
+    title="Expert Brake Repair in Sylvan Lake"
+    content="Brake repair at Sylvan Lake AUTOPRO starts with knowing exactly what your vehicle needs. We inspect first, document everything with photos and measurements, and give you an accurate quote before any work begins. No surprise parts. No uncomfortable phone calls halfway through the job.<br/><br/>We've been repairing brakes in Sylvan Lake since 2006. Whether you need brake pads, rotors, calipers, or a complete brake system overhaul, our licensed technicians use quality NAPA parts backed by a <strong>24-month, 40,000 km nationwide warranty</strong>.<br/><br/>Your brakes are your vehicle's most important safety system. We treat them that way."
+    image={{
+      src: brakePadRotorImage,
+      alt: 'New brake pads and rotor installed on vehicle',
+    }}
+  />
 
   <!-- Warning Signs Section -->
   <Features2
@@ -190,6 +192,13 @@ const breadcrumbSchema = {
     ]}
   />
 
+  <!-- Quality Parts Section -->
+  <Content
+    isReversed={true}
+    title="Quality Parts. Proper Installation."
+    content="We use NAPA brake parts—not the cheapest option, but the right option. Quality pads last longer, stop better, and produce less dust and noise. Our technicians install them correctly: slides cleaned and lubricated, hardware replaced when needed, rotors measured or machined to spec.<br/><br/>The difference between a brake job that lasts and one that squeaks, shudders, or wears unevenly often comes down to doing the details right."
+  />
+
   <!-- Our Process Section -->
   <Steps2
     title="Our Process: No Surprises"
@@ -222,37 +231,6 @@ const breadcrumbSchema = {
       },
     ]}
   />
-
-  <!-- Pricing Section -->
-  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
-    <div class="max-w-4xl mx-auto px-4 md:px-6">
-      <div class="text-center mb-8 md:mb-12">
-        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">What Does Brake Repair Cost?</h2>
-        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3 md:mt-4">Costs depend on what's actually needed. Here are typical ranges:</p>
-      </div>
-      <div class="space-y-6 md:space-y-8 text-base md:text-lg text-muted dark:text-slate-400">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-xl">
-            <p class="font-bold dark:text-white">Brake pads only (one axle)</p>
-            <p class="text-xl md:text-2xl font-bold text-primary dark:text-blue-400">$250 - $400</p>
-          </div>
-          <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-xl">
-            <p class="font-bold dark:text-white">Pads + rotors (one axle)</p>
-            <p class="text-xl md:text-2xl font-bold text-primary dark:text-blue-400">$400 - $700</p>
-          </div>
-          <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-xl">
-            <p class="font-bold dark:text-white">Pads + rotors + calipers</p>
-            <p class="text-xl md:text-2xl font-bold text-primary dark:text-blue-400">$700 - $1,200</p>
-          </div>
-          <div class="bg-white dark:bg-slate-900 p-4 md:p-6 rounded-xl">
-            <p class="font-bold dark:text-white">Complete brake job (all four wheels)</p>
-            <p class="text-xl md:text-2xl font-bold text-primary dark:text-blue-400">$800 - $1,500+</p>
-          </div>
-        </div>
-        <p class="text-center">These are estimates. Your actual cost depends on your vehicle and what the inspection reveals. That's why we inspect first—so your quote is accurate.</p>
-      </div>
-    </div>
-  </section>
 
   <!-- NAPA Warranty Section -->
   <section class="py-12 md:py-16 lg:py-20">
@@ -312,13 +290,40 @@ const breadcrumbSchema = {
     ]}
   />
 
+  <!-- Related Services Section -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Brake Inspection',
+        description: '$92.40 with digital report',
+        icon: 'tabler:search',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/brake-inspection' },
+      },
+      {
+        title: 'Steering & Suspension',
+        description: 'Affects braking performance',
+        icon: 'tabler:car',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/steering-suspension' },
+      },
+      {
+        title: 'Tire Service',
+        description: 'Tires affect stopping distance',
+        icon: 'tabler:circle',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/tires' },
+      },
+    ]}
+  />
+
   <!-- Call to Action -->
   <CallToAction
     title="Schedule Brake Service"
     subtitle="Hearing noise? Feeling vibration? Let's find out what's going on."
     actions={[
       { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

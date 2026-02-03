@@ -104,7 +104,8 @@ const breadcrumbSchema = {
     subtitle="Keep It Tight. Keep It Safe. Keep It Driving Right."
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -184,7 +185,6 @@ const breadcrumbSchema = {
 
   <!-- Quality Parts Section -->
   <Content
-    isReversed={true}
     title="We Use Parts That Last"
     content="Suspension components take a beating. Cheap parts wear out fast — sometimes faster than the originals they replaced. Then you're paying for the same repair twice.<br/><br/>We primarily use <strong>NAPA Premium Steering & Suspension</strong> parts. They're built to meet or exceed OE specifications, and they're backed by NAPA's warranty program.<br/><br/>When the job calls for something different — OEM parts for specific applications, heavy-duty upgrades for trucks that tow — we source what's right for the vehicle and how it's used.<br/><br/><strong>The goal is to fix it once, fix it right, and have it last.</strong>"
   />
@@ -261,7 +261,6 @@ const breadcrumbSchema = {
 
   <!-- Alignment Connection Section -->
   <Content
-    isReversed={true}
     title="Suspension Work Usually Means Alignment"
     content="Here's something to keep in mind: most steering and suspension repairs affect your alignment.<br/><br/>Replace a tie rod? Alignment. Ball joints? Alignment. Control arms? Alignment. Struts on vehicles where they're part of the steering geometry? Alignment.<br/><br/>We have a <strong>Hunter HawkEye Elite alignment system</strong> — the same equipment used by dealerships. When your suspension work is done, we can align it properly before you leave.<br/><br/><a href='/services/alignment' class='text-primary hover:underline font-semibold'>Learn More About Our Alignment Service →</a>"
   />
@@ -308,25 +307,25 @@ const breadcrumbSchema = {
         title: 'Wheel Alignment',
         description: 'Essential after suspension work',
         icon: 'tabler:focus-2',
-        callToAction: { text: 'Learn More', href: '/services/alignment' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/alignment' },
       },
       {
         title: 'Tire Sales & Service',
         description: 'Suspension wear affects your tires',
         icon: 'tabler:circle',
-        callToAction: { text: 'Learn More', href: '/services/tires' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/tires' },
       },
       {
         title: 'Brake Service',
         description: 'Often inspected together',
         icon: 'tabler:disc',
-        callToAction: { text: 'Learn More', href: '/services/brake-repair' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/brake-repair' },
       },
       {
         title: 'Pre-Purchase Inspection',
         description: 'Suspension check included',
         icon: 'tabler:clipboard-check',
-        callToAction: { text: 'Learn More', href: '/services/pre-purchase-inspection' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/pre-purchase-inspection' },
       },
     ]}
   />
@@ -337,7 +336,8 @@ const breadcrumbSchema = {
     subtitle="Clunks, noises, pulling, wandering — we'll figure out what's going on and fix it properly."
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

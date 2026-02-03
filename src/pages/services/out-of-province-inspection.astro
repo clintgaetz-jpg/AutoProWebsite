@@ -110,7 +110,8 @@ const breadcrumbSchema = {
     subtitle="Licensed Facility. No Surprises. Welcome to Alberta."
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -234,7 +235,6 @@ const breadcrumbSchema = {
 
   <!-- What If My Vehicle Fails Section -->
   <Content
-    isReversed={true}
     title="What If My Vehicle Fails?"
     content="First—don't panic. Many vehicles need minor repairs to pass. Common issues include worn brake pads, cracked windshield, burned out bulbs, worn suspension components, or insufficient tire tread.<br/><br/><strong>You have options:</strong><br/><br/>• <strong>Have us do the repairs</strong> — We'll give you an estimate upfront. No surprises.<br/>• <strong>Go elsewhere</strong> — You can have repairs done at any shop. Return here for re-inspection (half hour labor charge).<br/>• <strong>Do it yourself</strong> — Same deal. Return for re-inspection when complete.<br/><br/><strong>The 10-day rule:</strong> You have 10 days to complete repairs and get re-inspected. After that, the inspection expires and you'll need to start over with a new full inspection. This is a government program rule, not ours."
     items={[
@@ -303,7 +303,8 @@ const breadcrumbSchema = {
     subtitle="$179.95 (most vehicles) • 1-2 hours • Digital report included"
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

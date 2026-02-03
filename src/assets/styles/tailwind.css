@@ -114,7 +114,7 @@
     --aw-color-secondary: #001FCC;
     --aw-color-accent: #FFC836;
     --aw-color-bg-page: #ffffff;
-    --aw-color-bg-page-dark: #030621;
+    --aw-color-bg-page-dark: #0F172A;
     --aw-color-text-default: #1a1a1a;
     --aw-color-text-muted: #4b5563;
     --aw-color-text-page: #1a1a1a;
@@ -123,7 +123,7 @@
   }
 
   .dark {
-    --aw-color-bg-page: #030621;
+    --aw-color-bg-page: #0F172A;
     --aw-color-text-default: #e5e7eb;
     --aw-color-text-muted: #9ca3af;
     --aw-color-text-page: #e5e7eb;
@@ -131,7 +131,7 @@
 
   @media (prefers-color-scheme: dark) {
     :root:not(.light) {
-      --aw-color-bg-page: #030621;
+      --aw-color-bg-page: #0F172A;
       --aw-color-text-default: #e5e7eb;
       --aw-color-text-muted: #9ca3af;
       --aw-color-text-page: #e5e7eb;
@@ -281,7 +281,7 @@
 }
 
 .dark #header.expanded nav {
-  background: #030621;
+  background: #0F172A;
 }
 
 /* ===========================================

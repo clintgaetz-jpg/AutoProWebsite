@@ -104,7 +104,8 @@ const breadcrumbSchema = {
     subtitle="Batteries, Starters, Alternators — and the Complicated Stuff Too"
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -116,7 +117,6 @@ const breadcrumbSchema = {
 
   <!-- Batteries Section -->
   <Content
-    isReversed={true}
     title="Battery Testing & Replacement"
     content="<strong>When to Check Your Battery:</strong><br/>• Vehicle is slow to crank or won't start<br/>• Battery warning light on the dash<br/>• Electrical accessories acting strangely<br/>• Battery is more than 4–5 years old<br/>• You've needed a jump start recently"
     items={[
@@ -134,7 +134,6 @@ const breadcrumbSchema = {
 
   <!-- Alternators Section -->
   <Content
-    isReversed={true}
     title="Alternator Diagnosis & Replacement"
     content="<strong>Signs of Alternator Problems:</strong><br/>• Battery warning light on the dash<br/>• Dimming headlights or interior lights<br/>• Battery keeps dying (even a new battery)<br/>• Electrical accessories not working properly<br/>• Whining noise from the engine area<br/><br/>We test alternator output and determine whether it's charging properly. Alternator problems can also be caused by bad wiring, loose connections, or a slipping belt — we check the whole system before recommending replacement."
   />
@@ -192,7 +191,6 @@ const breadcrumbSchema = {
 
   <!-- Wiring Repair Section -->
   <Content
-    isReversed={true}
     title="Wiring Repair & Modifications"
     content="Whether it's fixing damaged wiring or installing something new, we can help:"
     items={[
@@ -272,19 +270,19 @@ const breadcrumbSchema = {
         title: 'Check Engine Light & Diagnostics',
         description: 'Often related to electrical faults',
         icon: 'tabler:engine',
-        callToAction: { text: 'Learn More', href: '/services/diagnostics' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/diagnostics' },
       },
       {
         title: 'Hybrid & EV Service',
         description: 'High-voltage electrical systems',
         icon: 'tabler:leaf',
-        callToAction: { text: 'Learn More', href: '/services/hybrid-ev-service' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/hybrid-ev-service' },
       },
       {
         title: 'Pre-Purchase Inspection',
         description: 'Electrical system check included',
         icon: 'tabler:clipboard-check',
-        callToAction: { text: 'Learn More', href: '/services/pre-purchase-inspection' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/pre-purchase-inspection' },
       },
     ]}
   />
@@ -295,7 +293,8 @@ const breadcrumbSchema = {
     subtitle="From dead batteries to complicated wiring issues, we can diagnose and fix it."
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

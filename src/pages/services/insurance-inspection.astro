@@ -105,7 +105,8 @@ const breadcrumbSchema = {
     subtitle="Quick. Affordable. Done Right. — $95.99"
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -146,7 +147,6 @@ const breadcrumbSchema = {
 
   <!-- Simple Rule Section -->
   <Content
-    isReversed={true}
     title="The Simple Rule"
     content="<strong>Same insurer, continuous coverage</strong> → Usually no inspection needed.<br/><br/><strong>Switch insurers, older vehicle, or coverage lapse</strong> → Inspection likely required.<br/><br/>When in doubt, ask your insurance company what they need."
   />
@@ -198,7 +198,6 @@ const breadcrumbSchema = {
 
   <!-- If Doesn't Pass Section -->
   <Content
-    isReversed={true}
     title="What If My Vehicle Doesn't Pass?"
     content="If we find issues that prevent your vehicle from passing:<br/><br/>• Clear explanation of what failed and why<br/>• Photos documenting the issues<br/>• Estimate for repairs if you want them done here<br/><br/>You're not obligated to have repairs done with us—but if you do, we re-inspect at no additional charge once work is complete.<br/><br/>Many issues are minor: burnt-out bulb, worn wiper blades, low tire tread. We'll tell you what's critical and what's quick to fix."
   />
@@ -248,7 +247,8 @@ const breadcrumbSchema = {
     subtitle="$95.99 (tax included) • Same-day appointments available"
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

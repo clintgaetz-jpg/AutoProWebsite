@@ -1,0 +1,395 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Auto Repair Near Leslieville, AB | Sylvan Lake AUTOPRO Inc',
+  description: "Leslieville's nearest full-service auto repair shop. Sylvan Lake AUTOPRO is 45 minutes east on Highway 11. Licensed inspections, brakes, diagnostics & NAPA warranty. (403) 887-0440.",
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Sylvan Lake AUTOPRO",
+  "image": "https://sylvanlakeautopro.com/images/og-image.jpg",
+  "@id": "https://sylvanlakeautopro.com/#organization",
+  "url": "https://sylvanlakeautopro.com",
+  "telephone": "+1-403-887-0440",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1A Industrial Dr",
+    "addressLocality": "Sylvan Lake",
+    "addressRegion": "AB",
+    "postalCode": "T4S 1P4",
+    "addressCountry": "CA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 52.311676,
+    "longitude": -114.073863
+  },
+  "areaServed": ["Leslieville", "Condor", "Alhambra", "Eckville", "Benalto", "Clearwater County"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it worth the 45-minute drive from Leslieville?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Many of our west-country customers combine the trip with errands in Sylvan Lake or Red Deer. Drop your vehicle off in the morning, take care of your shopping, and pick it up when you're done. The drive is all highway — no city navigation required."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work on diesel trucks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We service gas and diesel light-duty and medium-duty trucks, including the F-250s, F-350s, Ram 2500s/3500s, and Silverado/Sierra HDs that are common in the Leslieville area."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get an out-of-province inspection done?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We're a fully licensed AMVIC inspection facility. Out-of-province inspections are one of our most common services for rural Alberta customers purchasing vehicles from other provinces."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I need a ride while my vehicle is being serviced?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer shuttle service within the Sylvan Lake area. If you're coming from Leslieville, many customers drop off early using our after-hours key drop and arrange pickup later in the day. We can also arrange loaner vehicles for longer repairs — ask when you book."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I get to your shop?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Head east on Highway 11 from Leslieville. Pass through Eckville, continue east past Benalto. When you reach Sylvan Lake, our shop is at 1A Industrial Drive — on the east side of town in the industrial area, before you reach downtown. Total drive: about 45 km, 42 minutes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you do commercial vehicle inspections?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We perform CVIP (Commercial Vehicle Inspection Program) inspections. This is important for Clearwater County businesses operating commercial trucks, trailers, and buses."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://sylvanlakeautopro.com/locations/" },
+    { "@type": "ListItem", "position": 3, "name": "Leslieville" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Serving West Country"
+    title="Auto Repair Near Leslieville"
+    subtitle="For Leslieville and west-country residents, Sylvan Lake AUTOPRO is a straight shot east on Highway 11. Full-service auto repair, licensed inspections, and Red Seal certified technicians — 45 minutes from your door, no city traffic."
+    actions={[
+      { variant: 'primary', text: 'Book Online', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+
+  <!-- Directions Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Getting Here from Leslieville</h2>
+      </div>
+
+      <div class="prose prose-lg dark:prose-invert max-w-none text-muted dark:text-slate-400 mb-8">
+        <p>The drive from Leslieville to our shop is about 45 km east on Highway 11 — the David Thompson Highway. It's a familiar route for anyone in the Clearwater County area who heads to Sylvan Lake or Red Deer for supplies.</p>
+        <p>Eckville is the halfway point. From there, Highway 11 continues east as a four-lane divided highway straight into Sylvan Lake.</p>
+        <p>Our shop is at <strong class="text-gray-900 dark:text-white">1A Industrial Drive, Sylvan Lake</strong> — on the east side of town in the industrial area, right off Highway 11. You'll reach us before you get into downtown Sylvan Lake or anywhere near the Red Deer traffic.</p>
+      </div>
+
+      <!-- Distance Table -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-primary text-white">
+            <tr>
+              <th class="px-4 py-3 text-left font-semibold">Community</th>
+              <th class="px-4 py-3 text-left font-semibold">Distance</th>
+              <th class="px-4 py-3 text-left font-semibold">Drive Time</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-slate-700">
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Leslieville</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">45 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~42 min</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Condor</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">35 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~30 min</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Alhambra</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">40 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~35 min</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Eckville</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">25 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~20 min</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Benalto</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">18 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~18 min</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why East Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Why Drive East Instead of West?</h2>
+        <p class="text-lg text-muted dark:text-slate-400 mt-4">Leslieville residents typically choose between Rocky Mountain House to the west or Sylvan Lake to the east. Both are reasonable drives. Here's why many west-country folks choose us:</p>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white dark:bg-slate-900 rounded-lg p-6 shadow">
+          <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">More Options in One Stop</h3>
+          <p class="text-muted dark:text-slate-400">Rocky Mountain House has capable shops, but Sylvan Lake AUTOPRO offers comprehensive diagnostics, all inspection types (out-of-province, CVIP, insurance, pre-purchase), alignment with our Hunter HawkEye Elite system, A/C service, and full electrical diagnostics — all under one roof.</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-lg p-6 shadow">
+          <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">The NAPA Warranty Travels With You</h3>
+          <p class="text-muted dark:text-slate-400">Our repairs are backed by the NAPA Peace of Mind warranty — 24 months or 40,000 km, honoured at 17,000+ locations across North America. If something goes wrong while you're in Edmonton, Calgary, or on the road, you're covered at the nearest NAPA AUTOPRO shop.</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-lg p-6 shadow">
+          <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">Digital Inspections You Can See</h3>
+          <p class="text-muted dark:text-slate-400">We send photos and measurements of every inspection directly to your phone. No guesswork, no "trust me" — you see exactly what we're looking at and why we're recommending it.</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-lg p-6 shadow">
+          <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">You're Probably Heading This Way Anyway</h3>
+          <p class="text-muted dark:text-slate-400">If you're running errands in Sylvan Lake or Red Deer, book your vehicle in for the morning and it's ready when you're done shopping.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <Features2
+    title="Services West-Country Residents Need"
+    columns={2}
+    items={[
+      {
+        title: 'Pre-Trip & Post-Trip Inspections',
+        description: "Living near the David Thompson Highway means mountain trips are part of life — heading west to Nordegg, Abraham Lake, Saskatchewan River Crossing, and beyond. Mountain driving puts extra stress on brakes, cooling systems, and drivetrain components. A pre-trip check or post-trip inspection is smart preventive maintenance.",
+        icon: 'tabler:mountain',
+        callToAction: { text: 'Learn More', href: '/services/pre-purchase-inspection' },
+      },
+      {
+        title: 'Suspension & Alignment',
+        description: "Between Highway 11 and the range roads around Leslieville, Condor, and Alhambra, your suspension takes a beating. Potholes, frost heaves, and washboard gravel wear out shocks, struts, and ball joints. Our alignment system catches issues before they chew through a set of tires.",
+        icon: 'tabler:steering-wheel',
+        callToAction: { text: 'Learn More', href: '/services/steering-suspension' },
+      },
+      {
+        title: 'Oil Changes & Severe-Duty Maintenance',
+        description: "Rural driving — dust, gravel, towing, short trips in cold weather — all count as severe-duty conditions. That means more frequent oil changes and filter replacements. We use Castrol synthetic oil and NAPA filters, and we'll set you up on a maintenance schedule that matches how you actually drive.",
+        icon: 'tabler:droplet',
+        callToAction: { text: 'Learn More', href: '/services/oil-change' },
+      },
+      {
+        title: 'All Licensed Inspections',
+        description: "Out-of-province, CVIP commercial, insurance, and pre-purchase inspections. We're fully licensed through AMVIC. Common need in the Clearwater County area, especially for trucks and equipment vehicles coming from other provinces.",
+        icon: 'tabler:clipboard-check',
+        callToAction: { text: 'Learn More', href: '/services/out-of-province-inspection' },
+      },
+      {
+        title: 'Diesel Truck Service',
+        description: "Many Leslieville-area residents drive diesel pickups for farm, ranch, and oilfield work. We service both gas and diesel light-duty and medium-duty trucks — maintenance, diagnostics, brakes, suspension, and more.",
+        icon: 'tabler:truck',
+        callToAction: { text: 'Learn More', href: '/services/fleet-services' },
+      },
+      {
+        title: 'Complete Diagnostics',
+        description: "Check engine light on? Our professional scan tools and factory-level software identify the actual problem. We diagnose issues properly so you're not guessing or replacing parts unnecessarily.",
+        icon: 'tabler:engine',
+        callToAction: { text: 'Learn More', href: '/services/diagnostics' },
+      },
+    ]}
+  />
+
+  <!-- About Leslieville Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">About Leslieville & the West Country</h2>
+      </div>
+
+      <div class="prose prose-lg dark:prose-invert max-w-none text-muted dark:text-slate-400">
+        <p>Leslieville has been a Clearwater County community since 1903 — one of the earliest settlements along the railway line between Rocky Mountain House and Red Deer. Today it's a small, tight-knit hamlet of about 130 people, surrounded by agricultural land and the rolling foothills of central Alberta.</p>
+        <p>The broader west country — Leslieville, Condor, Alhambra, Withrow, and the acreages along Highway 11 and the surrounding range roads — is home to people who depend on their vehicles. Farming, ranching, oilfield work, and commuting to Red Deer or Sylvan Lake for work and errands all mean serious mileage on trucks and SUVs.</p>
+        <p>We've been serving west-country residents since we opened in 2006. We understand that when your truck is your livelihood, downtime costs money. We schedule efficiently, communicate clearly, and get vehicles back on the road.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Why Leslieville Residents Choose Us</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">Straight Shot on Highway 11</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">45 minutes, no city traffic.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">4.9 Google Rating</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">From 290+ reviews.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">Red Seal Certified Technicians</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">Highest trade certification in Canada.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">NAPA Peace of Mind Warranty</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">24 months / 40,000 km, honoured at 17,000+ locations.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">Digital Inspections</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">See the photos and measurements on your phone.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">After-Hours Key Drop</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">Leave your vehicle early, pick it up when it suits you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions from Leslieville-area residents"
+    columns={1}
+    items={[
+      {
+        title: 'Is it worth the 45-minute drive from Leslieville?',
+        description: "Many of our west-country customers combine the trip with errands in Sylvan Lake or Red Deer. Drop your vehicle off in the morning, take care of your shopping, and pick it up when you're done. The drive is all highway — no city navigation required.",
+      },
+      {
+        title: 'Do you work on diesel trucks?',
+        description: "Yes. We service gas and diesel light-duty and medium-duty trucks, including the F-250s, F-350s, Ram 2500s/3500s, and Silverado/Sierra HDs that are common in the Leslieville area.",
+      },
+      {
+        title: 'Can I get an out-of-province inspection done?',
+        description: "Yes. We're a fully licensed AMVIC inspection facility. Out-of-province inspections are one of our most common services for rural Alberta customers purchasing vehicles from other provinces.",
+      },
+      {
+        title: 'What if I need a ride while my vehicle is being serviced?',
+        description: "We offer shuttle service within the Sylvan Lake area. If you're coming from Leslieville, many customers drop off early using our after-hours key drop and arrange pickup later in the day. We can also arrange loaner vehicles for longer repairs — ask when you book.",
+      },
+      {
+        title: 'How do I get to your shop?',
+        description: "Head east on Highway 11 from Leslieville. Pass through Eckville, continue east past Benalto. When you reach Sylvan Lake, our shop is at 1A Industrial Drive — on the east side of town in the industrial area, before you reach downtown. Total drive: about 45 km, 42 minutes.",
+      },
+      {
+        title: 'Do you do commercial vehicle inspections?',
+        description: "Yes. We perform CVIP (Commercial Vehicle Inspection Program) inspections. This is important for Clearwater County businesses operating commercial trucks, trailers, and buses.",
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Serving the West Country Since 2006"
+    subtitle="From Leslieville to Condor, Alhambra to Withrow — we're a straight shot east on Highway 11."
+    actions={[
+      { variant: 'primary', text: 'Book Online', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>

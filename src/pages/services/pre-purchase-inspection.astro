@@ -7,6 +7,10 @@ import Steps2 from '~/components/widgets/Steps2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
+import heroImage from '~/assets/images/inspection-phones-overview.jpg';
+import reportImage from '~/assets/images/inspection-report-overview.jpg';
+import findingsImage from '~/assets/images/inspection-findings.jpg';
+
 const metadata = {
   title: 'Pre-Purchase Inspection | $160 | Sylvan Lake AUTOPRO',
   description: 'Pre-purchase vehicle inspection before you buy. Starting at $160 for cars and SUVs. Avoid hidden repair costs. Detailed report with photos. Sylvan Lake AUTOPRO. Call (403) 887-0440.',
@@ -104,9 +108,14 @@ const breadcrumbSchema = {
     tagline="Inspections"
     title="Pre-Purchase Vehicle Inspections"
     subtitle="Know What You're Buying Before You Sign — Starting at $160"
+    image={{
+      src: heroImage,
+      alt: 'Digital vehicle inspection report showing detailed findings on smartphone',
+    }}
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -114,6 +123,10 @@ const breadcrumbSchema = {
   <Content
     title="Don't Buy Problems You Can't See"
     content="Thinking about buying a used vehicle? <strong>Get it inspected first.</strong><br/><br/>We see it all the time: someone buys a truck, brings it in for service, and we find $2,000 in brake and suspension work that needs to happen now. That 'great deal' suddenly isn't.<br/><br/>A pre-purchase inspection costs <strong>$160 for cars and SUVs</strong>. Finding hidden problems after you've signed? That costs a lot more."
+    image={{
+      src: reportImage,
+      alt: 'Digital inspection report overview showing vehicle condition summary',
+    }}
   />
 
   <!-- Why Get Inspection Section -->
@@ -176,9 +189,13 @@ const breadcrumbSchema = {
 
   <!-- What We Find Section -->
   <Content
-    isReversed={true}
     title="What We Actually Find"
     content="These aren't rare catastrophic failures. This is regular stuff that adds up fast:<br/><br/><strong>'It drives fine'</strong><br/>Until you find out the front brakes are metal-on-metal. Rotors, pads, possibly calipers. $600-$800 you didn't budget for.<br/><br/><strong>'Just had the oil changed'</strong><br/>Great, but the lower control arm bushings are shot and it needs an alignment. Another $800-$1,000.<br/><br/><strong>'Runs great'</strong><br/>Sure, but there's a transmission code stored that the seller cleared before you test drove it. That's a $3,000+ problem waiting.<br/><br/><strong>This is a regular Tuesday for us.</strong> A $160 inspection saves you thousands—or gives you leverage to negotiate."
+    image={{
+      src: findingsImage,
+      alt: 'Inspection findings showing issues that need attention with photos and measurements',
+    }}
+    isReversed
   />
 
   <!-- When to Get Inspection Section -->
@@ -189,7 +206,6 @@ const breadcrumbSchema = {
 
   <!-- Pricing Section -->
   <Content
-    isReversed={true}
     title="Pricing"
     content="<strong>Cars and SUVs:</strong> $160 (tax included)<br/><br/><strong>2500/3500 trucks and larger:</strong> Call for quote<br/><br/>For the cost of a tank of gas, you get professional insight into what you're actually buying.<br/><br/><strong>Think of it this way:</strong> If the inspection finds nothing wrong, you bought peace of mind for $160. If it finds problems, you just saved yourself from a bad purchase—or got leverage to negotiate the price down.<br/><br/>Either way, you win."
   />
@@ -266,7 +282,8 @@ const breadcrumbSchema = {
     subtitle="$160 for cars and SUVs (tax included) • Detailed report with photos"
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

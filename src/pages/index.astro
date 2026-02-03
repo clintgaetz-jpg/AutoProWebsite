@@ -92,28 +92,7 @@ const localBusinessSchema = {
   </Fragment>
 
   <!-- Hero -->
-  <Hero
-    actions={[
-      {
-        variant: 'accent',
-        text: 'Call (403) 887-0440',
-        href: 'tel:4038870440',
-        icon: 'tabler:phone',
-      },
-      {
-        variant: 'accent',
-        text: 'Text Us',
-        href: 'sms:+14038870440',
-        icon: 'tabler:message',
-      },
-      {
-        variant: 'accent',
-        text: 'Book Appointment',
-        href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1',
-        target: '_blank',
-      },
-    ]}
-  >
+  <Hero>
     <Fragment slot="title">
       Your Trusted <span class="text-accent">Auto Repair</span> Shop in Sylvan Lake
     </Fragment>
@@ -121,6 +100,57 @@ const localBusinessSchema = {
     <Fragment slot="subtitle">
       <span class="font-semibold">Locally owned since 2006.</span> Licensed technicians,
       NAPA Peace of Mind warranty, and service that treats you like a neighbour—because you are one.
+    </Fragment>
+
+    <Fragment slot="actions">
+      <!-- Mobile: 2x2 grid of rectangular buttons -->
+      <div class="md:hidden grid grid-cols-2 gap-3 max-w-sm mx-auto">
+        <a
+          href="tel:4038870440"
+          class="inline-flex items-center justify-center min-h-[48px] px-4 py-3 rounded-lg font-semibold text-sm
+                 bg-[#FFC836] text-[#0A0094] hover:bg-[#e6b430] transition-colors"
+        >
+          Call Now
+        </a>
+        <a
+          href="sms:+14038870440"
+          class="inline-flex items-center justify-center min-h-[48px] px-4 py-3 rounded-lg font-semibold text-sm
+                 bg-[#FFC836] text-[#0A0094] hover:bg-[#e6b430] transition-colors"
+        >
+          Text Us
+        </a>
+        <a
+          href="https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center min-h-[48px] px-4 py-3 rounded-lg font-semibold text-sm
+                 bg-[#FFC836] text-[#0A0094] hover:bg-[#e6b430] transition-colors"
+        >
+          Directions
+        </a>
+        <a
+          href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center min-h-[48px] px-4 py-3 rounded-lg font-semibold text-sm
+                 bg-[#FFC836] text-[#0A0094] hover:bg-[#e6b430] transition-colors"
+        >
+          Book Now
+        </a>
+      </div>
+
+      <!-- Desktop: Single Book Appointment button -->
+      <div class="hidden md:flex justify-center">
+        <a
+          href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center min-h-[48px] px-8 py-3 rounded-lg font-bold text-base
+                 bg-[#FFC836] text-[#0A0094] hover:bg-[#e6b430] transition-colors shadow-lg"
+        >
+          Book Appointment
+        </a>
+      </div>
     </Fragment>
   </Hero>
 
@@ -244,9 +274,10 @@ const localBusinessSchema = {
           Call us or book online. We take care of your vehicle like it's our own.
         </p>
         <div class="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
+          <!-- Call button - mobile only -->
           <a
             href="tel:+14038870440"
-            class="inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-full font-semibold
+            class="md:hidden inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-full font-semibold
                    bg-[#FFC836] border-2 border-[#FFC836] text-[#0A0094]
                    hover:bg-[#e6b430] hover:border-[#e6b430] transition-colors"
           >
@@ -260,6 +291,15 @@ const localBusinessSchema = {
                    hover:bg-[#e6b430] hover:border-[#e6b430] transition-colors"
           >
             Text Us
+          </a>
+          <!-- Get Directions button - desktop only -->
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U"
+            class="hidden md:inline-flex items-center justify-center min-h-[48px] px-6 py-3 rounded-full font-semibold
+                   bg-[#FFC836] border-2 border-[#FFC836] text-[#0A0094]
+                   hover:bg-[#e6b430] hover:border-[#e6b430] transition-colors"
+          >
+            Get Directions
           </a>
           <a
             href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1"

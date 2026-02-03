@@ -1,15 +1,58 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'Making It Easy | Sylvan Lake AUTOPRO',
   description: "Auto repair doesn't have to be a hassle. Shuttle service, loaner vehicles, digital inspections, flexible payment, online booking, and more. Sylvan Lake AUTOPRO makes it easy.",
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you offer loaner vehicles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we have loaner vehicles available for customers who need one while their vehicle is being serviced. You must be 25 or older to use a loaner. Call us at (403) 887-0440 to check availability and reserve one — they go fast."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the shuttle service work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer a free local shuttle within Sylvan Lake. Drop your vehicle off, and we'll drive you home, to work, or wherever you need to be in town. We'll pick you up when your vehicle is ready. Just let us know when you book your appointment."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I need to drop off my vehicle after hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No problem. We have a secure combination lock box at the front of the shop. Drop your keys in the box and text us at (403) 887-0440 with your name, vehicle info, and what's going on. We'll get to it first thing the next business day."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer financing for repairs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We offer financing through both Flexiti and AutologiQ so you can get the repairs you need without paying everything upfront. Ask our front desk or apply online — approval is usually quick."
+      }
+    }
+  ]
+};
 ---
 
 <Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
 
   <!-- Hero Section -->
   <Hero2
@@ -18,7 +61,8 @@ const metadata = {
     subtitle="Auto repair shouldn't be a hassle. Here's how we make it work for you."
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -255,13 +299,39 @@ const metadata = {
     </div>
   </section>
 
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about our customer services"
+    columns={1}
+    items={[
+      {
+        title: 'Do you offer loaner vehicles?',
+        description: 'Yes, we have loaner vehicles available for customers who need one while their vehicle is being serviced. You must be 25 or older to use a loaner. Call us at (403) 887-0440 to check availability and reserve one — they go fast.',
+      },
+      {
+        title: 'How does the shuttle service work?',
+        description: "We offer a free local shuttle within Sylvan Lake. Drop your vehicle off, and we'll drive you home, to work, or wherever you need to be in town. We'll pick you up when your vehicle is ready. Just let us know when you book your appointment.",
+      },
+      {
+        title: 'What if I need to drop off my vehicle after hours?',
+        description: "No problem. We have a secure combination lock box at the front of the shop. Drop your keys in the box and text us at (403) 887-0440 with your name, vehicle info, and what's going on. We'll get to it first thing the next business day.",
+      },
+      {
+        title: 'Do you offer financing for repairs?',
+        description: 'Yes. We offer financing through both Flexiti and AutologiQ so you can get the repairs you need without paying everything upfront. Ask our front desk or apply online — approval is usually quick.',
+      },
+    ]}
+  />
+
   <!-- CTA -->
   <CallToAction
     title="Questions?"
     subtitle="We're here to help. If you have questions about any of our services or amenities, give us a call."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Contact Us', href: '/contact' },
+      { variant: 'primary', text: 'Contact Us', href: '/contact' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

@@ -6,6 +6,9 @@ import Features2 from '~/components/widgets/Features2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
+import brakeMeasureImage from '~/assets/images/brake-measure.jpg';
+import brakeRotorImage from '~/assets/images/brake-rotor.jpg';
+
 const metadata = {
   title: 'Brake Inspection | $92.40 | Sylvan Lake AUTOPRO',
   description: 'Thorough brake inspection in Sylvan Lake. We disassemble, measure, and document everything. Digital report with photos. $92.40 tax included. Call (403) 887-0440.',
@@ -113,7 +116,8 @@ const breadcrumbSchema = {
     subtitle="We Measure. We Document. You Decide."
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -122,6 +126,10 @@ const breadcrumbSchema = {
     isReversed={false}
     title="What Is a Complete Brake Inspection?"
     content="A complete brake inspection at Sylvan Lake AUTOPRO costs <strong>$92.40, tax included</strong>. We remove the wheels, disassemble the brake components, and measure everything—pad thickness, rotor thickness, caliper condition, brake lines, and hardware. You'll receive a digital report with photos of your actual brakes and color-coded status for each component.<br/><br/>This isn't a quick glance through your wheel spokes. It's a thorough inspection that tells you exactly what condition your brakes are in and what (if anything) they need. No guessing. No surprises."
+    image={{
+      src: brakeMeasureImage,
+      alt: 'Digital brake pad measurement gauge showing precise pad thickness',
+    }}
   />
 
   <!-- What We Inspect Section -->
@@ -168,6 +176,10 @@ const breadcrumbSchema = {
     isReversed={true}
     title="Why Do We Charge for Brake Inspections?"
     content={`You've seen shops advertising "free brake inspections." Here's why we don't—and why that's actually better for you.<br/><br/><strong>What a "free" inspection really means:</strong> A quick visual look without removing the wheels. Someone peers through your wheel spokes and says "looks okay" or "pads are getting low."<br/><br/><strong>What you can't see without taking things apart:</strong><br/>• Whether your caliper is seized<br/>• If your rotors are thick enough to machine<br/>• Whether caliper pistons are leaking<br/>• If your slides are moving freely<br/>• The actual pad thickness in millimeters<br/><br/><strong>Our approach:</strong> We pull the wheels, disassemble everything, measure with actual tools, photograph what we find, and send you a digital report. When we quote your repair, we know exactly what's needed. No surprises.`}
+    image={{
+      src: brakeRotorImage,
+      alt: 'Brake rotor on hub assembly during inspection',
+    }}
     items={[
       { title: 'No Surprise Costs', description: 'Your quote is accurate because we inspected first' },
       { title: 'Digital Documentation', description: 'Photos and measurements sent to your phone' },
@@ -217,13 +229,40 @@ const breadcrumbSchema = {
     ]}
   />
 
+  <!-- Related Services Section -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Brake Repair',
+        description: 'Pads, rotors, calipers & more',
+        icon: 'tabler:disc',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/brake-repair' },
+      },
+      {
+        title: 'Steering & Suspension',
+        description: 'Affects braking performance',
+        icon: 'tabler:car',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/steering-suspension' },
+      },
+      {
+        title: 'Tire Service',
+        description: 'Tires affect stopping distance',
+        icon: 'tabler:circle',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/tires' },
+      },
+    ]}
+  />
+
   <!-- Call to Action -->
   <CallToAction
     title="Book Your Brake Inspection"
     subtitle="$92.40 (tax included) • Digital report with photos"
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

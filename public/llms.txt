@@ -10,9 +10,13 @@
 ## Main Pages
 - [Home](https://sylvanlakeautopro.com/): Overview of services, trust signals, booking
 - [About Us](https://sylvanlakeautopro.com/about): Company history, ownership since 2006, Red Seal certified technicians, NAPA AUTOPRO membership
+- [Team](https://sylvanlakeautopro.com/team): Meet our technicians and staff
 - [Contact](https://sylvanlakeautopro.com/contact): Location, hours, map, service areas
 - [Making It Easy](https://sylvanlakeautopro.com/making-it-easy): Shuttle service, loaner vehicles, digital inspections, flexible payment
 - [Warranty](https://sylvanlakeautopro.com/warranty): NAPA Peace of Mind warranty details, 24mo/40K nationwide coverage, labor warranty
+- [Reviews](https://sylvanlakeautopro.com/reviews): Customer reviews and testimonials, 4.9 Google rating
+- [Credentials & Licensing](https://sylvanlakeautopro.com/credentials-and-licensing): AMVIC license, CVIP certification, Red Seal technicians, training certifications
+- [All Services](https://sylvanlakeautopro.com/services): Complete list of services offered
 
 ## Maintenance Services
 - [Oil Change](https://sylvanlakeautopro.com/services/oil-change): Full synthetic oil service with Castrol GTX Magnatec and NAPA Gold filters
@@ -25,7 +29,7 @@
 
 ## Steering, Suspension & Alignment
 - [Steering & Suspension](https://sylvanlakeautopro.com/services/steering-suspension): Ball joints, tie rods, control arms, shocks, struts, wheel bearings
-- [Wheel Alignment](https://sylvanlakeautopro.com/services/alignment): Hunter HawkEye Elite precision alignment
+- [Wheel Alignment](https://sylvanlakeautopro.com/services/alignment): Hunter HawkEye Elite precision alignment ($60K+ equipment investment)
 
 ## Diagnostics & Electrical
 - [Check Engine Light](https://sylvanlakeautopro.com/services/diagnostics): Diagnostic services, code reading, problem identification
@@ -35,21 +39,36 @@
 - [A/C Service & Repair](https://sylvanlakeautopro.com/services/ac-service-repair): Air conditioning diagnosis, repair, R-134a and R-1234yf recharge
 - [Heater Repair](https://sylvanlakeautopro.com/services/heater-repair): Heating system diagnosis and repair
 
-## Tires & Keys
-- [Tires](https://sylvanlakeautopro.com/services/tires): Tire sales, installation, balancing, rotation, TPMS service
-- [Automotive Keys](https://sylvanlakeautopro.com/services/automotive-keys): Key cutting and transponder programming
+## Tires
+- [Tires](https://sylvanlakeautopro.com/services/tires): Tire sales, installation, balancing, rotation, TPMS service, seasonal storage
+- [Tire Pricing](https://sylvanlakeautopro.com/services/tire-pricing): Shop tires online with TireConnect, see prices for your vehicle
 
 ## Specialty Services
+- [Exhaust System](https://sylvanlakeautopro.com/services/exhaust-system): Muffler replacement, exhaust manifold repair, broken bolt extraction, catalytic converter, cat-back systems, diesel exhaust kits
+- [Diesel Services](https://sylvanlakeautopro.com/services/diesel): Diesel repair, maintenance, diagnostics. Head gaskets, turbos, injectors, DPF/DEF systems. Partner shop for tuning
 - [Transmission Repair](https://sylvanlakeautopro.com/services/transmission-repair): Transmission repair and custom rebuilds, 49 years builder experience
 - [Engine Repair](https://sylvanlakeautopro.com/services/engine-repair): Engine repair, head gasket replacement, rebuilt and used engine installation
 - [Hybrid & EV Service](https://sylvanlakeautopro.com/services/hybrid-ev-service): Hybrid and electric vehicle maintenance and repair
 - [Fleet Services](https://sylvanlakeautopro.com/services/fleet-services): Commercial fleet maintenance, fleet cards accepted
+- [Automotive Keys](https://sylvanlakeautopro.com/services/automotive-keys): Key cutting and transponder programming
 
 ## Inspection Services
+- [Complete Vehicle Inspection](https://sylvanlakeautopro.com/services/vehicle-inspection): Comprehensive bumper-to-bumper inspection with digital report, photos and measurements sent to your phone
 - [Out of Province Inspection](https://sylvanlakeautopro.com/services/out-of-province-inspection): Alberta OOP vehicle inspections - $179.95
 - [CVIP Inspection](https://sylvanlakeautopro.com/services/cvip-inspection): Commercial vehicle safety inspections
 - [Insurance Inspection](https://sylvanlakeautopro.com/services/insurance-inspection): Insurance inspections for vehicles 12+ years - $95.99
 - [Pre-Purchase Inspection](https://sylvanlakeautopro.com/services/pre-purchase-inspection): Used vehicle buyer inspections - from $160
+
+## Emergency & Breakdown
+- [Broken Down?](https://sylvanlakeautopro.com/breakdown): Emergency breakdown help, safety guide if stranded, should you drive it flowchart, towing company contacts, AMA roadside info, after-hours drop-off, hotels and taxi info for stranded travelers
+
+## Location Pages
+- [Areas We Serve](https://sylvanlakeautopro.com/locations): Overview of all service areas in West-Central Alberta
+- [Red Deer County](https://sylvanlakeautopro.com/locations/red-deer-county): Auto repair for Red Deer County residents, gravel road vehicle wear, Benalto, Springbrook, Markerville, Penhold
+- [Eckville](https://sylvanlakeautopro.com/locations/eckville): Auto repair near Eckville, 20 minutes on Highway 11, west country service
+- [Bentley](https://sylvanlakeautopro.com/locations/bentley): Auto repair near Bentley AB, 15 minute drive, Highway 20 access
+- [Benalto](https://sylvanlakeautopro.com/locations/benalto): Auto repair near Benalto AB, 10-15 minute drive, gravel road maintenance expertise
+- [Leslieville](https://sylvanlakeautopro.com/locations/leslieville): Auto repair near Leslieville, Clearwater County, David Thompson Highway, west country
 
 ## Legal
 - [Terms of Service](https://sylvanlakeautopro.com/terms): Service terms, AMVIC compliance, NAPA warranty info
@@ -59,10 +78,12 @@
 Sylvan Lake, Red Deer, Rocky Mountain House, Rimbey, Ponoka, Blackfalds, Penhold, Eckville, Bentley, Benalto, Condor, Leslieville, Alhambra, Withrow, Evarts, Dickson, Markerville, Caroline, Bluffton, Hoadley, Jarvis Bay, Norglenwold, Gull Lake, Birchcliff
 
 ## Key Differentiators
-- 4.9 Google rating (290+ reviews)
-- NAPA Peace of Mind Warranty: 24 months / 40,000 km nationwide
-- Digital inspections with photos and measurements
-- JD Power award winner (multiple years)
-- Licensed technicians
+- 4.9 Google rating (291+ reviews)
+- NAPA Peace of Mind Warranty: 24 months / 40,000 km nationwide at 17,000+ locations
+- Digital inspections with photos and measurements sent to your phone
+- JD Power award winner (multiple years since 2009)
+- Red Seal certified technicians
 - Loaner vehicles and shuttle service available
-- Serving Sylvan Lake since 2006
+- Same ownership since 2006 (19 years)
+- Hunter HawkEye Elite alignment system ($60K+ investment)
+- Transmission specialist with 49 years experience

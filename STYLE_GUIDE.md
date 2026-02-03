@@ -33,7 +33,7 @@
 | Mode | Page Background | Card Background |
 |------|-----------------|-----------------|
 | **Light** | `#ffffff` | `#ffffff` / `bg-gray-50` |
-| **Dark** | `#030621` | `slate-900` / `slate-800` |
+| **Dark** | `#0F172A` | `slate-900` / `slate-800` |
 
 ### Text Colors
 
@@ -633,6 +633,56 @@ The site includes several features that make it feel more like a native mobile a
 - Tap highlight disabled (custom feedback instead)
 - Double-tap zoom prevented on buttons (`touch-action: manipulation`)
 - Text selection disabled on UI, enabled on content
+
+---
+
+## Standard URLs
+
+Use these exact URLs throughout the site for consistency:
+
+### Maps & Directions
+
+```
+Google Maps:
+https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U
+
+Apple Maps:
+https://maps.apple.com/?daddr=NAPA+AUTOPRO+Sylvan+Lake+AUTOPRO+Inc,+1A+Industrial+Dr,+Sylvan+Lake,+AB+T4S+1P4,+Canada&dirflg=d
+```
+
+### Google Business Profile
+
+```
+Main Profile (for "Read Reviews" links):
+https://g.page/sylvan-lake-autopro
+```
+
+### Booking
+
+```
+Online Booking:
+https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1
+```
+
+### Phone
+
+```
+Click-to-call:
+tel:+14038870440
+
+Display format:
+(403) 887-0440
+```
+
+### Directions Component
+
+Use `DirectionsButtons.astro` for map links - it handles iOS/Android detection automatically:
+
+```astro
+import DirectionsButtons from '~/components/ui/DirectionsButtons.astro';
+
+<DirectionsButtons />
+```
 
 ---
 

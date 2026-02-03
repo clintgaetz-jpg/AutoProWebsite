@@ -95,8 +95,9 @@ const breadcrumbSchema = {
     title="Fleet & Commercial Vehicle Service"
     subtitle="Your Truck Is Your Income. We Get It."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -257,13 +258,40 @@ const breadcrumbSchema = {
     ]}
   />
 
+  <!-- Related Services Section -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Diesel Service',
+        description: 'Light & medium duty diesel repair',
+        icon: 'tabler:gas-station',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/diesel' },
+      },
+      {
+        title: 'CVIP Inspection',
+        description: 'Commercial vehicle inspections',
+        icon: 'tabler:clipboard-check',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/cvip-inspection' },
+      },
+      {
+        title: 'Transmission Service',
+        description: 'Fleet transmission maintenance',
+        icon: 'tabler:manual-gearbox',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/transmission-repair' },
+      },
+    ]}
+  />
+
   <!-- Call to Action -->
   <CallToAction
     title="Get Your Fleet Serviced"
     subtitle="Fleet card questions? Call us and we'll confirm your card works here."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

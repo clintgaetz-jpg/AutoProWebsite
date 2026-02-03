@@ -1,0 +1,209 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Shop Tires | Sylvan Lake AUTOPRO',
+  description: 'Search and price tires for your vehicle. Browse top brands, compare prices, and book your tire installation at Sylvan Lake AUTOPRO.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Tire Sales",
+  "name": "Tire Sales",
+  "description": "Search and price tires for your vehicle. Browse top brands, compare prices, and book your tire installation.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Shop Tires" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Widget Section - No Header -->
+  <section class="pb-6 md:pb-8 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <!-- TireConnect Widget -->
+      <div id="tireconnect" class="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-4 min-h-[450px]">
+        <!-- Loading state -->
+        <div id="tc-loading" class="flex items-center justify-center h-[400px] text-muted dark:text-slate-400">
+          <div class="text-center">
+            <div class="inline-block w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p>Loading tire search...</p>
+          </div>
+        </div>
+        <!-- Error/fallback state (hidden by default) -->
+        <div id="tc-error" class="hidden flex-col items-center justify-center h-[400px] text-muted dark:text-slate-400">
+          <div class="text-center max-w-md">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">Tire search unavailable</p>
+            <p class="mb-4">The tire search tool didn't load. Give us a call and we'll help you find the right tires.</p>
+            <a href="tel:+14038870440" class="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold bg-primary text-white hover:bg-secondary transition-colors min-h-[48px]">
+              Call (403) 887-0440
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick contact below widget -->
+      <p class="text-center text-sm text-muted dark:text-slate-400 mt-4">
+        Questions? Call <a href="tel:+14038870440" class="text-primary hover:underline font-medium dark:text-blue-400">(403) 887-0440</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- TireConnect Script - Dynamic loading with proper callbacks -->
+  <script is:inline>
+    (function() {
+      var TIRECONNECT_URL = 'https://app.tireconnect.ca/js/widget.js';
+      var scriptLoaded = false;
+      var scriptFailed = false;
+
+      function showLoading() {
+        var loadingEl = document.getElementById('tc-loading');
+        var errorEl = document.getElementById('tc-error');
+        if (loadingEl) { loadingEl.style.display = 'flex'; loadingEl.classList.remove('hidden'); }
+        if (errorEl) { errorEl.style.display = 'none'; errorEl.classList.add('hidden'); }
+      }
+
+      function showError() {
+        var loadingEl = document.getElementById('tc-loading');
+        var errorEl = document.getElementById('tc-error');
+        if (loadingEl) { loadingEl.style.display = 'none'; loadingEl.classList.add('hidden'); }
+        if (errorEl) { errorEl.style.display = 'flex'; errorEl.classList.remove('hidden'); }
+      }
+
+      function initWidget() {
+        var loadingEl = document.getElementById('tc-loading');
+        var errorEl = document.getElementById('tc-error');
+
+        if (typeof TCWidget !== 'undefined') {
+          if (loadingEl) loadingEl.style.display = 'none';
+          if (errorEl) errorEl.style.display = 'none';
+
+          TCWidget.init({
+            apikey: '11cf9c56224e594319d104dbdeb76dab',
+            container: 'tireconnect',
+            locale: 'en_CA'
+          });
+        } else {
+          showError();
+        }
+      }
+
+      function loadTireConnect() {
+        // Don't reload if already loaded successfully
+        if (scriptLoaded && typeof TCWidget !== 'undefined') {
+          initWidget();
+          return;
+        }
+
+        // Reset state
+        scriptFailed = false;
+        showLoading();
+
+        // Remove any existing script
+        var existingScript = document.getElementById('tireconnect-script');
+        if (existingScript) existingScript.remove();
+
+        // Create and load script
+        var script = document.createElement('script');
+        script.id = 'tireconnect-script';
+        script.src = TIRECONNECT_URL;
+        script.async = true;
+
+        script.onload = function() {
+          scriptLoaded = true;
+          // Small delay to ensure TCWidget is defined
+          setTimeout(initWidget, 100);
+        };
+
+        script.onerror = function() {
+          scriptFailed = true;
+          scriptLoaded = false;
+          showError();
+        };
+
+        document.head.appendChild(script);
+
+        // Timeout fallback - if nothing happens in 8 seconds, show error
+        setTimeout(function() {
+          if (!scriptLoaded && !scriptFailed) {
+            showError();
+          }
+        }, 8000);
+      }
+
+      // Initial load
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadTireConnect);
+      } else {
+        loadTireConnect();
+      }
+
+      // Handle Astro page transitions
+      document.addEventListener('astro:page-load', loadTireConnect);
+    })();
+  </script>
+
+  <!-- Info Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white mb-4 md:mb-6">
+        What's Included With Every Tire Purchase
+      </h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+        <p>
+          Professional mounting and balancing on every set we sell. We also offer wheel alignment to make sure your new tires wear evenly and last as long as possible. Need your old tires disposed of? We handle that too.
+        </p>
+        <p>
+          Not sure what size you need? Call us or book an appointment — we'll check your vehicle and recommend the right tires for how you drive and Alberta's conditions.
+        </p>
+      </div>
+      <div class="mt-6 md:mt-8 flex flex-wrap justify-center gap-3">
+        <a href="/services/alignment" class="btn-secondary">Wheel Alignment</a>
+        <a href="/services/tires" class="btn-secondary">Full Tire Services</a>
+        <a href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1" target="_blank" rel="noopener noreferrer" class="btn-primary">Book Installation</a>
+      </div>
+      <p class="mt-6 text-sm text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 rounded-lg px-4 py-3 inline-block">
+        Ask about our <strong class="text-gray-900 dark:text-white">Tire Protection Plan</strong> — coverage for road hazards and premature wear.
+      </p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Found Your Tires?"
+    subtitle="Give us a call to confirm pricing and availability, or book your installation appointment online."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>

@@ -1,0 +1,358 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Auto Repair Red Deer County | Sylvan Lake AUTOPRO Inc',
+  description: 'Trusted auto repair for Red Deer County acreage and rural residents. Full-service shop in Sylvan Lake — 19 years serving central Alberta. Licensed inspections, brakes, oil changes & more.',
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Sylvan Lake AUTOPRO",
+  "image": "https://sylvanlakeautopro.com/images/og-image.jpg",
+  "@id": "https://sylvanlakeautopro.com/#organization",
+  "url": "https://sylvanlakeautopro.com",
+  "telephone": "+1-403-887-0440",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1A Industrial Dr",
+    "addressLocality": "Sylvan Lake",
+    "addressRegion": "AB",
+    "postalCode": "T4S 1P4",
+    "addressCountry": "CA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 52.311676,
+    "longitude": -114.073863
+  },
+  "areaServed": ["Red Deer County", "Benalto", "Springbrook", "Markerville", "Dickson", "Spruce View", "Penhold", "Gasoline Alley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How far is Sylvan Lake AUTOPRO from Red Deer County communities?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We're centrally located on Highway 11 in Sylvan Lake. Most Red Deer County residents can reach us within 20–35 minutes. Benalto is about 18 minutes west on Highway 11, Springbrook is about 20 minutes via Highway 2A, and Penhold is about 22 minutes north."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work on farm trucks and equipment vehicles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We work on all light-duty and medium-duty vehicles including trucks, SUVs, and vans. For heavy-duty farm equipment, you'd need a specialized agricultural dealer, but for your pickup trucks, service vehicles, and daily drivers, we've got you covered."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I drop my vehicle off early and pick it up later?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. We have an after-hours key drop, so you can drop your vehicle off before we open and pick it up when it's convenient. We also offer shuttle service within the Sylvan Lake area."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do gravel roads really affect my vehicle that much?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Gravel road driving accelerates wear on suspension components, brakes, wheel bearings, and undercarriage protection. Dust infiltrates filters and can affect engine performance. We recommend more frequent inspections for vehicles that regularly travel gravel roads — typically every 8,000–10,000 km rather than the standard 12,000 km interval."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are you open on Saturdays?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Check our current hours on our contact page or call (403) 887-0440."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://sylvanlakeautopro.com/locations/" },
+    { "@type": "ListItem", "position": 3, "name": "Red Deer County" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Serving Red Deer County"
+    title="Auto Repair for Red Deer County Residents"
+    subtitle="Sylvan Lake AUTOPRO has been the go-to shop for Red Deer County residents since 2006. Whether you're on an acreage off a range road or in one of the County's hamlets, we're centrally located on Highway 11 in Sylvan Lake — easy to get to from anywhere in the County."
+    actions={[
+      { variant: 'primary', text: 'Book Online', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+
+  <!-- Gravel Roads Section -->
+  <Content
+    title="Your Vehicle Works Harder Out Here"
+    content="Red Deer County covers over 4,000 square kilometres of central Alberta, and the County maintains more than 3,000 kilometres of roads — many of them gravel. That gravel takes a toll on your vehicle in ways city driving simply doesn't.<br/><br/>Loose stone chips away at paint and undercarriage coatings. Dust works its way into engine air filters, cabin filters, and brake components. The constant vibration from washboard roads accelerates wear on suspension bushings, ball joints, tie rod ends, and wheel bearings. And in winter, the combination of gravel, sand, salt, and freeze-thaw cycles creates conditions that are genuinely hard on vehicles.<br/><br/>If you live on an acreage or in one of the County's rural subdivisions, your vehicle needs a mechanic who understands these conditions — not a quick-lube chain designed for city commuters.<br/><br/>At Sylvan Lake AUTOPRO, we see vehicles from across the County every day. We know what gravel road driving does to your suspension, your brakes, and your undercarriage, and we inspect for it every time your vehicle is in our shop."
+  />
+
+  <!-- Distance Table Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Convenient for Communities Across the County</h2>
+        <p class="text-lg text-muted dark:text-slate-400 mt-4">Sylvan Lake sits right in the heart of Red Deer County, making us easy to reach from communities throughout the area.</p>
+      </div>
+
+      <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-primary text-white">
+            <tr>
+              <th class="px-4 py-3 text-left font-semibold">Community</th>
+              <th class="px-4 py-3 text-left font-semibold">Distance</th>
+              <th class="px-4 py-3 text-left font-semibold">Drive Time</th>
+              <th class="px-4 py-3 text-left font-semibold hidden sm:table-cell">Route</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200 dark:divide-slate-700">
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Benalto</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">18 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~18 min</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400 hidden sm:table-cell">West on Highway 11</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Springbrook</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">25 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~20 min</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400 hidden sm:table-cell">South via Highway 2A & 11</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Markerville</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">22 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~20 min</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400 hidden sm:table-cell">South on Hwy 781 to Hwy 11</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Dickson</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">30 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~25 min</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400 hidden sm:table-cell">South on Range Road 31 to Hwy 11</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Spruce View</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">50 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~35 min</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400 hidden sm:table-cell">South on Hwy 54 to Hwy 2A to Hwy 11</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Penhold</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">30 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~22 min</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400 hidden sm:table-cell">North on Hwy 2A to Hwy 11</td>
+            </tr>
+            <tr class="hover:bg-gray-50 dark:hover:bg-slate-800">
+              <td class="px-4 py-3 font-medium dark:text-white">Gasoline Alley</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">28 km</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400">~20 min</td>
+              <td class="px-4 py-3 text-muted dark:text-slate-400 hidden sm:table-cell">West on Highway 11</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-6 text-center text-muted dark:text-slate-400">
+        We're located at <strong class="text-gray-900 dark:text-white">1A Industrial Drive, Sylvan Lake</strong> — right off Highway 11 on the east side of town, in the industrial area. Easy to find, plenty of parking for trucks and trailers.
+      </p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <Features2
+    title="Services Red Deer County Residents Use Most"
+    columns={2}
+    items={[
+      {
+        title: 'Suspension & Steering Repair',
+        description: 'Gravel roads are hard on suspension components. We see worn ball joints, tie rod ends, and shock absorbers regularly from County residents. Our Hunter HawkEye Elite alignment system catches problems early — before they cost you tires.',
+        icon: 'tabler:steering-wheel',
+        callToAction: { text: 'Learn More', href: '/services/steering-suspension' },
+      },
+      {
+        title: 'Out of Province Inspections',
+        description: "Red Deer County sees a lot of vehicle movement — people buying trucks from BC or Saskatchewan, or bringing vehicles from out east. We're a licensed AMVIC inspection facility and one of the few shops in the area that handles out-of-province inspections efficiently.",
+        icon: 'tabler:clipboard-check',
+        callToAction: { text: 'Learn More', href: '/services/out-of-province-inspection' },
+      },
+      {
+        title: 'Commercial Vehicle Inspections (CVIP)',
+        description: "The County's economy runs on agriculture, oil and gas, and construction. If you operate commercial vehicles, we perform CVIP inspections to keep your fleet compliant and on the road.",
+        icon: 'tabler:truck',
+        callToAction: { text: 'Learn More', href: '/services/cvip-inspection' },
+      },
+      {
+        title: 'Pre-Purchase Inspections',
+        description: "Buying a used truck off a County acreage? A pre-purchase inspection can save you thousands. We'll put it on the hoist and give you an honest assessment before you hand over the money.",
+        icon: 'tabler:search',
+        callToAction: { text: 'Learn More', href: '/services/pre-purchase-inspection' },
+      },
+      {
+        title: 'Oil Changes & Maintenance',
+        description: "We use Castrol synthetic oil and NAPA filters — products designed for vehicles that work hard. Rural driving with dust, towing, and short cold-weather trips all qualify as severe-duty conditions that require more frequent maintenance.",
+        icon: 'tabler:droplet',
+        callToAction: { text: 'Learn More', href: '/services/oil-change' },
+      },
+      {
+        title: 'Complete Diagnostics',
+        description: "Check engine light on? Our scan tools and factory-level software identify the actual problem, not just clear the code. We diagnose issues properly so you're not replacing parts unnecessarily.",
+        icon: 'tabler:engine',
+        callToAction: { text: 'Learn More', href: '/services/diagnostics' },
+      },
+    ]}
+  />
+
+  <!-- Why Choose Us Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Why County Residents Choose Us</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">19 Years in Sylvan Lake</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">We're not going anywhere — serving the community since 2006.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">4.9 Google Rating</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">From 290+ reviews — our reputation is earned.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">NAPA Peace of Mind Warranty</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">24 months / 40,000 km, honoured at 17,000+ locations across North America.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">Digital Inspections</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">Photos and measurements sent directly to your phone.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">Red Seal Certified Technicians</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">The highest certification level in Canada.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">Drop-Off Friendly</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">Leave your vehicle and we'll call when it's ready, or use our shuttle service.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions from Red Deer County residents"
+    columns={1}
+    items={[
+      {
+        title: 'How far is Sylvan Lake AUTOPRO from Red Deer County communities?',
+        description: "We're centrally located on Highway 11 in Sylvan Lake. Most Red Deer County residents can reach us within 20–35 minutes. Benalto is about 18 minutes west on Highway 11, Springbrook is about 20 minutes via Highway 2A, and Penhold is about 22 minutes north.",
+      },
+      {
+        title: 'Do you work on farm trucks and equipment vehicles?',
+        description: "We work on all light-duty and medium-duty vehicles including trucks, SUVs, and vans. For heavy-duty farm equipment, you'd need a specialized agricultural dealer, but for your pickup trucks, service vehicles, and daily drivers, we've got you covered.",
+      },
+      {
+        title: 'Can I drop my vehicle off early and pick it up later?',
+        description: "Absolutely. We have an after-hours key drop, so you can drop your vehicle off before we open and pick it up when it's convenient. We also offer shuttle service within the Sylvan Lake area.",
+      },
+      {
+        title: 'Do gravel roads really affect my vehicle that much?',
+        description: "Yes. Gravel road driving accelerates wear on suspension components, brakes, wheel bearings, and undercarriage protection. Dust infiltrates filters and can affect engine performance. We recommend more frequent inspections for vehicles that regularly travel gravel roads — typically every 8,000–10,000 km rather than the standard 12,000 km interval.",
+      },
+      {
+        title: 'Are you open on Saturdays?',
+        description: 'Check our current hours on our contact page or call (403) 887-0440.',
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Serving Red Deer County Since 2006"
+    subtitle="From Benalto to Penhold, Springbrook to Spruce View — we're your local auto repair shop."
+    actions={[
+      { variant: 'primary', text: 'Book Online', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>

@@ -96,7 +96,8 @@ const breadcrumbSchema = {
     subtitle="Licensed Facility. Annual Inspections. Fleet Programs."
     actions={[
       { variant: 'primary', text: 'Book CVIP Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -147,7 +148,6 @@ const breadcrumbSchema = {
 
   <!-- Requirements Section -->
   <Content
-    isReversed={true}
     title="When Is a CVIP Required?"
     content="Alberta Transportation requires annual inspections for commercial vehicles based on weight and operation:<br/><br/><strong>Intra-provincial (within Alberta):</strong> 11,794 kg+ GVW — Annual<br/><br/><strong>Extra-provincial (crossing borders):</strong> 4,500 kg+ GVW — Annual<br/><br/><strong>Buses (10+ passengers including driver):</strong> Any weight — Semi-annual<br/><br/>If your vehicle operates commercially and meets these thresholds, it needs a current CVIP certificate and decal."
   />
@@ -193,7 +193,6 @@ const breadcrumbSchema = {
 
   <!-- Who We Work With Section -->
   <Content
-    isReversed={true}
     title="Who We Work With"
     content="<strong>Businesses we serve:</strong><br/><br/>• Landscaping and construction companies<br/>• Property management fleets<br/>• Medical transport and ambulance services<br/>• School and charter bus operators<br/>• Delivery and courier services<br/>• Any business with commercial vehicles<br/><br/><strong>Call us to discuss your fleet: (403) 887-0440</strong>"
   />
@@ -239,7 +238,8 @@ const breadcrumbSchema = {
     subtitle="Licensed facility since 2006. Fleet inquiries welcome."
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

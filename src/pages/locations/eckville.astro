@@ -1,0 +1,329 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Auto Repair Near Eckville, AB | Sylvan Lake AUTOPRO Inc',
+  description: 'Full-service auto repair just 20 minutes from Eckville on Highway 11. Licensed inspections, brakes, oil changes, diagnostics & more. 4.9★ rating, NAPA warranty. Call (403) 887-0440.',
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Sylvan Lake AUTOPRO",
+  "image": "https://sylvanlakeautopro.com/images/og-image.jpg",
+  "@id": "https://sylvanlakeautopro.com/#organization",
+  "url": "https://sylvanlakeautopro.com",
+  "telephone": "+1-403-887-0440",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1A Industrial Dr",
+    "addressLocality": "Sylvan Lake",
+    "addressRegion": "AB",
+    "postalCode": "T4S 1P4",
+    "addressCountry": "CA"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 52.311676,
+    "longitude": -114.073863
+  },
+  "areaServed": ["Eckville", "Condor", "Alhambra", "Withrow", "Benalto", "Lacombe County"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long is the drive from Eckville to your shop?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "About 20 minutes. Head south on Highway 766 to Highway 11, then east to Sylvan Lake. We're at 1A Industrial Drive, on the east side of town right off the highway."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it worth driving past the shops in Eckville?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For parts and tires, Eckville has solid options. For full-service diagnostics, inspections, complex repairs, and warranty-backed work with NAPA parts, Sylvan Lake AUTOPRO offers capabilities that smaller shops typically can't match. Our digital inspection system means you'll see exactly what's happening with your vehicle."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you service diesel trucks?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We work on both gas and diesel light-duty and medium-duty trucks. Many Eckville-area residents drive diesel pickups for farm and oilfield work, and we're equipped to handle them."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I wait while my vehicle is serviced?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We have a comfortable waiting room with Wi-Fi, TV, and complimentary beverages and snacks. For longer services, we can arrange a shuttle within Sylvan Lake, or you can explore town while you wait."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you do out-of-province inspections?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We're a licensed AMVIC facility for out-of-province vehicle inspections. This is a common need in the Eckville area, especially for vehicles purchased from BC or Saskatchewan. We handle the full inspection and paperwork."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's covered under the NAPA warranty?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The NAPA Peace of Mind warranty covers qualifying repairs for 24 months or 40,000 km, whichever comes first. It's honoured at over 17,000 NAPA AUTOPRO and AutoCare locations across North America — so you're covered whether you're in Eckville, Edmonton, or on vacation."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Locations", "item": "https://sylvanlakeautopro.com/locations/" },
+    { "@type": "ListItem", "position": 3, "name": "Eckville" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Serving Eckville Area"
+    title="Auto Repair Near Eckville"
+    subtitle="Eckville residents don't have to drive to Red Deer for quality auto repair. Sylvan Lake AUTOPRO is just 20 minutes east on Highway 11 — a straight shot with no city traffic. Full-service repair, licensed inspections, and NAPA warranty coverage."
+    actions={[
+      { variant: 'primary', text: 'Book Online', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+
+  <!-- Directions Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Getting Here from Eckville</h2>
+      </div>
+
+      <div class="prose prose-lg dark:prose-invert max-w-none text-muted dark:text-slate-400">
+        <p>From Eckville, head south on Highway 766 to Highway 11, then east toward Sylvan Lake. The drive is about 25 km and takes roughly 20 minutes — mostly highway with no stoplights until you reach town.</p>
+        <p>Our shop is at <strong class="text-gray-900 dark:text-white">1A Industrial Drive, Sylvan Lake</strong>, on the east side of town in the industrial area, right off Highway 11. You'll see us before you even hit downtown.</p>
+        <p>If you're coming from the Eckville trading area — Condor, Alhambra, Withrow, or the acreages along Highway 766 — add about 5–10 minutes to the drive. We're still closer and easier to get to than the big box shops in Red Deer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Not Red Deer Section -->
+  <Content
+    title="Full-Service Auto Repair — No Need to Go to Red Deer"
+    content="Eckville has parts stores, tire shops, and some specialty services, but for comprehensive auto repair, diagnostics, and licensed inspections, most Eckville residents end up driving somewhere. The question is: Red Deer or Sylvan Lake?<br/><br/>Red Deer means 45+ minutes, city traffic, and navigating to whichever shop you're trying to find. Sylvan Lake means 20 minutes on a highway you already know, a shop that's been here since 2006, and you're back home before lunch."
+  />
+
+  <!-- Services Section -->
+  <Features2
+    title="What We Handle That Saves You the Trip"
+    columns={2}
+    items={[
+      {
+        title: 'Diagnostics & Check Engine Lights',
+        description: "Modern vehicles generate complex fault codes that require professional diagnostic equipment to interpret. We invest in current scan tools and factory-level software — not just basic code readers. When your check engine light comes on, we'll identify the actual problem, not just clear the code.",
+        icon: 'tabler:engine',
+        callToAction: { text: 'Learn More', href: '/services/diagnostics' },
+      },
+      {
+        title: 'Brake Service',
+        description: "From pad replacements to full brake system overhauls — rotors, calipers, lines, and fluid flushes. If your vehicle pulls to one side or you're hearing grinding, get it looked at before it becomes a safety issue.",
+        icon: 'tabler:disc',
+        callToAction: { text: 'Learn More', href: '/services/brake-repair' },
+      },
+      {
+        title: 'Steering & Suspension',
+        description: "Highway 11 between Eckville and Sylvan Lake is well maintained, but if your daily driving includes range roads and gravel, your suspension components wear faster. Our Hunter HawkEye Elite alignment system measures to fractions of a degree.",
+        icon: 'tabler:steering-wheel',
+        callToAction: { text: 'Learn More', href: '/services/steering-suspension' },
+      },
+      {
+        title: 'All Inspections',
+        description: "We're a licensed facility for out-of-province inspections, CVIP commercial inspections, insurance inspections, and pre-purchase inspections. One shop, all inspection types.",
+        icon: 'tabler:clipboard-check',
+        callToAction: { text: 'Learn More', href: '/services/out-of-province-inspection' },
+      },
+      {
+        title: 'Electrical & A/C Service',
+        description: "Electrical diagnosis, battery and charging system testing, A/C recharge and leak repair. These are services that require specialized equipment — we have it.",
+        icon: 'tabler:bolt',
+        callToAction: { text: 'Learn More', href: '/services/electrical' },
+      },
+      {
+        title: 'Oil Changes & Maintenance',
+        description: "We use Castrol synthetic oil and NAPA filters — products designed for vehicles that work hard. Rural driving qualifies as severe-duty conditions that benefit from premium products.",
+        icon: 'tabler:droplet',
+        callToAction: { text: 'Learn More', href: '/services/oil-change' },
+      },
+    ]}
+  />
+
+  <!-- About Eckville Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">About Eckville</h2>
+      </div>
+
+      <div class="prose prose-lg dark:prose-invert max-w-none text-muted dark:text-slate-400">
+        <p>Eckville is a community with deep roots. Settled by Estonian and Finnish homesteaders in the early 1900s, the town moved to its current location in 1912 when the Canadian Northern Railway came through. Today, about 1,100 people call Eckville home, with a broader trading area of around 7,000 residents.</p>
+        <p>The local economy still centres on agriculture and oil and gas, which means a lot of trucks and work vehicles that need reliable maintenance. We see Eckville-area vehicles regularly — they tend to be trucks and SUVs that work for a living, and we treat them accordingly.</p>
+        <p>Eckville is also a gateway to the west country. People heading to or from Rocky Mountain House, Nordegg, and Abraham Lake on the David Thompson Highway pass right through. If you're prepping a vehicle for a mountain trip or need post-trip maintenance, we're right on your route home.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Why Eckville Residents Trust Us</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">20-Minute Drive</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">Less than half the time to get to a Red Deer shop.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">4.9 Google Rating</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">From 290+ reviews, not 29.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">Digital Inspections</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">Photos and measurements sent to your phone so you see what we see.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">NAPA Peace of Mind Warranty</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">24 months / 40,000 km, honoured at 17,000+ locations.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">No Upselling</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">We show you what needs attention, explain why, and let you decide.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 p-4 bg-white dark:bg-slate-900 rounded-lg shadow">
+          <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="font-bold text-gray-900 dark:text-white">Red Seal Certified Technicians</h3>
+            <p class="text-muted dark:text-slate-400 text-sm">The highest trade certification in Canada.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions from Eckville-area residents"
+    columns={1}
+    items={[
+      {
+        title: 'How long is the drive from Eckville to your shop?',
+        description: "About 20 minutes. Head south on Highway 766 to Highway 11, then east to Sylvan Lake. We're at 1A Industrial Drive, on the east side of town right off the highway.",
+      },
+      {
+        title: 'Is it worth driving past the shops in Eckville?',
+        description: "For parts and tires, Eckville has solid options. For full-service diagnostics, inspections, complex repairs, and warranty-backed work with NAPA parts, Sylvan Lake AUTOPRO offers capabilities that smaller shops typically can't match. Our digital inspection system means you'll see exactly what's happening with your vehicle.",
+      },
+      {
+        title: 'Do you service diesel trucks?',
+        description: "Yes. We work on both gas and diesel light-duty and medium-duty trucks. Many Eckville-area residents drive diesel pickups for farm and oilfield work, and we're equipped to handle them.",
+      },
+      {
+        title: 'Can I wait while my vehicle is serviced?',
+        description: "Yes. We have a comfortable waiting room with Wi-Fi, TV, and complimentary beverages and snacks. For longer services, we can arrange a shuttle within Sylvan Lake, or you can explore town while you wait.",
+      },
+      {
+        title: 'Do you do out-of-province inspections?',
+        description: "Yes. We're a licensed AMVIC facility for out-of-province vehicle inspections. This is a common need in the Eckville area, especially for vehicles purchased from BC or Saskatchewan. We handle the full inspection and paperwork.",
+      },
+      {
+        title: "What's covered under the NAPA warranty?",
+        description: "The NAPA Peace of Mind warranty covers qualifying repairs for 24 months or 40,000 km, whichever comes first. It's honoured at over 17,000 NAPA AUTOPRO and AutoCare locations across North America — so you're covered whether you're in Eckville, Edmonton, or on vacation.",
+      },
+    ]}
+  />
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Just 20 Minutes from Eckville"
+    subtitle="Skip the Red Deer traffic. Full-service auto repair on Highway 11 in Sylvan Lake."
+    actions={[
+      { variant: 'primary', text: 'Book Online', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>

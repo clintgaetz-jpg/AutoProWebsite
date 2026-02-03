@@ -3,6 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
@@ -40,11 +41,59 @@ const breadcrumbSchema = {
     { "@type": "ListItem", "position": 3, "name": "Transmission Repair" }
   ]
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Should I rebuild or replace my transmission?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We prefer rebuilding your transmission over installing an exchange unit. With a rebuild, we fix exactly what's wrong, you see documentation of the failure, and you can add upgrades while it's apart. Exchange units are unknown quality from unknown sources. A custom rebuild by our 49-year specialist is typically better value and better quality."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does a transmission rebuild cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Transmission rebuild costs vary significantly based on the transmission type and what's actually wrong. A minor repair might be $1,500-2,500, while a full rebuild with upgrades could be $3,500-6,000+. We diagnose first and give you exact pricing before any work begins."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you repair CVT transmissions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We diagnose CVT issues and perform fluid services. For internal CVT repairs, we'll advise whether repair or replacement makes more sense for your specific situation. CVT rebuilds aren't always cost-effective compared to replacement, depending on the failure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the warning signs of transmission problems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common signs include slipping (engine revs but vehicle doesn't accelerate), hard or delayed shifts, grinding or shaking during shifts, transmission warning light, fluid leaks, burning smell, or unusual noises. Don't ignore these — transmission problems rarely fix themselves and usually get worse."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work on diesel truck transmissions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We service and rebuild heavy-duty transmissions including Allison, Aisin, Ford TorqShift, Ram 68RFE, and GM units. Diesel trucks put extra stress on transmissions, especially when towing. We can build yours to handle the load."
+      }
+    }
+  ]
+};
 ---
 
 <Layout metadata={metadata}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
 
@@ -54,8 +103,9 @@ const breadcrumbSchema = {
     title="Transmission Repair & Rebuilds"
     subtitle="We Fix Yours. We Don't Just Swap It."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -252,19 +302,48 @@ const breadcrumbSchema = {
         title: 'Driveline Services',
         description: 'Differentials, transfer cases, AWD',
         icon: 'tabler:settings',
-        callToAction: { text: 'Learn More', href: '/services/driveline' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/driveline' },
       },
       {
         title: 'Fluid Maintenance',
         description: 'BG Transmission Service',
         icon: 'tabler:droplet',
-        callToAction: { text: 'Learn More', href: '/services/fluid-maintenance' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/fluid-maintenance' },
       },
       {
         title: 'Diagnostics',
         description: 'Check engine & warning lights',
         icon: 'tabler:cpu',
-        callToAction: { text: 'Learn More', href: '/services/diagnostics' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/diagnostics' },
+      },
+    ]}
+  />
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about transmission repair"
+    columns={1}
+    items={[
+      {
+        title: 'Should I rebuild or replace my transmission?',
+        description: "We prefer rebuilding your transmission over installing an exchange unit. With a rebuild, we fix exactly what's wrong, you see documentation of the failure, and you can add upgrades while it's apart. Exchange units are unknown quality from unknown sources. A custom rebuild by our 49-year specialist is typically better value and better quality.",
+      },
+      {
+        title: 'How much does a transmission rebuild cost?',
+        description: "Transmission rebuild costs vary significantly based on the transmission type and what's actually wrong. A minor repair might be $1,500-2,500, while a full rebuild with upgrades could be $3,500-6,000+. We diagnose first and give you exact pricing before any work begins.",
+      },
+      {
+        title: 'Can you repair CVT transmissions?',
+        description: "We diagnose CVT issues and perform fluid services. For internal CVT repairs, we'll advise whether repair or replacement makes more sense for your specific situation. CVT rebuilds aren't always cost-effective compared to replacement, depending on the failure.",
+      },
+      {
+        title: 'What are the warning signs of transmission problems?',
+        description: "Common signs include slipping (engine revs but vehicle doesn't accelerate), hard or delayed shifts, grinding or shaking during shifts, transmission warning light, fluid leaks, burning smell, or unusual noises. Don't ignore these — transmission problems rarely fix themselves and usually get worse.",
+      },
+      {
+        title: 'Do you work on diesel truck transmissions?',
+        description: 'Yes. We service and rebuild heavy-duty transmissions including Allison, Aisin, Ford TorqShift, Ram 68RFE, and GM units. Diesel trucks put extra stress on transmissions, especially when towing. We can build yours to handle the load.',
       },
     ]}
   />
@@ -274,8 +353,9 @@ const breadcrumbSchema = {
     title="Transmission Problems?"
     subtitle="Get a proper diagnosis — not a guess. We'll tell you exactly what's wrong and give you real options."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

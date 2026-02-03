@@ -1,0 +1,355 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Diesel Repair & Service | Sylvan Lake AUTOPRO',
+  description: 'Full diesel repair, maintenance, diagnostics and performance services in Sylvan Lake. Head gaskets, exhaust, turbos, injectors, DPF systems. Partner shop for tuning and custom work.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Diesel Engine Repair and Maintenance",
+  "description": "Complete diesel repair, maintenance, diagnostics and performance services including head gaskets, turbochargers, injectors, DPF/DEF systems, and exhaust work. Partner shop available for tuning and custom builds.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": [
+    "Sylvan Lake",
+    "Red Deer",
+    "Rocky Mountain House",
+    "Rimbey",
+    "Ponoka",
+    "Blackfalds",
+    "Penhold",
+    "Eckville",
+    "Bentley",
+    "Benalto",
+    "Condor",
+    "Leslieville",
+    "Alhambra",
+    "Withrow",
+    "Evarts",
+    "Dickson",
+    "Markerville",
+    "Caroline",
+    "Bluffton",
+    "Hoadley",
+    "Jarvis Bay",
+    "Norglenwold",
+    "Gull Lake",
+    "Birchcliff"
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What diesel truck brands do you service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All major makes including Chevrolet/GMC (Duramax), Ford (Power Stroke), Ram (Cummins), and import diesels. Our diagnostic tools cover the full range of diesel platforms."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I change oil in my diesel truck?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most modern diesel trucks call for oil changes every 8,000–12,000 km depending on driving conditions. Towing, short trips, and cold Alberta winters push you toward the shorter interval. We use the correct CK-4 or FA-4 rated diesel oils for your specific engine."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the signs of a failing diesel head gasket?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "White smoke from the exhaust, coolant loss without visible leaks, overheating, milky residue on the oil cap, or bubbling in the coolant reservoir. If you notice any of these, get it checked quickly — driving with a blown head gasket causes significantly more engine damage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work on DPF and DEF systems?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We service diesel particulate filters (DPF) including cleaning and forced regeneration, and diagnose DEF (diesel exhaust fluid) system issues. These emissions systems are complex and require proper diagnostic tools to service correctly."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer diesel performance work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We handle all mechanical work in-house. For specialty tuning and custom builds, we partner with a trusted local diesel performance shop. This gives you access to performance work with the convenience of one shop managing everything."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you do CVIP inspections on diesel commercial vehicles?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we're licensed to perform Commercial Vehicle Inspection Program (CVIP) inspections on diesel commercial vehicles."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Diesel Services" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Diesel Services"
+    title="Diesel Repair, Maintenance & Performance"
+    subtitle="From routine maintenance to major repairs and performance work — we keep Alberta's diesel trucks and equipment running right. In-house expertise plus a trusted partner shop for tuning and custom builds."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+        <p>Diesel engines are built tough, but they need technicians who understand their unique systems — higher compression, turbocharging, complex fuel injection, and emissions controls that gas engines don't have. Getting diesel work done wrong costs serious money.</p>
+        <p>At Sylvan Lake AUTOPRO, our technicians have the diagnostic tools and hands-on experience to handle everything from routine diesel maintenance to complex head gasket repairs, turbo replacements, and exhaust system work. We service all makes — Duramax, Cummins, Power Stroke — trucks, equipment, and commercial vehicles.</p>
+        <p>For customers looking for performance tuning or custom work, we partner with a trusted local diesel performance shop. They handle the specialty builds while we take care of everything else — giving you one-stop diesel service without compromise.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diesel Services Grid -->
+  <Features2
+    title="Diesel Repair & Diagnostics"
+    columns={2}
+    items={[
+      {
+        title: 'Head Gasket Diagnosis & Repair',
+        description: 'Diesel head gaskets fail differently than gas engines. We diagnose accurately and repair properly to avoid repeat failures.',
+        icon: 'tabler:layers-intersect',
+      },
+      {
+        title: 'Turbocharger Service',
+        description: 'Inspection, repair and replacement of turbochargers. We catch failing turbos before they send debris into your engine.',
+        icon: 'tabler:tornado',
+      },
+      {
+        title: 'Fuel Injector Testing & Replacement',
+        description: 'Injector problems cause poor performance, smoke, and hard starting. We test and replace injectors to restore proper operation.',
+        icon: 'tabler:gas-station',
+      },
+      {
+        title: 'Glow Plug & Starting System',
+        description: 'Cold Alberta mornings are hard on diesel starting systems. We diagnose and repair glow plugs, controllers, and related components.',
+        icon: 'tabler:bolt',
+      },
+      {
+        title: 'Diesel Diagnostics',
+        description: 'OEM and Snap-on diagnostic tools for diesel-specific codes and live data — fuel rail pressure, boost, injector balance rates, regen status.',
+        icon: 'tabler:device-analytics',
+      },
+      {
+        title: 'Cooling System Repair',
+        description: 'Diesel engines run hotter and have more demanding cooling requirements. We service radiators, water pumps, thermostats, and EGR coolers.',
+        icon: 'tabler:temperature',
+      },
+    ]}
+  />
+
+  <Features2
+    title="Diesel Maintenance"
+    subtitle="Keep your diesel running reliably"
+    columns={2}
+    items={[
+      {
+        title: 'Diesel Oil Changes',
+        description: 'Correct CK-4/FA-4 rated oils for your specific engine. Diesel oil requirements are different from gas engines — we get it right.',
+        icon: 'tabler:droplet',
+      },
+      {
+        title: 'Fuel Filter Replacement',
+        description: 'Critical for injector longevity. Diesel fuel filters need regular replacement to protect your expensive injection system.',
+        icon: 'tabler:filter',
+      },
+      {
+        title: 'DEF System Service',
+        description: 'Diesel exhaust fluid system maintenance and diagnosis. DEF problems trigger limp mode — we keep your system working properly.',
+        icon: 'tabler:droplet-check',
+      },
+      {
+        title: 'DPF Service',
+        description: 'Diesel particulate filter cleaning and forced regeneration. We diagnose DPF issues and restore proper exhaust flow.',
+        icon: 'tabler:air-conditioning',
+      },
+      {
+        title: 'Coolant Service',
+        description: 'ELC/OAT coolant flush and fill. Diesel engines require specific coolant types — we use the correct fluids for your application.',
+        icon: 'tabler:snowflake',
+      },
+      {
+        title: 'Heavy-Duty Drivetrain Service',
+        description: 'Transmission and differential service with heavy-duty fluids rated for diesel truck loads and towing.',
+        icon: 'tabler:manual-gearbox',
+      },
+    ]}
+  />
+
+  <!-- Performance & Custom Work Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <p class="text-sm font-bold tracking-wide uppercase text-accent mb-2">Performance & Custom Work</p>
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading">Full-Service Diesel — Repair to Performance</h2>
+      <div class="text-base md:text-lg text-gray-300 space-y-4">
+        <p>We handle your diesel repair, maintenance, and diagnostics in-house. When you need performance tuning or custom work, we work directly with a trusted local diesel performance shop that specializes in it.</p>
+        <p>This partnership means you get one point of contact for all your diesel needs. We coordinate the work, ensure everything integrates properly, and stand behind the service. No bouncing between shops, no finger-pointing if something isn't right.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exhaust System Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading text-center dark:text-white">Exhaust System Service</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-center">
+        <p>Diesel exhaust systems take more abuse than gas vehicles — higher temperatures, more soot, and complex emissions equipment. We service the complete exhaust system including manifolds, up-pipes, downpipes, DPF, SCR catalysts, and mufflers.</p>
+        <p>Leaking exhaust manifolds are common on many diesel trucks and we catch them early during inspections before they cause turbo damage.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diesel Diagnostics Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading text-center dark:text-white">Diesel Diagnostics</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-center">
+        <p>Modern diesels are computer-controlled systems. A check engine light on a diesel could be anything from a simple sensor to a failing injector or turbo issue.</p>
+        <p>Our Snap-on and OEM diagnostic tools read diesel-specific codes and live data — fuel rail pressure, boost pressure, injector balance rates, regen status — to pinpoint problems accurately instead of guessing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Commercial & Fleet Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading text-center dark:text-white">Commercial & Fleet Diesel</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-center">
+        <p>We service commercial diesel vehicles including CVIP inspections. If you run a fleet with diesel trucks or equipment, check out our fleet services program for scheduled maintenance and priority booking.</p>
+        <p class="mt-6">
+          <a href="/services/fleet-services" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full transition-colors">
+            Learn About Fleet Services
+          </a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about diesel service"
+    columns={1}
+    items={[
+      {
+        title: 'What diesel truck brands do you service?',
+        description: 'All major makes including Chevrolet/GMC (Duramax), Ford (Power Stroke), Ram (Cummins), and import diesels. Our diagnostic tools cover the full range of diesel platforms.',
+      },
+      {
+        title: 'How often should I change oil in my diesel truck?',
+        description: 'Most modern diesel trucks call for oil changes every 8,000–12,000 km depending on driving conditions. Towing, short trips, and cold Alberta winters push you toward the shorter interval. We use the correct CK-4 or FA-4 rated diesel oils for your specific engine.',
+      },
+      {
+        title: 'What are the signs of a failing diesel head gasket?',
+        description: 'White smoke from the exhaust, coolant loss without visible leaks, overheating, milky residue on the oil cap, or bubbling in the coolant reservoir. If you notice any of these, get it checked quickly — driving with a blown head gasket causes significantly more engine damage.',
+      },
+      {
+        title: 'Do you work on DPF and DEF systems?',
+        description: 'Yes. We service diesel particulate filters (DPF) including cleaning and forced regeneration, and diagnose DEF (diesel exhaust fluid) system issues. These emissions systems are complex and require proper diagnostic tools to service correctly.',
+      },
+      {
+        title: 'Do you offer diesel performance work?',
+        description: 'We handle all mechanical work in-house. For specialty tuning and custom builds, we partner with a trusted local diesel performance shop. This gives you access to performance work with the convenience of one shop managing everything.',
+      },
+      {
+        title: 'Can you do CVIP inspections on diesel commercial vehicles?',
+        description: 'Yes, we\'re licensed to perform Commercial Vehicle Inspection Program (CVIP) inspections on diesel commercial vehicles. See our CVIP inspection page for details and pricing.',
+      },
+    ]}
+  />
+
+  <!-- Related Services -->
+  <Features2
+    title="Related Services"
+    columns={4}
+    items={[
+      {
+        title: 'Fleet & Commercial',
+        description: 'Fleet maintenance programs and commercial vehicle service.',
+        icon: 'tabler:truck',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/fleet-services' },
+      },
+      {
+        title: 'Engine Repair',
+        description: 'Complete engine repair and replacement services.',
+        icon: 'tabler:engine',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/engine-repair' },
+      },
+      {
+        title: 'Diagnostics',
+        description: 'Check engine light diagnosis and troubleshooting.',
+        icon: 'tabler:device-analytics',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/diagnostics' },
+      },
+      {
+        title: 'Exhaust System',
+        description: 'Manifold repair, bolt extraction, diesel exhaust kits.',
+        icon: 'tabler:volume-off',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/exhaust-system' },
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Need Diesel Service?"
+    subtitle="Whether it's a routine oil change, head gasket repair, or performance build — we've got the expertise and the partners to do it right. Book online or call us."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>

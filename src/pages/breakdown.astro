@@ -1,0 +1,724 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: "Car Broke Down? Here's What To Do | Sylvan Lake AUTOPRO",
+  description: "Stuck on the side of the road near Sylvan Lake? Here's exactly what to do. Towing contacts, AMA roadside info, after-hours drop-off, and what to expect when we look at your vehicle. Call (403) 887-0440.",
+};
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "AutoRepair",
+  "name": "Sylvan Lake AUTOPRO Inc",
+  "telephone": "+1-403-887-0440",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1A Industrial Dr",
+    "addressLocality": "Sylvan Lake",
+    "addressRegion": "AB",
+    "postalCode": "T4S 1P4",
+    "addressCountry": "CA"
+  },
+  "openingHours": "Mo-Fr 08:00-17:00",
+  "areaServed": ["Sylvan Lake", "Red Deer County", "Eckville", "Bentley", "Benalto"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What if I break down after hours?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Have your vehicle towed to 1A Industrial Dr, Sylvan Lake. Use our after-hours key drop box for your keys and contact info. Fill out the breakdown form online so we have your details ready. We'll be in touch next business day."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much will a tow cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depends on distance and the tow company. AMA members may have towing included — call 1-800-222-4357 to check. Otherwise, contact one of the tow companies listed above for a quote."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will you fix it the same day?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Depends on what we find. Quick fixes — sometimes yes. Bigger jobs depend on parts and scheduling. We'll give you an honest timeline as soon as we know what we're dealing with."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How will I get around while my car is being fixed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We have loaner vehicles for longer repairs and a local shuttle during business hours. Let us know what you need when we call."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work on all vehicle types?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cars, trucks, SUVs, diesels, hybrids, EVs, and most RVs. Domestic and import, all makes and models."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I text you photos of what's happening?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — text photos or describe what you're seeing to (403) 887-0440. Dashboard lights, noises, fluid leaks — anything helps us prepare."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "I'm from out of town and stranded. Can you help?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely. Loaner vehicles, hotel info, ride options — we've been here 19 years and we'll make sure you're not on your own."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Breakdown" }
+  ]
+};
+
+const googleMapsUrl = "https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U";
+const appleMapsUrl = "https://maps.apple.com/?daddr=NAPA+AUTOPRO+Sylvan+Lake+AUTOPRO+Inc,+1A+Industrial+Dr,+Sylvan+Lake,+AB+T4S+1P4,+Canada&dirflg=d";
+const googleMapsViewUrl = "https://g.page/sylvan-lake-autopro";
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+    <script async src="https://tally.so/widgets/embed.js"></script>
+  </Fragment>
+
+  <!-- Sticky Call Button (Mobile) -->
+  <div class="fixed bottom-0 left-0 right-0 z-50 p-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-t border-gray-200 dark:border-gray-700 md:hidden safe-area-bottom" id="sticky-call-bar">
+    <a
+      href="tel:+14038870440"
+      class="flex items-center justify-center gap-3 w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-xl transition-colors"
+    >
+      <Icon name="tabler:phone" class="w-6 h-6" />
+      Call (403) 887-0440
+    </a>
+  </div>
+
+  <!-- 1. Hero Section -->
+  <section class="bg-gray-50 dark:bg-slate-800 py-10 md:py-14 lg:py-16">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 font-heading text-gray-900 dark:text-white">Car Broke Down? Here's What to Do.</h1>
+      <p class="text-lg md:text-xl text-muted dark:text-slate-300 mb-6">Step by step — whether you're on the side of the road or sitting in your driveway.</p>
+
+      <a
+        href="tel:+14038870440"
+        class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-primary hover:bg-primary/90 text-white font-bold text-xl rounded-xl transition-colors mb-4"
+      >
+        <Icon name="tabler:phone" class="w-6 h-6" />
+        Call (403) 887-0440
+      </a>
+      <p class="text-sm text-gray-500 dark:text-slate-400">Monday–Friday 8am–5pm · Closed weekends & stat holidays</p>
+    </div>
+  </section>
+
+  <!-- 2. What's Your Situation? (Two Paths) -->
+  <section class="py-10 md:py-12 bg-white dark:bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-xl md:text-2xl font-bold text-center mb-6 font-heading dark:text-white">What's Your Situation?</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <button type="button" id="stranded-btn" class="block w-full bg-red-50 dark:bg-red-900/20 border-2 border-red-400 dark:border-red-600 rounded-xl p-5 hover:shadow-lg transition-shadow text-center cursor-pointer">
+          <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
+            <Icon name="tabler:alert-triangle" class="w-6 h-6 text-white" />
+          </div>
+          <p class="font-bold text-gray-900 dark:text-white mb-1">Stranded / Side of the Road</p>
+          <p class="text-sm text-muted dark:text-slate-400">Broke down while driving — need help now</p>
+        </button>
+        <a href="#need-a-tow" class="block bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-400 dark:border-blue-600 rounded-xl p-5 hover:shadow-lg transition-shadow text-center">
+          <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mx-auto mb-3">
+            <Icon name="tabler:home" class="w-6 h-6 text-white" />
+          </div>
+          <p class="font-bold text-gray-900 dark:text-white mb-1">Won't Start / At Home</p>
+          <p class="text-sm text-muted dark:text-slate-400">Vehicle won't start or has a problem — not an emergency</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Safety First + Should I Keep Driving (Hidden by default, revealed by Stranded button) -->
+  <div id="stranded-sections" class="hidden">
+  <!-- 3. Safety First -->
+  <section id="safety-first" class="py-10 md:py-12 bg-primary dark:bg-primary/90 text-white">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+          <Icon name="tabler:shield-check" class="w-6 h-6 text-white" />
+        </div>
+        <div>
+          <h2 class="text-xl md:text-2xl font-bold mb-3 font-heading">Safety First</h2>
+          <p class="text-blue-100 mb-3 [text-wrap:pretty]">If you're in an unsafe spot — busy highway, no shoulder, bad visibility — <strong class="text-white">move your vehicle somewhere safe, even if it might cause more damage.</strong></p>
+          <p class="text-white font-medium mb-3">Your car can be replaced. You can't.</p>
+          <p class="text-blue-100 [text-wrap:pretty]">Turn on your hazards. Get yourself and passengers away from traffic. Then figure out next steps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Should I Keep Driving? -->
+  <section class="py-10 md:py-14 bg-white dark:bg-slate-900">
+    <div class="max-w-5xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center font-heading text-gray-900 dark:text-white">Should I Keep Driving?</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- STOP -->
+        <div class="bg-red-50 dark:bg-red-900/20 border-2 border-red-500 rounded-xl p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <Icon name="tabler:hand-stop" class="w-5 h-5 text-white" />
+            </div>
+            <h3 class="text-lg font-bold text-red-700 dark:text-red-400">STOP — Call a Tow</h3>
+          </div>
+          <ul class="space-y-1.5 text-sm text-gray-700 dark:text-gray-300 mb-3">
+            <li class="flex items-start gap-2"><Icon name="tabler:x" class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />Steam or smoke from the hood</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:x" class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />Temperature gauge in the red</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:x" class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />Oil pressure light on</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:x" class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />Grinding metal sound from brakes</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:x" class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />Fluid pooling under vehicle</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:x" class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />Check engine light FLASHING</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:x" class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />Violent shaking or vibration</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:x" class="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />Steering not responding</li>
+          </ul>
+          <p class="text-xs font-semibold text-red-700 dark:text-red-400 italic">Pull over. Hazards on. Don't drive it.</p>
+        </div>
+
+        <!-- MAYBE -->
+        <div class="bg-yellow-50 dark:bg-yellow-900/20 border-2 border-yellow-500 rounded-xl p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <Icon name="tabler:alert-triangle" class="w-5 h-5 text-white" />
+            </div>
+            <h3 class="text-lg font-bold text-yellow-700 dark:text-yellow-400">MAYBE — Drive Slow</h3>
+          </div>
+          <ul class="space-y-1.5 text-sm text-gray-700 dark:text-gray-300 mb-3">
+            <li class="flex items-start gap-2"><Icon name="tabler:minus" class="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />Check engine light steady (not flashing)</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:minus" class="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />Transmission shifting rough</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:minus" class="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />A/C stopped working</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:minus" class="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />Minor vibration at speed</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:minus" class="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />Power steering feels heavy</li>
+          </ul>
+          <p class="text-xs font-semibold text-yellow-700 dark:text-yellow-400 italic">You might be able to limp it to us. Drive slow, stay off highways, head straight here.</p>
+        </div>
+
+        <!-- OK -->
+        <div class="bg-green-50 dark:bg-green-900/20 border-2 border-green-500 rounded-xl p-5">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+              <Icon name="tabler:check" class="w-5 h-5 text-white" />
+            </div>
+            <h3 class="text-lg font-bold text-green-700 dark:text-green-400">OK TO DRIVE</h3>
+          </div>
+          <ul class="space-y-1.5 text-sm text-gray-700 dark:text-gray-300 mb-3">
+            <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />Tire pressure light (tire not flat)</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />Maintenance reminder light</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />Minor electrical (window, lock, radio)</li>
+            <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />Small coolant top-up needed</li>
+          </ul>
+          <p class="text-xs font-semibold text-green-700 dark:text-green-400 italic mb-3">Not an emergency. Come see us during business hours.</p>
+          <a href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg text-sm transition-colors">
+            Book Appointment
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div><!-- End stranded-sections -->
+
+  <!-- Collapsible Sections Container -->
+  <section class="py-10 md:py-14 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 space-y-4">
+
+      <!-- 5. Need a Tow? (Collapsible) -->
+      <details id="need-a-tow" class="group bg-white dark:bg-slate-900 rounded-xl shadow-md overflow-hidden">
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+          <div class="flex items-center gap-3">
+            <Icon name="tabler:truck" class="w-6 h-6 text-primary dark:text-blue-400" />
+            <h3 class="text-lg md:text-xl font-bold font-heading text-gray-900 dark:text-white">Need a Tow?</h3>
+          </div>
+          <Icon name="tabler:chevron-down" class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180" />
+        </summary>
+        <div class="px-5 pb-5 border-t border-gray-100 dark:border-slate-700 pt-4">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Have AMA -->
+            <div>
+              <h4 class="font-bold text-gray-900 dark:text-white mb-2">Have AMA?</h4>
+              <p class="text-sm text-muted dark:text-slate-400 mb-3">Towing may already be included in your membership.</p>
+              <a href="tel:+18002224357" class="flex items-center justify-between w-full py-3 px-4 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl transition-colors">
+                <span>Call AMA (24/7)</span>
+                <span>1-800-222-4357</span>
+              </a>
+            </div>
+
+            <!-- No AMA -->
+            <div>
+              <h4 class="font-bold text-gray-900 dark:text-white mb-2">No AMA? Call a Tow Company</h4>
+              <div class="space-y-2">
+                <a href="tel:+14038873901" class="flex items-center justify-between w-full py-2 px-3 bg-green-50 dark:bg-green-900/20 border border-green-300 dark:border-green-700 hover:bg-green-100 dark:hover:bg-green-900/30 rounded-lg transition-colors text-sm">
+                  <div class="flex items-center gap-2">
+                    <div>
+                      <span class="font-semibold text-gray-900 dark:text-white">Lake City Services</span>
+                      <span class="text-xs text-muted dark:text-slate-400 block">Next door to us</span>
+                    </div>
+                    <span class="text-xs font-semibold bg-green-600 text-white px-2 py-0.5 rounded-full">Recommended</span>
+                  </div>
+                  <span class="text-primary font-semibold">(403) 887-3901</span>
+                </a>
+                <a href="tel:+14038966342" class="flex items-center justify-between w-full py-2 px-3 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors text-sm">
+                  <div>
+                    <span class="font-semibold text-gray-900 dark:text-white">Command Towing</span>
+                    <span class="text-xs text-muted dark:text-slate-400 block">Sylvan Lake · 24/7</span>
+                  </div>
+                  <span class="text-primary font-semibold">(403) 896-6342</span>
+                </a>
+                <a href="tel:+14033478205" class="flex items-center justify-between w-full py-2 px-3 bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-lg transition-colors text-sm">
+                  <div>
+                    <span class="font-semibold text-gray-900 dark:text-white">Trio Towing</span>
+                    <span class="text-xs text-muted dark:text-slate-400 block">Red Deer</span>
+                  </div>
+                  <span class="text-primary font-semibold">(403) 347-8205</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info for Your Tow Driver (moved inside) -->
+          <div class="mt-6 pt-6 border-t border-gray-200 dark:border-slate-700">
+            <h4 class="font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+              <Icon name="tabler:clipboard" class="w-5 h-5 text-primary dark:text-blue-400" />
+              Info for Your Tow Driver
+            </h4>
+            <!-- Copyable Card -->
+            <div class="bg-[#FFC836]/20 border border-[#FFC836] rounded-lg p-4 mb-4 relative">
+              <pre id="tow-instructions" class="text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap font-sans pr-20">Tow To: Sylvan Lake AUTOPRO
+Address: 1A Industrial Drive, Sylvan Lake, AB
+Drop: Front of shop, park in lot
+Keys: Grey drop box, front of building
+Google Maps: https://g.page/sylvan-lake-autopro</pre>
+              <button
+                id="copy-tow-instructions"
+                class="absolute top-3 right-3 inline-flex items-center justify-center gap-1.5 py-2 px-3 bg-primary hover:bg-primary/90 text-white text-sm font-semibold rounded-lg transition-colors"
+              >
+                <Icon name="tabler:copy" class="w-4 h-4" />
+                <span>Copy</span>
+              </button>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+              <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 py-2 px-4 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-900 dark:text-white text-sm font-medium rounded-lg transition-colors">
+                <Icon name="tabler:map-pin" class="w-4 h-4" />
+                Get Directions
+              </a>
+              <a href={appleMapsUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 py-2 px-4 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-900 dark:text-white text-sm font-medium rounded-lg transition-colors md:hidden">
+                <Icon name="tabler:brand-apple" class="w-4 h-4" />
+                Apple Maps
+              </a>
+              <a href={googleMapsViewUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 py-2 px-4 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-900 dark:text-white text-sm font-medium rounded-lg transition-colors">
+                <Icon name="tabler:external-link" class="w-4 h-4" />
+                View on Maps
+              </a>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <!-- 6. Stranded? (Collapsible with sub-accordions) -->
+      <details class="group bg-white dark:bg-slate-900 rounded-xl shadow-md overflow-hidden">
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+          <div class="flex items-center gap-3">
+            <Icon name="tabler:help" class="w-6 h-6 text-primary dark:text-blue-400" />
+            <h3 class="text-lg md:text-xl font-bold font-heading text-gray-900 dark:text-white">Stranded? We Can Help Beyond the Car</h3>
+          </div>
+          <Icon name="tabler:chevron-down" class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180" />
+        </summary>
+        <div class="px-5 pb-5 border-t border-gray-100 dark:border-slate-700 pt-4 space-y-3">
+
+          <!-- Loaner Vehicles & Shuttle -->
+          <details class="group/sub bg-gray-50 dark:bg-slate-800 rounded-lg overflow-hidden">
+            <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+              <span class="font-semibold text-gray-900 dark:text-white">Loaner Vehicles & Shuttle</span>
+              <Icon name="tabler:chevron-down" class="w-4 h-4 text-gray-500 transition-transform group-open/sub:rotate-180" />
+            </summary>
+            <div class="px-4 pb-4 text-sm text-muted dark:text-slate-400">
+              <p class="mb-2"><strong class="text-gray-900 dark:text-white">Loaner Vehicles:</strong> Ask when we call — we'll work something out for longer repairs.</p>
+              <p><strong class="text-gray-900 dark:text-white">Local Shuttle:</strong> Available during business hours within the Sylvan Lake area.</p>
+            </div>
+          </details>
+
+          <!-- Hotels -->
+          <details class="group/sub bg-gray-50 dark:bg-slate-800 rounded-lg overflow-hidden">
+            <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+              <span class="font-semibold text-gray-900 dark:text-white">Hotels in Sylvan Lake</span>
+              <Icon name="tabler:chevron-down" class="w-4 h-4 text-gray-500 transition-transform group-open/sub:rotate-180" />
+            </summary>
+            <div class="px-4 pb-4 space-y-2">
+              <a href="tel:+14038877884" class="flex items-center justify-between py-2 px-3 bg-white dark:bg-slate-900 rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+                <div>
+                  <span class="font-semibold text-gray-900 dark:text-white">Prairie Moon Inn & Suites</span>
+                  <span class="text-xs text-muted dark:text-slate-400 block">13 Beju Industrial Dr — walking distance from our shop</span>
+                </div>
+                <span class="text-primary font-semibold">(403) 887-7884</span>
+              </a>
+              <a href="tel:+14038877788" class="flex items-center justify-between py-2 px-3 bg-white dark:bg-slate-900 rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+                <div>
+                  <span class="font-semibold text-gray-900 dark:text-white">Best Western Plus Chateau Inn</span>
+                  <span class="text-xs text-muted dark:text-slate-400 block">5027 Lakeshore Dr — near lakeshore, pool & breakfast</span>
+                </div>
+                <span class="text-primary font-semibold">(403) 887-7788</span>
+              </a>
+            </div>
+          </details>
+
+          <!-- Taxi & Rides -->
+          <details class="group/sub bg-gray-50 dark:bg-slate-800 rounded-lg overflow-hidden">
+            <summary class="flex items-center justify-between p-4 cursor-pointer list-none">
+              <span class="font-semibold text-gray-900 dark:text-white">Taxi & Rides</span>
+              <Icon name="tabler:chevron-down" class="w-4 h-4 text-gray-500 transition-transform group-open/sub:rotate-180" />
+            </summary>
+            <div class="px-4 pb-4 space-y-2">
+              <a href="tel:+14038580377" class="flex items-center justify-between py-2 px-3 bg-white dark:bg-slate-900 rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+                <div>
+                  <span class="font-semibold text-gray-900 dark:text-white">Pal Cabs</span>
+                  <span class="text-xs text-muted dark:text-slate-400 block">Sylvan Lake</span>
+                </div>
+                <span class="text-primary font-semibold">(403) 858-0377</span>
+              </a>
+              <a href="tel:+15873774111" class="flex items-center justify-between py-2 px-3 bg-white dark:bg-slate-900 rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+                <div>
+                  <span class="font-semibold text-gray-900 dark:text-white">Sylvan Taxi</span>
+                  <span class="text-xs text-muted dark:text-slate-400 block">Sylvan Lake</span>
+                </div>
+                <span class="text-primary font-semibold">(587) 377-4111</span>
+              </a>
+              <a href="tel:+14038873286" class="flex items-center justify-between py-2 px-3 bg-white dark:bg-slate-900 rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+                <div>
+                  <span class="font-semibold text-gray-900 dark:text-white">Sylvan Lake Associated Cab</span>
+                  <span class="text-xs text-muted dark:text-slate-400 block">Sylvan Lake</span>
+                </div>
+                <span class="text-primary font-semibold">(403) 887-3286</span>
+              </a>
+              <a href="tel:+14033417777" class="flex items-center justify-between py-2 px-3 bg-white dark:bg-slate-900 rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+                <div>
+                  <span class="font-semibold text-gray-900 dark:text-white">Alberta Gold Taxi</span>
+                  <span class="text-xs text-muted dark:text-slate-400 block">Red Deer · 24/7</span>
+                </div>
+                <span class="text-primary font-semibold">(403) 341-7777</span>
+              </a>
+            </div>
+          </details>
+
+        </div>
+      </details>
+
+      <!-- 7. After-Hours Drop-Off (Collapsible) -->
+      <details class="group bg-white dark:bg-slate-900 rounded-xl shadow-md overflow-hidden">
+        <summary class="flex items-center justify-between p-5 cursor-pointer list-none">
+          <div class="flex items-center gap-3">
+            <Icon name="tabler:key" class="w-6 h-6 text-primary dark:text-blue-400" />
+            <h3 class="text-lg md:text-xl font-bold font-heading text-gray-900 dark:text-white">After-Hours Drop-Off</h3>
+          </div>
+          <Icon name="tabler:chevron-down" class="w-5 h-5 text-gray-500 transition-transform group-open:rotate-180" />
+        </summary>
+        <div class="px-5 pb-5 border-t border-gray-100 dark:border-slate-700 pt-4">
+          <p class="text-muted dark:text-slate-400 mb-4">If your vehicle is being towed to us (or you can drive it here) outside business hours:</p>
+          <ol class="space-y-3 mb-4">
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">1</span>
+              <div>
+                <p class="font-semibold text-gray-900 dark:text-white">Park in our lot</p>
+                <p class="text-sm text-muted dark:text-slate-400">1A Industrial Dr, Sylvan Lake</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">2</span>
+              <div>
+                <p class="font-semibold text-gray-900 dark:text-white">Find the drop box</p>
+                <p class="text-sm text-muted dark:text-slate-400">Large grey secure box at the front of the shop</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">3</span>
+              <div>
+                <p class="font-semibold text-gray-900 dark:text-white">Leave your contact info</p>
+                <p class="text-sm text-muted dark:text-slate-400">Fill out an envelope at the box OR use the <a href="#breakdown-form" class="text-primary hover:underline">online form</a></p>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0">4</span>
+              <div>
+                <p class="font-semibold text-gray-900 dark:text-white">Drop your keys</p>
+                <p class="text-sm text-muted dark:text-slate-400">Seal in envelope or just drop them in if you used the online form</p>
+              </div>
+            </li>
+          </ol>
+          <p class="text-sm text-muted dark:text-slate-400 italic">Not riding with the tow truck? Fill out the form from wherever you are, then have the driver drop your keys in the box.</p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- 8. Let Us Know What's Going On -->
+  <section id="breakdown-form" class="py-10 md:py-14 bg-white dark:bg-slate-900">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl font-bold mb-3 text-center font-heading text-gray-900 dark:text-white">Let Us Know What's Going On</h2>
+      <p class="text-center text-muted dark:text-slate-400 mb-6">The more info we have, the faster we can help. Tell us what happened — dashboard lights, noises, where you broke down, anything.</p>
+
+      <!-- Authorize Diagnostic Work -->
+      <div class="bg-[#FFC836]/20 border border-[#FFC836] rounded-xl p-5 mb-6">
+        <h3 class="font-bold text-gray-900 dark:text-white mb-2">Authorize Diagnostic Work — We'll Get Started Faster</h3>
+        <p class="text-sm text-muted dark:text-slate-400">Most diagnostic assessments can be completed for under $200. By authorizing up to $200 in diagnostic work, we can get started as soon as we're in — without waiting to reach you by phone. You're only charged for the time we actually use — if we find the issue sooner, you pay less. You'll hear from us with what we found, and no further work happens without your approval.</p>
+      </div>
+
+      <!-- Tally Form -->
+      <div class="bg-gray-50 dark:bg-slate-800 rounded-xl p-4 md:p-6 mb-6">
+        <iframe
+          data-tally-src="https://tally.so/embed/QKVv4Y?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+          loading="lazy"
+          width="100%"
+          height="2396"
+          frameborder="0"
+          marginheight="0"
+          marginwidth="0"
+          title="Sylvan Lake AUTOPRO Breakdown Dropoff Form"
+        ></iframe>
+      </div>
+
+      <div class="text-center">
+        <p class="text-muted dark:text-slate-400 mb-4">Or contact us directly:</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="sms:+14038870440" class="inline-flex items-center justify-center gap-2 px-5 py-3 bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold rounded-full hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors">
+            <Icon name="tabler:message" class="w-5 h-5" />
+            Text (403) 887-0440
+          </a>
+          <a href="mailto:service@sylvanlakeautopro.com" class="inline-flex items-center justify-center gap-2 px-5 py-3 border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white font-semibold rounded-full hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 transition-colors">
+            <Icon name="tabler:mail" class="w-5 h-5" />
+            service@sylvanlakeautopro.com
+          </a>
+        </div>
+        <p class="text-sm text-muted dark:text-slate-400 mt-4">We check texts and emails periodically outside hours — but for fastest response, have your info waiting for us when we open.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. What to Expect -->
+  <section class="py-10 md:py-14 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6 text-center font-heading text-gray-900 dark:text-white">What to Expect</h2>
+
+      <div class="text-muted dark:text-slate-400 mb-6">
+        <p class="mb-3"><strong class="text-gray-900 dark:text-white">When we get to your vehicle:</strong></p>
+        <p>We'll take a look and assess what's going on. Sometimes it's a quick fix we can handle right away. Other times we need further diagnosis or to order parts — in which case we'll need to book it in.</p>
+      </div>
+
+      <p class="text-muted dark:text-slate-400 mb-3">Either way, here's what you'll get from us:</p>
+      <ul class="space-y-2 text-muted dark:text-slate-400 mb-6">
+        <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />What we found (or what we need to investigate further)</li>
+        <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />Whether it's something quick or a bigger job</li>
+        <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />An honest timeline</li>
+        <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />A cost estimate before any work starts</li>
+      </ul>
+
+      <div class="bg-white dark:bg-slate-900 rounded-xl p-5 shadow">
+        <p class="font-bold text-gray-900 dark:text-white mb-2">No surprises:</p>
+        <ul class="space-y-2 text-muted dark:text-slate-400">
+          <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />No work happens without your approval</li>
+          <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />We send photos and measurements to your phone — you see what we see</li>
+          <li class="flex items-start gap-2"><Icon name="tabler:check" class="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />If it's going to take a while, ask about a <strong class="text-gray-900 dark:text-white">loaner vehicle</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. FAQs -->
+  <FAQs
+    title="Frequently Asked Questions"
+    columns={1}
+    items={[
+      {
+        title: 'What if I break down after hours?',
+        description: "Have your vehicle towed to 1A Industrial Dr. Use our after-hours key drop box for your keys and contact info. Fill out the breakdown form online so we have your details ready. We'll be in touch next business day.",
+      },
+      {
+        title: 'How much will a tow cost?',
+        description: "Depends on distance and the tow company. AMA members may have towing included — call 1-800-222-4357 to check. Otherwise, contact one of the tow companies listed above for a quote.",
+      },
+      {
+        title: 'Will you fix it the same day?',
+        description: "Depends on what we find. Quick fixes — sometimes yes. Bigger jobs depend on parts and scheduling. We'll give you an honest timeline as soon as we know what we're dealing with.",
+      },
+      {
+        title: 'How will I get around while my car is being fixed?',
+        description: "We have loaner vehicles for longer repairs and a local shuttle during business hours. Let us know what you need when we call.",
+      },
+      {
+        title: 'Do you work on all vehicle types?',
+        description: 'Cars, trucks, SUVs, diesels, hybrids, EVs, and most RVs. Domestic and import, all makes and models.',
+      },
+      {
+        title: 'Can I text you photos of what\'s happening?',
+        description: 'Yes — text photos or describe what you\'re seeing to (403) 887-0440. Dashboard lights, noises, fluid leaks — anything helps us prepare.',
+      },
+      {
+        title: "I'm from out of town and stranded. Can you help?",
+        description: "Absolutely. Loaner vehicles, hotel info, ride options — we've been here 19 years and we'll make sure you're not on your own.",
+      },
+    ]}
+  />
+
+  <!-- 12. Final CTA -->
+  <section class="bg-primary py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 font-heading text-white">We'll Get You Back on the Road</h2>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mb-4">
+        <a href="tel:+14038870440" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white hover:bg-gray-100 text-primary font-bold text-xl rounded-xl transition-colors">
+          <Icon name="tabler:phone" class="w-6 h-6" />
+          Call (403) 887-0440
+        </a>
+        <a href="#breakdown-form" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-semibold text-lg rounded-xl border border-white/30 transition-colors">
+          Fill Out Breakdown Form
+        </a>
+      </div>
+
+      <p class="text-white/70">Monday–Friday 8am–5pm · After-hours drop-off available 24/7</p>
+    </div>
+  </section>
+
+  <!-- Spacer for sticky button on mobile -->
+  <div class="h-24 md:hidden"></div>
+
+  <!-- Scripts -->
+  <script>
+    // Tally embed loader
+    var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}
+
+    // Copy tow instructions
+    function setupCopyButton() {
+      const copyBtn = document.getElementById('copy-tow-instructions');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', async () => {
+          const text = `Tow To: Sylvan Lake AUTOPRO
+Address: 1A Industrial Drive, Sylvan Lake, AB
+Drop: Front of shop, park in lot
+Keys: Grey drop box, front of building
+Google Maps: https://g.page/sylvan-lake-autopro`;
+
+          try {
+            await navigator.clipboard.writeText(text);
+            const span = copyBtn.querySelector('span');
+            if (span) {
+              span.textContent = 'Copied!';
+              setTimeout(() => { span.textContent = 'Copy to Clipboard'; }, 2000);
+            }
+          } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            const span = copyBtn.querySelector('span');
+            if (span) {
+              span.textContent = 'Copied!';
+              setTimeout(() => { span.textContent = 'Copy to Clipboard'; }, 2000);
+            }
+          }
+        });
+      }
+    }
+
+    // Stranded button - reveal emergency sections
+    function setupStrandedButton() {
+      const strandedBtn = document.getElementById('stranded-btn');
+      const strandedSections = document.getElementById('stranded-sections');
+
+      if (strandedBtn && strandedSections) {
+        strandedBtn.addEventListener('click', () => {
+          // Show the hidden sections
+          strandedSections.classList.remove('hidden');
+
+          // Smooth scroll to Safety First section
+          const safetySection = document.getElementById('safety-first');
+          if (safetySection) {
+            safetySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
+    }
+
+    setupCopyButton();
+    setupStrandedButton();
+    document.addEventListener('astro:page-load', setupCopyButton);
+    document.addEventListener('astro:page-load', setupStrandedButton);
+  </script>
+</Layout>
+
+<style>
+  /* Smooth accordion transitions */
+  details > summary {
+    transition: margin 0.2s ease-out;
+  }
+  details[open] > summary {
+    margin-bottom: 0;
+  }
+  details > div {
+    animation: accordion-open 0.2s ease-out;
+  }
+  @keyframes accordion-open {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Safe area for sticky button */
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  /* Smooth reveal for stranded sections */
+  #stranded-sections:not(.hidden) {
+    animation: reveal-sections 0.3s ease-out;
+  }
+  @keyframes reveal-sections {
+    from {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

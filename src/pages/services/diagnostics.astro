@@ -7,6 +7,10 @@ import Steps2 from '~/components/widgets/Steps2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
+import diagnosticTech from '~/assets/images/diagnostic-tech.jpg';
+import diagnosticScanner from '~/assets/images/diagnostic-scanner.jpg';
+import diagnosticHero from '~/assets/images/diagnostic-hero.jpg';
+
 const metadata = {
   title: 'Check Engine Light | Sylvan Lake AUTOPRO',
   description: 'Check engine light on? We diagnose the actual problem, not just read codes. Free code scan available. Professional diagnostics in Sylvan Lake. Call (403) 887-0440.',
@@ -95,9 +99,14 @@ const breadcrumbSchema = {
     tagline="Diagnostics"
     title="Check Engine Light & Diagnostics"
     subtitle="Codes Tell Us Where to Look. Testing Tells Us What's Wrong."
+    image={{
+      src: diagnosticHero,
+      alt: 'Diagnostic process showing OBD port, check engine light, scanner data, and circuit testing',
+    }}
     actions={[
       { variant: 'primary', text: 'Book Diagnostic Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -105,6 +114,10 @@ const breadcrumbSchema = {
   <Content
     title="More Than Just Reading Codes"
     content="Your check engine light came on. Now what?<br/><br/>You could go to a parts store and have them scan the code. They'll hand you a printout that says something like 'P0420 — Catalyst System Efficiency Below Threshold' and suggest you need a catalytic converter. Maybe you do. Maybe you don't.<br/><br/><strong>Trouble codes don't tell you what's broken. They tell us where to start looking.</strong><br/><br/>Real diagnosis means understanding what the code is actually reporting, researching what causes it, and testing to find the actual problem. That's what we do."
+    image={{
+      src: diagnosticTech,
+      alt: 'Technician using diagnostic scan tool on vehicle',
+    }}
   />
 
   <!-- Why Codes Aren't Enough Section -->
@@ -112,6 +125,10 @@ const breadcrumbSchema = {
     isReversed={true}
     title="The Problem With 'Just Reading Codes'"
     content="Here's something most people don't realize: a trouble code doesn't mean 'replace this part.'<br/><br/>A code is the computer's way of saying 'this reading doesn't look right' or 'this system isn't performing as expected.' The code points to a symptom. Finding the cause takes work.<br/><br/><strong>Example: Oxygen Sensor Code</strong><br/>Your scan shows P0130 — O2 Sensor Circuit Malfunction (Bank 1, Sensor 1).<br/><br/><strong>What people assume:</strong> The oxygen sensor is bad. Replace it.<br/><br/><strong>What it could actually be:</strong><br/>• The oxygen sensor is bad<br/>• The wiring to the sensor is damaged, corroded, or chafed<br/>• A connector has backed out or has corrosion<br/>• There's an exhaust leak before the sensor<br/>• The sensor is reading correctly, but something else is causing an abnormal reading<br/>• The PCM (computer) has an issue<br/><br/>If you just replace the sensor and the problem was wiring, you've wasted money and the light comes right back on."
+    image={{
+      src: diagnosticScanner,
+      alt: 'Snap-on diagnostic scanner showing fault codes and live data',
+    }}
   />
 
   <!-- Free Code Scan Section -->
@@ -268,19 +285,19 @@ const breadcrumbSchema = {
         title: 'Electrical System Service',
         description: 'Batteries, starters, alternators, wiring',
         icon: 'tabler:bolt',
-        callToAction: { text: 'Learn More', href: '/services/electrical' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/electrical' },
       },
       {
         title: 'Hybrid & EV Service',
         description: 'Specialized diagnostics for hybrid systems',
         icon: 'tabler:leaf',
-        callToAction: { text: 'Learn More', href: '/services/hybrid-ev-service' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/hybrid-ev-service' },
       },
       {
         title: 'Fluid Maintenance',
         description: 'Preventive maintenance to avoid problems',
         icon: 'tabler:droplet',
-        callToAction: { text: 'Learn More', href: '/services/fluid-maintenance' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/fluid-maintenance' },
       },
     ]}
   />
@@ -291,7 +308,8 @@ const breadcrumbSchema = {
     subtitle="Stop by for a free code scan, or book a diagnostic appointment if you're ready to find out what's actually wrong."
     actions={[
       { variant: 'primary', text: 'Book Diagnostic Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

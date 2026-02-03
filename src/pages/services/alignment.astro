@@ -7,6 +7,8 @@ import Steps2 from '~/components/widgets/Steps2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
+import alignerImage from '~/assets/images/aligner.jpg';
+
 const metadata = {
   title: 'Wheel Alignment | Sylvan Lake AUTOPRO',
   description: 'Precision wheel alignment in Sylvan Lake using Hunter HawkEye Elite equipment. We don\'t just get the numbers in the green — we make it drive straight. Call (403) 887-0440.',
@@ -105,7 +107,8 @@ const breadcrumbSchema = {
     subtitle="Green Numbers Are Easy. Straight Driving Takes Skill."
     actions={[
       { variant: 'primary', text: 'Book Alignment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -115,11 +118,28 @@ const breadcrumbSchema = {
     content="Getting alignment numbers 'in the green' is straightforward. Any shop with an alignment rack can do that.<br/><br/><strong>Making your vehicle actually drive straight? That takes more.</strong><br/><br/>It takes understanding how the angles interact. It takes patience to get the steering wheel centered while the thrust angle is correct while the toe is set properly. It takes knowing when factory specs aren't quite right for how a vehicle has aged or been used.<br/><br/>We invest in the best equipment and take the time to do alignments properly — not just technically correct, but actually right."
   />
 
+  <!-- Tires Cross-Link Section -->
+  <section class="py-8 md:py-10 bg-gray-50 dark:bg-slate-800/50">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <p class="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-4">
+        <strong>Need new tires too?</strong> We can do both in a single visit.
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a href="/services/tires" class="btn-secondary">Tire Services</a>
+        <a href="/services/tire-pricing" class="btn-secondary">Shop Tires</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Hunter HawkEye Elite Section -->
   <Content
     isReversed={true}
     title="The Equipment Matters"
     content="We recently invested over <strong>$60,000</strong> in a Hunter HawkEye Elite alignment system — the same equipment used by dealerships and high-end shops."
+    image={{
+      src: alignerImage,
+      alt: 'Hunter HawkEye Elite alignment system with truck on alignment rack',
+    }}
     items={[
       { title: 'Pinpoint Accuracy', description: 'Four high-resolution cameras measure alignment angles with precision that budget equipment can\'t match. We\'re adjusting in 0.1-degree increments — small differences that affect how your vehicle tracks and wears tires.' },
       { title: 'QuickGrip Wheel Adaptors', description: 'Hunter\'s patented adaptors grip the tire, not the rim. No metal-to-metal contact, no risk of scratching your wheels. This matters when you have $3,000 wheels on your truck.' },
@@ -280,19 +300,19 @@ const breadcrumbSchema = {
         title: 'Tire Sales & Service',
         description: 'New tires? Get them aligned.',
         icon: 'tabler:circle',
-        callToAction: { text: 'Learn More', href: '/services/tires' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/tires' },
       },
       {
         title: 'Steering & Suspension',
         description: 'When alignment isn\'t enough',
         icon: 'tabler:car',
-        callToAction: { text: 'Learn More', href: '/services/steering-suspension' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/steering-suspension' },
       },
       {
         title: 'Pre-Purchase Inspection',
         description: 'Alignment check included',
         icon: 'tabler:clipboard-check',
-        callToAction: { text: 'Learn More', href: '/services/pre-purchase-inspection' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/pre-purchase-inspection' },
       },
     ]}
   />
@@ -303,7 +323,8 @@ const breadcrumbSchema = {
     subtitle="Whether your vehicle is pulling, your steering wheel is off-center, or you just want to protect your new tires — we'll make it drive right."
     actions={[
       { variant: 'primary', text: 'Book Alignment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

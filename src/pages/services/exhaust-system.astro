@@ -1,0 +1,296 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Exhaust System Repair Sylvan Lake | Muffler & Manifold | Sylvan Lake AUTOPRO',
+  description: 'Exhaust system repair in Sylvan Lake. Muffler replacement, manifold leak repair, broken bolt extraction, cat-back systems, diesel kits. Call (403) 887-0440.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Exhaust System Repair",
+  "description": "Exhaust system repair including muffler replacement, manifold leak repair, broken bolt extraction, catalytic converter service, cat-back systems, and diesel exhaust kits.",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How much does a muffler replacement cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most muffler replacements run $300–$600 including parts and labour, depending on the vehicle. We'll give you an exact quote before starting any work."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you fix a cracked exhaust manifold?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We repair cracked manifolds and replace failed gaskets. If the manifold is too damaged to repair, we replace it with an OEM part. Broken manifold bolts are extracted in-vehicle whenever possible."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I know if my catalytic converter is bad?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common signs include a check engine light (usually P0420 or P0430 codes), rotten egg smell, reduced power, or failed emissions. We diagnose with scan tools and exhaust gas analysis before recommending replacement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you do custom exhaust work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We don't do custom fabrication, but we do install cat-back systems and complete diesel exhaust kits. For factory exhaust repair, manifold work, and bolt extraction — that's all us."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my truck so loud suddenly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually a rusted-through muffler, cracked exhaust manifold, or broken flex pipe. Bring it in and we'll put it on the hoist to find exactly where the leak is."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you extract broken exhaust bolts?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — this is one of our specialties. We extract broken and seized exhaust bolts in-vehicle whenever possible, saving you the cost of cylinder head removal."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Exhaust System Repair" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Exhaust System Service"
+    title="Exhaust Repair Done Right"
+    subtitle="OEM parts. Honest diagnosis. And we don't shy away from the hard stuff."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+        <p>If your vehicle is louder than it should be, smells like exhaust inside the cab, or has a check engine light related to emissions — it's likely an exhaust issue. We handle everything from straightforward muffler replacements to the repairs other shops send away: cracked manifolds, broken bolts, and rusted-out components that need careful extraction.</p>
+        <p>We use OEM and OEM-equivalent parts for factory system repairs. We also install cat-back systems and complete diesel exhaust kits. What we don't do is custom fabrication — no one-off builds or welding up custom pipe work.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Repair Grid -->
+  <Features2
+    title="What We Repair"
+    columns={2}
+    items={[
+      {
+        title: 'Muffler Replacement',
+        description: 'Rusted, leaking, or damaged mufflers replaced with OEM-equivalent parts.',
+        icon: 'tabler:volume-off',
+      },
+      {
+        title: 'Exhaust Manifold Repair',
+        description: 'Cracked manifolds, warped gaskets, and manifold bolt extraction.',
+        icon: 'tabler:engine',
+      },
+      {
+        title: 'Catalytic Converter',
+        description: 'Diagnosis and replacement when needed (emissions compliance).',
+        icon: 'tabler:leaf',
+      },
+      {
+        title: 'Exhaust Pipes & Hangers',
+        description: 'Rotted sections, broken hangers, flex pipe replacement.',
+        icon: 'tabler:line',
+      },
+      {
+        title: 'O2 Sensors & Emissions',
+        description: 'Sensor replacement and emissions system diagnosis.',
+        icon: 'tabler:device-analytics',
+      },
+      {
+        title: 'Broken Bolt Extraction',
+        description: 'Seized, rusted, and snapped bolts removed without damaging the casting.',
+        icon: 'tabler:tool',
+      },
+      {
+        title: 'Cat-Back Systems',
+        description: 'Full cat-back exhaust replacement and upgrades, properly installed.',
+        icon: 'tabler:arrows-right',
+      },
+      {
+        title: 'Diesel Exhaust Kits',
+        description: 'DPF-back, full kits, and diesel exhaust system replacement.',
+        icon: 'tabler:truck',
+      },
+    ]}
+  />
+
+  <!-- Broken Bolt Extraction Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-900 text-white">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <p class="text-sm font-bold tracking-wide uppercase text-accent mb-2">The Jobs Other Shops Send Away</p>
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading">Broken Bolt Extraction Specialists</h2>
+      <div class="text-base md:text-lg text-gray-300 space-y-4">
+        <p>When exhaust manifold bolts snap off — and they do, especially on older trucks and Alberta winter vehicles — most shops won't touch it. They'll refer you to a machine shop or tell you the head needs to come off.</p>
+        <p>We extract broken bolts in-vehicle whenever possible. Our technicians have the tools, patience, and experience to drill, tap, and extract without damaging your cylinder head or exhaust port. It's painstaking work, but it saves you thousands compared to head removal.</p>
+        <p>This is one of those jobs where experience matters more than anything else.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OEM Parts Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading text-center dark:text-white">OEM Parts, Factory Fit</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-center">
+        <p>We stick to OEM and OEM-equivalent exhaust components. Factory parts fit right, seal properly, and last longer than universal parts that need adapters and clamps to make work. Your vehicle was engineered as a system — we keep it that way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- When to Check Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading text-center dark:text-white">When to Get Your Exhaust Checked</h2>
+      <div class="max-w-2xl mx-auto">
+        <ul class="text-base md:text-lg text-muted dark:text-slate-400 space-y-3 list-disc list-inside">
+          <li>Louder than normal operation</li>
+          <li>Exhaust smell inside the vehicle</li>
+          <li>Check engine light (P0420, P0430 catalyst codes)</li>
+          <li>Visible rust or damage under the vehicle</li>
+          <li>Failed emissions-related inspection</li>
+          <li>Rattling or vibration from underneath</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Don't Do Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading text-center dark:text-white">What We Don't Do</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-center">
+        <p>We don't do custom exhaust fabrication — no one-off builds, custom headers, or welding up custom pipe work from scratch. If you need something purpose-built, we'll refer you to a fabrication shop. We install manufactured systems (cat-back, diesel kits) and handle all factory exhaust repair.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about exhaust repair"
+    columns={1}
+    items={[
+      {
+        title: 'How much does a muffler replacement cost?',
+        description: 'Most muffler replacements run $300–$600 including parts and labour, depending on the vehicle. We\'ll give you an exact quote before starting any work.',
+      },
+      {
+        title: 'Can you fix a cracked exhaust manifold?',
+        description: 'Yes. We repair cracked manifolds and replace failed gaskets. If the manifold is too damaged to repair, we replace it with an OEM part. Broken manifold bolts are extracted in-vehicle whenever possible.',
+      },
+      {
+        title: 'How do I know if my catalytic converter is bad?',
+        description: 'Common signs include a check engine light (usually P0420 or P0430 codes), rotten egg smell, reduced power, or failed emissions. We diagnose with scan tools and exhaust gas analysis before recommending replacement.',
+      },
+      {
+        title: 'Do you do custom exhaust work?',
+        description: 'We don\'t do custom fabrication, but we do install cat-back systems and complete diesel exhaust kits. For factory exhaust repair, manifold work, and bolt extraction — that\'s all us.',
+      },
+      {
+        title: 'Why is my truck so loud suddenly?',
+        description: 'Usually a rusted-through muffler, cracked exhaust manifold, or broken flex pipe. Bring it in and we\'ll put it on the hoist to find exactly where the leak is.',
+      },
+      {
+        title: 'Can you extract broken exhaust bolts?',
+        description: 'Yes — this is one of our specialties. We extract broken and seized exhaust bolts in-vehicle whenever possible, saving you the cost of cylinder head removal.',
+      },
+    ]}
+  />
+
+  <!-- Related Services -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Diagnostics',
+        description: 'Check engine light diagnosis and troubleshooting.',
+        icon: 'tabler:device-analytics',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/diagnostics' },
+      },
+      {
+        title: 'Engine Repair',
+        description: 'Complete engine repair and replacement services.',
+        icon: 'tabler:engine',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/engine-repair' },
+      },
+      {
+        title: 'Diesel Services',
+        description: 'Diesel repair, maintenance and performance.',
+        icon: 'tabler:truck',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/diesel' },
+      },
+    ]}
+  />
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Exhaust Issues? Let's Take a Look."
+    subtitle="Honest diagnosis, OEM parts, and we don't walk away from the hard jobs."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>

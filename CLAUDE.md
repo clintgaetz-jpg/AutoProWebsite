@@ -19,7 +19,7 @@ Auto repair shop website built with Astro + Tailwind CSS. Mobile-first design th
 - Primary (NAPA Blue): `#0A0094`
 - Secondary: `#001FCC`
 - Accent (NAPA Gold): `#FFC836`
-- Dark background: `#030621`
+- Dark background: `#0F172A`
 
 ## Common Patterns
 ```

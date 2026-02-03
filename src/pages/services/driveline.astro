@@ -3,6 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
@@ -40,11 +41,51 @@ const breadcrumbSchema = {
     { "@type": "ListItem", "position": 3, "name": "Driveline Services" }
   ]
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How often should I change my differential fluid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most differentials should have their fluid changed every 50,000-80,000 km. If you tow, haul heavy loads, or drive off-road frequently, consider shorter intervals around 40,000 km."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What's the difference between a differential and a transfer case?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Differentials split power between the two wheels on an axle, allowing them to turn at different speeds when cornering. A transfer case splits power between the front and rear axles in 4WD and AWD vehicles. Both have their own fluids that need servicing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I use any gear oil in my differential?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Different differentials require different fluid specifications. Limited-slip differentials need friction modifier additives. Some newer vehicles require OEM-specific fluids. Using the wrong fluid can cause noise, premature wear, or damage. We always check specs and use the correct fluid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are signs my driveline needs service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Common signs include whining or humming from the rear end, clunking when accelerating or decelerating, vibration at highway speeds, difficulty engaging 4WD, or fluid leaks under the vehicle. Any of these warrant an inspection."
+      }
+    }
+  ]
+};
 ---
 
 <Layout metadata={metadata}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
 
@@ -54,8 +95,9 @@ const breadcrumbSchema = {
     title="Driveline Services"
     subtitle="Differentials. Transfer Cases. AWD Systems. CVT Transmissions."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -67,7 +109,6 @@ const breadcrumbSchema = {
 
   <!-- Right Fluids Section -->
   <Content
-    isReversed={true}
     title="Full Synthetic. OEM When Required. No Shortcuts."
     content="Driveline components are expensive to replace. Differentials, transfer cases, and CVT transmissions cost thousands of dollars when they fail. The fluid that protects them costs a fraction of that.<br/><br/>We use <strong>full synthetic gear oils</strong> for differential and transfer case services — better protection under load, better performance in cold weather, longer service life.<br/><br/><strong>But here's the thing:</strong> some newer vehicles require OEM-specific fluids. Certain CVT transmissions, for example, have specifications that no aftermarket fluid meets. Using the wrong fluid can cause shudder, slipping, or premature wear.<br/><br/>We check the specs. If your vehicle requires OEM fluid, that's what goes in. No substitutes, no 'compatible' alternatives.<br/><br/><strong>This is what taking fluids seriously looks like.</strong>"
   />
@@ -113,7 +154,6 @@ const breadcrumbSchema = {
 
   <!-- Transfer Case Service Section -->
   <Content
-    isReversed={true}
     title="Transfer Case Service"
     content="The transfer case is what makes your 4x4 or AWD system work — it splits power between the front and rear axles. Like differentials, it runs on gear oil that breaks down over time.<br/><br/>Transfer cases are often overlooked because they're out of sight. But a failed transfer case is a <strong>$2,000–$4,000 repair</strong>. Fluid service is cheap insurance."
     items={[
@@ -149,7 +189,6 @@ const breadcrumbSchema = {
 
   <!-- CVT Service Section -->
   <Content
-    isReversed={true}
     title="CVT Transmission Service"
     content="CVT (Continuously Variable Transmission) units are everywhere now — Nissan, Subaru, Honda, Toyota, Mitsubishi, and others use them extensively. They're efficient, but they're also sensitive to fluid condition.<br/><br/>CVT fluid is specialized. It's not the same as regular automatic transmission fluid. Using the wrong fluid — or running too long on worn fluid — causes belt/chain slippage, shudder, and premature failure.<br/><br/><strong>CVT replacements are expensive. $4,000–$7,000 is common.</strong> Fluid service is a fraction of that."
     items={[
@@ -204,13 +243,39 @@ const breadcrumbSchema = {
     content="<strong>Automatic Transmission Fluid Service:</strong> If you need a standard automatic transmission fluid service (not CVT), check out our BG Transmission Service — a complete fluid exchange with cleaners and conditioners.<br/><br/><a href='/services/fluid-maintenance' class='text-primary hover:underline font-semibold'>Learn More About BG Transmission Service →</a><br/><br/><strong>Transmission Problems:</strong> For transmission issues beyond fluid — hard shifting, slipping, codes — we do full transmission repair and custom rebuilds. Our builder has 49 years of experience.<br/><br/><a href='/services/transmission-repair' class='text-primary hover:underline font-semibold'>Learn More About Transmission Repair →</a>"
   />
 
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about driveline services"
+    columns={1}
+    items={[
+      {
+        title: 'How often should I change my differential fluid?',
+        description: 'Most differentials should have their fluid changed every 50,000-80,000 km. If you tow, haul heavy loads, or drive off-road frequently, consider shorter intervals around 40,000 km.',
+      },
+      {
+        title: "What's the difference between a differential and a transfer case?",
+        description: 'Differentials split power between the two wheels on an axle, allowing them to turn at different speeds when cornering. A transfer case splits power between the front and rear axles in 4WD and AWD vehicles. Both have their own fluids that need servicing.',
+      },
+      {
+        title: 'Can I use any gear oil in my differential?',
+        description: "No. Different differentials require different fluid specifications. Limited-slip differentials need friction modifier additives. Some newer vehicles require OEM-specific fluids. Using the wrong fluid can cause noise, premature wear, or damage. We always check specs and use the correct fluid.",
+      },
+      {
+        title: 'What are signs my driveline needs service?',
+        description: 'Common signs include whining or humming from the rear end, clunking when accelerating or decelerating, vibration at highway speeds, difficulty engaging 4WD, or fluid leaks under the vehicle. Any of these warrant an inspection.',
+      },
+    ]}
+  />
+
   <!-- Final CTA -->
   <CallToAction
     title="Ready to Talk?"
     subtitle="Questions about driveline services? Not sure what your vehicle needs? Give us a call."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

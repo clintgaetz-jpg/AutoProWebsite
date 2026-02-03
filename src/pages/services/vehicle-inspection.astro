@@ -1,0 +1,361 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Image from '~/components/common/Image.astro';
+
+import phonesOverview from '~/assets/images/inspection-phones-overview.jpg';
+import reportOverview from '~/assets/images/inspection-report-overview.jpg';
+import inspectionFindings from '~/assets/images/inspection-findings.jpg';
+import inspectionTechBg from '~/assets/images/inspection-tech-bg.jpg';
+
+const metadata = {
+  title: 'Complete Vehicle Inspection in Sylvan Lake | Sylvan Lake AUTOPRO',
+  description: 'Thorough bumper-to-bumper vehicle inspection with photos and measurements sent to your phone. Know exactly what\'s going on with your vehicle. Book today.',
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Complete Vehicle Inspection",
+  "description": "Comprehensive bumper-to-bumper vehicle inspection with digital report including photos and measurements",
+  "provider": {
+    "@type": "AutoRepair",
+    "name": "Sylvan Lake AUTOPRO",
+    "telephone": "+1-403-887-0440",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Industrial Dr",
+      "addressLocality": "Sylvan Lake",
+      "addressRegion": "AB",
+      "postalCode": "T4S 1P4",
+      "addressCountry": "CA"
+    }
+  },
+  "areaServed": ["Sylvan Lake", "Red Deer", "Lacombe", "Blackfalds", "Eckville", "Bentley"]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How long does a complete vehicle inspection take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most inspections take 60-90 minutes depending on the vehicle. We'll give you a time estimate when you book."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does a vehicle inspection cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Call us at (403) 887-0440 for current inspection pricing. The inspection fee can often be applied toward any repairs you choose to have done."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Will you do repairs during the inspection?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not without your approval. We inspect first, send you the findings with photos, and you decide what to address. No pressure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often should I get my vehicle inspected?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We recommend a comprehensive inspection at least once a year, or before any long road trip. If your vehicle is older or high-mileage, twice a year is smart."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you inspect all makes and models?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes — cars, trucks, SUVs, vans, domestic, import, gas, diesel, hybrid, and EV. Our diagnostic tools cover virtually every make and model on the road."
+      }
+    }
+  ]
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://sylvanlakeautopro.com/services/" },
+    { "@type": "ListItem", "position": 3, "name": "Complete Vehicle Inspection" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Vehicle Inspection"
+    title="Complete Vehicle Inspection"
+    subtitle="A thorough look at your vehicle's health — with photos and measurements sent directly to your phone."
+    image={{
+      src: phonesOverview,
+      alt: 'Digital vehicle inspection report displayed on multiple phones',
+    }}
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="prose prose-lg dark:prose-invert max-w-none text-center">
+        <p class="text-xl text-gray-600 dark:text-gray-300">
+          Our complete vehicle inspection is a bumper-to-bumper look at every major system on your vehicle. We check brakes, tires, suspension, fluids, belts, battery, exhaust, and everything underneath — then send the results directly to your phone with photos and measurements.
+        </p>
+        <p class="text-gray-600 dark:text-gray-400">
+          This isn't a government-mandated inspection. It's for <strong>you</strong> — to know exactly what's going on with your vehicle. Whether it's a routine annual checkup, pre-road trip peace of mind, a new-to-you used vehicle, or that weird noise you've been ignoring, this inspection gives you the full picture.
+        </p>
+        <p class="text-gray-600 dark:text-gray-400">
+          Every finding is categorized as <span class="text-green-600 dark:text-green-400 font-semibold">good</span>, <span class="text-yellow-600 dark:text-yellow-400 font-semibold">needs future attention</span>, or <span class="text-red-600 dark:text-red-400 font-semibold">urgent</span> — with photos of the actual components on your vehicle so you can see what we see.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- See What We See Section - Dark Overlay -->
+  <section class="relative py-12 md:py-16 lg:py-20 overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url(${inspectionTechBg.src});`}></div>
+    <div class="absolute inset-0 bg-gray-800/[0.80] dark:bg-slate-900/[0.85]"></div>
+    <div class="relative z-10 max-w-6xl mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div>
+          <p class="text-[#FFC836] font-semibold mb-2">Digital Inspection</p>
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">See What We See</h2>
+          <div class="space-y-4 text-gray-200">
+            <p>
+              Our digital inspection system sends results directly to your phone through AutoText — before we even call you. No waiting, no wondering.
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="text-[#FFC836] mt-1">✓</span>
+                <span><strong class="text-white">Photos of YOUR vehicle</strong> — not stock images. See the actual brake pads, tires, and components we're talking about.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#FFC836] mt-1">✓</span>
+                <span><strong class="text-white">Real measurements</strong> — brake pad thickness in mm, tire tread depth, battery voltage. Hard numbers, not guesses.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#FFC836] mt-1">✓</span>
+                <span><strong class="text-white">Color-coded priority</strong> — green (good), yellow (monitor), red (needs attention). Know what's urgent vs. what can wait.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-[#FFC836] mt-1">✓</span>
+                <span><strong class="text-white">You approve what gets done</strong> — no surprises, no pressure. Review everything before we turn a wrench.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="flex justify-center">
+          <Image
+            src={reportOverview}
+            alt="Digital vehicle inspection report on phone showing detailed findings"
+            class="rounded-lg shadow-2xl max-w-sm w-full"
+            widths={[400, 600]}
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Inspect Section -->
+  <Features2
+    title="What We Inspect"
+    subtitle="A comprehensive look at every major system"
+    columns={2}
+    items={[
+      {
+        title: 'Brakes',
+        description: 'Pads, rotors, brake lines, and fluid condition — with measurements',
+        icon: 'tabler:disc',
+      },
+      {
+        title: 'Tires',
+        description: 'Tread depth, wear pattern, pressure, and tire age',
+        icon: 'tabler:circle-dotted',
+      },
+      {
+        title: 'Suspension & Steering',
+        description: 'Shocks, struts, ball joints, tie rods, and bushings',
+        icon: 'tabler:steering-wheel',
+      },
+      {
+        title: 'Fluids',
+        description: 'Oil, coolant, transmission, brake, and power steering',
+        icon: 'tabler:droplet',
+      },
+      {
+        title: 'Belts & Hoses',
+        description: 'Serpentine belt, coolant hoses, and clamps',
+        icon: 'tabler:refresh',
+      },
+      {
+        title: 'Battery & Electrical',
+        description: 'Load test, terminals, and alternator output',
+        icon: 'tabler:battery-charging',
+      },
+      {
+        title: 'Exhaust',
+        description: 'Leaks, hangers, and catalytic converter condition',
+        icon: 'tabler:wind',
+      },
+      {
+        title: 'Lights & Wipers',
+        description: 'All exterior lights and wiper blade condition',
+        icon: 'tabler:bulb',
+      },
+      {
+        title: 'Under-Vehicle',
+        description: 'Frame, CV boots, driveline, and fluid leaks',
+        icon: 'tabler:car',
+      },
+      {
+        title: 'Engine Bay',
+        description: 'Visual inspection, air filter, and fluid levels',
+        icon: 'tabler:engine',
+      },
+    ]}
+  />
+
+  <!-- What Your Report Looks Like Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <div class="order-2 md:order-1 flex justify-center">
+          <Image
+            src={inspectionFindings}
+            alt="Vehicle inspection report showing color-coded findings on phone"
+            class="rounded-lg shadow-xl max-w-sm w-full"
+            widths={[400, 600]}
+            loading="lazy"
+          />
+        </div>
+        <div class="order-1 md:order-2">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">What Your Report Looks Like</h2>
+          <div class="prose dark:prose-invert">
+            <p class="text-gray-600 dark:text-gray-300">
+              You'll receive a detailed digital report on your phone with every inspection item organized by priority:
+            </p>
+            <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+              <li><span class="inline-block w-3 h-3 rounded-full bg-green-500 mr-2"></span><strong>Green</strong> — Good condition, no action needed</li>
+              <li><span class="inline-block w-3 h-3 rounded-full bg-yellow-500 mr-2"></span><strong>Yellow</strong> — Monitor this, may need attention soon</li>
+              <li><span class="inline-block w-3 h-3 rounded-full bg-red-500 mr-2"></span><strong>Red</strong> — Needs attention now for safety or to prevent damage</li>
+            </ul>
+            <p class="text-gray-600 dark:text-gray-300">
+              Tap any item to see photos and measurements. Review everything at your own pace, then let us know what you'd like to address.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It's Different Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Looking for a Different Inspection?</h2>
+      <div class="prose dark:prose-invert max-w-none">
+        <p class="text-gray-600 dark:text-gray-400 text-center mb-8">
+          Our complete vehicle inspection is <strong>not</strong> for registration, insurance, or government purposes. It's a health check for your vehicle. If you need an official inspection:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <a href="/services/out-of-province-inspection" class="block p-6 bg-gray-50 dark:bg-slate-800 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors no-underline">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Out of Province</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Registering a vehicle from outside Alberta</p>
+          </a>
+          <a href="/services/pre-purchase-inspection" class="block p-6 bg-gray-50 dark:bg-slate-800 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors no-underline">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Pre-Purchase</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Buying a used vehicle from a private seller</p>
+          </a>
+          <a href="/services/cvip-inspection" class="block p-6 bg-gray-50 dark:bg-slate-800 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors no-underline">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Commercial (CVIP)</h3>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Commercial vehicle safety certification</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about vehicle inspections"
+    columns={1}
+    items={[
+      {
+        title: 'How long does a complete vehicle inspection take?',
+        description: 'Most inspections take 60-90 minutes depending on the vehicle. We\'ll give you a time estimate when you book.',
+      },
+      {
+        title: 'How much does a vehicle inspection cost?',
+        description: 'Call us at (403) 887-0440 for current inspection pricing. The inspection fee can often be applied toward any repairs you choose to have done.',
+      },
+      {
+        title: 'Will you do repairs during the inspection?',
+        description: 'Not without your approval. We inspect first, send you the findings with photos, and you decide what to address. No pressure.',
+      },
+      {
+        title: 'How often should I get my vehicle inspected?',
+        description: 'We recommend a comprehensive inspection at least once a year, or before any long road trip. If your vehicle is older or high-mileage, twice a year is smart.',
+      },
+      {
+        title: 'Do you inspect all makes and models?',
+        description: 'Yes — cars, trucks, SUVs, vans, domestic, import, gas, diesel, hybrid, and EV. Our diagnostic tools cover virtually every make and model on the road.',
+      },
+    ]}
+  />
+
+  <!-- Related Services -->
+  <section class="py-12 md:py-16 bg-gray-50 dark:bg-slate-800/50">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Related Services</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <a href="/services/brake-inspection" class="block p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
+          <span class="text-gray-900 dark:text-white font-medium">Brake Inspection</span>
+        </a>
+        <a href="/services/pre-purchase-inspection" class="block p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
+          <span class="text-gray-900 dark:text-white font-medium">Pre-Purchase Inspection</span>
+        </a>
+        <a href="/services/oil-change" class="block p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
+          <span class="text-gray-900 dark:text-white font-medium">Oil Change</span>
+        </a>
+        <a href="/services/steering-suspension" class="block p-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm hover:shadow-md transition-shadow text-center">
+          <span class="text-gray-900 dark:text-white font-medium">Steering & Suspension</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <CallToAction
+    title="Know What's Going On With Your Vehicle"
+    subtitle="Comprehensive inspection with photos and measurements sent to your phone"
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+    ]}
+  />
+</Layout>

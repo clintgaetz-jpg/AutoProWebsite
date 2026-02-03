@@ -1,25 +1,75 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import { Icon } from 'astro-icon/components';
+
+import warrantyBadge from '~/assets/images/napa-warranty-badge.jpg';
 
 const metadata = {
   title: 'Warranty | Sylvan Lake AUTOPRO',
   description: "NAPA Peace of Mind warranty: 24 months / 40,000 km, honored at 600+ locations across North America. Plus our own 2-year/40K labor warranty. We stand behind our work.",
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What does the NAPA Peace of Mind warranty cover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "All qualifying repairs performed at our shop are covered by the NAPA Peace of Mind Warranty — 24 months or 40,000 km, whichever comes first. This covers both parts and labour. Some components like batteries, wiper blades, and wear items may have separate manufacturer warranties."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does the warranty last?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "24 months or 40,000 km from the date of repair, whichever comes first. This applies to qualifying repairs using approved parts. We'll let you know at the time of service if anything falls outside standard warranty coverage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I need warranty work while travelling?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The NAPA Peace of Mind Warranty is honoured at over 17,000 NAPA AUTOPRO locations across North America. If you break down on a road trip, find the nearest NAPA location and they'll handle warranty repairs. No need to come back to us first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does servicing at an independent shop void my factory warranty?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. In Canada, you have the right to service your vehicle at any licensed repair facility without affecting your factory warranty. The manufacturer cannot require you to use a dealership for routine maintenance. We use OEM-equivalent or better parts and document all work performed."
+      }
+    }
+  ]
+};
 ---
 
 <Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
 
   <!-- Hero Section -->
   <Hero2
     tagline="Peace of Mind"
     title="Warranty That Travels With You"
     subtitle="National network backing. Local shop accountability. We stand behind our work."
+    image={{
+      src: warrantyBadge,
+      alt: 'NAPA Peace of Mind Warranty - 24 Months / 40,000 KM',
+    }}
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'View NAPA Warranty', href: 'https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/', target: '_blank' },
+      { variant: 'primary', text: 'View NAPA Warranty', href: 'https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -44,7 +94,7 @@ const metadata = {
           </div>
           <div>
             <h3 class="text-xl font-bold mb-2 dark:text-white">Covered Anywhere</h3>
-            <p class="text-muted dark:text-slate-400">Break down in Vancouver? Toronto? Texas? Your warranty travels with you. It's honored at over 600 NAPA AUTOPRO and AutoCare locations across Canada and the United States. Call <strong class="dark:text-white">1-866-GET-NAPA</strong> (1-866-438-6272) and they'll direct you to the nearest participating shop.</p>
+            <p class="text-muted dark:text-slate-400">Break down in Vancouver? Toronto? Texas? Your warranty travels with you. It's honored at over 17,000 NAPA AUTOPRO locations across North America. Call <strong class="dark:text-white">1-866-GET-NAPA</strong> (1-866-438-6272) and they'll direct you to the nearest participating shop.</p>
           </div>
         </div>
       </div>
@@ -263,13 +313,39 @@ const metadata = {
     </div>
   </section>
 
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about our warranty coverage"
+    columns={1}
+    items={[
+      {
+        title: 'What does the NAPA Peace of Mind warranty cover?',
+        description: 'All qualifying repairs performed at our shop are covered by the NAPA Peace of Mind Warranty — 24 months or 40,000 km, whichever comes first. This covers both parts and labour. Some components like batteries, wiper blades, and wear items may have separate manufacturer warranties.',
+      },
+      {
+        title: 'How long does the warranty last?',
+        description: "24 months or 40,000 km from the date of repair, whichever comes first. This applies to qualifying repairs using approved parts. We'll let you know at the time of service if anything falls outside standard warranty coverage.",
+      },
+      {
+        title: 'What if I need warranty work while travelling?',
+        description: "The NAPA Peace of Mind Warranty is honoured at over 17,000 NAPA AUTOPRO locations across North America. If you break down on a road trip, find the nearest NAPA location and they'll handle warranty repairs. No need to come back to us first.",
+      },
+      {
+        title: 'Does servicing at an independent shop void my factory warranty?',
+        description: 'No. In Canada, you have the right to service your vehicle at any licensed repair facility without affecting your factory warranty. The manufacturer cannot require you to use a dealership for routine maintenance. We use OEM-equivalent or better parts and document all work performed.',
+      },
+    ]}
+  />
+
   <!-- CTA -->
   <CallToAction
     title="Questions About Warranty?"
     subtitle="Every repair is different. If you want to know exactly what's covered before we start, just ask. We'll walk you through it."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Contact Us', href: '/contact' },
+      { variant: 'primary', text: 'Contact Us', href: '/contact' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

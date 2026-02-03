@@ -260,6 +260,9 @@ import { UI } from 'astrowind:config';
     elements: null,
 
     start() {
+      // Reset counter when starting (important for page navigations)
+      this.animationCounter = 0;
+
       const selectors = [
         '[class*=" intersect:"]',
         '[class*=":intersect:"]',

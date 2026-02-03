@@ -82,9 +82,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
         <!-- Logo - Centered on mobile, left on desktop -->
         <a
-          class="flex items-center md:order-first absolute left-1/2 -translate-x-1/2 md:relative md:left-auto md:translate-x-0 z-10 py-1"
+          class="flex items-center md:order-first absolute left-1/2 -translate-x-1/2 md:relative md:left-auto md:translate-x-0 z-20 py-2 px-3 -mx-3 rounded-lg active:opacity-80 transition-opacity"
           href={getHomePermalink()}
           aria-label="Go to homepage"
+          data-astro-prefetch
         >
           <Logo />
         </a>
@@ -160,17 +161,20 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
           {showToggleTheme && <ToggleTheme iconClass="w-5 h-5 text-white" />}
           {
             actions?.length ? (
-              actions.map((btnProps) => (
-                <a
-                  href={btnProps.href}
-                  target={btnProps.target}
-                  rel={btnProps.target === '_blank' ? 'noopener noreferrer' : undefined}
-                  class="flex items-center gap-2 bg-[#2952e8] hover:bg-[#3d63ea] text-white px-5 py-2.5 rounded font-semibold text-sm transition-colors focus:ring-2 focus:ring-[#FFC836] focus:outline-none"
-                >
-                  <Icon name="tabler:calendar" class="w-4 h-4" />
-                  {btnProps.text}
-                </a>
-              ))
+              <div class="flex flex-col items-center">
+                {actions.map((btnProps) => (
+                  <a
+                    href={btnProps.href}
+                    target={btnProps.target}
+                    rel={btnProps.target === '_blank' ? 'noopener noreferrer' : undefined}
+                    class="flex items-center gap-2 bg-[#2952e8] hover:bg-[#3d63ea] text-white px-5 py-2 rounded font-semibold text-sm transition-colors focus:ring-2 focus:ring-[#FFC836] focus:outline-none"
+                  >
+                    <Icon name="tabler:calendar" class="w-4 h-4" />
+                    {btnProps.text}
+                  </a>
+                ))}
+                <span class="text-[0.9375rem] text-[#FFC836] leading-none">(403) 887-0440</span>
+              </div>
             ) : null
           }
         </div>
@@ -209,7 +213,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       >
         <Icon name="tabler:x" class="w-6 h-6" />
       </button>
-      <a href={getHomePermalink()} class="flex items-center">
+      <a href={getHomePermalink()} class="flex items-center py-1 active:opacity-80 transition-opacity" data-astro-prefetch>
         <Logo />
       </a>
       <div class="w-10"></div> <!-- Spacer for balance -->

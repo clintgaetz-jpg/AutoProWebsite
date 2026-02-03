@@ -96,7 +96,8 @@ const breadcrumbSchema = {
     subtitle="Yes, We Work on Hybrids and EVs"
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -147,7 +148,6 @@ const breadcrumbSchema = {
 
   <!-- Diagnostics Section -->
   <Content
-    isReversed={true}
     title="Diagnostics & Repairs"
     content="Beyond regular maintenance, we also handle:<br/><br/>• <strong>Battery health monitoring</strong> — Check your hybrid/EV battery condition<br/>• <strong>Check engine / hybrid system warning lights</strong> — Proper diagnosis, not guessing<br/>• <strong>Charging system issues</strong> — When your EV isn't charging properly<br/>• <strong>High-voltage system diagnostics</strong> — With proper safety equipment<br/>• <strong>Software and module updates</strong> — Keep systems current"
     items={[
@@ -204,7 +204,6 @@ const breadcrumbSchema = {
 
   <!-- Why Choose Us Section -->
   <Content
-    isReversed={true}
     title="Why Choose Us for Hybrid/EV Service?"
     content="<strong>We Don't Say No</strong><br/>Some shops won't touch hybrids or EVs. We've invested in the training and equipment because these vehicles are part of the future—and part of our community now.<br/><br/><strong>Local Option</strong><br/>You shouldn't have to drive 45 minutes to Red Deer for a brake inspection on your Prius. We're here in Sylvan Lake.<br/><br/><strong>Same Shop for Everything</strong><br/>If you have a hybrid and a gas vehicle, you don't need two shops. We service both.<br/><br/><strong>NAPA Warranty</strong><br/>Qualifying repairs backed by the NAPA Peace of Mind Warranty—24 months/40,000 km, honored across Canada."
   />
@@ -244,7 +243,8 @@ const breadcrumbSchema = {
     subtitle="Local service for your hybrid or electric vehicle. No trip to Red Deer required."
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

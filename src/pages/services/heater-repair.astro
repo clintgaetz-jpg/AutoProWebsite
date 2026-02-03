@@ -104,7 +104,8 @@ const breadcrumbSchema = {
     subtitle="Three Systems. One Symptom. Proper Diagnosis Matters."
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -140,7 +141,6 @@ const breadcrumbSchema = {
 
   <!-- Diagnosis Section -->
   <Content
-    isReversed={true}
     title="Why Heater Diagnosis Takes Time"
     content="This isn't a quick scan and done.<br/><br/>A proper heater diagnosis means checking:<br/>• Engine operating temperature<br/>• Coolant level and condition<br/>• Both heater hoses (are they both hot?)<br/>• Blend door actuator operation<br/>• Climate control module communication<br/>• Scan tool data from HVAC system<br/>• Airflow from different vents and settings<br/><br/>The symptom 'no heat' could be a <strong>$30 thermostat</strong> or a <strong>$1,500 heater core replacement</strong>. We figure out which one before you spend money."
     items={[
@@ -158,7 +158,6 @@ const breadcrumbSchema = {
 
   <!-- Heater Core Reality Section -->
   <Content
-    isReversed={true}
     title="The Heater Core Reality"
     content="If diagnosis points to the heater core, here's what you need to know:<br/><br/><strong>The heater core itself is inexpensive</strong> — Usually $100-$300 for the part.<br/><br/><strong>The labor is not</strong> — On most vehicles, the entire dashboard must be removed to access it. This is a 6-12 hour job depending on the vehicle.<br/><br/><strong>What's involved:</strong> Drain coolant, evacuate A/C system, remove steering column covers, remove instrument panel, remove center console, disconnect wiring harnesses, remove HVAC housing, split housing to access heater core, replace core, reassemble everything, recharge A/C, refill and bleed coolant, test entire system.<br/><br/><strong>Our recommendation:</strong> If we're going that deep into the dash, we'll advise you on whether it makes sense to replace the evaporator core (A/C) at the same time. Same labor to access—doing both now avoids paying that labor twice later."
   />
@@ -241,7 +240,8 @@ const breadcrumbSchema = {
     subtitle="Don't wait until it's -30° to find out your heater doesn't work."
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

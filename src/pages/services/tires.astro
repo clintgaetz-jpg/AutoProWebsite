@@ -6,6 +6,9 @@ import Features2 from '~/components/widgets/Features2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
+import tireBalancerImage from '~/assets/images/tire-balancer.jpg';
+import tireMachineImage from '~/assets/images/tire-machine.jpg';
+
 const metadata = {
   title: 'Tires | Sales & Service | Sylvan Lake AUTOPRO',
   description: 'Tire sales and service in Sylvan Lake. Shop tires online, professional installation, balancing, rotation, TPMS, flat repair, seasonal storage. Call (403) 887-0440.',
@@ -103,8 +106,9 @@ const breadcrumbSchema = {
     title="Tire Sales & Service"
     subtitle="Shop Online. We Install. Done Right."
     actions={[
-      { variant: 'primary', text: 'Shop Tires Below ↓', href: '#tire-shop' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'primary', text: 'Shop Tires & Pricing', href: '/services/tire-pricing' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -114,29 +118,20 @@ const breadcrumbSchema = {
     content="Tires affect everything — handling, braking, fuel economy, ride comfort, and safety. They're the only part of your vehicle that actually makes contact with the pavement.<br/><br/>We sell tires from multiple brands, all available through our online tire shop below. Find what fits your vehicle, compare options, and we'll handle the installation, balancing, and everything else.<br/><br/><strong>Not sure what you need?</strong> Give us a call. We'll help you find the right tire for how you drive."
   />
 
-  <!-- TireConnect Widget Section -->
-  <section id="tire-shop" class="py-12 md:py-16 bg-gray-50 dark:bg-slate-800">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-8">
-        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 dark:text-white">Find Tires for Your Vehicle</h2>
-        <p class="text-lg text-gray-600 dark:text-slate-400">Search by vehicle or tire size. Compare brands, see pricing, and schedule your installation.</p>
-      </div>
-      <div id="tireconnect" class="bg-white dark:bg-slate-900 rounded-lg shadow-lg p-4 min-h-[400px]"></div>
+  <!-- Shop Tires CTA -->
+  <section class="py-8 md:py-10 bg-primary dark:bg-blue-900">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <p class="text-lg md:text-xl text-white mb-4">
+        Ready to find the right tires for your vehicle?
+      </p>
+      <a
+        href="/services/tire-pricing"
+        class="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold bg-[#FFC836] text-[#0A0094] hover:bg-[#e6b430] transition-colors min-h-[48px]"
+      >
+        Shop Tires & Pricing →
+      </a>
     </div>
   </section>
-
-  <script is:inline src="https://app.tireconnect.ca/js/widget.js"></script>
-  <script is:inline>
-    document.addEventListener('DOMContentLoaded', function() {
-      if (typeof TCWidget !== 'undefined') {
-        TCWidget.init({
-          apikey: '11cf9c56224e594319d104dbdeb76dab',
-          container: 'tireconnect',
-          locale: 'en_CA'
-        });
-      }
-    });
-  </script>
 
   <!-- Tire Services Section -->
   <Features2
@@ -172,6 +167,10 @@ const breadcrumbSchema = {
     isReversed={true}
     title="TPMS Service"
     content="That little tire pressure light on your dash? It matters.<br/><br/>Your TPMS sensors monitor tire pressure and warn you when something's low. But sensors have batteries that eventually die, and they can be damaged during tire service if not handled carefully.<br/><br/>If your TPMS light is on, don't ignore it. Underinflated tires wear faster, handle worse, and cost you fuel economy."
+    image={{
+      src: tireBalancerImage,
+      alt: 'Technician balancing tire on Hunter Road Force balancer',
+    }}
     items={[
       { title: 'Sensor Replacement', description: 'When sensors fail or batteries die' },
       { title: 'Relearn/Reset', description: 'After tire rotation or new sensor installation' },
@@ -190,7 +189,12 @@ const breadcrumbSchema = {
   <Content
     isReversed={true}
     title="New Tires? Get an Alignment."
-    content="You just spent $800–$2,000 on a set of tires. The last thing you want is premature wear because your alignment is off.<br/><br/>Misalignment causes uneven wear patterns that can ruin tires in a fraction of their expected life. We recommend an alignment check with every new set of tires — it protects your investment and ensures your vehicle handles the way it should.<br/><br/><a href='/services/alignment' class='text-primary hover:underline font-semibold'>Learn More About Wheel Alignments →</a>"
+    content="You just spent $800–$2,000 on a set of tires. The last thing you want is premature wear because your alignment is off.<br/><br/>Misalignment causes uneven wear patterns that can ruin tires in a fraction of their expected life. We recommend an alignment check with every new set of tires — it protects your investment and ensures your vehicle handles the way it should."
+    callToAction={{ variant: 'secondary', text: 'Learn More About Wheel Alignments', href: '/services/alignment' }}
+    image={{
+      src: tireMachineImage,
+      alt: 'Technician mounting tire on Hunter tire changer',
+    }}
   />
 
   <!-- When to Replace Section -->
@@ -236,7 +240,7 @@ const breadcrumbSchema = {
       },
       {
         title: 'What brands do you carry?',
-        description: 'We have access to most major brands through our tire suppliers. Use the search tool above to see what\'s available for your vehicle, or call us if you\'re looking for something specific.',
+        description: 'We have access to most major brands through our tire suppliers. Use our online tire shop to see what\'s available for your vehicle, or call us if you\'re looking for something specific.',
       },
       {
         title: 'Do I need winter tires?',
@@ -258,19 +262,19 @@ const breadcrumbSchema = {
         title: 'Wheel Alignment',
         description: 'Protect your tire investment',
         icon: 'tabler:steering-wheel',
-        callToAction: { text: 'Learn More', href: '/services/alignment' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/alignment' },
       },
       {
         title: 'Brake Service',
         description: 'Stopping power matters',
         icon: 'tabler:disc',
-        callToAction: { text: 'Learn More', href: '/services/brake-inspection' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/brake-inspection' },
       },
       {
         title: 'Steering & Suspension',
         description: 'Affects tire wear and handling',
         icon: 'tabler:car',
-        callToAction: { text: 'Learn More', href: '/services/steering-suspension' },
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/steering-suspension' },
       },
     ]}
   />
@@ -278,10 +282,11 @@ const breadcrumbSchema = {
   <!-- Final CTA -->
   <CallToAction
     title="Ready for New Tires?"
-    subtitle="Shop online using the tool above, or give us a call to discuss what's right for your vehicle."
+    subtitle="Browse our tire shop online, or give us a call to discuss what's right for your vehicle."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Book Installation', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'primary', text: 'Shop Tires & Pricing', href: '/services/tire-pricing' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

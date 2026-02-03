@@ -112,7 +112,8 @@ const breadcrumbSchema = {
     subtitle="From minor repairs to complete engine replacement—we'll get you back on the road."
     actions={[
       { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -265,13 +266,40 @@ const breadcrumbSchema = {
     ]}
   />
 
+  <!-- Related Services -->
+  <Features2
+    title="Related Services"
+    columns={3}
+    items={[
+      {
+        title: 'Exhaust System',
+        description: 'Manifold repair, bolt extraction, mufflers.',
+        icon: 'tabler:volume-off',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/exhaust-system' },
+      },
+      {
+        title: 'Diagnostics',
+        description: 'Check engine light diagnosis.',
+        icon: 'tabler:device-analytics',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/diagnostics' },
+      },
+      {
+        title: 'Diesel Services',
+        description: 'Diesel repair and maintenance.',
+        icon: 'tabler:truck',
+        callToAction: { variant: 'secondary', text: 'Learn More', href: '/services/diesel' },
+      },
+    ]}
+  />
+
   <!-- Call to Action -->
   <CallToAction
     title="Concerned About Your Engine?"
     subtitle="Strange noises? Warning lights? Let's diagnose the problem and give you honest options."
     actions={[
       { variant: 'primary', text: 'Book Diagnostic', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
-      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

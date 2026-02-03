@@ -3,6 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
@@ -40,11 +41,59 @@ const breadcrumbSchema = {
     { "@type": "ListItem", "position": 3, "name": "Fluid Maintenance Services" }
   ]
 };
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How often should I change my transmission fluid?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We recommend transmission fluid service every 50,000 km. If you tow, haul, or do a lot of stop-and-go driving, consider 40,000 km intervals. Many 'lifetime' fluids aren't really lifetime — they just outlast the warranty period."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I skip fluid maintenance?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Fluids break down over time from heat and contamination. Old transmission fluid leads to hard shifts and eventual failure. Degraded coolant causes corrosion and overheating. Contaminated brake fluid reduces stopping power. The repairs from neglected fluids cost far more than regular maintenance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What are BG Products and why do you use them?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "BG Products are professional-grade automotive chemicals used by dealerships and independent shops since 1971. They're more effective than basic fluid changes because they include cleaners that remove deposits and conditioners that protect components. BG also backs their services with a Lifetime Protection Plan covering component failure up to $6,000."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a coolant flush really necessary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Coolant additives deplete over time, causing the fluid to become acidic. This leads to internal corrosion, scale buildup, and eventual failures of water pumps, heater cores, and radiators. A proper coolant service every 50,000 km prevents expensive cooling system repairs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does brake fluid need to be changed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Brake fluid absorbs moisture from the air over time. This moisture lowers the fluid's boiling point (causing brake fade under heavy use) and causes internal corrosion in brake lines, calipers, and the master cylinder. Fresh fluid maintains proper brake performance and prevents component damage."
+      }
+    }
+  ]
+};
 ---
 
 <Layout metadata={metadata}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   </Fragment>
 
@@ -54,8 +103,9 @@ const breadcrumbSchema = {
     title="Fluid Maintenance Services"
     subtitle="Your Vehicle Has a Lot of Fluids. They All Wear Out. We Can Help."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
@@ -67,7 +117,6 @@ const breadcrumbSchema = {
 
   <!-- You Decide Section -->
   <Content
-    isReversed={true}
     title="Your Vehicle, Your Call"
     content="We get it — people approach maintenance differently.<br/><br/>Some customers bring in their owner's manual and follow the schedule to the letter. Some prefer to stick with the basics and skip the extras. Most are somewhere in between.<br/><br/><strong>All of that is fine with us.</strong><br/><br/>Here's how we see our job: we recommend what we think is best to make your vehicle last. You decide what actually gets done. No pressure, no judgment.<br/><br/>Here's the thing — we're all keeping vehicles longer than we used to. The average vehicle on the road is over 12 years old now. When you're planning to drive something for 200,000+ km, preventive maintenance stops being optional. It's what keeps a $4,000 transmission from failing at 180,000 km instead of lasting to 300,000."
   />
@@ -113,7 +162,6 @@ const breadcrumbSchema = {
 
   <!-- Coolant Service Section -->
   <Content
-    isReversed={true}
     title="BG Cooling System Service"
     content="Coolant doesn't just keep your engine from overheating — it protects against corrosion, lubricates the water pump, and keeps your heater working in January.<br/><br/>Over time, coolant becomes acidic as its additives deplete. This leads to internal corrosion, scale buildup, and deposits that restrict flow. Left unchecked, you're looking at heater core failures, water pump failures, and overheating — all expensive repairs that start with neglected coolant."
     items={[
@@ -134,7 +182,6 @@ const breadcrumbSchema = {
 
   <!-- Fuel System Service Section -->
   <Content
-    isReversed={true}
     title="BG Fuel System Service"
     content="Carbon deposits are a fact of life in modern engines. They form on fuel injectors, throttle bodies, intake valves, and combustion chambers. As they build up, you lose fuel efficiency, power, and throttle response.<br/><br/>This is especially true for <strong>GDI (Gasoline Direct Injection)</strong> engines, where fuel doesn't wash over the intake valves. Carbon builds up fast, and there's no easy way to remove it without professional service.<br/><br/><strong>BG Platinum Fuel System Service:</strong> Cleans injectors, throttle body, valves, and combustion chambers. Every 25,000 km.<br/><br/><strong>BG GDI Fuel/Air Induction Service:</strong> Specifically targets intake valve carbon on direct injection engines. Every 24,000 km."
     items={[
@@ -181,7 +228,6 @@ const breadcrumbSchema = {
 
   <!-- BG On The Road Section -->
   <Content
-    isReversed={true}
     title="BG On The Road — 6 Months Roadside Assistance"
     content="Every BG service comes with <strong>BG On The Road</strong> — complimentary roadside assistance for 6 months. And it's renewable every time you get another BG service.<br/><br/><strong>Coverage includes:</strong><br/>• Towing service (accidents and disablements)<br/>• Jump start service<br/>• Flat tire assistance<br/>• Lock-out service<br/>• Emergency fluid delivery<br/>• Trip routing service<br/>• Emergency rental car coverage<br/>• Emergency travel expense<br/>• Theft/hit and run protection<br/><br/>Available anywhere in the US, Canada, and Puerto Rico. It's a nice bonus for services you should probably be doing anyway."
   />
@@ -192,13 +238,43 @@ const breadcrumbSchema = {
     content="That's fine. Most people aren't.<br/><br/>Here's how we approach it:<br/><br/><strong>1.</strong> Tell us about your vehicle — year, make, model, mileage<br/><strong>2.</strong> Tell us what you know — what's been done, what hasn't, any concerns<br/><strong>3.</strong> We'll look at your maintenance schedule and tell you what's due<br/><strong>4.</strong> You decide what to tackle and when<br/><br/>No pressure. No scare tactics. Just information so you can make a good decision."
   />
 
+  <!-- FAQ Section -->
+  <FAQs
+    title="Frequently Asked Questions"
+    subtitle="Common questions about fluid maintenance"
+    columns={1}
+    items={[
+      {
+        title: 'How often should I change my transmission fluid?',
+        description: "We recommend transmission fluid service every 50,000 km. If you tow, haul, or do a lot of stop-and-go driving, consider 40,000 km intervals. Many 'lifetime' fluids aren't really lifetime — they just outlast the warranty period.",
+      },
+      {
+        title: 'What happens if I skip fluid maintenance?',
+        description: 'Fluids break down over time from heat and contamination. Old transmission fluid leads to hard shifts and eventual failure. Degraded coolant causes corrosion and overheating. Contaminated brake fluid reduces stopping power. The repairs from neglected fluids cost far more than regular maintenance.',
+      },
+      {
+        title: 'What are BG Products and why do you use them?',
+        description: "BG Products are professional-grade automotive chemicals used by dealerships and independent shops since 1971. They're more effective than basic fluid changes because they include cleaners that remove deposits and conditioners that protect components. BG also backs their services with a Lifetime Protection Plan covering component failure up to $6,000.",
+      },
+      {
+        title: 'Is a coolant flush really necessary?',
+        description: 'Yes. Coolant additives deplete over time, causing the fluid to become acidic. This leads to internal corrosion, scale buildup, and eventual failures of water pumps, heater cores, and radiators. A proper coolant service every 50,000 km prevents expensive cooling system repairs.',
+      },
+      {
+        title: 'Why does brake fluid need to be changed?',
+        description: "Brake fluid absorbs moisture from the air over time. This moisture lowers the fluid's boiling point (causing brake fade under heavy use) and causes internal corrosion in brake lines, calipers, and the master cylinder. Fresh fluid maintains proper brake performance and prevents component damage.",
+      },
+    ]}
+  />
+
   <!-- Final CTA -->
   <CallToAction
     title="Ready to Talk?"
     subtitle="Questions about fluid services? Want to know what your vehicle needs? Give us a call."
     actions={[
-      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
-      { variant: 'secondary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'primary', text: 'Book Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 </Layout>

@@ -7,9 +7,9 @@ export interface Props {
 
 const { class: className = '' } = Astro.props;
 
-// Using coordinates for reliability (1A Industrial Dr, Sylvan Lake, AB T4S 1P4)
-const appleUrl = 'https://maps.apple.com/?daddr=52.311676,-114.073863&dirflg=d';
-const googleUrl = 'https://www.google.com/maps/dir/?api=1&destination=52.311676,-114.073863';
+// 1A Industrial Dr, Sylvan Lake, AB T4S 1P4
+const appleUrl = 'https://maps.apple.com/?daddr=NAPA+AUTOPRO+Sylvan+Lake+AUTOPRO+Inc,+1A+Industrial+Dr,+Sylvan+Lake,+AB+T4S+1P4,+Canada&dirflg=d';
+const googleUrl = 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U';
 ---
 
 <div class:list={['directions-buttons flex flex-col sm:flex-row gap-3 justify-center', className]} data-directions-buttons>

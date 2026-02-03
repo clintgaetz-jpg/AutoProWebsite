@@ -1,0 +1,185 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Service Areas | Sylvan Lake AUTOPRO',
+  description: 'Sylvan Lake AUTOPRO serves Bentley, Benalto, Red Deer County, Eckville, Leslieville, and surrounding central Alberta communities. 19 years of trusted auto repair on Highway 11.',
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Locations" }
+  ]
+};
+
+const locations = [
+  {
+    name: 'Bentley',
+    description: 'Just 15 minutes east on Highway 11A. Your closest full-service shop — no traffic, easy parking, same-day service for most repairs.',
+    driveTime: '~15 min',
+    href: '/locations/bentley',
+    icon: 'tabler:home',
+  },
+  {
+    name: 'Benalto',
+    description: 'Serving Benalto and surrounding Red Deer County. Closer than Red Deer with no city traffic — full-service repair with small-town service.',
+    driveTime: '10-15 min',
+    href: '/locations/benalto',
+    icon: 'tabler:tractor',
+  },
+  {
+    name: 'Red Deer County',
+    description: 'Serving Springbrook, Markerville, Dickson, Spruce View, Penhold, and Gasoline Alley. We understand gravel road driving and the extra wear it puts on your vehicle.',
+    driveTime: '18-35 min',
+    href: '/locations/red-deer-county',
+    icon: 'tabler:map-2',
+  },
+  {
+    name: 'Eckville',
+    description: 'Just 20 minutes east on Highway 11. Full-service diagnostics, inspections, and repairs without the Red Deer traffic. Gateway to the west country.',
+    driveTime: '~20 min',
+    href: '/locations/eckville',
+    icon: 'tabler:map-pin',
+  },
+  {
+    name: 'Leslieville',
+    description: 'Serving Leslieville, Condor, Alhambra, and Clearwater County. 45 minutes on the David Thompson Highway — combine your trip with errands in Sylvan Lake.',
+    driveTime: '~45 min',
+    href: '/locations/leslieville',
+    icon: 'tabler:mountain',
+  },
+];
+
+const otherAreas = [
+  'Sylvan Lake',
+  'Red Deer',
+  'Lacombe',
+  'Blackfalds',
+  'Ponoka',
+  'Rimbey',
+  'Rocky Mountain House',
+  'Caroline',
+  'Gull Lake',
+  'Jarvis Bay',
+  'Norglenwold',
+];
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Central Alberta"
+    title="Areas We Serve"
+    subtitle="Located on Highway 11 in Sylvan Lake, we're centrally positioned to serve communities throughout Red Deer County, Lacombe County, and Clearwater County. Easy highway access, no city traffic."
+    actions={[
+      { variant: 'primary', text: 'Book Online', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+
+  <!-- Location Cards -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+        {locations.map((location) => (
+          <a
+            href={location.href}
+            class="group bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-gray-100 dark:border-slate-800 overflow-hidden hover:shadow-xl hover:border-primary/50 transition-all"
+          >
+            <div class="p-6">
+              <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <Icon name={location.icon} class="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h2 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-primary transition-colors">{location.name}</h2>
+                  <p class="text-sm text-muted dark:text-slate-400">{location.driveTime} drive</p>
+                </div>
+              </div>
+              <p class="text-muted dark:text-slate-400 mb-4">{location.description}</p>
+              <span class="inline-flex items-center text-primary font-semibold group-hover:underline">
+                Learn more
+                <Icon name="tabler:arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Other Areas -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">We Also Serve</h2>
+        <p class="text-lg text-muted dark:text-slate-400 mt-4">Customers come to us from communities throughout central Alberta.</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3">
+        {otherAreas.map((area) => (
+          <span class="px-4 py-2 bg-white dark:bg-slate-900 rounded-full text-muted dark:text-slate-400 shadow-sm">
+            {area}
+          </span>
+        ))}
+      </div>
+
+      <p class="text-center text-muted dark:text-slate-400 mt-8">
+        Don't see your area? Give us a call — if you can get here, we can help.
+      </p>
+    </div>
+  </section>
+
+  <!-- Address Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white mb-6">Find Us</h2>
+
+      <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8 inline-block">
+        <p class="text-xl font-bold text-gray-900 dark:text-white mb-2">1A Industrial Drive</p>
+        <p class="text-lg text-muted dark:text-slate-400 mb-4">Sylvan Lake, AB T4S 1P4</p>
+        <p class="text-muted dark:text-slate-400 mb-6">Right off Highway 11, east side of town, in the industrial area.</p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center px-5 py-3 rounded-full font-semibold bg-primary text-white hover:bg-primary/90 transition-colors"
+          >
+            <Icon name="tabler:map-pin" class="w-5 h-5 mr-2" />
+            Get Directions
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center px-5 py-3 rounded-full font-semibold border-2 border-primary text-primary hover:bg-primary hover:text-white transition-colors"
+          >
+            Contact & Hours
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CallToAction
+    title="Ready to Book?"
+    subtitle="Schedule your appointment online or give us a call."
+    actions={[
+      { variant: 'primary', text: 'Book Online', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>
