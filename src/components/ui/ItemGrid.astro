@@ -37,7 +37,7 @@ const {
           <div class={twMerge('flex flex-row max-w-md', panelClass, itemClasses?.panel)}>
             <div class="flex justify-center">
               {(icon || defaultIcon) && href ? (
-                <a href={href} class="hover:opacity-80 transition-opacity">
+                <a href={href} class="hover:opacity-80 transition-opacity" aria-label={title || 'View details'}>
                   <Icon
                     name={icon || defaultIcon}
                     class={twMerge('w-7 h-7 mr-2 rtl:mr-0 rtl:ml-2', defaultIconClass, itemClasses?.icon)}

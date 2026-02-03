@@ -190,7 +190,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 <div
   id="mobile-nav-overlay"
   class="fixed inset-0 z-50 pointer-events-none"
-  aria-hidden="true"
+  inert
 >
   <!-- Backdrop -->
   <div
@@ -213,7 +213,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
       >
         <Icon name="tabler:x" class="w-6 h-6" />
       </button>
-      <a href={getHomePermalink()} class="flex items-center py-1 active:opacity-80 transition-opacity" data-astro-prefetch>
+      <a href={getHomePermalink()} class="flex items-center py-1 active:opacity-80 transition-opacity" aria-label="Go to homepage" data-astro-prefetch>
         <Logo />
       </a>
       <div class="w-10"></div> <!-- Spacer for balance -->
