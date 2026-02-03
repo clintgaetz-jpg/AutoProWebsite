@@ -1,0 +1,107 @@
+SYLVAN LAKE AUTOPRO — URL Migration Map
+Domain: https://sylvanlakeautopro.com
+Date: February 3, 2026
+
+All old URLs have 301 redirects in place, but Google Ads final URLs
+should be updated to the new URLs to avoid disapprovals.
+
+============================================================
+CORE PAGES
+============================================================
+OLD URL → NEW URL
+
+/ → / (unchanged)
+/about → /about (unchanged)
+/contact → /contact (unchanged)
+/services → /services (unchanged)
+/reviews → /reviews (unchanged)
+/directions → /contact
+/appointments → /contact
+/specials → /services
+/careers → /about
+/leave-a-review → /reviews
+
+============================================================
+SERVICE PAGES
+============================================================
+OLD URL → NEW URL
+
+/services/oil-change → /services/oil-change (unchanged)
+/services/pre-purchase-inspection → /services/pre-purchase-inspection (unchanged)
+/services/brakes → /services/brake-repair
+/services/steering-and-suspension → /services/steering-suspension
+/services/check-engine-light → /services/diagnostics
+/services/wheel-alignment → /services/alignment
+/services/exhaust-system-service → /services/exhaust-system
+/services/electrical-system-service → /services/electrical
+/services/diesel-repair-and-service → /services/diesel
+/services/fleet-service → /services/fleet-services
+/services/out-of-province-inspections → /services/out-of-province-inspection
+/services/automotive-ac-service-and-repair-in-sylvan-lake-ab → /services/ac-service-repair
+/services/tire-sales-in-sylvan-lake-ab → /services/tires
+/services/tire-services-in-sylvan-lake-ab → /services/tires
+/services/cooling-system → /services/heater-repair
+/services/fuel-system-service → /services/fluid-maintenance
+/services/clutch-repair → /services/transmission-repair
+/services/shocks-and-struts → /services/steering-suspension
+/services/alternator → /services/electrical
+/services/car-lights → /services/electrical
+/services/computer-diagnostics → /services/diagnostics
+/services/engine-diagnostics → /services/diagnostics
+/services/digital-inspection → /services/vehicle-inspection
+/services/wheel-service-and-repair → /services/alignment
+/services/axle-service → /services/driveline
+/services/4x4-service → /services/driveline
+/services/towing → /breakdown
+/services/tune-up → /services
+/services/speedometer → /services
+/services/auto-detailing → /services
+/services/aftermarket-additions → /services
+
+============================================================
+LOCATION / SEO PAGES
+============================================================
+OLD URL → NEW URL
+
+/auto-repair-in-sylvan-lake-ab → /
+/auto-repair-services-in-red-deer-county-ab → /locations/red-deer-county
+/reliable-auto-services-in-benalto-ab → /locations/benalto
+/trustworthy-auto-repair-in-bentley-ab → /locations/bentley
+/expert-auto-repair-in-eckville-ab → /locations/eckville
+/commercial-vehicle-inspection-in-sylvan-lake-ab → /services/cvip-inspection
+
+============================================================
+NEW PAGES (no old equivalent)
+============================================================
+/services/brake-inspection
+/services/automotive-keys
+/services/cvip-inspection
+/services/driveline
+/services/engine-repair
+/services/fluid-maintenance
+/services/heater-repair
+/services/hybrid-ev-service
+/services/insurance-inspection
+/services/tire-pricing
+/services/transmission-repair
+/services/vehicle-inspection
+/warranty
+/team
+/making-it-easy
+/credentials-and-licensing
+/breakdown
+/locations/leslieville
+
+============================================================
+VEHICLE PAGES (all redirect to /services)
+============================================================
+All /vehicles/* URLs → /services
+
+============================================================
+NOTES
+============================================================
+- All old URLs have 301 redirects active
+- Update ad final URLs to new paths to prevent disapprovals
+- Display URL domain remains: sylvanlakeautopro.com
+- UTM parameters are preserved through redirects
+- Booking link: https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1
