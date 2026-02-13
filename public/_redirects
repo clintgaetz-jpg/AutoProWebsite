@@ -6,64 +6,64 @@
 # LOCATION / SEO LANDING PAGES
 # ============================================
 /auto-repair-in-sylvan-lake-ab / 301
-/auto-repair-services-in-red-deer-county-ab /locations/red-deer-county/ 301
-/reliable-auto-services-in-benalto-ab /locations/benalto/ 301
-/trustworthy-auto-repair-in-bentley-ab /locations/bentley/ 301
-/expert-auto-repair-in-eckville-ab /locations/eckville/ 301
-/commercial-vehicle-inspection-in-sylvan-lake-ab /services/cvip-inspection/ 301
+/auto-repair-services-in-red-deer-county-ab /locations/red-deer-county 301
+/reliable-auto-services-in-benalto-ab /locations/benalto 301
+/trustworthy-auto-repair-in-bentley-ab /locations/bentley 301
+/expert-auto-repair-in-eckville-ab /locations/eckville 301
+/commercial-vehicle-inspection-in-sylvan-lake-ab /services/cvip-inspection 301
 
 # ============================================
 # GENERAL PAGES
 # ============================================
-/directions /contact/ 301
-/appointments /contact/ 301
-/careers /about/ 301
-/specials /services/ 301
-/leave-a-review /reviews/ 301
+/directions /contact 301
+/appointments /contact 301
+/careers /about 301
+/specials /services 301
+/leave-a-review /reviews 301
 
 # ============================================
 # SERVICE PAGES - Direct matches with different slugs
 # ============================================
-/services/brakes /services/brake-repair/ 301
-/services/steering-and-suspension /services/steering-suspension/ 301
-/services/check-engine-light /services/diagnostics/ 301
-/services/wheel-alignment /services/alignment/ 301
-/services/exhaust-system-service /services/exhaust-system/ 301
-/services/electrical-system-service /services/electrical/ 301
-/services/diesel-repair-and-service /services/diesel/ 301
-/services/fleet-service /services/fleet-services/ 301
-/services/out-of-province-inspections /services/out-of-province-inspection/ 301
-/services/automotive-ac-service-and-repair-in-sylvan-lake-ab /services/ac-service-repair/ 301
-/services/tire-sales-in-sylvan-lake-ab /services/tires/ 301
-/services/tire-services-in-sylvan-lake-ab /services/tires/ 301
-/services/cooling-system /services/heater-repair/ 301
-/services/fuel-system-service /services/fluid-maintenance/ 301
+/services/brakes /services/brake-repair 301
+/services/steering-and-suspension /services/steering-suspension 301
+/services/check-engine-light /services/diagnostics 301
+/services/wheel-alignment /services/alignment 301
+/services/exhaust-system-service /services/exhaust-system 301
+/services/electrical-system-service /services/electrical 301
+/services/diesel-repair-and-service /services/diesel 301
+/services/fleet-service /services/fleet-services 301
+/services/out-of-province-inspections /services/out-of-province-inspection 301
+/services/automotive-ac-service-and-repair-in-sylvan-lake-ab /services/ac-service-repair 301
+/services/tire-sales-in-sylvan-lake-ab /services/tires 301
+/services/tire-services-in-sylvan-lake-ab /services/tires 301
+/services/cooling-system /services/heater-repair 301
+/services/fuel-system-service /services/fluid-maintenance 301
 
 # ============================================
 # SERVICE PAGES - Consolidated into related new pages
 # ============================================
-/services/clutch-repair /services/transmission-repair/ 301
-/services/shocks-and-struts /services/steering-suspension/ 301
-/services/alternator /services/electrical/ 301
-/services/car-lights /services/electrical/ 301
-/services/computer-diagnostics /services/diagnostics/ 301
-/services/engine-diagnostics /services/diagnostics/ 301
-/services/digital-inspection /services/vehicle-inspection/ 301
-/services/wheel-service-and-repair /services/alignment/ 301
-/services/axle-service /services/driveline/ 301
-/services/4x4-service /services/driveline/ 301
-/services/towing /breakdown/ 301
+/services/clutch-repair /services/transmission-repair 301
+/services/shocks-and-struts /services/steering-suspension 301
+/services/alternator /services/electrical 301
+/services/car-lights /services/electrical 301
+/services/computer-diagnostics /services/diagnostics 301
+/services/engine-diagnostics /services/diagnostics 301
+/services/digital-inspection /services/vehicle-inspection 301
+/services/wheel-service-and-repair /services/alignment 301
+/services/axle-service /services/driveline 301
+/services/4x4-service /services/driveline 301
+/services/towing /breakdown 301
 
 # ============================================
 # SERVICE PAGES - No equivalent, redirect to services index
 # ============================================
-/services/tune-up /services/ 301
-/services/speedometer /services/ 301
-/services/auto-detailing /services/ 301
-/services/aftermarket-additions /services/ 301
+/services/tune-up /services 301
+/services/speedometer /services 301
+/services/auto-detailing /services 301
+/services/aftermarket-additions /services 301
 
 # ============================================
 # VEHICLE PAGES - Wildcard catch-all
 # ============================================
-/vehicles/* /services/ 301
-/vehicles /services/ 301
+/vehicles/* /services 301
+/vehicles /services 301
