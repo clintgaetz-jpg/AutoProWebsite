@@ -48,7 +48,8 @@
       "PowerShell(Write-Output \"===== .claude dir =====\"; Get-ChildItem -Force .claude | Select-Object Name, Length; Write-Output \"===== tracked in git? =====\"; git ls-files .claude; Write-Output \"===== .gitignore =====\"; if \\(Test-Path .gitignore\\) { Get-Content .gitignore } else { Write-Output \"\\(no .gitignore\\)\" }; Write-Output \"===== global ~/.claude settings =====\"; if \\(Test-Path \"$env:USERPROFILE\\\\.claude\\\\settings.json\"\\) { Write-Output \"global settings.json EXISTS\" } else { Write-Output \"no global settings.json\" }; if \\(Test-Path \"$env:USERPROFILE\\\\.claude\\\\CLAUDE.md\"\\) { Write-Output \"global CLAUDE.md EXISTS\" } else { Write-Output \"no global CLAUDE.md\" })",
       "PowerShell(npm run *)",
       "PowerShell(npx wrangler pages deploy dist --project-name=autoprowebsite)",
-      "WebFetch(domain:www.napaautopro.com)"
+      "WebFetch(domain:www.napaautopro.com)",
+      "PowerShell(npx wrangler pages deploy dist --project-name=autoprowebsite --commit-dirty=true 2>&1 | Select-Object -Last 12)"
     ]
   },
   "enabledMcpjsonServers": [

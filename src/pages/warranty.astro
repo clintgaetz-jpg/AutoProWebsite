@@ -4,6 +4,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import { Icon } from 'astro-icon/components';
+import napaBadge from '~/assets/images/napa-peace-of-mind-36-60.png';
 
 const metadata = {
   title: 'Warranty',
@@ -76,6 +77,7 @@ const faqSchema = {
     tagline="Peace of Mind"
     title="Warranty That Travels With You"
     subtitle="National network backing. Local shop accountability. We stand behind our work."
+    image={{ src: napaBadge, alt: 'NAPA Peace of Mind Warranty — 36 months / 60,000 km' }}
     actions={[
       { variant: 'primary', text: 'View NAPA Warranty', href: 'https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/', target: '_blank' },
       { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
