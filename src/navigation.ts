@@ -123,6 +123,7 @@ export const footerData = {
   secondaryLinks: [
     { text: 'Terms', href: getPermalink('/terms') },
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
+    { text: 'Warranty Conditions', href: getPermalink('/warranty-conditions') },
   ],
   socialLinks: [
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://www.facebook.com/SylvanLakeAutopro/' },

@@ -1,0 +1,148 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Warranty Conditions',
+  description:
+    'The fine print behind our 3 year / 60,000 km coverage: the key conditions of the NAPA Peace of Mind Nationwide Limited Warranty, and how parts from other suppliers carry different coverage.',
+};
+
+const NAPA_POM_URL = 'https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/';
+const NAPA_WARRANTIES_URL = 'https://www.napaautopro.com/en/warranties/';
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero -->
+  <Hero2
+    tagline="The Fine Print"
+    title="Warranty Conditions"
+    subtitle="The key terms behind our 3 year / 60,000 km coverage — and how coverage works when a repair uses parts from another supplier."
+    actions={[
+      { variant: 'primary', text: 'Full NAPA Warranty', href: NAPA_POM_URL, target: '_blank' },
+      { variant: 'secondary', text: 'Back to Warranty', href: '/warranty' },
+    ]}
+  />
+
+  <!-- Intro -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <p class="text-sm font-bold tracking-wide uppercase text-primary dark:text-blue-200 mb-2">NAPA Peace of Mind Warranty</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">The Conditions, In Plain Language</h2>
+      </div>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+        <p>Qualifying repairs done with NAPA parts at our shop are backed by the <strong class="text-gray-900 dark:text-white">NAPA "Peace of Mind" Nationwide Limited Warranty — 36 months or 60,000 kilometres</strong>, whichever comes first, measured from the date of the original repair.</p>
+        <p>Here's what's worth knowing before you need it. For the complete legal terms, the official NAPA warranty document is always the final word — <a href={NAPA_POM_URL} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">read it here</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Conditions -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <!-- Card -->
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-slate-800">
+          <div class="w-12 h-12 bg-primary/10 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
+            <Icon name="tabler:clock" class="w-6 h-6 text-primary dark:text-blue-400" />
+          </div>
+          <h3 class="text-xl font-bold mb-2 dark:text-white">How Long It Lasts</h3>
+          <p class="text-muted dark:text-slate-400">36 months or 60,000 km, whichever comes first, from the date and odometer reading on your original repair order. Covers both parts and labour on qualifying repairs.</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-slate-800">
+          <div class="w-12 h-12 bg-primary/10 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
+            <Icon name="tabler:map-pin" class="w-6 h-6 text-primary dark:text-blue-400" />
+          </div>
+          <h3 class="text-xl font-bold mb-2 dark:text-white">Where It's Honoured</h3>
+          <p class="text-muted dark:text-slate-400">At any participating NAPA AUTOPRO or NAPA AUTOCARE location — over 19,000 across Canada and the United States. Within 40 km, return to us. Farther away or broken down? Call 1-866-GET-NAPA and they'll direct you to the nearest participating shop.</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-slate-800">
+          <div class="w-12 h-12 bg-primary/10 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
+            <Icon name="tabler:file-text" class="w-6 h-6 text-primary dark:text-blue-400" />
+          </div>
+          <h3 class="text-xl font-bold mb-2 dark:text-white">Keep Your Repair Order</h3>
+          <p class="text-muted dark:text-slate-400">The warranty covers the original purchaser on the vehicle we repaired. Hold onto your repair order — you'll need to present it to claim warranty service.</p>
+        </div>
+
+        <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-slate-800">
+          <div class="w-12 h-12 bg-primary/10 dark:bg-blue-900/30 rounded-full flex items-center justify-center mb-4">
+            <Icon name="tabler:shield-check" class="w-6 h-6 text-primary dark:text-blue-400" />
+          </div>
+          <h3 class="text-xl font-bold mb-2 dark:text-white">What Keeps It Valid</h3>
+          <p class="text-muted dark:text-slate-400">Coverage is conditional on the vehicle being used normally and getting reasonable, necessary maintenance during the warranty period. Abnormal use, neglect, accident, or alteration can void it.</p>
+        </div>
+      </div>
+
+      <!-- Not covered -->
+      <div class="mt-8 bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-slate-800">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-gray-100 dark:bg-slate-700 rounded-full flex items-center justify-center">
+            <Icon name="tabler:info-circle" class="w-5 h-5 text-gray-500 dark:text-slate-400" />
+          </div>
+          <h3 class="text-xl font-bold dark:text-white">What It Doesn't Cover</h3>
+        </div>
+        <p class="text-muted dark:text-slate-400 mb-4">At a high level, the NAPA Peace of Mind Warranty does not cover:</p>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 text-muted dark:text-slate-400">
+          <li class="flex items-start gap-2"><Icon name="tabler:point" class="w-4 h-4 mt-1.5 flex-shrink-0" /><span>Internal engine, transmission and differential repairs (external seals and gaskets are covered)</span></li>
+          <li class="flex items-start gap-2"><Icon name="tabler:point" class="w-4 h-4 mt-1.5 flex-shrink-0" /><span>Tires</span></li>
+          <li class="flex items-start gap-2"><Icon name="tabler:point" class="w-4 h-4 mt-1.5 flex-shrink-0" /><span>Routine maintenance — oil changes, fluid services, filters, wiper blades</span></li>
+          <li class="flex items-start gap-2"><Icon name="tabler:point" class="w-4 h-4 mt-1.5 flex-shrink-0" /><span>Auto body, paint, glass and trailer-related repairs</span></li>
+          <li class="flex items-start gap-2"><Icon name="tabler:point" class="w-4 h-4 mt-1.5 flex-shrink-0" /><span>Off-road, racing and recreational vehicles</span></li>
+          <li class="flex items-start gap-2"><Icon name="tabler:point" class="w-4 h-4 mt-1.5 flex-shrink-0" /><span>Commercial vehicles over 19,500 lbs GVWR (or 1.5-ton load capacity)</span></li>
+          <li class="flex items-start gap-2"><Icon name="tabler:point" class="w-4 h-4 mt-1.5 flex-shrink-0" /><span>Incidental or consequential damages</span></li>
+        </ul>
+        <p class="text-sm text-muted dark:text-slate-400 mt-5">This is a plain-language summary. The <a href={NAPA_POM_URL} target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">official NAPA warranty statement</a> contains the complete terms and exclusions and governs in every case.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Parts From Other Suppliers -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-3xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8">
+        <p class="text-sm font-bold tracking-wide uppercase text-primary dark:text-blue-200 mb-2">Good to Know</p>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Parts From Other Suppliers</h2>
+      </div>
+      <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg p-6 md:p-8 border border-gray-100 dark:border-slate-800">
+        <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
+          <p>The NAPA Peace of Mind Warranty applies to qualifying repairs performed with <strong class="text-gray-900 dark:text-white">NAPA parts</strong>. Not every repair uses them — sometimes the right part for your vehicle is an OEM or dealer part, a component from another supplier, or a specialty part.</p>
+          <p>When that's the case, the repair carries the <strong class="text-gray-900 dark:text-white">individual part manufacturer's or supplier's own warranty</strong> instead — and those terms vary in length, distance, and what's covered. It's not always 3 years / 60,000 km.</p>
+          <p class="font-medium text-gray-900 dark:text-white">We'll always tell you which warranty applies before we order anything, so there are no surprises. If you're ever unsure, just ask.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Official NAPA link -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-3xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold font-heading dark:text-white mb-3">Want the Complete Terms?</h2>
+      <p class="text-base md:text-lg text-muted dark:text-slate-400 mb-8">The official NAPA Peace of Mind Warranty document is the final word on coverage, exclusions, and how to make a claim. It's maintained by NAPA and always current.</p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href={NAPA_POM_URL} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 min-h-[48px] px-6 rounded-lg bg-primary text-white font-bold hover:bg-secondary transition-colors">
+          <Icon name="tabler:external-link" class="w-5 h-5" />
+          Read the NAPA Warranty
+        </a>
+        <a href={NAPA_WARRANTIES_URL} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 min-h-[48px] px-6 rounded-lg border border-primary text-primary dark:text-blue-300 dark:border-blue-400 font-bold hover:bg-primary hover:text-white transition-colors">
+          All NAPA Warranties
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CallToAction
+    title="Questions About Your Coverage?"
+    subtitle="Every repair is different. If you want to know exactly what's covered before we start, just ask — we'll walk you through it."
+    actions={[
+      { variant: 'primary', text: 'Contact Us', href: '/contact' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>
