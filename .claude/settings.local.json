@@ -43,7 +43,14 @@
       "Bash(dir:*)",
       "Bash(ls:*)",
       "Bash(forfiles /P \"src\\\\assets\\\\images\" /C \"cmd /c echo @fname@fext @fsize\")",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "PowerShell(git *)",
+      "PowerShell(Write-Output \"===== .claude dir =====\"; Get-ChildItem -Force .claude | Select-Object Name, Length; Write-Output \"===== tracked in git? =====\"; git ls-files .claude; Write-Output \"===== .gitignore =====\"; if \\(Test-Path .gitignore\\) { Get-Content .gitignore } else { Write-Output \"\\(no .gitignore\\)\" }; Write-Output \"===== global ~/.claude settings =====\"; if \\(Test-Path \"$env:USERPROFILE\\\\.claude\\\\settings.json\"\\) { Write-Output \"global settings.json EXISTS\" } else { Write-Output \"no global settings.json\" }; if \\(Test-Path \"$env:USERPROFILE\\\\.claude\\\\CLAUDE.md\"\\) { Write-Output \"global CLAUDE.md EXISTS\" } else { Write-Output \"no global CLAUDE.md\" })",
+      "PowerShell(npm run *)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "supabase",
+    "n8n-mcp"
+  ]
 }

@@ -5,11 +5,9 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import { Icon } from 'astro-icon/components';
 
-import warrantyBadge from '~/assets/images/napa-warranty-badge.jpg';
-
 const metadata = {
   title: 'Warranty',
-  description: "NAPA Peace of Mind warranty: 24 months / 40,000 km, honored at 600+ locations across North America. Plus our own 2-year/40K labor warranty. We stand behind our work.",
+  description: "NAPA Peace of Mind warranty: 3 years / 60,000 km on qualifying repairs with NAPA parts, honored at 19,000+ locations across North America. We stand behind our work.",
 };
 
 const faqSchema = {
@@ -21,7 +19,7 @@ const faqSchema = {
       "name": "What does the NAPA Peace of Mind warranty cover?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "All qualifying repairs performed at our shop are covered by the NAPA Peace of Mind Warranty — 24 months or 40,000 km, whichever comes first. This covers both parts and labour. Some components like batteries, wiper blades, and wear items may have separate manufacturer warranties."
+        "text": "Qualifying repairs done with NAPA parts at our shop are covered by the NAPA Peace of Mind Warranty — 3 years or 60,000 km, whichever comes first. This covers both parts and labour. Some components like batteries, wiper blades, and wear items may have separate manufacturer warranties, and some exclusions apply — ask us about your specific repair."
       }
     },
     {
@@ -29,7 +27,15 @@ const faqSchema = {
       "name": "How long does the warranty last?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "24 months or 40,000 km from the date of repair, whichever comes first. This applies to qualifying repairs using approved parts. We'll let you know at the time of service if anything falls outside standard warranty coverage."
+        "text": "3 years or 60,000 km from the date of repair, whichever comes first. This applies to qualifying repairs done with NAPA parts. We'll let you know at the time of service if anything falls outside standard warranty coverage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the coverage apply to any repair?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The 3 year / 60,000 km Peace of Mind coverage applies to qualifying repairs done with NAPA parts at our shop. Some exclusions apply and other parts may carry different coverage — ask us and we'll tell you exactly what applies before we order anything."
       }
     },
     {
@@ -37,7 +43,15 @@ const faqSchema = {
       "name": "What if I need warranty work while travelling?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The NAPA Peace of Mind Warranty is honoured at over 17,000 NAPA AUTOPRO locations across North America. If you break down on a road trip, find the nearest NAPA location and they'll handle warranty repairs. No need to come back to us first."
+        "text": "The NAPA Peace of Mind Warranty is honoured at over 19,000 NAPA AUTOPRO locations across North America. If you break down on a road trip, find the nearest NAPA location and they'll handle warranty repairs. No need to come back to us first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What if I have a problem with a covered repair?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bring it back to us first — call (403) 887-0440 and we'll make it right. If you're on the road or more than 40 km away, call NAPA directly at 1-866-GET-NAPA (1-866-438-6272) and they'll point you to the nearest participating shop."
       }
     },
     {
@@ -62,10 +76,6 @@ const faqSchema = {
     tagline="Peace of Mind"
     title="Warranty That Travels With You"
     subtitle="National network backing. Local shop accountability. We stand behind our work."
-    image={{
-      src: warrantyBadge,
-      alt: 'NAPA Peace of Mind Warranty - 24 Months / 40,000 KM',
-    }}
     actions={[
       { variant: 'primary', text: 'View NAPA Warranty', href: 'https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/', target: '_blank' },
       { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
@@ -78,11 +88,11 @@ const faqSchema = {
     <div class="max-w-5xl mx-auto px-4 md:px-6">
       <div class="text-center mb-8 md:mb-12">
         <p class="text-sm font-bold tracking-wide uppercase text-primary dark:text-blue-200 mb-2">NAPA Peace of Mind Warranty</p>
-        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">24 Months / 40,000 KM — Honored Across North America</h2>
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">3 Years / 60,000 KM — Honored Across North America</h2>
       </div>
 
       <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 max-w-3xl mx-auto mb-10">
-        <p>As a NAPA AUTOPRO facility, qualifying repairs are backed by the NAPA Peace of Mind Warranty — 24 months or 40,000 kilometres, whichever comes first.</p>
+        <p>As a NAPA AUTOPRO facility, qualifying repairs done with NAPA parts are backed by the NAPA Peace of Mind Warranty — 3 years or 60,000 kilometres, whichever comes first.</p>
         <p>Here's what that means for you:</p>
       </div>
 
@@ -94,7 +104,7 @@ const faqSchema = {
           </div>
           <div>
             <h3 class="text-xl font-bold mb-2 dark:text-white">Covered Anywhere</h3>
-            <p class="text-muted dark:text-slate-400">Break down in Vancouver? Toronto? Texas? Your warranty travels with you. It's honored at over 17,000 NAPA AUTOPRO locations across North America. Call <strong class="dark:text-white">1-866-GET-NAPA</strong> (1-866-438-6272) and they'll direct you to the nearest participating shop.</p>
+            <p class="text-muted dark:text-slate-400">Break down in Vancouver? Toronto? Texas? Your warranty travels with you. It's honored at over 19,000 NAPA AUTOPRO locations across North America. Call <strong class="dark:text-white">1-866-GET-NAPA</strong> (1-866-438-6272) and they'll direct you to the nearest participating shop.</p>
           </div>
         </div>
       </div>
@@ -188,14 +198,6 @@ const faqSchema = {
             </li>
             <li class="flex items-start gap-2">
               <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
-              <span>Customer-supplied parts</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
-              <span>Used or salvaged parts (separate warranty)</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <Icon name="tabler:x" class="w-4 h-4 text-gray-400 mt-1 flex-shrink-0" />
               <span>Commercial vehicles over 17,000 lbs GVW</span>
             </li>
             <li class="flex items-start gap-2">
@@ -207,12 +209,12 @@ const faqSchema = {
       </div>
 
       <p class="text-center text-muted dark:text-slate-400 mt-8">
-        For full details, visit the <a href="https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">official NAPA warranty page</a> or ask us — we'll explain exactly what applies to your repair.
+        Some exclusions apply. For full details, visit the <a href="https://www.napaautopro.com/en/warranties/peace-of-mind-warranty/" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">official NAPA warranty page</a> or ask us — we'll explain exactly what applies to your repair before we order anything.
       </p>
     </div>
   </section>
 
-  <!-- Our Labor Warranty -->
+  <!-- Parts & Labour -->
   <section class="py-12 md:py-16 lg:py-20">
     <div class="max-w-3xl mx-auto px-4 md:px-6">
       <div class="text-center mb-8">
@@ -221,58 +223,12 @@ const faqSchema = {
       </div>
 
       <div class="bg-primary/5 dark:bg-blue-900/20 border border-primary/20 dark:border-blue-800 rounded-xl p-6 md:p-8">
-        <p class="text-lg md:text-xl font-bold text-center text-gray-900 dark:text-white mb-4">2-Year / 40,000 KM Labor Warranty</p>
+        <p class="text-lg md:text-xl font-bold text-center text-gray-900 dark:text-white mb-4">Parts and Labour — Both Covered</p>
         <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
-          <p>Beyond the parts, we warranty our labor: 2 years or 40,000 kilometres on the work we perform.</p>
+          <p>It's not just the parts. The NAPA Peace of Mind Warranty covers the labour too — 3 years or 60,000 kilometres on the work we perform.</p>
           <p>If a repair fails or doesn't perform as expected, bring it back. We'll look at it, we'll fix it, and we won't make you feel like a problem for asking.</p>
           <p class="font-medium text-gray-900 dark:text-white">That's not a slogan. It's how we operate.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Parts Warranties Vary -->
-  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
-    <div class="max-w-3xl mx-auto px-4 md:px-6">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Not All Parts Are Created Equal</h2>
-        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3">Different parts carry different warranties. That's the reality.</p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 mb-8">
-        <div class="bg-white dark:bg-slate-900 rounded-xl p-5 text-center">
-          <p class="font-bold text-gray-900 dark:text-white mb-1">OEM Parts</p>
-          <p class="text-muted dark:text-slate-400 text-sm">Typically 12 months</p>
-        </div>
-        <div class="bg-white dark:bg-slate-900 rounded-xl p-5 text-center">
-          <p class="font-bold text-gray-900 dark:text-white mb-1">Aftermarket Parts</p>
-          <p class="text-muted dark:text-slate-400 text-sm">12 months to lifetime</p>
-        </div>
-        <div class="bg-white dark:bg-slate-900 rounded-xl p-5 text-center">
-          <p class="font-bold text-gray-900 dark:text-white mb-1">Used/Salvage Parts</p>
-          <p class="text-muted dark:text-slate-400 text-sm">30-90 days typically</p>
-        </div>
-      </div>
-
-      <p class="text-muted dark:text-slate-400">
-        We dig into this for every job. We'll recommend parts that balance quality, warranty coverage, and value for your situation. If you want to know exactly what warranty applies to a specific repair, just ask — we'll tell you before we order anything.
-      </p>
-    </div>
-  </section>
-
-  <!-- Used & Salvage Parts -->
-  <section class="py-12 md:py-16 lg:py-20">
-    <div class="max-w-3xl mx-auto px-4 md:px-6">
-      <div class="text-center mb-8">
-        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Smart Sourcing, Not Cutting Corners</h2>
-        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-3">When used parts make sense</p>
-      </div>
-
-      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4">
-        <p>Some shops won't touch salvage parts. We think that's short-sighted.</p>
-        <p>Sometimes a quality used part is the right call — discontinued parts, older vehicles, or when new doesn't make financial sense. We don't use them to cut corners. We use them when they're the smart choice.</p>
-        <p>Here's the difference: we've built a network of trusted salvage partners over 19 years. Some even provide warranty on their parts. We know what to look for, we know who to trust, and we've sent parts back when they didn't meet our standards. <strong class="text-gray-900 dark:text-white">If we wouldn't put it in our own vehicle, it's not going in yours.</strong></p>
-        <p>Warranty on used parts varies — could be 30 days, 90 days, or more depending on the part and supplier. We'll always discuss it with you before we order.</p>
       </div>
     </div>
   </section>
@@ -321,15 +277,23 @@ const faqSchema = {
     items={[
       {
         title: 'What does the NAPA Peace of Mind warranty cover?',
-        description: 'All qualifying repairs performed at our shop are covered by the NAPA Peace of Mind Warranty — 24 months or 40,000 km, whichever comes first. This covers both parts and labour. Some components like batteries, wiper blades, and wear items may have separate manufacturer warranties.',
+        description: 'Qualifying repairs done with NAPA parts at our shop are covered by the NAPA Peace of Mind Warranty — 3 years or 60,000 km, whichever comes first. This covers both parts and labour. Some components like batteries, wiper blades, and wear items may have separate manufacturer warranties, and some exclusions apply — ask us about your specific repair.',
       },
       {
         title: 'How long does the warranty last?',
-        description: "24 months or 40,000 km from the date of repair, whichever comes first. This applies to qualifying repairs using approved parts. We'll let you know at the time of service if anything falls outside standard warranty coverage.",
+        description: "3 years or 60,000 km from the date of repair, whichever comes first. This applies to qualifying repairs done with NAPA parts. We'll let you know at the time of service if anything falls outside standard warranty coverage.",
+      },
+      {
+        title: 'Does the coverage apply to any repair?',
+        description: "The 3 year / 60,000 km Peace of Mind coverage applies to qualifying repairs done with NAPA parts at our shop. Some exclusions apply and other parts may carry different coverage — ask us and we'll tell you exactly what applies before we order anything.",
       },
       {
         title: 'What if I need warranty work while travelling?',
-        description: "The NAPA Peace of Mind Warranty is honoured at over 17,000 NAPA AUTOPRO locations across North America. If you break down on a road trip, find the nearest NAPA location and they'll handle warranty repairs. No need to come back to us first.",
+        description: "The NAPA Peace of Mind Warranty is honoured at over 19,000 NAPA AUTOPRO locations across North America. If you break down on a road trip, find the nearest NAPA location and they'll handle warranty repairs. No need to come back to us first.",
+      },
+      {
+        title: 'What if I have a problem with a covered repair?',
+        description: "Bring it back to us first — call (403) 887-0440 and we'll make it right. If you're on the road or more than 40 km away, call NAPA directly at 1-866-GET-NAPA (1-866-438-6272) and they'll point you to the nearest participating shop.",
       },
       {
         title: 'Does servicing at an independent shop void my factory warranty?',
