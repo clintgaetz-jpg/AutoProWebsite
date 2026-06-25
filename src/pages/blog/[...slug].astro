@@ -1,0 +1,130 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
+import { fetchPosts } from '~/utils/blog';
+import { getCanonical, getPermalink } from '~/utils/permalinks';
+
+export async function getStaticPaths() {
+  const posts = await fetchPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = post;
+
+const url = String(getCanonical(`/blog/${post.slug}`));
+const SITE_URL = 'https://sylvanlakeautopro.com';
+const LOGO_URL = `${SITE_URL}/images/autopro-logo.png`;
+const imageUrl = post.image ? (post.image.startsWith('http') ? post.image : `${SITE_URL}${post.image}`) : `${SITE_URL}/images/og-image.jpg`;
+
+const publishISO = post.publishDate.toISOString();
+const modifiedISO = (post.updateDate ?? post.publishDate).toISOString();
+const fmtDate = (d) =>
+  d ? new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }).format(d) : '';
+
+const metadata = {
+  title: post.title,
+  description: post.excerpt,
+  canonical: url,
+  openGraph: {
+    type: 'article',
+    images: [{ url: imageUrl, width: 1200, height: 630 }],
+  },
+};
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.title,
+  description: post.excerpt,
+  image: imageUrl,
+  datePublished: publishISO,
+  dateModified: modifiedISO,
+  author: {
+    '@type': 'Organization',
+    name: 'Sylvan Lake AUTOPRO',
+    url: SITE_URL,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Sylvan Lake AUTOPRO',
+    logo: { '@type': 'ImageObject', url: LOGO_URL },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+  url: url,
+  ...(post.category ? { articleSection: post.category.title } : {}),
+  ...(post.tags && post.tags.length ? { keywords: post.tags.map((t) => t.title).join(', ') } : {}),
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+    { '@type': 'ListItem', position: 3, name: post.title },
+  ],
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <article class="px-4 sm:px-6 mx-auto max-w-3xl pt-8 md:pt-12 pb-12">
+    <!-- Breadcrumb -->
+    <nav class="text-sm text-muted dark:text-slate-400 mb-6" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-primary">Home</a>
+      <span class="mx-1.5">/</span>
+      <a href="/blog" class="hover:text-primary">Blog</a>
+      <span class="mx-1.5">/</span>
+      <span class="text-gray-700 dark:text-slate-300">A/C</span>
+    </nav>
+
+    <!-- Header -->
+    <header class="mb-8">
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted dark:text-slate-400 mb-3">
+        {post.category && (
+          <span class="inline-flex items-center font-semibold uppercase tracking-wide text-primary dark:text-blue-300">{post.category.title}</span>
+        )}
+        <time datetime={publishISO}>{fmtDate(post.publishDate)}</time>
+        {post.readingTime ? <span>· {post.readingTime} min read</span> : null}
+      </div>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading leading-tight tracking-tighter dark:text-white">
+        {post.title}
+      </h1>
+      {post.excerpt && <p class="text-lg text-muted dark:text-slate-400 mt-4">{post.excerpt}</p>}
+    </header>
+
+    <!-- Body -->
+    <div
+      class="prose prose-lg max-w-none dark:prose-invert dark:prose-headings:text-slate-200 prose-headings:font-heading prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary dark:prose-a:text-blue-400 prose-img:rounded-md prose-img:shadow-lg"
+    >
+      {Content ? <Content /> : null}
+    </div>
+
+    <!-- Footer / back link -->
+    <div class="mt-10 pt-6 border-t border-gray-200 dark:border-slate-700">
+      <a href="/blog" class="inline-flex items-center gap-1.5 text-primary dark:text-blue-400 font-medium hover:underline">
+        <Icon name="tabler:arrow-left" class="w-4 h-4" /> Back to all articles
+      </a>
+    </div>
+  </article>
+
+  <!-- CTA -->
+  <CallToAction
+    title="Need Your A/C Looked At?"
+    subtitle="Proper diagnosis first — not a guess recharge. Book before the summer rush in Sylvan Lake."
+    actions={[
+      { variant: 'primary', text: 'Book A/C Service', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'A/C Service Details', href: '/services/ac-service-repair', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>

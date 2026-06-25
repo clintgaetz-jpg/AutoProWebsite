@@ -1,0 +1,89 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
+import { fetchPosts } from '~/utils/blog';
+import { getCanonical } from '~/utils/permalinks';
+
+const posts = await fetchPosts();
+
+const SITE_URL = 'https://sylvanlakeautopro.com';
+const url = String(getCanonical('/blog'));
+
+const fmtDate = (d) =>
+  d ? new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: 'long', day: 'numeric' }).format(d) : '';
+
+const metadata = {
+  title: 'Car Care Tips & Auto Repair Advice',
+  description:
+    'Straight-talk car care and auto repair advice from the licensed mechanics at Sylvan Lake AUTOPRO — A/C, brakes, diagnostics, winter prep and more, written for central Alberta drivers.',
+  canonical: url,
+};
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Sylvan Lake AUTOPRO Blog',
+  description: metadata.description,
+  url: url,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Sylvan Lake AUTOPRO',
+    logo: { '@type': 'ImageObject', url: `${SITE_URL}/images/autopro-logo.png` },
+  },
+  blogPost: posts.map((post) => ({
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishDate.toISOString(),
+    url: String(getCanonical(`/blog/${post.slug}`)),
+  })),
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
+    <link rel="alternate" type="application/rss+xml" title="Sylvan Lake AUTOPRO Blog" href="/rss.xml" />
+  </Fragment>
+
+  <!-- Header -->
+  <section class="bg-gradient-to-b from-[#0A0094] to-[#050036] text-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 md:py-16 text-center">
+      <p class="text-sm font-bold tracking-wide uppercase text-[#FFC836] mb-3">From the Shop</p>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold font-heading tracking-tighter mb-4">Car Care Tips &amp; Auto Repair Advice</h1>
+      <p class="text-lg text-gray-200 max-w-2xl mx-auto">
+        Honest, no-upsell advice from licensed mechanics in Sylvan Lake. Real answers to the questions central Alberta drivers actually ask.
+      </p>
+    </div>
+  </section>
+
+  <!-- Posts -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      {posts.length === 0 ? (
+        <p class="text-center text-muted dark:text-slate-400">New articles are on the way. Check back soon.</p>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {posts.map((post) => (
+            <article class="bg-white dark:bg-slate-900 rounded-xl shadow-lg border border-gray-100 dark:border-slate-800 p-6 md:p-8 flex flex-col">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted dark:text-slate-400 mb-3">
+                {post.category && (
+                  <span class="font-semibold uppercase tracking-wide text-primary dark:text-blue-300">{post.category.title}</span>
+                )}
+                <time datetime={post.publishDate.toISOString()}>{fmtDate(post.publishDate)}</time>
+                {post.readingTime ? <span>· {post.readingTime} min read</span> : null}
+              </div>
+              <h2 class="text-xl md:text-2xl font-bold font-heading dark:text-white mb-3 leading-snug">
+                <a href={`/blog/${post.slug}`} class="hover:text-primary dark:hover:text-blue-300 transition-colors">{post.title}</a>
+              </h2>
+              {post.excerpt && <p class="text-muted dark:text-slate-400 mb-5 flex-grow">{post.excerpt}</p>}
+              <a href={`/blog/${post.slug}`} class="inline-flex items-center gap-1.5 text-primary dark:text-blue-400 font-medium hover:underline mt-auto">
+                Read article <Icon name="tabler:arrow-right" class="w-4 h-4" />
+              </a>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

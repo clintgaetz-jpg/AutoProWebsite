@@ -1,5 +1,5 @@
 # Sylvan Lake AUTOPRO
-> Trusted auto repair shop serving West-Central Alberta since 2006. NAPA AUTOPRO member with 24-month/40,000km nationwide warranty.
+> Trusted auto repair shop serving West-Central Alberta since 2006. NAPA AUTOPRO member with a 3-year / 60,000 km NAPA Peace of Mind nationwide warranty, honoured at 19,000+ locations across North America.
 
 ## Business Info
 - Location: 1A Industrial Dr, Sylvan Lake, AB T4S 1P4
@@ -13,8 +13,9 @@
 - [Team](https://sylvanlakeautopro.com/team): Meet our technicians and staff
 - [Contact](https://sylvanlakeautopro.com/contact): Location, hours, map, service areas
 - [Making It Easy](https://sylvanlakeautopro.com/making-it-easy): Shuttle service, loaner vehicles, digital inspections, flexible payment
-- [Warranty](https://sylvanlakeautopro.com/warranty): NAPA Peace of Mind warranty details, 24mo/40K nationwide coverage, labor warranty
-- [Reviews](https://sylvanlakeautopro.com/reviews): Customer reviews and testimonials, 4.9 Google rating
+- [Warranty](https://sylvanlakeautopro.com/warranty): NAPA Peace of Mind warranty details, 3 years / 60,000 km nationwide coverage on parts and labour
+- [Warranty Conditions](https://sylvanlakeautopro.com/warranty-conditions): Key warranty terms in plain language, plus how parts from other suppliers carry different coverage
+- [Reviews](https://sylvanlakeautopro.com/reviews): Customer reviews and testimonials, 4.8 Google rating (300+ reviews)
 - [Credentials & Licensing](https://sylvanlakeautopro.com/credentials-and-licensing): AMVIC license, CVIP certification, Red Seal technicians, training certifications
 - [All Services](https://sylvanlakeautopro.com/services): Complete list of services offered
 
@@ -70,6 +71,9 @@
 - [Benalto](https://sylvanlakeautopro.com/locations/benalto): Auto repair near Benalto AB, 10-15 minute drive, gravel road maintenance expertise
 - [Leslieville](https://sylvanlakeautopro.com/locations/leslieville): Auto repair near Leslieville, Clearwater County, David Thompson Highway, west country
 
+## Blog
+- [Why Is My Car A/C Blowing Hot Air?](https://sylvanlakeautopro.com/blog/why-is-my-car-ac-blowing-hot-air): Straight-answer guide to the six common causes of warm A/C air, how to tell them apart, why Alberta is hard on A/C systems, DIY recharge kit warnings, and R-134a vs R-1234yf
+
 ## Legal
 - [Terms of Service](https://sylvanlakeautopro.com/terms): Service terms, AMVIC compliance, NAPA warranty info
 - [Privacy Policy](https://sylvanlakeautopro.com/privacy): Website privacy practices
@@ -78,8 +82,8 @@
 Sylvan Lake, Red Deer, Rocky Mountain House, Rimbey, Ponoka, Blackfalds, Penhold, Eckville, Bentley, Benalto, Condor, Leslieville, Alhambra, Withrow, Evarts, Dickson, Markerville, Caroline, Bluffton, Hoadley, Jarvis Bay, Norglenwold, Gull Lake, Birchcliff
 
 ## Key Differentiators
-- 4.9 Google rating (291+ reviews)
-- NAPA Peace of Mind Warranty: 24 months / 40,000 km nationwide at 17,000+ locations
+- 4.8 Google rating (300+ reviews)
+- NAPA Peace of Mind Warranty: 3 years / 60,000 km nationwide at 19,000+ locations
 - Digital inspections with photos and measurements sent to your phone
 - JD Power award winner (multiple years since 2009)
 - Red Seal certified technicians

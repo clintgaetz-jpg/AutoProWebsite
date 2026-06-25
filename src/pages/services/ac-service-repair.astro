@@ -38,26 +38,34 @@ const faqSchema = {
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How often should I have my A/C serviced?",
+      "name": "Why is my car A/C blowing hot air?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We don't recommend annual service. Get a full system check every few years, or whenever you notice decreased performance. Regular maintenance visits include visual inspections."
+        "text": "The most common causes are low refrigerant from a slow leak, a failed compressor, a blocked condenser, or an electrical issue like a bad clutch relay. It can also be something as simple as a clogged cabin air filter killing airflow. Diagnosis is the only way to know for sure—the cause changes the repair completely."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I use a DIY recharge kit?",
+      "name": "What type of refrigerant does my car use?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We strongly advise against it. DIY kits often overcharge the system, contaminate the refrigerant, or include stop-leak chemicals that clog components. This creates additional expense or leaves us unable to service your vehicle."
+        "text": "Vehicles built roughly before 2015 typically use R-134a. Vehicles from 2015 onward increasingly use R-1234yf, which requires different equipment and costs more to service. There's a label under your hood near the radiator support—or just bring it in and we'll identify it before we touch anything."
       }
     },
     {
       "@type": "Question",
-      "name": "Why is A/C repair so expensive now?",
+      "name": "How do I know if it's the compressor or just low refrigerant?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Modern R-1234yf refrigerant costs significantly more than older R-134a. A system might cost $150+ just in refrigerant before parts or labor. Proper leak repair is more important than ever."
+        "text": "Both can cause warm air. The difference shows up in a pressure test. If pressures are normal but the compressor clutch isn't engaging, it's electrical or mechanical. If pressures are low, there's a leak somewhere. We don't guess—we test first."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long does an A/C repair take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It varies widely. A leak repair and recharge is often same-day. Compressor replacement is typically a full day. Evaporator replacement requires dash removal and runs multiple days. We'll give you a realistic timeline before you commit."
       }
     },
     {
@@ -65,7 +73,23 @@ const faqSchema = {
       "name": "My A/C smells musty. What causes that?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Usually mold or mildew growth on the evaporator. When you shut off the A/C, moisture on the cold evaporator becomes a breeding ground. An evaporator cleaning service or replacement can help."
+        "text": "Mould and bacteria growing on the evaporator. When you shut off the A/C, moisture on the cold evaporator becomes a breeding ground. An evaporator cleaning and antibacterial treatment fixes it in most cases. A tip to prevent it: switch the A/C off a minute before you arrive and let the fan run on heat to dry the evaporator."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is A/C repair more expensive than it used to be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Modern R-1234yf refrigerant costs significantly more than older R-134a. A system that takes a full charge might run $150+ in refrigerant alone, before any parts or labour. Proper leak detection and repair before recharging is more important than ever."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How often do I actually need A/C service?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We don't push annual service. If your A/C is cooling well, have it inspected every couple of years or whenever you notice reduced performance. Your regular maintenance visits include a visual check of A/C components. The main thing is don't ignore gradual refrigerant loss—it's slow enough that you often don't notice until it stops working on the hottest day of the year."
       }
     }
   ]
@@ -103,8 +127,8 @@ const breadcrumbSchema = {
 
   <!-- Introduction Section -->
   <Content
-    title="Car A/C Not Blowing Cold?"
-    content="We diagnose and repair automotive air conditioning systems at our Sylvan Lake shop. We service all refrigerant types—<strong>R-134a and the newer R-1234yf</strong> systems that require specialized equipment many shops don't have.<br/><br/>A/C problems range from simple (low refrigerant from a slow leak) to complex (compressor failure, blend door actuators, electronic control issues). We figure out what's actually wrong before recommending repairs. Get your A/C checked now—waiting until July means competing with everyone else who waited."
+    title="Car A/C Not Blowing Cold in Sylvan Lake?"
+    content="We diagnose and repair automotive air conditioning systems right here in Sylvan Lake. We service all refrigerant types—<strong>R-134a and the newer R-1234yf</strong> systems that require specialized equipment many shops in the area don't have.<br/><br/><strong>Not sure what's wrong? A diagnostic is the right first step—not a recharge.</strong> Throwing refrigerant at an undiagnosed problem is the most common and most expensive mistake we see.<br/><br/>A/C problems range from simple (low refrigerant from a slow leak) to complex (compressor failure, blend door actuators, electronic control issues). We figure out what's actually wrong before recommending repairs.<br/><br/>Blowing hot air right now? We wrote the straight-answer guide: <a href='/blog/why-is-my-car-ac-blowing-hot-air' class='text-primary font-medium underline'>Why Is My Car A/C Blowing Hot Air?</a>"
   />
 
   <!-- Problem Categories Section -->
@@ -174,8 +198,13 @@ const breadcrumbSchema = {
       },
       {
         title: 'Electrical Diagnostics',
-        description: 'Scan tool communication with HVAC module to diagnose sensor, actuator, and control problems.',
+        description: 'Scan tool communication with the HVAC module to diagnose sensor, actuator, and control problems. A lot of A/C issues are electrical—they won\'t get fixed by recharging.',
         icon: 'tabler:cpu',
+      },
+      {
+        title: 'Cabin Air Filter Replacement',
+        description: 'A clogged cabin air filter cuts airflow and makes the whole system work harder. Often overlooked, easy to fix.',
+        icon: 'tabler:filter',
       },
     ]}
   />
@@ -206,24 +235,32 @@ const breadcrumbSchema = {
     columns={1}
     items={[
       {
-        title: 'How often should I have my A/C serviced?',
-        description: "We don't recommend annual service like some shops push. Your regular maintenance visits include visual inspections of A/C components. Get a full system check every few years, or whenever you notice decreased performance.",
+        title: "Why is my car A/C blowing hot air?",
+        description: "The most common causes are low refrigerant from a slow leak, a failed compressor, a blocked condenser, or an electrical issue like a bad clutch relay. It can also be something as simple as a clogged cabin air filter killing airflow. Diagnosis is the only way to know for sure—the cause changes the repair completely. (We go deeper in our guide: Why Is My Car A/C Blowing Hot Air?)",
       },
       {
-        title: 'How long does an A/C repair take?',
-        description: 'It varies widely. A simple leak repair and recharge might be same-day. Compressor replacement is typically a full day. Evaporator replacement requires dash removal—multiple days.',
+        title: "What type of refrigerant does my car use?",
+        description: "Vehicles built roughly before 2015 typically use R-134a. Vehicles from 2015 onward increasingly use R-1234yf, which requires different equipment and costs more to service. There's a label under your hood near the radiator support—or just bring it in and we'll identify it before we touch anything.",
       },
       {
-        title: 'Can I use a DIY recharge kit?',
-        description: "We strongly advise against it. DIY kits often overcharge the system, contaminate the refrigerant, or include 'stop leak' chemicals that clog components. This creates hundreds in additional expense or leaves us unable to service your vehicle.",
+        title: "How do I know if it's the compressor or just low refrigerant?",
+        description: "Both can cause warm air. The difference shows up in a pressure test. If pressures are normal but the compressor clutch isn't engaging, it's electrical or mechanical. If pressures are low, there's a leak somewhere. We don't guess—we test first.",
       },
       {
-        title: 'Why is A/C repair so expensive now?',
-        description: 'Modern R-1234yf refrigerant costs significantly more than older R-134a. A system that takes 2 lbs of refrigerant might cost $150+ just in refrigerant, before any parts or labor. Proper leak repair is more important than ever.',
+        title: "How long does an A/C repair take?",
+        description: "It varies widely. A leak repair and recharge is often same-day. Compressor replacement is typically a full day. Evaporator replacement requires dash removal and runs multiple days. We'll give you a realistic timeline before you commit.",
       },
       {
-        title: 'My A/C smells musty. What causes that?',
-        description: "Usually mold or mildew growth on the evaporator. When you shut off the A/C, moisture on the cold evaporator becomes a breeding ground. An evaporator cleaning service can help, or in severe cases, evaporator replacement.",
+        title: "My A/C smells musty. What causes that?",
+        description: "Mould and bacteria growing on the evaporator. When you shut off the A/C, moisture on the cold evaporator becomes a breeding ground. An evaporator cleaning and antibacterial treatment fixes it in most cases. A tip to prevent it: switch the A/C off a minute before you arrive and let the fan run on heat to dry the evaporator.",
+      },
+      {
+        title: "Why is A/C repair more expensive than it used to be?",
+        description: "Modern R-1234yf refrigerant costs significantly more than older R-134a. A system that takes a full charge might run $150+ in refrigerant alone, before any parts or labour. Proper leak detection and repair before recharging is more important than ever.",
+      },
+      {
+        title: "How often do I actually need A/C service?",
+        description: "We don't push annual service. If your A/C is cooling well, have it inspected every couple of years or whenever you notice reduced performance. Your regular maintenance visits include a visual check of A/C components. The main thing is don't ignore gradual refrigerant loss—it's slow enough that you often don't notice until it stops working on the hottest day of the year.",
       },
     ]}
   />
