@@ -1,6 +1,6 @@
 # CLAUDE.md — Sylvan Lake Autopro Website
 
-> **This is a live business website. Don't break what's working. Test locally before deploying.**
+> **This is a live business website. Pushing to `main` deploys straight to production — there is no staging gate. Build locally, and use a branch preview for anything risky, before merging to `main`.**
 
 ## Project Context
 Auto repair shop website built with Astro + Tailwind CSS. Mobile-first design that should feel like a native app. Replaces a paid agency setup — keep it maintainable without a developer.
@@ -26,6 +26,15 @@ npm run preview    # Preview production build locally
 ```
 
 ## Deploy
+
+**This project is git-connected to Cloudflare Pages. Pushing to `main` automatically builds and deploys to production (live in ~1–3 min). A push to `main` IS a production deploy — there is no separate manual step for normal changes.**
+
+### Safe workflow
+- Always run `npm run build` locally before pushing — a build that fails locally will fail the deploy.
+- For anything beyond low-risk text/schema/link edits, push to a **branch** first. Cloudflare Pages builds a **preview URL** for every non-`main` branch — verify there, then merge to `main`.
+
+### Manual deploy — fallback only
+Not normally needed (the git integration handles deploys). Use only if the git integration is down, and be aware a direct upload can conflict with a git-connected project:
 
 ```powershell
 npm run build
