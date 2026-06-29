@@ -10,7 +10,7 @@
 /reliable-auto-services-in-benalto-ab /locations/benalto 301
 /trustworthy-auto-repair-in-bentley-ab /locations/bentley 301
 /expert-auto-repair-in-eckville-ab /locations/eckville 301
-/commercial-vehicle-inspection-in-sylvan-lake-ab /services/commercial-vehicle-inspection 301
+/commercial-vehicle-inspection-in-sylvan-lake-ab /services/cvip-inspection 301
 
 # Old KUKUI .html location pages
 /Red_Deer_County_AB.html /locations/red-deer-county 301
@@ -25,7 +25,6 @@
 /directions /contact 301
 /appointments /contact 301
 /careers /about 301
-/specials /services 301
 /leave-a-review /reviews 301
 
 # Old KUKUI .html general pages
@@ -51,24 +50,24 @@
 /gmc-repair-services /services 301
 
 # Old KUKUI tire landing page
-/sylvan-lake-tire-services /services/tire-sales 301
+/sylvan-lake-tire-services /services/tires 301
 
 # ============================================
 # SERVICE PAGES - Direct matches
 # ============================================
-/services/brakes /services/brake-service 301
+/services/brakes /services/brake-repair 301
 /services/steering-and-suspension /services/steering-suspension 301
-/services/check-engine-light /services/check-engine-light 301
-/services/wheel-alignment /services/wheel-alignment 301
+/services/check-engine-light /services/diagnostics 301
+/services/wheel-alignment /services/alignment 301
 /services/exhaust-system-service /services/exhaust-system 301
-/services/electrical-system-service /services/electrical-system 301
-/services/diesel-repair-and-service /services/diesel-services 301
+/services/electrical-system-service /services/electrical 301
+/services/diesel-repair-and-service /services/diesel 301
 /services/fleet-service /services/fleet-services 301
 /services/out-of-province-inspections /services/out-of-province-inspection 301
-/services/automotive-ac-service-and-repair-in-sylvan-lake-ab /services/ac-service 301
-/services/tire-sales-in-sylvan-lake-ab /services/tire-sales 301
-/services/tire-services-in-sylvan-lake-ab /services/tire-sales 301
-/services/cooling-system /services/heating-cooling 301
+/services/automotive-ac-service-and-repair-in-sylvan-lake-ab /services/ac-service-repair 301
+/services/tire-sales-in-sylvan-lake-ab /services/tires 301
+/services/tire-services-in-sylvan-lake-ab /services/tires 301
+/services/cooling-system /services/heater-repair 301
 /services/fuel-system-service /services/fluid-maintenance 301
 /services/transmission /services/transmission-repair 301
 /services/drivetrain-service /services/driveline 301
@@ -79,12 +78,12 @@
 # ============================================
 /services/clutch-repair /services/transmission-repair 301
 /services/shocks-and-struts /services/steering-suspension 301
-/services/alternator /services/electrical-system 301
-/services/car-lights /services/electrical-system 301
-/services/computer-diagnostics /services/check-engine-light 301
-/services/engine-diagnostics /services/check-engine-light 301
+/services/alternator /services/electrical 301
+/services/car-lights /services/electrical 301
+/services/computer-diagnostics /services/diagnostics 301
+/services/engine-diagnostics /services/diagnostics 301
 /services/digital-inspection /services/vehicle-inspection 301
-/services/wheel-service-and-repair /services/wheel-alignment 301
+/services/wheel-service-and-repair /services/alignment 301
 /services/axle-service /services/driveline 301
 /services/4x4-service /services/driveline 301
 /services/towing /breakdown 301
@@ -92,85 +91,85 @@
 # ============================================
 # SERVICE PAGES - No direct equivalent
 # ============================================
-/services/tune-up /services/scheduled-maintenance 301
-/services/speedometer /services/electrical-system 301
+/services/tune-up /services 301
+/services/speedometer /services/electrical 301
 /services/auto-detailing /services 301
 /services/aftermarket-additions /services 301
 
 # ============================================
 # Old /services/services/ double-path URLs (from intermediate build)
 # ============================================
-/services/services/cooling-system /services/heating-cooling 301
+/services/services/cooling-system /services/heater-repair 301
 /services/services/exhaust-system-service /services/exhaust-system 301
-/services/services/tire-services-in-sylvan-lake-ab /services/tire-sales 301
-/services/services/tire-sales-in-sylvan-lake-ab /services/tire-sales 301
+/services/services/tire-services-in-sylvan-lake-ab /services/tires 301
+/services/services/tire-sales-in-sylvan-lake-ab /services/tires 301
 /services/services/steering-and-suspension /services/steering-suspension 301
 /services/services/aftermarket-additions /services 301
 /services/services/transmission /services/transmission-repair 301
 /services/services/4x4-service /services/driveline 301
-/services/services/diesel-repair-and-service /services/diesel-services 301
-/services/services/speedometer /services/electrical-system 301
+/services/services/diesel-repair-and-service /services/diesel 301
+/services/services/speedometer /services/electrical 301
 /services/services/digital-inspection /services/vehicle-inspection 301
 /services/services/shocks-and-struts /services/steering-suspension 301
-/services/services/wheel-service-and-repair /services/wheel-alignment 301
-/services/services/alternator /services/electrical-system 301
-/services/services/check-engine-light /services/check-engine-light 301
-/services/services/brakes /services/brake-service 301
-/services/services/electrical-system-service /services/electrical-system 301
+/services/services/wheel-service-and-repair /services/alignment 301
+/services/services/alternator /services/electrical 301
+/services/services/check-engine-light /services/diagnostics 301
+/services/services/brakes /services/brake-repair 301
+/services/services/electrical-system-service /services/electrical 301
 
 # ============================================
 # Old KUKUI .html service pages
 # ============================================
 /service-WheelBearings.html /services/steering-suspension 301
-/service-tiresales.html /services/tire-sales 301
-/service-BrakeRepair.html /services/brake-service 301
-/service-BrakeCalipers.html /services/brake-service 301
-/service-BrakeFluidService.html /services/brake-service 301
-/service-CheckEngineLight.html /services/check-engine-light 301
+/service-tiresales.html /services/tires 301
+/service-BrakeRepair.html /services/brake-repair 301
+/service-BrakeCalipers.html /services/brake-repair 301
+/service-BrakeFluidService.html /services/brake-repair 301
+/service-CheckEngineLight.html /services/diagnostics 301
 /service-PowerSteeringPumpRepair.html /services/steering-suspension 301
 /service-SuspensionRepair.html /services/steering-suspension 301
 /service-SteeringRepair.html /services/steering-suspension 301
 /service-autorepair /services 301
-/service-brakerotors /services/brake-service 301
-/service-drumbrakes /services/brake-service 301
+/service-brakerotors /services/brake-repair 301
+/service-drumbrakes /services/brake-repair 301
 
 # ============================================
 # Old KUKUI service video pages
 # ============================================
 /service-video-PowerSteeringPumpVideo.html /services/steering-suspension 301
 /service-video-WheelBearingsVideo.html /services/steering-suspension 301
-/service-video-DrumBrakesVideo.html /services/brake-service 301
-/service-video-BrakeCaliperVideo.html /services/brake-service 301
-/service-video-BrakePadsVideo.html /services/brake-service 301
-/service-video-BrakeFluidVideo.html /services/brake-service 301
+/service-video-DrumBrakesVideo.html /services/brake-repair 301
+/service-video-BrakeCaliperVideo.html /services/brake-repair 301
+/service-video-BrakePadsVideo.html /services/brake-repair 301
+/service-video-BrakeFluidVideo.html /services/brake-repair 301
 /service-video-OilChangeServiceVideo.html /services/oil-change 301
 /service-video-PowerSteeringFluidVideo.html /services/steering-suspension 301
 /service-video-FuelPumpVideo.html /services 301
 /service-video-SerpentineBeltVideo.html /services 301
-/service-video-ABSSensorVideo.html /services/brake-service 301
-/service-video-ACCompressorVideo.html /services/ac-service 301
-/service-video-SparkPlugsVideo.html /services/scheduled-maintenance 301
-/service-video-CoolantVideo.html /services/heating-cooling 301
+/service-video-ABSSensorVideo.html /services/brake-repair 301
+/service-video-ACCompressorVideo.html /services/ac-service-repair 301
+/service-video-SparkPlugsVideo.html /services 301
+/service-video-CoolantVideo.html /services/heater-repair 301
 /service-video-TimingBeltTensionerVideo.html /services 301
 /service-video-OilTemperatureSensorVideo.html /services/oil-change 301
-/service-video-AlternatorVideo.html /services/electrical-system 301
-/service-video-TireRotationVideo.html /services/tire-sales 301
-/service-video-TPMSVideo.html /services/tire-sales 301
-/service-video-WheelBalancingVideo.html /services/wheel-alignment 301
-/service-video-TireReplacementVideo.html /services/tire-sales 301
+/service-video-AlternatorVideo.html /services/electrical 301
+/service-video-TireRotationVideo.html /services/tires 301
+/service-video-TPMSVideo.html /services/tires 301
+/service-video-WheelBalancingVideo.html /services/alignment 301
+/service-video-TireReplacementVideo.html /services/tires 301
 
 # ============================================
 # Old KUKUI short service paths (no /services/ prefix)
 # ============================================
-/brakes /services/brake-service 301
-/check-engine-light /services/check-engine-light 301
+/brakes /services/brake-repair 301
+/check-engine-light /services/diagnostics 301
 /oil-change /services/oil-change 301
 /steering-suspension /services/steering-suspension 301
 /wheel-bearings /services/steering-suspension 301
 /automotive-keys /services/automotive-keys 301
-/shop-for-tires /services/tire-sales 301
-/tune-up /services/scheduled-maintenance 301
-/lights /services/electrical-system 301
+/shop-for-tires /services/tires 301
+/tune-up /services 301
+/lights /services/electrical 301
 /towing /breakdown 301
 /aftermarket-accessories /services 301
 /drivetrain /services/driveline 301
@@ -181,3 +180,69 @@
 # ============================================
 /vehicles/* /services 301
 /vehicles /services 301
+
+# ============================================
+# 2026-06 cleanup: old URLs from GSC (404 / redirect-error / crawled-not-indexed / noindex)
+# ============================================
+/Benalto-AB /locations/benalto 301
+/Benalto-AB.html /locations/benalto 301
+/Bentley-AB /locations/bentley 301
+/Bentley-AB.html /locations/bentley 301
+/Red-Deer-County-AB /locations/red-deer-county 301
+/Red-Deer-County-AB.html /locations/red-deer-county 301
+/Sylvan_Lake_AB.html / 301
+/Peace-of-Mind-Warranty.html /warranty 301
+/PrivacyPolicy /privacy 301
+/about.html /about 301
+/reviews.html /reviews 301
+/tires /services/tires 301
+/tire-services /services/tires 301
+/tire-sales-in-sylvan-lake /services/tires 301
+/service-TireSales.html /services/tires 301
+/service-TireRotation.html /services/tires 301
+/service-WheelBalancing.html /services/tires 301
+/wheels /services/tires 301
+/electrical /services/electrical 301
+/alternator /services/electrical 301
+/speedometer /services/electrical 301
+/service-BatteryService.html /services/electrical 301
+/service-video-BatteryVideo.html /services/electrical 301
+/diesel-repair /services/diesel 301
+/service-DieselService.html /services/diesel 301
+/engine-diagnostics /services/diagnostics 301
+/inspection-diagnostics /services/diagnostics 301
+/fuel-system /services/diagnostics 301
+/service-AutoDiagnostics.html /services/diagnostics 301
+/service-ComputerDiagnosticServices /services/diagnostics 301
+/service-video-FuelCapVideo.html /services/diagnostics 301
+/service-video-FuelFilterVideo.html /services/diagnostics 301
+/service-EngineRepair.html /services/engine-repair 301
+/timing-belt-replacement /services/engine-repair 301
+/service-video-TimingBeltVideo.html /services/engine-repair 301
+/service-BrakeRotors.html /services/brake-repair 301
+/service-video-BrakeRotorsVideo.html /services/brake-repair 301
+/automotive-ac-service-and-repair /services/ac-service-repair 301
+/service-AutoAirConditioningRepair.html /services/ac-service-repair 301
+/service-video-ACRechargeVideo.html /services/ac-service-repair 301
+/radiator /services/heater-repair 301
+/service-video-RadiatorCapVideo.html /services/heater-repair 301
+/service-video-RadiatorHoseVideo.html /services/heater-repair 301
+/service-video-CoolantTempSensorVideo.html /services/heater-repair 301
+/clutch /services/driveline 301
+/axles /services/driveline 301
+/service-video-BallJointsVideo.html /services/steering-suspension 301
+/service-video-ShocksandStrutsVideo.html /services/steering-suspension 301
+/service-video-ExhaustSystemVideo.html /services/exhaust-system 301
+/pre-purchase-inspection /services/pre-purchase-inspection 301
+/commercial-vehicle-inspection---cvip /services/cvip-inspection 301
+/state-inspection /services/cvip-inspection 301
+/4x4 /services 301
+/make-Dodge-repair.html /services 301
+/make-Ford-repair.html /services 301
+/make-Honda-repair.html /services 301
+/service-AutoRepair.html /services 301
+/service-video-VacuumPumpVideo.html /services 301
+/service-video-WindshieldWipersVideo.html /services 301
+/auto-detailing /services 301
+/specials.html /specials 301
+/exhaust-system-service /services/exhaust-system 301

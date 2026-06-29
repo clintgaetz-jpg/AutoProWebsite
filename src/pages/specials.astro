@@ -1,0 +1,81 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Button from '~/components/ui/Button.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Specials & Offers',
+  description:
+    'Current specials at Sylvan Lake AUTOPRO, including our out-of-province inspection offer. Taxes-in pricing, NAPA warranty. Call (403) 887-0440.',
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Specials" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Current Offers"
+    title="Specials & Offers"
+    subtitle="Real deals on the services your vehicle needs."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Specials Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <!-- Out-of-Province Inspection Special -->
+      <div class="bg-white dark:bg-slate-900 rounded-xl shadow-lg overflow-hidden border-t-4 border-[#FFC836]">
+        <div class="p-6 md:p-8 lg:p-10">
+          <p class="text-sm font-bold tracking-wide uppercase text-primary dark:text-blue-200 mb-2 flex items-center gap-2">
+            <Icon name="tabler:discount-2" class="w-5 h-5" />
+            Special Offer
+          </p>
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 font-heading dark:text-white">Out-of-Province Inspection Special</h2>
+          <p class="text-base md:text-lg text-muted dark:text-slate-400 mb-6">New to Alberta? Get your out-of-province vehicle inspection for <strong class="text-gray-900 dark:text-white">$167.95 taxes in</strong> — regularly $188.95. Licensed Alberta inspection facility since 2006, digital report included, no surprises.</p>
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+            <Button
+              variant="primary"
+              text="Book Your Inspection"
+              href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1"
+              target="_blank"
+              class="min-h-[48px] w-full sm:w-auto"
+            />
+            <Button
+              variant="secondary"
+              text="Call (403) 887-0440"
+              href="tel:+14038870440"
+              class="min-h-[48px] w-full sm:w-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="More Specials Coming Soon"
+    subtitle="Call us anytime for a quote — honest, taxes-in pricing on every service."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>

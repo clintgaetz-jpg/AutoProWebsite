@@ -1,0 +1,76 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: 'Pricing & Estimates',
+  description:
+    'Honest, taxes-in pricing at Sylvan Lake AUTOPRO. You approve the cost before we start — never a bill higher than you authorized. Call (403) 887-0440.',
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://sylvanlakeautopro.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Pricing" }
+  ]
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  </Fragment>
+
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Honest Pricing"
+    title="Pricing & Estimates"
+    subtitle="Taxes in. You approve the cost before we start."
+    actions={[
+      { variant: 'primary', text: 'Call (403) 887-0440', href: 'tel:+14038870440' },
+    ]}
+  />
+
+  <!-- Introduction Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6 text-center">
+      <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 font-heading dark:text-white">Fair Prices, No Surprises</h2>
+      <div class="text-base md:text-lg text-muted dark:text-slate-400 space-y-4 text-left md:text-center">
+        <p>We price the right way: before any work begins, you get a clear estimate — and you'll never receive a bill higher than what you approved. Our prices are quoted taxes in, so the number you see is the number you pay. Most repairs are quoted per-vehicle after a proper inspection, because doing it right beats guessing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Pricing Section -->
+  <section class="py-12 md:py-16 lg:py-20 bg-gray-50 dark:bg-slate-800">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="text-center mb-8 md:mb-12">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold font-heading dark:text-white">Service Pricing</h2>
+      </div>
+
+      <ul class="space-y-3 max-w-2xl mx-auto">
+        <li class="flex items-start gap-3 bg-white dark:bg-slate-900 rounded-xl shadow-sm p-4 md:p-5">
+          <Icon name="tabler:check" class="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+          <span class="text-base md:text-lg dark:text-slate-300">Out-of-Province Vehicle Inspection — <strong class="dark:text-white">$167.95 taxes in</strong></span>
+        </li>
+      </ul>
+
+      <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-6 md:mt-8 text-center max-w-2xl mx-auto">Most other services are quoted per-vehicle — call (403) 887-0440 or book an inspection for an exact estimate.</p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <CallToAction
+    title="Get an Honest Estimate"
+    subtitle="No surprises. You approve the cost before we start."
+    actions={[
+      { variant: 'primary', text: 'Book Appointment', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
+      { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
+    ]}
+  />
+</Layout>
