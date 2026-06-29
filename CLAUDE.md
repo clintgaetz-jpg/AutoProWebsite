@@ -43,6 +43,19 @@ npx wrangler pages deploy dist --project-name=autoprowebsite
 
 If auth error: `npx wrangler logout && npx wrangler login`, then retry.
 
+### Deploy verification gotcha
+A deployment can show **Active** in `wrangler pages deployment list` ~30s before the edge actually serves it. If a fresh deploy looks like the old build, it's usually propagation lag — re-check after a minute. The immutable per-deploy URL (`https://<id>.autoprowebsite.pages.dev`) is the authoritative way to confirm a build's content.
+
+---
+
+## URLs & Trailing Slash (known mismatch)
+
+`src/config.yaml` sets `trailingSlash: false` → Astro runs `'never'`, so **all internal links (`getPermalink`), `<link rel=canonical>` tags, and sitemap entries are emitted without a trailing slash** (e.g. `/services/oil-change`). But Astro's default `build.format: 'directory'` outputs `page/index.html`, and **Cloudflare Pages 308-redirects the no-slash URL to the trailing-slash version** (`/services/oil-change` → `/services/oil-change/`). Net: the URLs the site advertises each take one redirect hop in production.
+
+- **Testing:** hit deploy/preview/prod URLs **with** a trailing slash (or `curl -L`). The no-slash form returns a 308 (and 404 while a deploy is still propagating) — this is normal, not a broken page.
+- **Internal links:** keep `<a href>`s **no-slash** to match `getPermalink` output. Do NOT "fix" a link by adding a slash.
+- **Not yet resolved:** the likely fix is Astro `build: { format: 'file' }` so Cloudflare serves the no-slash URL directly (matching the config, canonicals, and the no-slash `_redirects`). It changes every output path — test on a preview branch before shipping.
+
 ---
 
 ## Key Files
