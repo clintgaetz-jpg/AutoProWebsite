@@ -26,3 +26,6 @@ pnpm-lock.yaml
 .mcp.json
 .env
 .env.local
+
+# Claude Code local settings (per-machine allowlist, not for the public repo)
+.claude/settings.local.json
