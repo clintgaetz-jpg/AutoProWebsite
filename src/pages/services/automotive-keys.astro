@@ -3,6 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import AreasWeServe from '~/components/widgets/AreasWeServe.astro';
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
 import { Icon } from 'astro-icon/components';
@@ -356,6 +357,9 @@ const breadcrumbSchema = {
       },
     ]}
   />
+
+  <!-- Areas We Serve -->
+  <AreasWeServe />
 
   <!-- Final CTA -->
   <CallToAction
