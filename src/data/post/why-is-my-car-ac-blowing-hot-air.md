@@ -132,7 +132,7 @@ Spring booking means same-day or next-day availability, time to source parts, an
 
 Sylvan Lake AUTOPRO services all vehicle makes and models, all refrigerant types including R-1234yf, and we start with proper diagnosis — not a guess recharge.
 
-[Book Your A/C Service](https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1) or call us at (403) 887-0440.
+[Book Your A/C Service](/book) or call us at (403) 887-0440.
 
 ---
 
