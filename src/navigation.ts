@@ -113,6 +113,8 @@ export const footerData = {
         { text: 'Team', href: getPermalink('/team') },
         { text: 'Making It Easy', href: getPermalink('/making-it-easy') },
         { text: 'Reviews', href: getPermalink('/reviews') },
+        { text: 'Pricing', href: getPermalink('/pricing') },
+        { text: 'Specials', href: getPermalink('/specials') },
         { text: 'Blog', href: getPermalink('/blog') },
         { text: 'Warranty', href: getPermalink('/warranty') },
         { text: 'Credentials & Licensing', href: getPermalink('/credentials-and-licensing') },
