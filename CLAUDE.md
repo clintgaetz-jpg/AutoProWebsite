@@ -7,6 +7,17 @@ Auto repair shop website built with Astro + Tailwind CSS. Mobile-first design th
 
 **Sylvan Lake Autopro** is a NAPA affiliate. Never call it "NAPA AutoCare Centre."
 
+## State Tracking (don't skip — even from a file brief)
+
+This repo is tracked in the **AutoPro Supabase** state system (`hjhllnczzfqsoekywjpq`) as project **`autopro-web`**. Tasks often arrive as a standalone `CODE-BRIEF_*.md` — that does **not** exempt the session from the global CLAUDE.md Session Protocol.
+
+- **Start:** load `project_changelog`, `dev_sessions`, `project_todos` for `autopro-web` before working.
+- **Deploy session (pushed changes):** INSERT a `project_changelog` row + UPDATE `dev_sessions` for the work area touched.
+- **Verify / audit session (no deploy):** log to `project_docs` (`doc_type='verification'`), `project_todos`, and `dev_sessions` — **never** `project_changelog` (changelog is deployment history only).
+- **Before writing to the live state tables, hold and ask first.** Default read-only; confirm the routing before any INSERT/UPDATE.
+- Work areas: `content` (pages), `seo` (redirects/schema/robots/llms), `blog`.
+- Schema note: `dev_sessions` PK is `work_area` alone — update with `WHERE project='autopro-web' AND work_area='…'`. `project_todos` / `project_docs` default `project='scheduler'` — always set `project='autopro-web'` explicitly.
+
 ## Stack
 
 | Item | Value |
