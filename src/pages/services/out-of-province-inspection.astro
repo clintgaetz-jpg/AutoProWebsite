@@ -9,8 +9,8 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import AreasWeServe from '~/components/widgets/AreasWeServe.astro';
 
 const metadata = {
-  title: 'Out of Province Inspection | $179.95',
-  description: 'Licensed out of province vehicle inspection in Sylvan Lake. $179.95 most vehicles. Certified facility since 2006. Digital report included. Call (403) 887-0440.',
+  title: 'Out of Province Inspection Sylvan Lake — $167.95 Taxes In',
+  description: 'Out of province vehicle inspection in Sylvan Lake — $167.95 taxes in (reg. $188.95). Licensed Alberta facility since 2006. Often same-week. Digital report included. Book online or call (403) 887-0440.',
 };
 
 const serviceSchema = {
@@ -33,7 +33,7 @@ const serviceSchema = {
   },
   "offers": {
     "@type": "Offer",
-    "price": "179.95",
+    "price": "167.95",
     "priceCurrency": "CAD"
   },
   "areaServed": ["Sylvan Lake", "Benalto", "Eckville", "Condor", "Leslieville", "Bentley", "Blackfalds", "Lacombe", "Gull Lake", "Red Deer", "Red Deer County", "Penhold", "Innisfail", "Norglenwold", "Birchcliff", "Jarvis Bay", "Half Moon Bay", "Sunbreaker Cove"]
@@ -48,7 +48,7 @@ const faqSchema = {
       "name": "How much does an out of province inspection cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "$179.95 ($188.95 with GST) for most cars, SUVs, and light trucks. Heavier trucks may cost more due to additional disassembly time."
+        "text": "$167.95 taxes in (reg. $188.95) for most cars, SUVs, and light trucks. Heavier trucks may cost more due to additional disassembly time."
       }
     },
     {
@@ -112,14 +112,26 @@ const breadcrumbSchema = {
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
       { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Text (403) 887-0440', href: 'sms:+14038870440', class: 'md:hidden' },
       { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
 
+  <!-- Price + availability + trust strip (below hero) -->
+  <section class="pt-6 pb-2 md:pt-8">
+    <div class="max-w-3xl mx-auto px-4 md:px-6 text-center">
+      <p class="text-xl md:text-2xl font-bold font-heading text-primary dark:text-blue-200">
+        $167.95 taxes in <span class="font-normal text-muted dark:text-slate-400">(reg. $188.95)</span>
+      </p>
+      <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-1">Often same-week availability.</p>
+      <p class="text-sm text-muted dark:text-slate-400 mt-3">4.8★ from 300+ Google reviews · Licensed Alberta facility since 2006 · Red Seal technicians · digital report sent to your phone.</p>
+    </div>
+  </section>
+
   <!-- Introduction Section -->
   <Content
     title="What Does an Out of Province Inspection Cost?"
-    content="An out of province vehicle inspection in Sylvan Lake costs <strong>$179.95</strong> for most cars, SUVs, and light trucks. We're a licensed Alberta inspection facility—certified since 2006, regularly audited, with trained technicians who know the program inside and out.<br/><br/>Just moved to Central Alberta? Welcome! You'll need this inspection to register your vehicle here. We'll walk you through the process, tell you exactly what to expect, and give you a digital report documenting everything we check. No surprises. If repairs are needed, you'll know the cost before we start."
+    content="An out of province vehicle inspection in Sylvan Lake is <strong>$167.95 taxes in (regularly $188.95)</strong> for most cars, SUVs, and light trucks. We're a licensed Alberta inspection facility—certified since 2006, regularly audited, with trained technicians who know the program inside and out.<br/><br/>Just moved to Central Alberta? Welcome! You'll need this inspection to register your vehicle here. We'll walk you through the process, tell you exactly what to expect, and give you a digital report documenting everything we check. No surprises. If repairs are needed, you'll know the cost before we start."
   />
 
   <!-- Do You Need an Inspection? Section -->
@@ -189,6 +201,22 @@ const breadcrumbSchema = {
     ]}
   />
 
+  <!-- Before You Come In Section -->
+  <section class="py-12 md:py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 md:px-6">
+      <div class="bg-gray-50 dark:bg-slate-800 border-l-4 border-[#FFC836] rounded-r-xl p-5 md:p-8">
+        <h2 class="text-xl md:text-2xl font-bold font-heading dark:text-white mb-4">New to Alberta? Two things before your appointment:</h2>
+        <ol class="list-decimal list-outside ml-5 space-y-3 text-base md:text-lg text-muted dark:text-slate-400">
+          <li>Pick up an <strong class="text-gray-900 dark:text-white">Out of Province Inspection Request form</strong> from any Alberta registry and bring it.</li>
+          <li>Have the <strong class="text-gray-900 dark:text-white">registration details</strong> ready — the name and address of whoever the vehicle will be registered to.</li>
+        </ol>
+        <p class="text-base md:text-lg text-muted dark:text-slate-400 mt-4">
+          Not sure what you need? <strong class="text-gray-900 dark:text-white"><a href="tel:+14038870440" class="text-primary dark:text-blue-200 hover:underline">Call</a> or <a href="sms:+14038870440" class="text-primary dark:text-blue-200 hover:underline">text (403) 887-0440</a></strong> and we'll walk you through it.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- What We Inspect Section -->
   <Features2
     title="What Do We Inspect?"
@@ -231,7 +259,7 @@ const breadcrumbSchema = {
   <!-- Pricing Section -->
   <Content
     title="Pricing"
-    content="<strong>Out of Province Inspection (most vehicles):</strong> $179.95 ($188.95 with GST)<br/><br/><strong>Re-inspection (repairs done elsewhere):</strong> Half hour labor<br/><br/><strong>Simple re-inspection (windshield, bulb replacement):</strong> No charge<br/><br/><strong>Larger vehicles:</strong> Heavier trucks may have additional charges due to extra time needed to disassemble brakes for measurement. We'll tell you before we start.<br/><br/><em>Our guarantee: You will never receive a bill higher than you have authorized.</em>"
+    content="<strong>Out of Province Inspection (most vehicles):</strong> $167.95 taxes in (reg. $188.95)<br/><br/><strong>Re-inspection (repairs done elsewhere):</strong> Half hour labor<br/><br/><strong>Simple re-inspection (windshield, bulb replacement):</strong> No charge<br/><br/><strong>Larger vehicles:</strong> Heavier trucks may have additional charges due to extra time needed to disassemble brakes for measurement. We'll tell you before we start.<br/><br/><em>Our guarantee: You will never receive a bill higher than you have authorized.</em>"
   />
 
   <!-- What If My Vehicle Fails Section -->
@@ -253,7 +281,7 @@ const breadcrumbSchema = {
     items={[
       {
         title: 'How much does an out of province inspection cost?',
-        description: "$179.95 ($188.95 with GST) for most cars, SUVs, and light trucks. Heavier trucks may cost more due to additional disassembly time—we'll always tell you before we start.",
+        description: "$167.95 taxes in (reg. $188.95) for most cars, SUVs, and light trucks. Heavier trucks may cost more due to additional disassembly time—we'll always tell you before we start.",
       },
       {
         title: 'How long does the inspection take?',
@@ -301,14 +329,47 @@ const breadcrumbSchema = {
   <!-- Areas We Serve -->
   <AreasWeServe />
 
+  <!-- Trust line (near final CTA) -->
+  <section class="pt-8 md:pt-12">
+    <p class="max-w-3xl mx-auto px-4 md:px-6 text-center text-sm text-muted dark:text-slate-400">4.8★ from 300+ Google reviews · Licensed Alberta facility since 2006 · Red Seal technicians · digital report sent to your phone.</p>
+  </section>
+
   <!-- Call to Action -->
   <CallToAction
     title="Book Your Out of Province Inspection"
-    subtitle="$179.95 (most vehicles) • 1-2 hours • Digital report included"
+    subtitle="$167.95 taxes in • often same-week • digital report included"
     actions={[
       { variant: 'primary', text: 'Book Inspection', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' },
       { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
+      { variant: 'secondary', text: 'Text (403) 887-0440', href: 'sms:+14038870440', class: 'md:hidden' },
       { variant: 'secondary', text: 'Get Directions', href: 'https://www.google.com/maps/dir/?api=1&destination=NAPA+AUTOPRO+-+Sylvan+Lake+AUTOPRO+Inc&destination_place_id=ChIJM5AeqqSydVMRS6-I0MZs35U', class: 'hidden md:inline-flex' },
     ]}
   />
+
+  <!-- Sticky mobile contact bar (this page only) -->
+  <div class="fixed bottom-0 inset-x-0 z-40 md:hidden bg-[#0A0094] border-t border-white/15 shadow-[0_-2px_10px_rgba(0,0,0,0.2)]">
+    <div class="grid grid-cols-3 gap-2 p-2">
+      <a
+        href="https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center min-h-[48px] rounded-lg bg-[#FFC836] text-[#0A0094] font-bold text-sm active:scale-[0.97] transition-transform"
+      >Book</a>
+      <a
+        href="tel:+14038870440"
+        class="flex items-center justify-center min-h-[48px] rounded-lg border border-white text-white font-bold text-sm active:scale-[0.97] transition-transform"
+      >Call</a>
+      <a
+        href="sms:+14038870440"
+        class="flex items-center justify-center min-h-[48px] rounded-lg border border-white text-white font-bold text-sm active:scale-[0.97] transition-transform"
+      >Text</a>
+    </div>
+  </div>
+
+  <!-- Mobile-only bottom padding so the sticky bar never covers page/footer content (scoped to this page) -->
+  <style is:global>
+    @media (max-width: 767px) {
+      body { padding-bottom: calc(64px + env(safe-area-inset-bottom)); }
+    }
+  </style>
 </Layout>
