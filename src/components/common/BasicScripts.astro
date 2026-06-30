@@ -165,8 +165,8 @@ import { UI } from 'astrowind:config';
         });
       });
 
-      // Track Book Online clicks (autotext.me booking system)
-      document.querySelectorAll('a[href*="autotext.me"]').forEach(function (elem) {
+      // Track Book Online clicks (owned /book redirect → AutoFlow scheduler; destination in public/_redirects)
+      document.querySelectorAll('a[href="/book"], a[href="/book/"]').forEach(function (elem) {
         elem.addEventListener('click', function () {
           gtag('event', 'book_online_click', {
             'event_category': 'conversion',

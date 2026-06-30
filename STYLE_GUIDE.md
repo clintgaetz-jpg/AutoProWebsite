@@ -660,9 +660,10 @@ https://g.page/sylvan-lake-autopro
 ### Booking
 
 ```
-Online Booking:
-https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1
+Online Booking (use this owned path on every CTA):
+/book
 ```
+> `/book` 302-redirects to the AutoFlow scheduler. The destination URL lives ONLY in `public/_redirects` — change it there, never in pages.
 
 ### Phone
 

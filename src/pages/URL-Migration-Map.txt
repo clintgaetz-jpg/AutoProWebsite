@@ -104,4 +104,4 @@ NOTES
 - Update ad final URLs to new paths to prevent disapprovals
 - Display URL domain remains: sylvanlakeautopro.com
 - UTM parameters are preserved through redirects
-- Booking link: https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1
+- Booking link: /book (302 -> app.autoflow.com/scheduler/...). Destination lives ONLY in public/_redirects.

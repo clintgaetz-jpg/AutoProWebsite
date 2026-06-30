@@ -315,9 +315,9 @@ h4: text-lg font-bold
 ```
 
 ### Booking URL
-Always use the full booking URL:
+Always link booking CTAs to the owned path `/book` (302 → AutoFlow scheduler; destination lives ONLY in `public/_redirects`):
 ```
-https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1
+/book
 ```
 
 ---

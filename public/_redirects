@@ -3,6 +3,14 @@
 # Format: old_path new_path status_code
 
 # ============================================
+# BOOKING — single source of truth for the booking destination
+# Owned, branded path. Change the AutoFlow URL HERE ONLY; every CTA points at /book.
+# 302 (temporary) ON PURPOSE — keeps the destination swappable without code changes.
+# ============================================
+/book   https://app.autoflow.com/scheduler/WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09   302
+/book/  https://app.autoflow.com/scheduler/WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09   302
+
+# ============================================
 # LOCATION / SEO LANDING PAGES
 # ============================================
 /auto-repair-in-sylvan-lake-ab / 301
@@ -23,7 +31,7 @@
 # GENERAL PAGES
 # ============================================
 /directions /contact 301
-/appointments /contact 301
+/appointments /book 301
 /careers /about 301
 /leave-a-review /reviews 301
 

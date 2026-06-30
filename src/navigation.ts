@@ -62,7 +62,7 @@ export const headerData = {
   mobileOnlyLinks: [
     { text: "I'm Broken Down", href: getPermalink('/breakdown'), icon: 'tabler:alert-triangle' },
   ],
-  actions: [{ text: 'Book Now', href: 'https://sylvanlakeautopro.autotext.me/Admin/kioskv2/index.php?id=WTNHaFJhb1g1dk9YV3g1YmpkUEx3QT09&kiosk=1', target: '_blank' }],
+  actions: [{ text: 'Book Now', href: '/book', target: '_blank' }],
 };
 
 export const footerData = {
