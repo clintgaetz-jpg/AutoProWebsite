@@ -39,51 +39,83 @@ const serviceSchema = {
   "areaServed": ["Sylvan Lake", "Benalto", "Eckville", "Condor", "Leslieville", "Bentley", "Blackfalds", "Lacombe", "Gull Lake", "Red Deer", "Red Deer County", "Penhold", "Innisfail", "Norglenwold", "Birchcliff", "Jarvis Bay", "Half Moon Bay", "Sunbreaker Cove"]
 };
 
+// Single source of truth for the FAQ block. The visible <FAQs> items and the
+// faqSchema JSON-LD are BOTH derived from this array, so the visible text and
+// schema can never drift out of sync (1:1 by construction). Answers are
+// answer-first and verified against Alberta.ca (June 2026). Inline links go to
+// official .gov sources for E-E-A-T.
+const faqs = [
+  {
+    question: 'Do I even need an out-of-province inspection?',
+    answer:
+      `Yes. If your vehicle is currently registered outside Alberta, it has to pass an out-of-province inspection before you can get Alberta plates — it's a <a href="https://www.alberta.ca/out-of-province-vehicle-inspections" target="_blank" rel="noopener noreferrer" class="text-primary dark:text-blue-200 hover:underline">Government of Alberta requirement</a>, not a shop upsell. Once it passes, you take the certificate to a registry to license the vehicle here.`,
+  },
+  {
+    question: 'Can my vehicle be exempt from the inspection?',
+    answer:
+      `Some can. You may be exempt if you fit one of Alberta's categories: a brand-new vehicle bought or leased within the last 90 days from a factory-authorized dealer in your name (if it's a new vehicle imported from outside Canada, you'll also need a completed RIV inspection and a stamped Transport Canada Form 1); a commercial vehicle with a valid commercial inspection certificate issued within 90 days; or a private passenger vehicle from BC, Saskatchewan, or Manitoba under the New West Partnership — newer than 4 years (the current model year plus the previous 3), or one that passed a government inspection there within the last 90 days. Vehicles that can <strong>never</strong> be exempt: flood-damaged, salvage, non-repairable, unsafe, rebuilt, right-hand drive, custom or homebuilt, kit cars, and lifted or lowered vehicles. The registry forwards your documents to Alberta Transportation, who makes the final call. See Alberta's <a href="https://www.alberta.ca/system/files/tec-registering-an-out-of-province-vehicle-in-alberta.pdf" target="_blank" rel="noopener noreferrer" class="text-primary dark:text-blue-200 hover:underline">exemptions guide</a>.`,
+  },
+  {
+    question: 'What is the New West Partnership?',
+    answer:
+      `It's a trade and labour-mobility agreement between the western provinces — BC, Alberta, and Saskatchewan signed it in 2010, and Manitoba joined in 2017. The provinces agreed to recognize each other's standards to make moving and doing business across them easier. For out-of-province inspections, it's the reason a private passenger vehicle from BC, Saskatchewan, or Manitoba can be exempt if it's newer than four years (the current model year plus the previous three) or it passed a government inspection in that province within the last 90 days.`,
+  },
+  {
+    question: 'How much does it cost?',
+    answer:
+      `$167.95 taxes in (reg. $188.95) for most cars, SUVs, and light trucks. Heavier trucks may cost more due to the extra time needed to disassemble brakes for measurement — we'll always tell you before we start.`,
+  },
+  {
+    question: "What's the process?",
+    answer:
+      `Per <a href="https://www.alberta.ca/out-of-province-vehicle-inspections" target="_blank" rel="noopener noreferrer" class="text-primary dark:text-blue-200 hover:underline">Alberta Transportation</a>, it's four steps: 1) Buy a Request for Vehicle Inspection Form at any Alberta registry. 2) Bring the vehicle and that form to a licensed facility — that's us. 3) If it fails, complete repairs within 10 days. 4) Take the passing Certificate of Inspection to an Alberta registry within 14 days.`,
+  },
+  {
+    question: 'How long does it take?',
+    answer:
+      `Plan for up to about 2 hours on average. It varies with the type and condition of the vehicle — a clean, late-model car goes quicker, while an older truck that needs the brakes pulled for measurement takes longer. Booking an appointment keeps it moving.`,
+  },
+  {
+    question: 'What if my vehicle fails?',
+    answer:
+      `You complete the required repairs within 10 days, then bring it back and we re-inspect — verifying just the repairs, not the whole vehicle again. Miss the 10-day window and it becomes a new full inspection. You can have the repairs done here, at another shop, or do them yourself.`,
+  },
+  {
+    question: 'How long is my inspection certificate valid?',
+    answer:
+      `You have 14 days to take the passing certificate to an Alberta registry. After 14 days from the date of issue it's no longer accepted, and the vehicle has to go through a full out-of-province inspection again — so don't sit on it.`,
+  },
+  {
+    question: "Who's allowed to do the inspection — are you licensed?",
+    answer:
+      `Yes, we're licensed. An out-of-province inspection has to be done in a licensed facility by a journeyperson technician licensed under Alberta's <a href="https://www.alberta.ca/vehicle-inspections" target="_blank" rel="noopener noreferrer" class="text-primary dark:text-blue-200 hover:underline">Vehicle Inspection Program</a> — and that's us. We've been a licensed Alberta inspection facility since 2006.`,
+  },
+  {
+    question: 'What does the inspection check, and why?',
+    answer:
+      `We inspect to Alberta's <a href="https://www.alberta.ca/out-of-province-vehicle-inspections" target="_blank" rel="noopener noreferrer" class="text-primary dark:text-blue-200 hover:underline">safety and equipment standards</a>, following the Automotive and Light Truck Inspection Manual — and your vehicle has to be within the manufacturer's (OEM) service limits to pass. The point is to keep unsafe vehicles, and vehicles that are stolen or built from stolen parts, off Alberta roads. It covers vehicles coming into the province and vehicles that have been in a collision.`,
+  },
+  {
+    question: 'Do I have to get repairs done at your shop?',
+    answer:
+      `No. You can have repairs done here, at any other shop, or do them yourself. You'll just need to return for a re-inspection so we can verify the work was completed.`,
+  },
+];
+
+const faqSubtitle =
+  `Last verified against Alberta Transportation: June 2026. Official rules govern — see Alberta's <a href="https://www.alberta.ca/out-of-province-vehicle-inspections" target="_blank" rel="noopener noreferrer" class="text-primary dark:text-blue-200 hover:underline">out-of-province vehicle inspections page</a>.`;
+
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How much does an out of province inspection cost?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "$167.95 taxes in (reg. $188.95) for most cars, SUVs, and light trucks. Heavier trucks may cost more due to additional disassembly time."
-      }
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.answer,
     },
-    {
-      "@type": "Question",
-      "name": "How long does the inspection take?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Typically 1-2 hours. We recommend booking an appointment so we can get you in and out efficiently."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "What happens if my vehicle fails the inspection?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "You'll receive documentation listing exactly what needs repair, plus an estimate. You have 10 days to complete repairs and return for re-inspection."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Do I have to get repairs done at your shop?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. You can go anywhere, or do them yourself. You'll just need to return for re-inspection to verify the work."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "I'm from BC, Saskatchewan, or Manitoba. Do I need an inspection?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Maybe not. If your vehicle is 4 model years old or newer and has no salvage or rebuilt status, you may qualify for the New West Partnership exemption."
-      }
-    }
-  ]
+  })),
 };
 
 const breadcrumbSchema = {
@@ -273,37 +305,12 @@ const breadcrumbSchema = {
     ]}
   />
 
-  <!-- FAQ Section -->
+  <!-- FAQ Section — items + faqSchema both derived from the `faqs` array above (1:1) -->
   <FAQs
     title="Frequently Asked Questions"
-    subtitle="Common questions about out of province inspections"
+    subtitle={faqSubtitle}
     columns={1}
-    items={[
-      {
-        title: 'How much does an out of province inspection cost?',
-        description: "$167.95 taxes in (reg. $188.95) for most cars, SUVs, and light trucks. Heavier trucks may cost more due to additional disassembly time—we'll always tell you before we start.",
-      },
-      {
-        title: 'How long does the inspection take?',
-        description: 'Typically 1-2 hours. We recommend booking an appointment so we can get you in and out efficiently.',
-      },
-      {
-        title: 'What happens if my vehicle fails?',
-        description: "You'll receive documentation listing exactly what needs repair, plus an estimate if you want us to do the work. You have 10 days to complete repairs and return for re-inspection.",
-      },
-      {
-        title: 'Do I have to get repairs done at your shop?',
-        description: "No. You can go anywhere, or do them yourself. You'll just need to return here for re-inspection to verify the work.",
-      },
-      {
-        title: "I'm from BC/Saskatchewan/Manitoba. Do I need an inspection?",
-        description: 'Maybe not. If your vehicle is 4 model years old or newer and has no salvage/rebuilt status, you may qualify for the New West Partnership exemption. Check with a registry office to confirm.',
-      },
-      {
-        title: 'What about insurance?',
-        description: "In Alberta, insurance is sold separately from registration. You'll need valid insurance before you can get plates. If you don't have coverage from your previous province, you'll need an in-transit permit from the registry.",
-      },
-    ]}
+    items={faqs.map((f) => ({ title: f.question, description: f.answer }))}
   />
 
   <!-- Local Resources Section -->
