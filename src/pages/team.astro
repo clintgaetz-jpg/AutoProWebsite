@@ -73,7 +73,7 @@ const technicians = [
   <Hero2
     tagline="Our People"
     title="Meet the Team"
-    subtitle="The people behind 19 years of uncompromising customer service."
+    subtitle="The people behind 20 years of uncompromising customer service."
     actions={[
       { variant: 'primary', text: 'Book Appointment', href: '/book', target: '_blank' },
       { variant: 'secondary', text: 'Call (403) 887-0440', href: 'tel:+14038870440', class: 'md:hidden' },
@@ -109,10 +109,8 @@ const technicians = [
             <div class="p-6 text-center">
               <h3 class="text-xl font-bold mb-1 dark:text-white">{owner.name}</h3>
               <p class="text-primary dark:text-blue-400 font-medium mb-3">{owner.role}</p>
-              {owner.bio && owner.bio !== '[Bio coming soon]' ? (
+              {owner.bio && owner.bio !== '[Bio coming soon]' && (
                 <p class="text-muted dark:text-slate-400 text-sm">{owner.bio}</p>
-              ) : (
-                <p class="text-gray-400 dark:text-slate-500 text-sm italic">{owner.bio}</p>
               )}
             </div>
           </div>
